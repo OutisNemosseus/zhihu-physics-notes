@@ -1,0 +1,72 @@
+site_name: Tong Su — Physics & Mathematics Notes
+site_description: Personal academic notes on physics, mathematics, semiconductors, and computational research.
+site_author: Tong Su
+
+theme:
+  name: material
+  language: en
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue grey
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue grey
+      accent: light blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+    - toc.follow
+
+nav:
+  - Home: index.md
+  - Condensed Matter:
+      - First Brillouin Zone: condensed-matter/first-brillouin-zone.md
+      - Topology in Materials: condensed-matter/topology-in-materials.md
+      - Pseudogap: condensed-matter/pseudogap.md
+      - Real-Space B and Reciprocal-Space k: condensed-matter/real-space-B-and-k-space.md
+  - Linear Algebra:
+      - What Is Linearity?: linear-algebra/what-is-linearity.md
+      - Quotient Groups and Spaces: linear-algebra/quotient-groups-and-spaces.md
+      - Linear Independence and Invertibility: linear-algebra/linear-independence-and-invertibility.md
+  - Vector Calculus:
+      - Boundary of a Boundary Is Zero: vector-calculus/boundary-of-boundary-zero.md
+      - Scalar Curl and Divergence: vector-calculus/scalar-curl-and-divergence.md
+  - Quantum:
+      - Quantum Degeneracy: quantum/quantum-degeneracy.md
+      - p-Wave Superconductivity: quantum/p-wave-superconductivity.md
+  - Projects: projects.md
+  - About: about.md
+
+markdown_extensions:
+  - admonition
+  - footnotes
+  - attr_list
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      permalink: true
+
+extra_javascript:
+  - assets/javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+plugins:
+  - search
+
+strict: true
