@@ -8,16 +8,22 @@ hide:
 
 Notes on physics, mathematics, semiconductors, and computational research.
 
-This site is a personal technical notebook: a collection of concise explanations, mathematical perspectives, and developing research interests. Several articles began as personal technical notes or Chinese answers on Zhihu and were later translated and edited into English.
+Several articles began as personal technical notes or Chinese answers on Zhihu and were later translated and edited into English.
 
-## Subjects
+## Questions
 
-- [Condensed Matter](condensed-matter/first-brillouin-zone.md) — Brillouin zones, reciprocal space, topology, and pseudogaps.
-- [Linear Algebra](linear-algebra/what-is-linearity.md) — Linearity, quotient structures, and invertibility.
-- [Vector Calculus](vector-calculus/boundary-of-boundary-zero.md) — Geometric interpretations of curl, divergence, and boundaries.
-- [Quantum Mechanics / Superconductivity](quantum/quantum-degeneracy.md) — Degeneracy and superconducting pairing symmetry.
-- [Projects](projects.md) — Current and prospective computational research projects.
+- [Why Is \(k\) Restricted to the First Brillouin Zone?](condensed-matter/first-brillouin-zone.md)
+- [What Is the Essence of Linearity?](linear-algebra/what-is-linearity.md)
+- [Why Is the Divergence of a Curl Zero?](vector-calculus/boundary-of-boundary-zero.md)
+- [Do Scalar Curl and Scalar Divergence Have Physical Meaning?](vector-calculus/scalar-curl-and-divergence.md)
+- [Why Are Quotient Groups and Quotient Spaces Both Called Quotients?](linear-algebra/quotient-groups-and-spaces.md)
+- [Why Can We Compare a Real-Space Magnetic Field \(B\) with a Reciprocal-Space \(k\)?](condensed-matter/real-space-B-and-k-space.md)
+- [Where Is the “Topology” in Topological Materials?](condensed-matter/topology-in-materials.md)
+- [A Simple Way to Understand Quantum Degeneracy](quantum/quantum-degeneracy.md)
+- [What Is \(p\)-Wave Superconductivity?](quantum/p-wave-superconductivity.md)
+- [Why Do Linearly Independent Columns Make a Square Matrix Invertible?](linear-algebra/linear-independence-and-invertibility.md)
+- [Is the Pseudogap a Universal Phenomenon?](condensed-matter/pseudogap.md)
 
-## Scope
+## Projects
 
-The notes emphasize structural intuition while retaining the equations and notation needed for precise discussion. They are intended for students, researchers, and anyone interested in the mathematical language of physics.
+[View research and software projects.](projects.md)
