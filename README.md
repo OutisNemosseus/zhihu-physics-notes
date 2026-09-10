@@ -99,3 +99,15 @@ python scripts/validate_bandpass_notebook.py
 
 The validation script runs in a fresh kernel and leaves the tracked notebook
 unchanged. GitHub Actions runs it on pushes and pull requests.
+
+## Notebook on the website
+
+The homepage and **Signal Processing → Continuous-to-Discrete Bandpass** page
+embed an HTML export of the notebook in an iframe. Visitors can read the saved
+results and download the notebook; Python execution requires Jupyter.
+
+The Pages workflow executes the notebook before building the site. The MkDocs
+hook in `scripts/export_notebooks.py` generates the HTML and downloadable notebook
+under `site/assets/notebooks/` during `mkdocs build`. Generated files stay out of
+Git. For a local preview with updated outputs, execute the notebook first using
+the command above, then run `mkdocs serve`.

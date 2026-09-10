@@ -24,6 +24,15 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 - [Why Do Linearly Independent Columns Make a Square Matrix Invertible?](linear-algebra/linear-independence-and-invertibility.md)
 - [Is the Pseudogap a Universal Phenomenon?](condensed-matter/pseudogap.md)
 
+## Signal Processing Notebook
+
+Read the complete bandpass-filter derivation, four dependency trees, and analog
+and digital spectra below, including the reusable Python solver.
+
+[Open the dedicated notebook page](signal-processing/continuous-to-discrete-bandpass.md)
+
+<iframe class="notebook-frame" src="assets/notebooks/continuous_to_discrete_bandpass.html" title="Continuous-to-discrete bandpass design notebook" loading="lazy"></iframe>
+
 ## Projects
 
 [View research and software projects.](projects.md)

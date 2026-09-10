@@ -44,6 +44,8 @@ nav:
   - Quantum:
       - Quantum Degeneracy: quantum/quantum-degeneracy.md
       - p-Wave Superconductivity: quantum/p-wave-superconductivity.md
+  - Signal Processing:
+      - Continuous-to-Discrete Bandpass: signal-processing/continuous-to-discrete-bandpass.md
   - Projects: projects.md
   - About: about.md
 
@@ -70,3 +72,6 @@ plugins:
   - search
 
 strict: true
+
+hooks:
+  - scripts/export_notebooks.py

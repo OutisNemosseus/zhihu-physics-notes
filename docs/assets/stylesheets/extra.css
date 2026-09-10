@@ -21,3 +21,19 @@
   font-weight: 550;
   letter-spacing: -0.01em;
 }
+
+.notebook-frame {
+  display: block;
+  width: 100%;
+  height: 82vh;
+  min-height: 620px;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  background: white;
+}
+
+@media (max-width: 600px) {
+  .notebook-frame {
+    min-height: 480px;
+  }
+}
