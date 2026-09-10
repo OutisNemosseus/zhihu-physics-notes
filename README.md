@@ -58,3 +58,44 @@ The deployment URL appears in the completed workflow and in the repository's Pag
 5. Run `mkdocs build --strict` before committing.
 
 MathJax supports inline mathematics written as `\( ... \)` and display mathematics written as `\[ ... \]`.
+
+## Run the Notebook
+
+Use Python 3.13 (verified with Python 3.13.13). From the repository root:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+jupyter lab
+```
+
+On Windows PowerShell, replace the activation command with:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Open [`notebooks/continuous_to_discrete_bandpass.ipynb`](notebooks/continuous_to_discrete_bandpass.ipynb)
+and select **Run → Run All Cells** using the virtual environment's Python kernel.
+The notebook includes the original derivation, four dependency trees, analog and
+digital spectra, and `solve_bandpass_latex(lower, upper, unit='rad/s')`.
+Set `unit='Hz'` for ordinary frequencies. Step-by-step LaTeX is displayed inline;
+a separate TeX installation is unnecessary.
+
+To execute the notebook without opening JupyterLab:
+
+```bash
+jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=180 notebooks/continuous_to_discrete_bandpass.ipynb
+```
+
+For execution plus checks of the original answer, alternate inputs in both units,
+invalid inputs, LaTeX outputs, and generated figures:
+
+```bash
+python scripts/validate_bandpass_notebook.py
+```
+
+The validation script runs in a fresh kernel and leaves the tracked notebook
+unchanged. GitHub Actions runs it on pushes and pull requests.

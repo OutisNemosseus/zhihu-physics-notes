@@ -1,1 +1,9 @@
 mkdocs-material==9.6.20
+
+# Notebook computation and Jupyter execution (tested with Python 3.13).
+numpy==2.5.3
+matplotlib==3.11.1
+ipython==9.17.1
+ipykernel==7.3.0
+jupyterlab==4.6.3
+nbconvert==7.17.1
