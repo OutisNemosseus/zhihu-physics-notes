@@ -100,14 +100,46 @@ python scripts/validate_bandpass_notebook.py
 The validation script runs in a fresh kernel and leaves the tracked notebook
 unchanged. GitHub Actions runs it on pushes and pull requests.
 
-## Notebook on the website
+## Publish notebooks automatically
 
-The homepage and **Signal Processing → Continuous-to-Discrete Bandpass** page
-embed an HTML export of the notebook in an iframe. Visitors can read the saved
-results and download the notebook; Python execution requires Jupyter.
+Put `.ipynb` files in `notebooks/` (subfolders, spaces and Chinese filenames are
+supported), then commit and push to `main`. GitHub Pages automatically generates
+an HTML export, a dedicated reading page, a navigation entry and a homepage
+iframe for every notebook. No manual edits to the homepage or navigation are
+needed. Titles come from the first Markdown H1, or from the filename.
 
-The Pages workflow executes the notebook before building the site. The MkDocs
-hook in `scripts/export_notebooks.py` generates the HTML and downloadable notebook
-under `site/assets/notebooks/` during `mkdocs build`. Generated files stay out of
-Git. For a local preview with updated outputs, execute the notebook first using
-the command above, then run `mkdocs serve`.
+Publication uses **saved outputs** and does not execute uploaded code. Run and
+save a notebook in Jupyter before uploading it if you want its figures and
+computed results to appear. Additional execution dependencies belong in
+`requirements.txt`; static publication does not need each notebook's kernel.
+The existing bandpass regression workflow continues to execute its own tests.
+
+After copying a notebook into the folder, publish it from the repository root:
+
+```bash
+git add notebooks/
+git commit -m "Publish notebook"
+git push origin main
+```
+
+Alternatively, open `notebooks/` on GitHub, choose **Add file → Upload files**,
+and commit to `main`.
+
+To generate the site locally with the installed project dependencies:
+
+```bash
+python scripts/export_notebooks.py
+```
+
+To preview and rebuild when notebooks are added or saved:
+
+```bash
+python scripts/export_notebooks.py --serve
+```
+
+Open the local address printed by MkDocs. The script is also registered as a
+MkDocs hook, so `mkdocs build --strict` works too. Generated files live in `site/`
+and are not committed. The original notebook files and the handwritten homepage
+content remain intact. Hidden files and checkpoint folders are ignored.
+
+See [notebooks/README.md](notebooks/README.md) for the Chinese quick-start guide.

@@ -27,10 +27,8 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Execute notebook for publication
-        run: jupyter nbconvert --to notebook --execute --inplace --ExecutePreprocessor.timeout=180 notebooks/continuous_to_discrete_bandpass.ipynb
       - name: Build site
-        run: mkdocs build --strict
+        run: python scripts/export_notebooks.py
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload Pages artifact
