@@ -46,6 +46,14 @@ nav:
       - p-Wave Superconductivity: quantum/p-wave-superconductivity.md
   - Signal Processing:
       - Continuous-to-Discrete Bandpass: signal-processing/continuous-to-discrete-bandpass.md
+  - Circuits:
+      - Current Sources: circuits/current-sources/index.md
+      - "10.21": circuits/current-sources/10-21.md
+      - "10.22": circuits/current-sources/10-22.md
+      - "10.23": circuits/current-sources/10-23.md
+      - "10.24": circuits/current-sources/10-24.md
+      - "10.25": circuits/current-sources/10-25.md
+      - "10.26": circuits/current-sources/10-26.md
   - Projects: projects.md
   - About: about.md
 
