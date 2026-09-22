@@ -26,9 +26,12 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 
 ## Circuits
 
-[Current-source exercises 10.21–10.26 (中文)](circuits/current-sources/index.md) · [Download Markdown ZIP](assets/downloads/ch10-current-sources.zip)
+[Browse all chapters / 按章节浏览](circuits/index.md)
 
-[Basic feedback exercises 12.1–12.15 (中文)](circuits/basic-feedback/index.md) · [Download Markdown ZIP](assets/downloads/ch12-basic-feedback.zip)
+| Chapter | Topics | Exercises | Markdown |
+|---|---|---|---|
+| [Chapter 10](circuits/current-sources/index.md) | Current Sources · 电流源 | 10.21–10.26 | [ZIP](assets/downloads/ch10-current-sources.zip) |
+| [Chapter 12](circuits/basic-feedback/index.md) | Basic Feedback · 基本反馈 | 12.1–12.15 | [ZIP](assets/downloads/ch12-basic-feedback.zip) |
 
 ## Notebooks
 
