@@ -28,6 +28,8 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 
 [Current-source exercises 10.21–10.26 (中文)](circuits/current-sources/index.md) · [Download Markdown ZIP](assets/downloads/ch10-current-sources.zip)
 
+[Basic feedback exercises 12.1–12.15 (中文)](circuits/basic-feedback/index.md) · [Download Markdown ZIP](assets/downloads/ch12-basic-feedback.zip)
+
 ## Notebooks
 
 Browse the complete notebooks below, including their saved formulas, figures,
