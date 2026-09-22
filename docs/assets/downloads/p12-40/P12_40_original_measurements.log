@@ -1,0 +1,15 @@
+User-provided LTspice measurement excerpt, original pre-fix run.
+Not a complete exported log. Local computer path headers omitted.
+Original precision settings: no numdgt=15.
+Original rof_ohm label denotes resistance EXCLUDING RL; this is not textbook part (c).
+
+id1_ma: (1000*Id(M1))=0.411159853684 at 0.0005
+ic2_ma: (-1000*Ic(Q2))=0.819213571958 at 0.0005
+vout_q_v: V(OUT)=1.47644817829 at 0.0005
+v_gain_minus: V(OUT)=1.4764393568 at 0.0015
+v_gain_plus: V(OUT)=1.47645699978 at 0.0025
+av_v_per_v: (v_gain_plus-v_gain_minus)/20u=0.882148742676
+v_test_minus: V(OUT)=1.47644674778 at 0.0035
+v_test_plus: V(OUT)=1.47644948959 at 0.0045
+rout_loaded_ohm: (v_test_plus-v_test_minus)/20n=137.090682983
+rof_ohm: 1/(1/rout_loaded_ohm-1/1200)=154.772205819

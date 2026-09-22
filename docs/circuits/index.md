@@ -5,6 +5,6 @@
 | Chapter | 当前收录内容 | 题目范围 | 下载 |
 |---|---|---|---|
 | [Chapter 10 — Current Sources](current-sources/index.md) | 电流源与电流镜 | 10.21–10.26（6 题） | [Markdown ZIP](../assets/downloads/ch10-current-sources.zip) |
-| [Chapter 12 — Basic Feedback](basic-feedback/index.md) | 基本反馈概念、增益、带宽与失真 | 12.1–12.15（15 题） | [Markdown ZIP](../assets/downloads/ch12-basic-feedback.zip) |
+| [Chapter 12 — Basic Feedback](basic-feedback/index.md) | 基本反馈概念、增益、带宽与失真 | 12.1–12.15、12.40（16 题） | [12.1–12.15 Markdown](../assets/downloads/ch12-basic-feedback.zip) · [12.40 LTspice](../assets/downloads/P12_40_Auto.zip) |
 
 章节目录列出每道题的内容和完成状态；缺图或题干不全的题目已注明假设与待核对部分。

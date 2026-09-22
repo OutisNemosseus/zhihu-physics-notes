@@ -1,0 +1,27 @@
+Figure P12.40 - BiCMOS amplifier
+VCC VCC 0 5
+VGG BIAS 0 2.5
+Vi IN BIAS PWL(0 0 1m 0 1.01m -10u 2m -10u 2.01m 10u 3m 10u 3.01m 0)
+RD1 VCC BASE 5k
+RE2 VCC EMITTER 1.6k
+M1 BASE IN OUT OUT MN L=1u W=1u
+Q2 OUT BASE EMITTER QP
+RL OUT 0 1.2k
+.model MN NMOS (LEVEL=1 VTO=0.5 KP=3m LAMBDA=0)
+.model QP PNP (BF=120 IS=1.4447463e-15)
+.temp 27
+.tran 0 5m 0 5u
+.options numdgt=15 measdgt=10 plotwinsize=0 reltol=1e-7 vntol=1e-10 abstol=1e-14
+Itest 0 OUT PWL(0 0 3.2m 0 3.21m -10n 4.2m -10n 4.21m 10n)
+.meas TRAN ID1_mA FIND (1000*Id(M1)) AT=0.5m
+.meas TRAN IC2_mA FIND (-1000*Ic(Q2)) AT=0.5m
+.meas TRAN VOUT_Q_V FIND V(OUT) AT=0.5m
+.meas TRAN v_gain_minus FIND V(OUT) AT=1.5m
+.meas TRAN v_gain_plus FIND V(OUT) AT=2.5m
+.meas TRAN Av_V_per_V PARAM (v_gain_plus-v_gain_minus)/20u
+.meas TRAN v_test_minus FIND V(OUT) AT=3.5m
+.meas TRAN v_test_plus FIND V(OUT) AT=4.5m
+.meas TRAN Rout_loaded_ohm PARAM (v_test_plus-v_test_minus)/20n
+.meas TRAN Rout_unloaded_ohm PARAM 1/(1/Rout_loaded_ohm-1/1200)
+.meas TRAN Rof_ohm PARAM Rout_loaded_ohm
+.end

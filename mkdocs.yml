@@ -73,6 +73,7 @@ nav:
           - "12.13": circuits/basic-feedback/12-13.md
           - "12.14": circuits/basic-feedback/12-14.md
           - "12.15": circuits/basic-feedback/12-15.md
+          - "12.40 — BiCMOS / LTspice": circuits/basic-feedback/12-40.md
   - Projects: projects.md
   - About: about.md
 

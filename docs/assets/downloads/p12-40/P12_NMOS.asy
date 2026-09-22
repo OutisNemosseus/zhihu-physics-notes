@@ -1,0 +1,28 @@
+Version 4
+SymbolType CELL
+LINE Normal 64 0 64 32
+LINE Normal 64 32 40 32
+LINE Normal 40 24 40 96
+LINE Normal 32 32 32 88
+LINE Normal 0 64 32 64
+LINE Normal 40 88 64 88
+LINE Normal 64 88 64 112
+LINE Normal 96 64 40 64
+LINE Normal 40 64 50 59
+LINE Normal 40 64 50 69
+WINDOW 0 104 16 Left 2
+WINDOW 3 104 40 Left 2
+SYMATTR Prefix M
+SYMATTR Description Four-terminal NMOS; bulk connected externally to source
+PIN 64 0 NONE 0
+PINATTR PinName D
+PINATTR SpiceOrder 1
+PIN 0 64 NONE 0
+PINATTR PinName G
+PINATTR SpiceOrder 2
+PIN 64 112 NONE 0
+PINATTR PinName S
+PINATTR SpiceOrder 3
+PIN 96 64 NONE 0
+PINATTR PinName B
+PINATTR SpiceOrder 4
