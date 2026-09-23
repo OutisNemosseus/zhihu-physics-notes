@@ -1,0 +1,204 @@
+# 12.49 — 两级电流反馈：增益和输入电阻
+
+[41 题完成清单](status-12-20-60.md) · [本题文件包](../../assets/downloads/ch12-20-60/p12-49.zip)
+
+## 教材题目与引用图
+
+来源：用户提供的 `electrobook-(4th ed).pdf`，页序号从 1 起。
+
+![12.49 原题或引用图 1，书内第 937 页／PDF 第 960 页](../../assets/images/ch12-source/12-49-1.png)
+
+![12.49 原题或引用图 2，书内第 938 页／PDF 第 961 页](../../assets/images/ch12-source/12-49-2.png)
+
+## 按教材模型展开推导
+
+
+### (a) 小信号参数 → 静态电流
+
+$$
+\begin{aligned}
+I_{C1}&=\frac{100}{101}(0.2\,\mathrm{mA}),\\
+I_{E2}&=\frac{10-40k I_{C1}-0.7}{1k+40k/101},\quad
+I_{C2}=\frac{100}{101}I_{E2},\\
+g_{mj}&=I_{Cj}/V_T,\quad r_{\pi j}=100/g_{mj}.
+\end{aligned}
+$$
+
+### (b)、(c) 增益和输入电阻 → 三节点方程
+
+设 Q1 基极为 $v_1$、Q2 基极为 $v_2$、Q2 发射极为 $v_e$，先由下列 KCL 解出它们，再求 $i_o=v_o/R_L$。输出负载电流与 Q2 集电极电流方向不能混淆，$v_o=-g_{m2}(v_2-v_e)(R_{C2}\parallel R_L)$。输入电阻定义为放大器自身端口，**排除外部并联 $R_S$**；仿真测试源看到的总电阻需用 $R_{if}=(1/R_{port}-1/R_S)^{-1}$ 换算。
+
+### 从依赖量展开到可代入的节点方程
+
+RL仅经隔直电容接入，DC断开；Q1发射极被旁路。Rif排除外部并联RS，另列端口电阻。
+
+未知的 $g_m,r_\pi$ 先由静态电流展开：$g_{mj}=I_{Cj}/V_T$、$r_{\pi j}=\beta/g_{mj}$，$V_T=26$ mV；$r_o=\infty$。向上代入如下，单位明确列出。
+
+|管号|$I_C$ (mA)|$g_m$ (mS)|$r_\pi$ (Ω)|
+|---|---:|---:|---:|
+|Q1|0.198019802|7.61614623|13130|
+|Q2|0.978161646|37.62160177|2658.04738|
+
+直流节点值由上面的固定 $V_{BE}$ 与电流 KCL 得到；表中 **不是**指数晶体管模型的输出。所有下表节点名与 `DC.cir` 一致，电压相对地：
+
+|节点|直流电压 (V)|
+|---|---:|
+|`b1`|-0.0198019802|
+|`b2`|1.687943262|
+|`e1`|-0.7198019802|
+|`e2`|0.9879432624|
+|`out`|8.043676708|
+|`vcc`|10|
+
+DC 网表的每管用 `Vbe` 维持 0.7 V、用 F 源实现 $I_C=\beta I_B$；这是教材分段近似的独立电路实现，不预设待求电流。
+
+为了逐节点核对，下面直接列出与原理图同名的全部节点 KCL。先由这些方程确定输出节点及输入电流，再向上组成所求比值。$i_V$ 是独立／受控电压源由正端流向负端的电流，所有理想直流电源在交流中接地，理想恒流偏置在交流中开路。
+
+$$
+\begin{aligned}
+\frac{v_{\mathrm{b2}}}{\mathrm{Rc1}}+\mathrm{Gm1}v_{\mathrm{in}}+\frac{(v_{\mathrm{b2}}-v_{\mathrm{e2}})}{\mathrm{Rpi2}}&=0\quad(v_{\mathrm{b2}}\text{ 节点})\\[5pt]
+\frac{v_{\mathrm{e2}}}{\mathrm{Re2}}-\frac{(v_{\mathrm{in}}-v_{\mathrm{e2}})}{\mathrm{Rf}}-\frac{(v_{\mathrm{b2}}-v_{\mathrm{e2}})}{\mathrm{Rpi2}}-\mathrm{Gm2}(v_{\mathrm{b2}}-v_{\mathrm{e2}})&=0\quad(v_{\mathrm{e2}}\text{ 节点})\\[5pt]
+-\mathrm{Iin}+\frac{v_{\mathrm{in}}}{\mathrm{Rs}}+\frac{(v_{\mathrm{in}}-v_{\mathrm{e2}})}{\mathrm{Rf}}+\frac{v_{\mathrm{in}}}{\mathrm{Rpi1}}&=0\quad(v_{\mathrm{in}}\text{ 节点})
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\frac{v_{\mathrm{out}}}{\mathrm{Rc2}}+\frac{v_{\mathrm{out}}}{\mathrm{RL}}+\mathrm{Gm2}(v_{\mathrm{b2}}-v_{\mathrm{e2}})&=0\quad(v_{\mathrm{out}}\text{ 节点})
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+
+\end{aligned}
+$$
+
+本组方程中的已知量如下。G 的系数为器件跨导（S），E 为开环电压增益或不加载电路的测量转换；不是题目闭环答案。1 V／1 A 是线性响应归一化，不是允许的大信号幅度。
+
+|元件|连接节点（顺序同网表）|参数（SI 单位）|
+|---|---|---:|
+|`Iin`|`0 → in`|1|
+|`Rs`|`in → 0`|10000|
+|`Rc1`|`b2 → 0`|40000|
+|`Rc2`|`out → 0`|2000|
+|`RL`|`out → 0`|500|
+|`Re2`|`e2 → 0`|1000|
+|`Rf`|`in → e2`|10000|
+|`Rpi1`|`in → 0`|13130|
+|`Gm1`|`b2 → 0 → in → 0`|0.00761614623001|
+|`Rpi2`|`b2 → e2`|2658.04737976|
+|`Gm2`|`out → e2 → b2 → e2`|0.0376216017674|
+
+### 向上代入得到结果
+
+将上述已知参数代入 KCL（线性方程组数值求解），再取目标端口量。计算脚本为仓库中的 `scripts/ch12_models.py`，与 LTspice 引擎独立。
+
+主结果：**8.602453176 A/A**。
+
+信号源端口电阻：47.4518348 Ω。去除外部并联源电阻后，放大器输入电阻为 47.67807602 Ω。
+
+保持图中电阻与负载的输出测试电阻：400 Ω。
+
+## 实际 LTspice 电路与频响截图
+
+以下为 **LTspice 26.1.1 for Windows 实际窗口截图**，下方是教材小信号等效原理图，上方是引擎生成的 AC 曲线。同名节点标签表示电气相连。
+
+![12.49 LTspice 高清等效电路截图](../../assets/images/ch12-spice/p12-49-schematic.png)
+
+![12.49 LTspice 实际原理图及 AC 结果](../../assets/images/ch12-spice/p12-49-run.png)
+
+未加入题目没有给出的结电容；因此 1 Hz–1 MHz 的平坦曲线只验证本页中频／理想等效模型，不代表实际器件带宽。对比值在 **1 kHz、同一套 $g_m,r_\pi$、同一端口定义**下提取。原日志的 AC 测量以 dB 和相位显示，数值表按 $x=10^{d/20}\cos\phi$ 换回线性值；180° 对应负号。
+
+<div class="p1240-results-grid">
+<section class="p1240-result-panel">
+<h3>LTspice 原始运行日志</h3>
+<details open><summary>AC.log</summary><pre class="p1240-log"><code>LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\AC.net
+Start Time: Tue Sep 22 10:01:47 2026
+Options:numdgt=15 measdgt=12
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+.OP point found by inspection.
+.OP point found by inspection.
+Total elapsed time: 0.053 seconds.
+Total iterations: 0
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\AC.net
+
+result: re(V(out)*0.002)=(18.6924463478dB,0°) at 1000
+rin_port: re(V(in)/I(Iin))=(33.5250601927dB,0°) at 1000
+</code></pre></details>
+<details><summary>DC.log</summary><pre class="p1240-log"><code>LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\DC.cir
+Start Time: Tue Sep 22 09:56:09 2026
+Options:numdgt=15 measdgt=12
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Total elapsed time: 0.015 seconds.
+Total iterations: 5
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\DC.cir
+
+ic1: (I(Vbe1)*100)=0.00019801980198 at 10
+ic2: (I(Vbe2)*100)=0.000978161645952 at 10
+v_b1: V(b1)=-0.019801980198 at 10
+v_b2: V(b2)=1.68794326241 at 10
+v_e1: V(e1)=-0.719801980198 at 10
+v_e2: V(e2)=0.987943262411 at 10
+v_out: V(out)=8.0436767081 at 10
+v_vcc: V(vcc)=10 at 10
+</code></pre></details>
+<details><summary>Rout.log</summary><pre class="p1240-log"><code>LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\Rout.cir
+Start Time: Tue Sep 22 09:56:09 2026
+Options:numdgt=15 measdgt=12
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+.OP point found by inspection.
+.OP point found by inspection.
+Total elapsed time: 0.019 seconds.
+Total iterations: 0
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\Rout.cir
+
+rout_port: re(V(out))=(52.0411998266dB,0°) at 1000
+</code></pre></details>
+</section>
+<section class="p1240-result-panel">
+<h3>教材计算与实际仿真</h3>
+<div class="p1240-table-scroll"><table><thead><tr><th>物理量</th><th>教材近似计算</th><th>实际仿真</th><th>单位</th><th>相对误差</th><th>原因／定义</th></tr></thead><tbody><tr><td>主结果</td><td>8.602453176</td><td>8.602453176</td><td>A/A</td><td>+1.2299e-09%</td><td>相同教材等效模型；数值舍入</td></tr><tr><td>输入测试端口电阻</td><td>47.4518348</td><td>47.45183479</td><td>Ω</td><td>-2.9734e-08%</td><td>相同端口；包含源电阻时的换算见上文</td></tr><tr><td>输出测试端口电阻</td><td>400</td><td>400</td><td>Ω</td><td>+4.6916e-10%</td><td>保持原负载；放大器自身值另列</td></tr><tr><td>IC1</td><td>0.000198019802</td><td>0.000198019802</td><td>A</td><td>-1e-10%</td><td>固定VBE、有限β的同一偏置模型</td></tr><tr><td>IC2</td><td>0.000978161646</td><td>0.000978161646</td><td>A</td><td>+1.7446e-11%</td><td>固定VBE、有限β的同一偏置模型</td></tr><tr><td>DC out</td><td>8.043676708</td><td>8.043676708</td><td>V</td><td>+4.5471e-11%</td><td>固定VBE近似；与AC扰动区分</td></tr></tbody></table></div>
+<p>计算来自上文节点方程，不以日志数值回填手算列。相对误差为 (仿真−计算)/计算；手算为零时只列绝对误差。同模型吻合验证代数与接线，不证明忽略寄生参数的近似适用于任意实物。</p>
+</section>
+</div>
+
+## 下载与复现
+
+[本题完整文件包](../../assets/downloads/ch12-20-60/p12-49.zip) · [12.20–12.60 全部成果包](../../assets/downloads/ch12-20-60.zip)
+
+- [AC.asc](../../assets/downloads/ch12-20-60/p12-49/AC.asc)
+- [AC.cir](../../assets/downloads/ch12-20-60/p12-49/AC.cir)
+- [AC.log](../../assets/downloads/ch12-20-60/p12-49/AC.log)
+- [AC.plt](../../assets/downloads/ch12-20-60/p12-49/AC.plt)
+- [AC.raw](../../assets/downloads/ch12-20-60/p12-49/AC.raw)
+- [DC.cir](../../assets/downloads/ch12-20-60/p12-49/DC.cir)
+- [DC.log](../../assets/downloads/ch12-20-60/p12-49/DC.log)
+- [DC.raw](../../assets/downloads/ch12-20-60/p12-49/DC.raw)
+- [Rout.asc](../../assets/downloads/ch12-20-60/p12-49/Rout.asc)
+- [Rout.cir](../../assets/downloads/ch12-20-60/p12-49/Rout.cir)
+- [Rout.log](../../assets/downloads/ch12-20-60/p12-49/Rout.log)
+- [Rout.raw](../../assets/downloads/ch12-20-60/p12-49/Rout.raw)
+
+完整解压后用 LTspice 打开 `AC.asc`，运行并按 **Ctrl+L** 查看本机新生成的日志。`AC.plt` 为波形选择配置；`Rout.asc`（如有）单独测试输出电阻，`DC.cir`（如有）验证教材固定 VBE 偏置。模型与参数直接写在文件中，不依赖外部器件库。

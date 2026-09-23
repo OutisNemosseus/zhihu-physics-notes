@@ -1,0 +1,2547 @@
+{
+  "pages": [
+    {
+      "problem": 20,
+      "desktop": {
+        "formulaWrappers": 5,
+        "renderedMath": 5,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 21,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 22,
+      "desktop": {
+        "formulaWrappers": 9,
+        "renderedMath": 9,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 23,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 24,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 25,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 26,
+      "desktop": {
+        "formulaWrappers": 12,
+        "renderedMath": 12,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 27,
+      "desktop": {
+        "formulaWrappers": 2,
+        "renderedMath": 2,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 28,
+      "desktop": {
+        "formulaWrappers": 6,
+        "renderedMath": 6,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 29,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 30,
+      "desktop": {
+        "formulaWrappers": 15,
+        "renderedMath": 15,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 1,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 31,
+      "desktop": {
+        "formulaWrappers": 8,
+        "renderedMath": 8,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 2,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 32,
+      "desktop": {
+        "formulaWrappers": 3,
+        "renderedMath": 3,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 1,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 33,
+      "desktop": {
+        "formulaWrappers": 4,
+        "renderedMath": 4,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 1,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 34,
+      "desktop": {
+        "formulaWrappers": 6,
+        "renderedMath": 6,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 1,
+        "bodyOverflow": false,
+        "grids": []
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": []
+      }
+    },
+    {
+      "problem": 35,
+      "desktop": {
+        "formulaWrappers": 22,
+        "renderedMath": 22,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 36,
+      "desktop": {
+        "formulaWrappers": 23,
+        "renderedMath": 23,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 37,
+      "desktop": {
+        "formulaWrappers": 24,
+        "renderedMath": 24,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 38,
+      "desktop": {
+        "formulaWrappers": 21,
+        "renderedMath": 21,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 39,
+      "desktop": {
+        "formulaWrappers": 13,
+        "renderedMath": 13,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 40,
+      "desktop": {
+        "formulaWrappers": 53,
+        "renderedMath": 53,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 41,
+      "desktop": {
+        "formulaWrappers": 17,
+        "renderedMath": 17,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 42,
+      "desktop": {
+        "formulaWrappers": 20,
+        "renderedMath": 20,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 43,
+      "desktop": {
+        "formulaWrappers": 26,
+        "renderedMath": 26,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 44,
+      "desktop": {
+        "formulaWrappers": 15,
+        "renderedMath": 15,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 45,
+      "desktop": {
+        "formulaWrappers": 13,
+        "renderedMath": 13,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 46,
+      "desktop": {
+        "formulaWrappers": 24,
+        "renderedMath": 24,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 47,
+      "desktop": {
+        "formulaWrappers": 17,
+        "renderedMath": 17,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 48,
+      "desktop": {
+        "formulaWrappers": 26,
+        "renderedMath": 26,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 49,
+      "desktop": {
+        "formulaWrappers": 23,
+        "renderedMath": 23,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 50,
+      "desktop": {
+        "formulaWrappers": 31,
+        "renderedMath": 31,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 51,
+      "desktop": {
+        "formulaWrappers": 23,
+        "renderedMath": 23,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 52,
+      "desktop": {
+        "formulaWrappers": 18,
+        "renderedMath": 18,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 53,
+      "desktop": {
+        "formulaWrappers": 19,
+        "renderedMath": 19,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 54,
+      "desktop": {
+        "formulaWrappers": 22,
+        "renderedMath": 22,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 55,
+      "desktop": {
+        "formulaWrappers": 16,
+        "renderedMath": 16,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 56,
+      "desktop": {
+        "formulaWrappers": 16,
+        "renderedMath": 16,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 57,
+      "desktop": {
+        "formulaWrappers": 22,
+        "renderedMath": 22,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 58,
+      "desktop": {
+        "formulaWrappers": 20,
+        "renderedMath": 20,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 5,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 59,
+      "desktop": {
+        "formulaWrappers": 19,
+        "renderedMath": 19,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 3,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    },
+    {
+      "problem": 60,
+      "desktop": {
+        "formulaWrappers": 15,
+        "renderedMath": 15,
+        "mathErrors": [],
+        "brokenImages": [],
+        "images": 4,
+        "bodyOverflow": false,
+        "grids": [
+          {
+            "horizontal": true,
+            "width": 908
+          }
+        ]
+      },
+      "mobile": {
+        "overflow": false,
+        "grids": [
+          {
+            "vertical": true
+          }
+        ]
+      }
+    }
+  ],
+  "downloads": [
+    {
+      "url": "assets/downloads/P12_40_Auto.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/P12_40_LTspice.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-20.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-21.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-22.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-23.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-24.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-25.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-26.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-27.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-28.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-29.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-30.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-31.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-32.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-33.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/12-34.md.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-35/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-36/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-37/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-38/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-39/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41b/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41b/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-41b/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-42/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-43/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-44/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-45/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-46/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-47/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-48/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-49/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-50/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-51/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-52/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-53/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-54/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-55/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/DeviceDC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/DeviceDC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-56/DeviceDC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-57/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-58/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/DC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/DC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/DC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/Rout.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/Rout.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/Rout.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-59/Rout.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60.zip",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60/AC.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60/AC.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60/AC.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60/AC.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/ch12-20-60/p12-60/AC.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_Auto.asc",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_Auto.cir",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_Auto.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_Auto.plt",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_Auto.raw",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_40_original_measurements.log",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_NMOS.asy",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/P12_PNP.asy",
+      "status": 200
+    },
+    {
+      "url": "assets/downloads/p12-40/README.txt",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-20-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-21-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-22-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-23-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-24-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-25-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-26-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-27-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-28-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-29-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-30-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-31-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-32-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-33-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-34-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-35-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-35-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-36-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-36-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-37-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-37-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-38-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-38-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-38-3.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-39-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-40-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-41-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-41-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-42-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-43-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-44-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-45-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-45-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-46-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-46-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-46-3.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-47-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-47-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-48-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-48-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-49-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-49-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-50-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-51-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-52-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-53-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-54-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-55-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-55-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-56-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-56-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-57-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-57-2.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-58-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-59-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/12-60-1.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.12.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.14.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.24.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.25.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.27.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-12.9.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-P12.22.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-source/figure-P12.26.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-35-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-35-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-36-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-36-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-37-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-37-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-38-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-38-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-39-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-39-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-40-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-40-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-41-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-41-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-41b-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-42-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-42-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-43-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-43-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-44-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-44-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-45-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-45-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-46-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-46-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-47-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-47-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-48-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-48-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-49-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-49-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-50-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-50-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-51-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-51-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-52-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-52-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-53-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-53-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-54-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-54-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-55-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-55-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-56-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-56-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-57-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-57-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-58-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-58-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-59-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-59-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-60-run.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/ch12-spice/p12-60-schematic.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/p12-40/problem-and-circuit.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/p12-40/solution-bias-and-small-signal.png",
+      "status": 200
+    },
+    {
+      "url": "assets/images/p12-40/solution-gain-and-resistance.png",
+      "status": 200
+    }
+  ],
+  "errors": [],
+  "sidebar": {
+    "checkbox": "__nav_7_3",
+    "before": true,
+    "after": false,
+    "restored": true
+  }
+}

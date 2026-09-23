@@ -1,0 +1,20 @@
+P12 Rout: textbook equivalent; see README.md
+Vin in 0 0 AC 0
+R1 in 0 400000
+R2 in 0 75000
+Rc1 b2 0 8800
+Rc2 b3 0 13000
+Re1 e1 0 500
+Re3 out 0 1400
+Rf out e1 10000
+Rpi1 in e1 3657.90419
+Gm1 b2 e1 in e1 0.0328056706
+Rpi2 b2 0 6440.3551
+Gm2 b3 0 b2 0 0.018632513
+Rpi3 b3 out 1579.63601
+Gm3 0 out b3 out 0.0759668677
+Itest 0 out 0 AC 1
+.ac dec 1 1 1Meg
+.options numdgt=15 measdgt=12
+.meas AC rout_port FIND re(V(out)) AT=1k
+.end

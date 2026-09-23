@@ -72,7 +72,48 @@ nav:
           - "12.13": circuits/basic-feedback/12-13.md
           - "12.14": circuits/basic-feedback/12-14.md
           - "12.15": circuits/basic-feedback/12-15.md
-          - "12.40 — BiCMOS / LTspice": circuits/basic-feedback/12-40.md
+          - "12.20–12.60 — 验证清单": circuits/basic-feedback/status-12-20-60.md
+          - "12.20": circuits/basic-feedback/12-20.md
+          - "12.21": circuits/basic-feedback/12-21.md
+          - "12.22": circuits/basic-feedback/12-22.md
+          - "12.23": circuits/basic-feedback/12-23.md
+          - "12.24": circuits/basic-feedback/12-24.md
+          - "12.25": circuits/basic-feedback/12-25.md
+          - "12.26": circuits/basic-feedback/12-26.md
+          - "12.27": circuits/basic-feedback/12-27.md
+          - "12.28": circuits/basic-feedback/12-28.md
+          - "12.29": circuits/basic-feedback/12-29.md
+          - "12.30": circuits/basic-feedback/12-30.md
+          - "12.31": circuits/basic-feedback/12-31.md
+          - "12.32": circuits/basic-feedback/12-32.md
+          - "12.33": circuits/basic-feedback/12-33.md
+          - "12.34": circuits/basic-feedback/12-34.md
+          - "12.35": circuits/basic-feedback/12-35.md
+          - "12.36": circuits/basic-feedback/12-36.md
+          - "12.37": circuits/basic-feedback/12-37.md
+          - "12.38": circuits/basic-feedback/12-38.md
+          - "12.39": circuits/basic-feedback/12-39.md
+          - "12.40": circuits/basic-feedback/12-40.md
+          - "12.41": circuits/basic-feedback/12-41.md
+          - "12.42": circuits/basic-feedback/12-42.md
+          - "12.43": circuits/basic-feedback/12-43.md
+          - "12.44": circuits/basic-feedback/12-44.md
+          - "12.45": circuits/basic-feedback/12-45.md
+          - "12.46": circuits/basic-feedback/12-46.md
+          - "12.47": circuits/basic-feedback/12-47.md
+          - "12.48": circuits/basic-feedback/12-48.md
+          - "12.49": circuits/basic-feedback/12-49.md
+          - "12.50": circuits/basic-feedback/12-50.md
+          - "12.51": circuits/basic-feedback/12-51.md
+          - "12.52": circuits/basic-feedback/12-52.md
+          - "12.53": circuits/basic-feedback/12-53.md
+          - "12.54": circuits/basic-feedback/12-54.md
+          - "12.55": circuits/basic-feedback/12-55.md
+          - "12.56": circuits/basic-feedback/12-56.md
+          - "12.57": circuits/basic-feedback/12-57.md
+          - "12.58": circuits/basic-feedback/12-58.md
+          - "12.59": circuits/basic-feedback/12-59.md
+          - "12.60": circuits/basic-feedback/12-60.md
   - Projects: projects.md
   - About: about.md
 

@@ -1,0 +1,64 @@
+# 12.22 — 运放电流反馈的有限增益
+
+## 教材题目与引用图
+
+来源：用户提供的 `electrobook-(4th ed).pdf`。以下页码同时列出书内印刷页码和 PDF 页序号（从 1 起）。
+
+![12.22 教材原文／引用图 1，印刷第 931 页，PDF 第 954 页](../../assets/images/ch12-source/12-22-1.png)
+
+![12.22 教材原文／引用图 2，印刷第 932 页，PDF 第 955 页](../../assets/images/ch12-source/figure-P12.22.png)
+
+
+## (a)、(b) 未知传递函数 → 反馈分流关系
+
+沿图 P12.22 标出的 $i_o$ 箭头（由右向左流过负载）计正；不能改用反向负载电流。按本节理想反馈近似，求和节点电压相对输出可忽略。有限开环参数是电流增益 $A_i$。
+
+$$
+\begin{aligned}
+A_{if}=\frac{i_o}{i_s}
+&\leftarrow i_o=A_i i_\varepsilon,\quad i_\varepsilon=i_s-i_{fb},\\
+i_{fb}&\leftarrow\frac{-v_x}{R_F},\quad
+ i_o=-v_x\left(\frac1{R_F}+\frac1{R_3}\right),\\
+\beta_i=\frac{i_{fb}}{i_o}&=\frac{R_3}{R_F+R_3}.
+\end{aligned}
+$$
+
+向上代回：$i_o=A_i(i_s-\beta_i i_o)$，所以
+
+$$\boxed{A_{if}=\frac{A_i}{1+\beta_i A_i}},\qquad
+\boxed{\beta_i=\frac1{1+R_F/R_3}}.$$
+
+## (c) 比值 → 已知增益 → 向上代入
+
+$$
+\begin{aligned}
+\frac{R_F}{R_3}&\leftarrow\frac1{\beta_i}-1,\\
+\beta_i&\leftarrow\frac1{A_{if}}-\frac1{A_i}
+=\frac1{25}-\frac1{10^5}=0.03999,\\
+\boxed{R_F/R_3}&=\boxed{24.00625156}.
+\end{aligned}
+$$
+
+只确定比值，题目没有指定两只电阻的绝对值。
+
+## (d) 增益变化 → 有限变化公式 → 向上代入
+
+固定反馈网络，令开环相对变化 $\delta=-0.15$。
+
+$$
+\begin{aligned}
+\frac{\Delta A_{if}}{A_{if}}
+&\leftarrow \frac{\delta}{1+T(1+\delta)},\quad T=\beta_iA_i=3999,\\
+\frac{\Delta A_{if}}{A_{if}}&=\frac{-0.15}{1+3999(0.85)}
+=-4.41157\times10^{-5},\\
+\boxed{\text{百分比变化}}&=\boxed{-0.00441157\%}.
+\end{aligned}
+$$
+
+教材微分近似为 $\delta/(1+T)=-0.00375\%$；15% 不是无穷小变化，应同时保留上面的有限变化结果。输入阻抗未知，不能据此给出真实器件的完整带宽或工作点。
+
+## 验证与下载
+
+本题属于理想反馈模型的代数／拓扑推导；没有指定可唯一复现的器件、电源及工作点。这里不编造晶体管电路或 SPICE 日志。以上结果是手算，不标注为仿真验证通过。
+
+[下载本题 Markdown](../../assets/downloads/ch12-20-60/12-22.md.txt) · [41 题状态清单](status-12-20-60.md)

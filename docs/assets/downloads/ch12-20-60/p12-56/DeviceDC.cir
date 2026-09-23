@@ -1,0 +1,23 @@
+P12.56 nonlinear device DC verification; LED constant drop as specified
+VCC vcc 0 3
+VSS vss 0 -3
+Vin in 0 0
+RD1 vcc d1 1.6k
+RD2 vcc d2 1.6k
+RL fb vss 248
+M1 d1 in tail tail MN L=1u W=1u
+M2 d2 fb tail tail MN L=1u W=1u
+M3 ledtop d1 vcc vcc MP L=1u W=1u
+VLED ledtop fb 1.6
+Itail tail vss 2m
+.model MN NMOS (LEVEL=1 VTO=0.5 KP=4m LAMBDA=0)
+.model MP PMOS (LEVEL=1 VTO=-0.5 KP=20m LAMBDA=0)
+.temp 27
+.options numdgt=15 measdgt=12 reltol=1e-9 abstol=1e-14 vntol=1e-10
+.dc VCC 3 3.000001 1u
+.meas DC id1 FIND Id(M1) AT=3
+.meas DC id2 FIND Id(M2) AT=3
+.meas DC id3 FIND (-Id(M3)) AT=3
+.meas DC vd1 FIND V(d1) AT=3
+.meas DC vg2 FIND V(fb) AT=3
+.end

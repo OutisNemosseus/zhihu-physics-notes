@@ -1,0 +1,10 @@
+P12 AC: textbook equivalent; see README.md
+Vin in 0 0 AC 5
+Re fb 0 333.333333
+Gbase 0 b in fb 1
+Vsense b fb 0
+Fcollector 0 fb Vsense 80
+.ac dec 20 1 1Meg
+.options numdgt=15 measdgt=12
+.meas AC result FIND re(V(fb)*0.003) AT=1k
+.end

@@ -1,0 +1,28 @@
+P12.37 textbook DC: Vbe=0.7 V; Ic=beta*Ib, not a device-model OP
+Vcc vcc 0 10
+R1 vcc b1 400000
+R2 b1 0 75000
+Rc1 vcc b2 8800
+Rc2 vcc b3 13000
+Re1 e1 0 500
+Re2 e2 0 3600
+Re3 out 0 1400
+Vbe1 b1 e1 0.7
+Fc1 b2 e1 Vbe1 120
+Vbe2 b2 e2 0.7
+Fc2 b3 e2 Vbe2 120
+Vbe3 b3 out 0.7
+Fc3 vcc out Vbe3 120
+.dc Vcc 10 10.000001 0.000001
+.options numdgt=15 measdgt=12
+.meas DC ic1 FIND (I(Vbe1)*120) AT=10
+.meas DC ic2 FIND (I(Vbe2)*120) AT=10
+.meas DC ic3 FIND (I(Vbe3)*120) AT=10
+.meas DC v_b1 FIND V(b1) AT=10
+.meas DC v_b2 FIND V(b2) AT=10
+.meas DC v_b3 FIND V(b3) AT=10
+.meas DC v_e1 FIND V(e1) AT=10
+.meas DC v_e2 FIND V(e2) AT=10
+.meas DC v_out FIND V(out) AT=10
+.meas DC v_vcc FIND V(vcc) AT=10
+.end
