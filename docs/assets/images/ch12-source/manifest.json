@@ -1,0 +1,831 @@
+{
+  "source": "electrobook-(4th ed).pdf",
+  "sha256": "b7c389f5b392c5a8c967a0e3d8543cf6cee98515327f574a9a907a286b771a1a",
+  "pages": 1395,
+  "problems": {
+    "20": [
+      {
+        "file": "12-20-1.png",
+        "pdf_page": 954,
+        "printed_page": 931,
+        "clip_points": [
+          68.75,
+          458.125,
+          415.625,
+          495.625
+        ]
+      },
+      {
+        "file": "figure-12.9.png",
+        "pdf_page": 890,
+        "printed_page": 867,
+        "reference": "12.9"
+      }
+    ],
+    "21": [
+      {
+        "file": "12-21-1.png",
+        "pdf_page": 954,
+        "printed_page": 931,
+        "clip_points": [
+          68.75,
+          495.625,
+          415.625,
+          531.25
+        ]
+      },
+      {
+        "file": "figure-12.9.png",
+        "pdf_page": 890,
+        "printed_page": 867,
+        "reference": "12.9"
+      }
+    ],
+    "22": [
+      {
+        "file": "12-22-1.png",
+        "pdf_page": 954,
+        "printed_page": 931,
+        "clip_points": [
+          68.75,
+          531.25,
+          415.625,
+          634.375
+        ]
+      },
+      {
+        "file": "figure-P12.22.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "reference": "P12.22"
+      }
+    ],
+    "23": [
+      {
+        "file": "12-23-1.png",
+        "pdf_page": 954,
+        "printed_page": 931,
+        "clip_points": [
+          68.75,
+          634.375,
+          415.625,
+          670.625
+        ]
+      },
+      {
+        "file": "figure-P12.22.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "reference": "P12.22"
+      },
+      {
+        "file": "12-22-1.png",
+        "pdf_page": 954,
+        "printed_page": 931,
+        "reference": "P12.22"
+      }
+    ],
+    "24": [
+      {
+        "file": "12-24-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "clip_points": [
+          166.875,
+          187.5,
+          510.0,
+          224.375
+        ]
+      },
+      {
+        "file": "figure-12.12.png",
+        "pdf_page": 893,
+        "printed_page": 870,
+        "reference": "12.12"
+      }
+    ],
+    "25": [
+      {
+        "file": "12-25-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "clip_points": [
+          166.875,
+          225.0,
+          510.0,
+          261.25
+        ]
+      },
+      {
+        "file": "figure-12.12.png",
+        "pdf_page": 893,
+        "printed_page": 870,
+        "reference": "12.12"
+      }
+    ],
+    "26": [
+      {
+        "file": "12-26-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "clip_points": [
+          166.875,
+          260.0,
+          510.0,
+          398.125
+        ]
+      },
+      {
+        "file": "figure-P12.26.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "reference": "P12.26"
+      }
+    ],
+    "27": [
+      {
+        "file": "12-27-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "clip_points": [
+          166.875,
+          609.375,
+          510.0,
+          645.0
+        ]
+      },
+      {
+        "file": "figure-P12.26.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "reference": "P12.26"
+      },
+      {
+        "file": "12-26-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "reference": "P12.26"
+      }
+    ],
+    "28": [
+      {
+        "file": "12-28-1.png",
+        "pdf_page": 955,
+        "printed_page": 932,
+        "clip_points": [
+          166.875,
+          645.0,
+          510.0,
+          683.125
+        ]
+      },
+      {
+        "file": "figure-12.14.png",
+        "pdf_page": 894,
+        "printed_page": 871,
+        "reference": "12.14"
+      }
+    ],
+    "29": [
+      {
+        "file": "12-29-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          66.875,
+          414.375,
+          103.125
+        ]
+      },
+      {
+        "file": "figure-12.14.png",
+        "pdf_page": 894,
+        "printed_page": 871,
+        "reference": "12.14"
+      }
+    ],
+    "30": [
+      {
+        "file": "12-30-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          103.125,
+          414.375,
+          336.875
+        ]
+      }
+    ],
+    "31": [
+      {
+        "file": "12-31-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          354.375,
+          414.375,
+          390.625
+        ]
+      },
+      {
+        "file": "12-30-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "reference": "P12.30"
+      }
+    ],
+    "32": [
+      {
+        "file": "12-32-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          390.625,
+          414.375,
+          450.625
+        ]
+      }
+    ],
+    "33": [
+      {
+        "file": "12-33-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          450.625,
+          414.375,
+          531.875
+        ]
+      }
+    ],
+    "34": [
+      {
+        "file": "12-34-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          531.875,
+          414.375,
+          584.375
+        ]
+      }
+    ],
+    "35": [
+      {
+        "file": "12-35-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          609.375,
+          414.375,
+          659.375
+        ]
+      },
+      {
+        "file": "12-35-2.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          85.625,
+          108.75,
+          253.125,
+          256.25
+        ]
+      }
+    ],
+    "36": [
+      {
+        "file": "12-36-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "clip_points": [
+          69.375,
+          658.75,
+          414.375,
+          684.375
+        ]
+      },
+      {
+        "file": "12-36-2.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          263.75,
+          64.375,
+          510.625,
+          305.0
+        ]
+      }
+    ],
+    "37": [
+      {
+        "file": "12-37-1.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          168.125,
+          305.0,
+          510.625,
+          365.625
+        ]
+      },
+      {
+        "file": "12-37-2.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          81.25,
+          387.5,
+          321.25,
+          611.25
+        ]
+      }
+    ],
+    "38": [
+      {
+        "file": "12-38-1.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          345.0,
+          414.375,
+          510.625,
+          611.25
+        ]
+      },
+      {
+        "file": "12-38-2.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "clip_points": [
+          168.125,
+          630.0,
+          510.625,
+          671.875
+        ]
+      },
+      {
+        "file": "12-38-3.png",
+        "pdf_page": 958,
+        "printed_page": 935,
+        "clip_points": [
+          100.0,
+          65.625,
+          415.0,
+          103.125
+        ]
+      }
+    ],
+    "39": [
+      {
+        "file": "12-39-1.png",
+        "pdf_page": 958,
+        "printed_page": 935,
+        "clip_points": [
+          68.75,
+          103.125,
+          416.875,
+          373.75
+        ]
+      }
+    ],
+    "40": [
+      {
+        "file": "12-40-1.png",
+        "pdf_page": 958,
+        "printed_page": 935,
+        "clip_points": [
+          68.75,
+          390.0,
+          416.875,
+          671.875
+        ]
+      }
+    ],
+    "41": [
+      {
+        "file": "12-41-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          47.5,
+          66.875,
+          142.5,
+          199.375
+        ]
+      },
+      {
+        "file": "12-41-2.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          66.25,
+          510.0,
+          140.625
+        ]
+      }
+    ],
+    "42": [
+      {
+        "file": "12-42-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          141.875,
+          510.0,
+          416.25
+        ]
+      }
+    ],
+    "43": [
+      {
+        "file": "12-43-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          428.125,
+          510.0,
+          485.625
+        ]
+      }
+    ],
+    "44": [
+      {
+        "file": "12-44-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          485.625,
+          510.0,
+          535.0
+        ]
+      },
+      {
+        "file": "12-36-1.png",
+        "pdf_page": 956,
+        "printed_page": 933,
+        "reference": "P12.36"
+      },
+      {
+        "file": "12-36-2.png",
+        "pdf_page": 957,
+        "printed_page": 934,
+        "reference": "P12.36"
+      }
+    ],
+    "45": [
+      {
+        "file": "12-45-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          560.0,
+          510.0,
+          613.125
+        ]
+      },
+      {
+        "file": "12-45-2.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          69.375,
+          115.0,
+          278.125,
+          235.0
+        ]
+      }
+    ],
+    "46": [
+      {
+        "file": "12-46-1.png",
+        "pdf_page": 959,
+        "printed_page": 936,
+        "clip_points": [
+          169.375,
+          613.125,
+          510.0,
+          687.5
+        ]
+      },
+      {
+        "file": "12-46-2.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          297.5,
+          63.75,
+          510.625,
+          235.0
+        ]
+      },
+      {
+        "file": "12-46-3.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          101.25,
+          237.5,
+          416.25,
+          311.25
+        ]
+      }
+    ],
+    "47": [
+      {
+        "file": "12-47-1.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          69.375,
+          311.25,
+          416.25,
+          359.375
+        ]
+      },
+      {
+        "file": "12-47-2.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          73.75,
+          365.625,
+          283.125,
+          563.125
+        ]
+      }
+    ],
+    "48": [
+      {
+        "file": "12-48-1.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          69.375,
+          569.375,
+          416.25,
+          645.625
+        ]
+      },
+      {
+        "file": "12-48-2.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          295.625,
+          365.625,
+          510.625,
+          563.125
+        ]
+      }
+    ],
+    "49": [
+      {
+        "file": "12-49-1.png",
+        "pdf_page": 960,
+        "printed_page": 937,
+        "clip_points": [
+          69.375,
+          645.625,
+          416.25,
+          671.875
+        ]
+      },
+      {
+        "file": "12-49-2.png",
+        "pdf_page": 961,
+        "printed_page": 938,
+        "clip_points": [
+          198.125,
+          63.125,
+          510.625,
+          334.375
+        ]
+      }
+    ],
+    "50": [
+      {
+        "file": "12-50-1.png",
+        "pdf_page": 961,
+        "printed_page": 938,
+        "clip_points": [
+          167.5,
+          334.375,
+          510.625,
+          407.5
+        ]
+      },
+      {
+        "file": "figure-12.24.png",
+        "pdf_page": 906,
+        "printed_page": 883,
+        "reference": "12.24"
+      },
+      {
+        "file": "figure-12.25.png",
+        "pdf_page": 907,
+        "printed_page": 884,
+        "reference": "12.25"
+      }
+    ],
+    "51": [
+      {
+        "file": "12-51-1.png",
+        "pdf_page": 961,
+        "printed_page": 938,
+        "clip_points": [
+          167.5,
+          407.5,
+          510.625,
+          671.875
+        ]
+      }
+    ],
+    "52": [
+      {
+        "file": "12-52-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          66.25,
+          418.125,
+          103.75
+        ]
+      },
+      {
+        "file": "12-51-1.png",
+        "pdf_page": 961,
+        "printed_page": 938,
+        "reference": "P12.51"
+      }
+    ],
+    "53": [
+      {
+        "file": "12-53-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          104.375,
+          418.125,
+          363.125
+        ]
+      }
+    ],
+    "54": [
+      {
+        "file": "12-54-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          371.25,
+          418.125,
+          433.75
+        ]
+      }
+    ],
+    "55": [
+      {
+        "file": "12-55-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          464.375,
+          418.125,
+          526.25
+        ]
+      },
+      {
+        "file": "12-55-2.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          55.0,
+          122.5,
+          186.25,
+          276.875
+        ]
+      }
+    ],
+    "56": [
+      {
+        "file": "12-56-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          526.25,
+          418.125,
+          611.25
+        ]
+      },
+      {
+        "file": "12-56-2.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          208.125,
+          66.875,
+          354.375,
+          276.875
+        ]
+      }
+    ],
+    "57": [
+      {
+        "file": "12-57-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "clip_points": [
+          69.375,
+          611.25,
+          418.125,
+          671.875
+        ]
+      },
+      {
+        "file": "12-57-2.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          365.625,
+          80.0,
+          510.625,
+          276.875
+        ]
+      }
+    ],
+    "58": [
+      {
+        "file": "12-58-1.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          167.5,
+          290.625,
+          510.625,
+          328.125
+        ]
+      },
+      {
+        "file": "12-57-1.png",
+        "pdf_page": 962,
+        "printed_page": 939,
+        "reference": "P12.57"
+      },
+      {
+        "file": "12-57-2.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "reference": "P12.57"
+      }
+    ],
+    "59": [
+      {
+        "file": "12-59-1.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          167.5,
+          328.125,
+          510.625,
+          583.75
+        ]
+      }
+    ],
+    "60": [
+      {
+        "file": "12-60-1.png",
+        "pdf_page": 963,
+        "printed_page": 940,
+        "clip_points": [
+          167.5,
+          596.25,
+          510.625,
+          673.75
+        ]
+      },
+      {
+        "file": "figure-12.27.png",
+        "pdf_page": 910,
+        "printed_page": 887,
+        "reference": "12.27"
+      }
+    ]
+  }
+}

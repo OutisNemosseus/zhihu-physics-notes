@@ -1,111 +1,16 @@
-# 12.40 — BiCMOS 反馈电路：手算与 LTspice 对照
+P12.40 current results — real LTspice 26.1.1 rerun
 
-本页整理题目 12.40 的直流偏置、小信号增益、输出电阻，以及可下载运行的 LTspice 文件。
+Options = 1e-14
+id1_ma = 0.4111598452
+ic2_ma = 0.8192135958
+vout_q_v = 1.476448129
+v_gain_minus = 1.476439309
+v_gain_plus = 1.476456949
+av_v_per_v = 0.8819698232
+v_test_minus = 1.476446713
+v_test_plus = 1.476449546
+rout_loaded_ohm = 141.63621
+rout_unloaded_ohm = 160.5907662
+rof_ohm = 141.63621
 
-## 下载与运行
-
-[下载自动测量完整 ZIP](../../assets/downloads/P12_40_Auto.zip){ .md-button .md-button--primary }
-
-完整解压后，用 **LTspice 打开 `P12_40_Auto.asc` → 点击 Run → 按 Ctrl+L**（View → SPICE Output Log）查看数字。波形窗口没有选曲线时会显示空白，测量数字在日志窗口内。
-
-ZIP 包含原理图、两个配套晶体管符号、独立网表、使用说明、原始日志摘录及本页的对比说明。`.asy` 文件须与 `.asc` 保持在同一目录。
-
-单独下载：
-
-- [原理图 P12_40_Auto.asc](../../assets/downloads/p12-40/P12_40_Auto.asc)
-- [NMOS 符号 P12_NMOS.asy](../../assets/downloads/p12-40/P12_NMOS.asy)
-- [PNP 符号 P12_PNP.asy](../../assets/downloads/p12-40/P12_PNP.asy)
-- [独立 SPICE 网表 P12_40_Auto.cir](../../assets/downloads/p12-40/P12_40_Auto.cir)
-- [使用说明 README.txt](../../assets/downloads/p12-40/README.txt)
-- [Ctrl+L 原始测量日志摘录](../../assets/downloads/p12-40/P12_40_original_measurements.log)
-- [最初的 AC 扫频版本 ZIP](../../assets/downloads/P12_40_LTspice.zip)
-
-!!! note "验证状态"
-    原始版本已由作者在 LTspice 中运行，实际测量值列于下表。当前下载版加入了双精度波形保存，并修正输出电阻的命名；**尚未收到修正版的 LTspice 重跑日志**。表中的精确模型参考值来自电路方程求解，不冒充修正版的实测结果。
-
-## 参数与模型
-
-$V^+=5\,\mathrm V$，$V_{GG}=2.5\,\mathrm V$，$R_{D1}=5\,\mathrm{k\Omega}$，$R_{E2}=1.6\,\mathrm{k\Omega}$，$R_L=1.2\,\mathrm{k\Omega}$。M₁ 为 NMOS，Q₂ 为 PNP；M₁ 源极与 Q₂ 集电极共同接输出。
-
-采用 $I_{D1}=K_n(V_{GS}-V_{TN})^2$，$K_n=1.5\,\mathrm{mA/V^2}$，$V_{TN}=0.5\,\mathrm V$，$\lambda=0$。SPICE 的 LEVEL=1 模型在 $W/L=1$ 时应设 `KP=3m`。
-
-Q₂ 的 `BF=120`，不指定 VAF（无 Early 效应）；在 27°C 下用 `IS=1.4447463e-15` 使工作点 $V_{EB}$ 约为 0.7 V。这是为教材近似选定的模型参数，并不是对某个实际器件的测量拟合。未加入寄生电容。
-
-## 手算、已运行日志与方程参考值
-
-教材答案来自本题解答截图。教材直流部分忽略基极电流，小信号部分仍使用 $\beta=120$；SPICE 则保留直流基极电流。教材还取 $V_T=26\,\mathrm{mV}$ 并作数值取整。
-
-| 量 | 教材答案 | 原始 LTspice 已运行结果 | 保留基极电流的方程参考值 |
-|---|---:|---:|---:|
-| $I_{D1}$ | 0.405 mA | 0.41115985 mA | 0.41116 mA |
-| $I_{C2}$（大小） | 0.828 mA | 0.81921357 mA | 0.81921 mA |
-| $V_{OQ}$ | 约 1.4803 V，由教材 $V_{GS}$ 推得 | 1.47644818 V | 1.47645 V |
-| $A_v$ | 0.8812 | 0.88214874 | 0.88197 |
-| (c) 输出电阻，包含 $R_L$ | 143 Ω | 137.09068 Ω，受原测量精度影响 | 141.63622 Ω |
-| 补充：不含 $R_L$ 的输出电阻 | 未给出 | 154.77221 Ω，受原测量精度影响 | 160.59078 Ω |
-
-直流电流差异约 1%–1.5%，符合两种偏置近似的区别；增益十分接近。原始日志的输出电阻不能作为修正版已验证的数值。
-
-## 为什么题目 (c) 要保留负载
-
-教材最后的测试电流关系包含 $1/R_L$：
-
-$$
-I_x=V_x\left[\frac{1}{R_L}+g_{m2}(0.1451)+g_{m1}\right].
-$$
-
-代入以 mS 为单位的导纳得到约 7.014 mS，因此 $R_{of}\approx143\,\Omega$。本页按这份答案的定义，将 **包含负载的输出电阻**作为题目 (c) 的结果。
-
-新版下载文件中的名称：
-
-| 日志字段 | 含义 |
-|---|---|
-| `ID1_mA` | M₁ 静态漏电流，mA |
-| `IC2_mA` | Q₂ 静态集电极电流大小，mA |
-| `Av_V_per_V` | 小信号电压增益，V/V |
-| `Rof_ohm` | 对应题目 (c)，包含 $R_L$，Ω |
-| `Rout_loaded_ohm` | 与 `Rof_ohm` 相同，保留作明确标记 |
-| `Rout_unloaded_ohm` | 同一偏置下扣除 $R_L$ 导纳的补充结果，Ω |
-
-旧日志中的 `rof_ohm` 曾表示不含 $R_L$ 的值；为保存原始记录，日志摘录没有改写数值或旧字段名。**不要把旧日志的 `rof_ohm` 与新版同名字段直接比较。**
-
-## 自动测量与精度修正
-
-一次瞬态仿真依次测量：0.5 ms 的静态值；输入为正负 10 µV 时的输出；输入恢复零扰动后，输出端注入正负 10 nA 时的电压。测试电流源 `Itest` 通过原理图上的 SPICE 指令加入。
-
-$$
-A_v\approx\frac{v_o(+10\,\mu\mathrm V)-v_o(-10\,\mu\mathrm V)}{20\,\mu\mathrm V},
-\qquad
-R_{of}\approx\frac{v_o(+10\,\mathrm{nA})-v_o(-10\,\mathrm{nA})}{20\,\mathrm{nA}}.
-$$
-
-电阻测试的电压差只有约 2.8 µV，叠加在约 1.476 V 的直流值上。原日志中的采样值表现出单精度量化，两个相近电压相减会放大舍入误差。新版加入：
-
-```spice
-.options numdgt=15 measdgt=10 plotwinsize=0 reltol=1e-7 vntol=1e-10 abstol=1e-14
-```
-
-`numdgt=15` 启用双精度数据保存；`measdgt=10` 控制测量输出位数。[ADI 官方参数参考](https://github.com/analogdevicesinc/ltspice-reference/blob/main/ai_ref/SIMULATION-COMMANDS-REFERENCE.md)
-
-$R_L$ 在测量中始终保留，以维持原偏置。额外的不含负载结果通过下式求出：
-
-$$
-R_{\mathrm{unloaded}}=\left(\frac1{R_{of}}-\frac1{R_L}\right)^{-1}.
-$$
-
-## Ctrl+L 原始日志摘录
-
-以下记录来自修正前的真实运行；省略本机文件路径。修正版的重跑结果待补充。
-
-```text
-id1_ma: (1000*Id(M1))=0.411159853684 at 0.0005
-ic2_ma: (-1000*Ic(Q2))=0.819213571958 at 0.0005
-vout_q_v: V(OUT)=1.47644817829 at 0.0005
-v_gain_minus: V(OUT)=1.4764393568 at 0.0015
-v_gain_plus: V(OUT)=1.47645699978 at 0.0025
-av_v_per_v: (v_gain_plus-v_gain_minus)/20u=0.882148742676
-v_test_minus: V(OUT)=1.47644674778 at 0.0035
-v_test_plus: V(OUT)=1.47644948959 at 0.0045
-rout_loaded_ohm: (v_test_plus-v_test_minus)/20n=137.090682983
-rof_ohm: 1/(1/rout_loaded_ohm-1/1200)=154.772205819
-```
+See the problem page for textbook derivations, units and signed relative errors. No values here replace the unedited original logs.

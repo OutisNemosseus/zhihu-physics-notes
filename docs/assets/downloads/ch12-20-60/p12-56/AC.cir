@@ -1,0 +1,13 @@
+P12 AC: textbook equivalent; see README.md
+Vin in 0 0 AC 1
+Rd1 d1 0 1600
+Rd2 d2 0 1600
+RL fb 0 248
+G1 d1 tail in tail 0.00282842712
+G2 d2 tail fb tail 0.00282842712
+G3 0 fb 0 d1 0.022
+Emonitor out 0 fb 0 1
+.ac dec 20 1 1Meg
+.options numdgt=15 measdgt=12
+.meas AC result FIND re(V(out)*0.00403225806) AT=1k
+.end

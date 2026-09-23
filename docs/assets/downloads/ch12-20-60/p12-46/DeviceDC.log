@@ -1,0 +1,26 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-46\DeviceDC.cir
+Start Time: Tue Sep 22 09:56:05 2026
+Options:numdgt=15 measdgt=12 reltol=1e-9 abstol=1e-14 vntol=1e-10
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+abstol = 1e-14
+reltol = 1e-09
+volttol = 1e-10
+Instance "M1": Length shorter than recommended for a level 1 MOSFET.
+Instance "M1": Width narrower than recommended for a level 1 MOSFET.
+Instance "M2": Length shorter than recommended for a level 1 MOSFET.
+Instance "M2": Width narrower than recommended for a level 1 MOSFET.
+Total elapsed time: 0.016 seconds.
+Total iterations: 11
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-46\DeviceDC.cir
+
+id1: Id(M1)=0.00398449641192 at 10
+id2: (-Id(M2))=0.0119215960622 at 10
+vout: V(out)=3.97652311852 at 10
+vs1: V(s)=5.96877132448 at 10

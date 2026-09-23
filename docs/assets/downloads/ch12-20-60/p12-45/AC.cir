@@ -1,0 +1,10 @@
+P12 AC: textbook equivalent; see README.md
+Iin 0 in 0 AC 6e-05
+Eamp out 0 0 in 100000000
+R1 in out 82333.3333
+R2 out 0 1000
+Rs in 0 100000
+.ac dec 20 1 1Meg
+.options numdgt=15 measdgt=12
+.meas AC result FIND re(I(Eamp)) AT=1k
+.end

@@ -1,0 +1,23 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\DC.cir
+Start Time: Tue Sep 22 09:56:09 2026
+Options:numdgt=15 measdgt=12
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+Total elapsed time: 0.015 seconds.
+Total iterations: 5
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-49\DC.cir
+
+ic1: (I(Vbe1)*100)=0.00019801980198 at 10
+ic2: (I(Vbe2)*100)=0.000978161645952 at 10
+v_b1: V(b1)=-0.019801980198 at 10
+v_b2: V(b2)=1.68794326241 at 10
+v_e1: V(e1)=-0.719801980198 at 10
+v_e2: V(e2)=0.987943262411 at 10
+v_out: V(out)=8.0436767081 at 10
+v_vcc: V(vcc)=10 at 10

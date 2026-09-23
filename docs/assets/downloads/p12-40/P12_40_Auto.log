@@ -1,0 +1,34 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\p12-40\P12_40_Auto.net
+Start Time: Tue Sep 22 11:07:11 2026
+Options:numdgt=15 measdgt=10 plotwinsize=0 reltol=1e-7 vntol=1e-10 abstol=1e-14
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+abstol = 1e-14
+reltol = 1e-07
+volttol = 1e-10
+Instance "M1": Length shorter than recommended for a level 1 MOSFET.
+Instance "M1": Width narrower than recommended for a level 1 MOSFET.
+Direct Newton iteration succeeded in finding operating point.
+Total elapsed time: 0.153 seconds.
+Total iterations: 2103
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\p12-40\P12_40_Auto.net
+C:\Users\tongs\AppData\Local\LTspice\lib\cmp\standard.bjt
+C:\Users\tongs\AppData\Local\LTspice\lib\cmp\standard.mos
+
+id1_ma: (1000*Id(M1))=0.4111598452 at 0.0005
+ic2_ma: (-1000*Ic(Q2))=0.8192135958 at 0.0005
+vout_q_v: V(OUT)=1.476448129 at 0.0005
+v_gain_minus: V(OUT)=1.476439309 at 0.0015
+v_gain_plus: V(OUT)=1.476456949 at 0.0025
+av_v_per_v: (v_gain_plus-v_gain_minus)/20u=0.8819698232
+v_test_minus: V(OUT)=1.476446713 at 0.0035
+v_test_plus: V(OUT)=1.476449546 at 0.0045
+rout_loaded_ohm: (v_test_plus-v_test_minus)/20n=141.63621
+rout_unloaded_ohm: 1/(1/Rout_loaded_ohm-1/1200)=160.5907662
+rof_ohm: Rout_loaded_ohm=141.63621

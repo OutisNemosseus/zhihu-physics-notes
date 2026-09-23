@@ -11,6 +11,5 @@ window.MathJax = {
   }
 };
 
-document$.subscribe(() => {
-  MathJax.typesetPromise();
-});
+// Material uses full page navigation here. MathJax startup typesets once.
+// Re-typesetting the generated assistive MathML would nest duplicate containers.

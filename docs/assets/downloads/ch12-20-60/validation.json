@@ -1,0 +1,294 @@
+{
+  "problems": 41,
+  "engine": "LTspice 26.1.1 for Windows",
+  "native_asc_matches": [
+    "docs/assets/downloads/ch12-20-60/p12-35/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-35/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-36/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-36/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-37/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-37/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-38/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-38/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-39/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-39/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-41/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-41/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-41b/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-41b/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-42/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-42/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-43/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-43/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-44/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-44/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-45/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-46/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-47/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-48/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-49/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-49/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-50/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-50/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-51/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-51/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-52/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-53/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-53/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-54/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-54/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-55/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-56/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-57/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-58/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-59/AC.asc",
+    "docs/assets/downloads/ch12-20-60/p12-59/Rout.asc",
+    "docs/assets/downloads/ch12-20-60/p12-60/AC.asc"
+  ],
+  "ac_comparisons": [
+    {
+      "problem": "35",
+      "equation": 10.998738342837619,
+      "spice": 10.998738342822344,
+      "unit": "V/V",
+      "relative_error": -1.3887858757863594e-12
+    },
+    {
+      "problem": "36",
+      "equation": 5.6815109656969405,
+      "spice": 5.681510965342022,
+      "unit": "V/V",
+      "relative_error": -6.24690796498167e-11
+    },
+    {
+      "problem": "37",
+      "equation": 20.72915371377101,
+      "spice": 20.729153713992158,
+      "unit": "V/V",
+      "relative_error": 1.0668516627915078e-11
+    },
+    {
+      "problem": "38",
+      "equation": 23.67027119228271,
+      "spice": 23.67027119468638,
+      "unit": "V/V",
+      "relative_error": 1.0154806137543398e-10
+    },
+    {
+      "problem": "39",
+      "equation": 1.2646793134598011,
+      "spice": 1.264679313459757,
+      "unit": "V/V",
+      "relative_error": -3.4939194394821375e-14
+    },
+    {
+      "problem": "41",
+      "equation": 0.8009919500329197,
+      "spice": 0.8009919498545327,
+      "unit": "V/V",
+      "relative_error": -2.22707571347574e-10
+    },
+    {
+      "problem": "41b",
+      "equation": 0.8313518018220387,
+      "spice": 0.8313518020338614,
+      "unit": "V/V",
+      "relative_error": 2.547930611935431e-10
+    },
+    {
+      "problem": "42",
+      "equation": 45.41020592842549,
+      "spice": 45.410205931006544,
+      "unit": "V/V",
+      "relative_error": 5.683862339545692e-11
+    },
+    {
+      "problem": "43",
+      "equation": 49.999999999999986,
+      "spice": 49.99999996304137,
+      "unit": "V/V",
+      "relative_error": -7.391723499949878e-10
+    },
+    {
+      "problem": "44",
+      "equation": 8.000000000000002,
+      "spice": 8.000000013411293,
+      "unit": "V/V",
+      "relative_error": 1.6764114540990245e-09
+    },
+    {
+      "problem": "45",
+      "equation": 0.004999999909433334,
+      "spice": 0.004999999907424348,
+      "unit": "A",
+      "relative_error": -4.01797179200677e-10
+    },
+    {
+      "problem": "46",
+      "equation": -2.3268200988965826,
+      "spice": -2.32682009809816,
+      "unit": "A/A",
+      "relative_error": -3.431389739574344e-10
+    },
+    {
+      "problem": "47",
+      "equation": -0.9200383723740996,
+      "spice": -0.9200383722577491,
+      "unit": "A/A",
+      "relative_error": -1.2646264362002835e-10
+    },
+    {
+      "problem": "48",
+      "equation": -0.9837839111581358,
+      "spice": -0.9837839111404207,
+      "unit": "A/A",
+      "relative_error": -1.8007055662225428e-11
+    },
+    {
+      "problem": "49",
+      "equation": 8.602453175859395,
+      "spice": 8.602453175965195,
+      "unit": "A/A",
+      "relative_error": 1.229879561002195e-11
+    },
+    {
+      "problem": "50",
+      "equation": 9.578209346080474,
+      "spice": 9.578209345522394,
+      "unit": "A/A",
+      "relative_error": -5.826556764700382e-11
+    },
+    {
+      "problem": "51",
+      "equation": 7.475240280680189,
+      "spice": 7.475240280635383,
+      "unit": "V/V",
+      "relative_error": -5.993912577554661e-12
+    },
+    {
+      "problem": "52",
+      "equation": 6.334451806035196,
+      "spice": 6.334451808282073,
+      "unit": "Ω",
+      "relative_error": 3.547073261372075e-10
+    },
+    {
+      "problem": "53",
+      "equation": 5.326188866933415,
+      "spice": 5.326188867597854,
+      "unit": "A/A",
+      "relative_error": 1.2474945724800423e-10
+    },
+    {
+      "problem": "54",
+      "equation": 30.000000000000004,
+      "spice": 29.999999975500792,
+      "unit": "A/A",
+      "relative_error": -8.166403849448518e-10
+    },
+    {
+      "problem": "55",
+      "equation": -0.0004999999800000008,
+      "spice": -0.0004999999816990318,
+      "unit": "A/V",
+      "relative_error": 3.3980621326374756e-09
+    },
+    {
+      "problem": "56",
+      "equation": 0.003730114839445508,
+      "spice": 0.0037301148348049726,
+      "unit": "A/V",
+      "relative_error": -1.2440730517853064e-09
+    },
+    {
+      "problem": "57",
+      "equation": 0.09804251504914326,
+      "spice": 0.09804251504980911,
+      "unit": "A/V",
+      "relative_error": 6.791505284061521e-12
+    },
+    {
+      "problem": "58",
+      "equation": 0.12,
+      "spice": 0.1200000001774948,
+      "unit": "A/V",
+      "relative_error": 1.479123420966566e-09
+    },
+    {
+      "problem": "59",
+      "equation": -6.526861023606688e-05,
+      "spice": -6.526861023592943e-05,
+      "unit": "A/V",
+      "relative_error": -2.105908643063098e-12
+    },
+    {
+      "problem": "60",
+      "equation": 0.014999444465019815,
+      "spice": 0.01499944446509812,
+      "unit": "A",
+      "relative_error": 5.220554527083255e-12
+    }
+  ],
+  "log_hashes": {
+    "docs/assets/downloads/ch12-20-60/p12-35/AC.log": "67dfa928e8b2a5002ca17d75cf0c4e6217d0f417bfc75da6380b42d03be91470",
+    "docs/assets/downloads/ch12-20-60/p12-35/Rout.log": "2d02ffa1658f1a8655f528b12eab40583ab6ffdd8865cabd31fd5c102b628201",
+    "docs/assets/downloads/ch12-20-60/p12-36/AC.log": "5645baa6ff1124203a464621f0c9a60e446679e75fd4e1a53aa1763c54ad2ef9",
+    "docs/assets/downloads/ch12-20-60/p12-36/DC.log": "39e7a3b754ce3d3fb99eb383a511460d5959efa96f55c7337e645048dfd04294",
+    "docs/assets/downloads/ch12-20-60/p12-36/Rout.log": "f72489e76567f8d67d2c1cc196e12f0f71190f7b2e36afa8151664c3d20240fa",
+    "docs/assets/downloads/ch12-20-60/p12-37/AC.log": "68bacb79a1ed6b4456de81e110f186996db3f1b24f2609b03226db427774b69d",
+    "docs/assets/downloads/ch12-20-60/p12-37/DC.log": "2d22fe62f27537a2523dc3380ac144a6e8a1969f3d57bf07162c19aaa867c392",
+    "docs/assets/downloads/ch12-20-60/p12-37/Rout.log": "93ae42eb9e3e5db64970507133e1983dfacdc6e6c14fba9bd9201fe70677859d",
+    "docs/assets/downloads/ch12-20-60/p12-38/AC.log": "5fedc8546be780b0cc367a7bd47826347306045c75ed0fe0716d5995bbadeafc",
+    "docs/assets/downloads/ch12-20-60/p12-38/Rout.log": "387b61c251a1b2f4d6981661a0d485721c533077baadd3ed3c8304a589d447c1",
+    "docs/assets/downloads/ch12-20-60/p12-39/AC.log": "e50964d804f81b7d20692d84ef2e008665714235075c6f58f9c0cad8785133f0",
+    "docs/assets/downloads/ch12-20-60/p12-39/DeviceDC.log": "821ac7ab64185f927fa7d93b1049d8bfc8340f17cd23cbbf53ac05a735085f4b",
+    "docs/assets/downloads/ch12-20-60/p12-39/Rout.log": "0418f413e58059a0e01edafb59f3616dfef4d4cbef15ed4fce3b2f3d23297a88",
+    "docs/assets/downloads/ch12-20-60/p12-41/AC.log": "016de37b453ad5ae68f6cdb0489745dcdf5ba6edfd60eafe0fecae421c38aabe",
+    "docs/assets/downloads/ch12-20-60/p12-41/Rout.log": "e83879acda72d47192136f020ade2b169d1591541f98fa72162977fb432c499f",
+    "docs/assets/downloads/ch12-20-60/p12-41b/AC.log": "a827ce5105a823451ec9136fbc166b9f66eedf249d94b28cee5a562d9524eaf0",
+    "docs/assets/downloads/ch12-20-60/p12-41b/Rout.log": "fd098c9acfdf2ba81df346f094fb4b918dc595001ff024669a2df48980d438b4",
+    "docs/assets/downloads/ch12-20-60/p12-42/AC.log": "e88de03843b3c35b108feb611f8451b3ab1aa358fc70f3947c5677ee54f7e5c9",
+    "docs/assets/downloads/ch12-20-60/p12-42/DC.log": "6a16c20713f18dc7656f4636244c3f0ccde190a7c221622c3f870716e50eeade",
+    "docs/assets/downloads/ch12-20-60/p12-42/Rout.log": "41d48de151ac0f2d95f7231c11be0943933ec97e920429a35261b47f4da49ddf",
+    "docs/assets/downloads/ch12-20-60/p12-43/AC.log": "332cc68059319e30c529d648ebe13645945ae35139c2cc623dd1538c54d25d9f",
+    "docs/assets/downloads/ch12-20-60/p12-43/DC.log": "262bdd18be574336dc0a71da1f428db2ce7b6f604ee734f45678b396188c0047",
+    "docs/assets/downloads/ch12-20-60/p12-43/Rout.log": "0166755008227164ef2754aa5122d5828aeeacc4cf181f889a4386a2f336149b",
+    "docs/assets/downloads/ch12-20-60/p12-44/AC.log": "e2c317346a632418d7f95784d0f40cf2fdfa1a5c67bd1d3c5f4cf2788fd37027",
+    "docs/assets/downloads/ch12-20-60/p12-44/DeviceDC.log": "4e8e04b3cf3ec5309371dbcea8a86b9b338de5deae8deae2371157ef0a70c475",
+    "docs/assets/downloads/ch12-20-60/p12-44/Rout.log": "03cf01000d89abfb3fdf87e50b252ccd093f559fdb427059575e3278a68fa0cd",
+    "docs/assets/downloads/ch12-20-60/p12-45/AC.log": "383530c61fafa99a4631df41d15a60f4eb81a1c4d183c40d09275bf5bc6aa509",
+    "docs/assets/downloads/ch12-20-60/p12-46/AC.log": "43c5dbfc757bdbb72357b417508d718eb460960317ae0acfc3de6e16eb783cad",
+    "docs/assets/downloads/ch12-20-60/p12-46/DeviceDC.log": "48193e30662b2207a10a10bea421866f65178284090e951453aadfe0bb19100c",
+    "docs/assets/downloads/ch12-20-60/p12-47/AC.log": "92589196c61375ecb70b8d0012ac777f316ac190566d6fb0aa500d300760436a",
+    "docs/assets/downloads/ch12-20-60/p12-47/DeviceDC.log": "e81e4166ea39436cb1c027d0aaad1f9ae476f4912410a86cd0966d6af1ed0a9d",
+    "docs/assets/downloads/ch12-20-60/p12-48/AC.log": "2e8b528634da148ee7513c6805895f53fa2472f3d329f691ab142054cf679513",
+    "docs/assets/downloads/ch12-20-60/p12-48/DeviceDC.log": "e1172a1371b4628a98b3f62ecb571c21564d47783c5c6275c8490993ef01009b",
+    "docs/assets/downloads/ch12-20-60/p12-49/AC.log": "0054e67972d243df3c6da4b9633c6dd8cb270a363875738255e0517839e635e0",
+    "docs/assets/downloads/ch12-20-60/p12-49/DC.log": "98c3265f18e184acfdea8461ae59e7857504c0b462976cb111412cfcd5dc9b0a",
+    "docs/assets/downloads/ch12-20-60/p12-49/Rout.log": "64272de9ba5769c787788550d9de46a6e72422cb88b9c67128c5e800f249caae",
+    "docs/assets/downloads/ch12-20-60/p12-50/AC.log": "56141066f148557d5259629581ecfe48e1bf46b27f930f61316abb6d19ec14c4",
+    "docs/assets/downloads/ch12-20-60/p12-50/DC.log": "d87df9fc257daa2ba446694bcdc27ca4255fcfe32310b78bba78f172d9ebe320",
+    "docs/assets/downloads/ch12-20-60/p12-50/Rout.log": "237d3c80ac8ac97071cb309dd6c0524b8c1377ee36f4de08cef44055793118ea",
+    "docs/assets/downloads/ch12-20-60/p12-51/AC.log": "deb2f6005099498126ed0a260e272691019d4c7f4bcb3ac18fa08712ac8945a4",
+    "docs/assets/downloads/ch12-20-60/p12-51/DC.log": "23eee8aa118b3721f2c5c8402f1027688cd1912f18b215a21bc937b77ea0fe2f",
+    "docs/assets/downloads/ch12-20-60/p12-51/Rout.log": "96f1e3fdf97b53944dc6037b7a508e5bb1f9bfe6152f821bcf14b45b9673a451",
+    "docs/assets/downloads/ch12-20-60/p12-52/AC.log": "fc35141c3c3db994a29699f80a20283bcbaca43aa7fd8647d4ee4754c0ee8dad",
+    "docs/assets/downloads/ch12-20-60/p12-52/DC.log": "af56b58aa8c593d9035581b4b74fa0fdda77d83473c3f6bb984d6d4e9773b7ad",
+    "docs/assets/downloads/ch12-20-60/p12-53/AC.log": "05433e8751f6a056a6edcb0c40c16105889bc7da6a306a2bd518bbd1ff634415",
+    "docs/assets/downloads/ch12-20-60/p12-53/DC.log": "efff3da9293b015e6d409d9810f8d7074338e4ae72865054a727b9a7cfda946c",
+    "docs/assets/downloads/ch12-20-60/p12-53/Rout.log": "ac42165b0c0ffa02719de0d4ea94ab04f6c496b9c66b572f81fc1d1030f0f358",
+    "docs/assets/downloads/ch12-20-60/p12-54/AC.log": "55909a02134e9c3c9c459c9645f770632804c4a210b1511fc301553a3ca09840",
+    "docs/assets/downloads/ch12-20-60/p12-54/DC.log": "dd0ff68710172abc24fa80fc17b1d409bf8a71212bb5d9584cbb625547f010e4",
+    "docs/assets/downloads/ch12-20-60/p12-54/Rout.log": "f84c3e488e9397f929467a8db5199467279a8d268647d067589b51bfc7d46402",
+    "docs/assets/downloads/ch12-20-60/p12-55/AC.log": "2a2bdd11b6f808ba9eba16751a5e6f8a75825cda2f7511279ddfa8a3c97fc899",
+    "docs/assets/downloads/ch12-20-60/p12-56/AC.log": "ff9d5ba6b5788400871f79f15f52fa5776cf453b34a246a317ea62428f63d6bf",
+    "docs/assets/downloads/ch12-20-60/p12-56/DeviceDC.log": "322017071fbd863b1328b471c9e1013fcbd4a594be99fffbbb2d074d77ec9e9d",
+    "docs/assets/downloads/ch12-20-60/p12-57/AC.log": "1318605ad8fb17e31756a2c5f896d8493ff76fcbafac8c70acf2a7d4d2988359",
+    "docs/assets/downloads/ch12-20-60/p12-58/AC.log": "75ad5a251bf6554b1d5a06a497ab132be471249a6b0c64977534e5955ec5d54e",
+    "docs/assets/downloads/ch12-20-60/p12-59/AC.log": "69f75c1105ded222aa6a75ecd2172af9c4d079b1615a5e2bb923af4233ececba",
+    "docs/assets/downloads/ch12-20-60/p12-59/DC.log": "fa1d2a0684428e040c4d63b29ec7d544dae00a337c8813b041780c0f9e063c3d",
+    "docs/assets/downloads/ch12-20-60/p12-59/Rout.log": "da5bf71188cb766da459c0fd62a35cac8fdf4af286fafca889bbc3ed5076848e",
+    "docs/assets/downloads/ch12-20-60/p12-60/AC.log": "d8fdbefe97e8c3fa6c180804175d8cc29c94a32838893be6acb97dae1b75cebf",
+    "docs/assets/downloads/p12-40/P12_40_Auto.log": "ce8bc3930f0f3cd635f6edc0e37cc59fd38d1ea74deee59efdaf443c171a6787"
+  }
+}

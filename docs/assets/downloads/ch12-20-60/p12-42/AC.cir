@@ -1,0 +1,19 @@
+P12 AC: textbook equivalent; see README.md
+Vin in 0 0 AC 1
+Rb11 in 0 150000
+Rb12 in 0 47000
+Rc1 b2 0 10000
+Rb21 b2 0 47000
+Rb22 b2 0 33000
+Rc2 out 0 4700
+R1 e1 0 100
+R2 e1 out 4700
+Rpi1 in e1 1385.75412
+Gm1 b2 e1 in e1 0.036081437
+Rpi2 b2 0 700.782835
+Gm2 out 0 b2 0 0.0713487796
+.ac dec 20 1 1Meg
+.options numdgt=15 measdgt=12
+.meas AC result FIND re(V(out)*1) AT=1k
+.meas AC rin_port FIND re(V(in)/(-I(Vin))) AT=1k
+.end

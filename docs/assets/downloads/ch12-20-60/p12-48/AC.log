@@ -1,0 +1,19 @@
+LTspice 26.1.1 for Windows
+Circuit: C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-48\AC.net
+Start Time: Tue Sep 22 10:01:42 2026
+Options:numdgt=15 measdgt=12
+solver = Normal
+Maximum thread count: 16
+tnom = 27
+temp = 27
+method = trap
+.OP point found by inspection.
+.OP point found by inspection.
+Total elapsed time: 0.047 seconds.
+Total iterations: 0
+
+Files loaded:
+C:\Users\tongs\Documents\GitHub\zhihu-physics-notes\docs\assets\downloads\ch12-20-60\p12-48\AC.net
+
+result: re(V(io)*1)=(-0.142005683919dB,180°) at 1000
+rin_port: re(V(in)/I(Iin))=(-19.5510484535dB,0°) at 1000
