@@ -1,0 +1,22 @@
+---
+title: File Upload for Midterm #1 Fall 2025
+description: ENGR 202 File upload guide
+---
+
+# File Upload for Midterm #1 Fall 2025
+
+**Type:** File upload
+
+## 完成指引
+
+按要求扫描或导出答题页，合并成清晰 PDF 后检查附件。
+
+## 提交前检查
+
+- 对照 Canvas 原题逐项确认没有遗漏。
+- 所有计算写出公式、代入、单位和最终答案。
+- 实验项目附原始数据、仪器截图和误差分析。
+- Survey、Discussion 和小组报告使用真实个人或小组信息。
+- PDF 上传前检查页序、清晰度和文件是否成功附加。
+
+[返回 ENGR 202 assignment 总页](all-assignments.md) · [返回 ENGR 202 首页](index.md)
