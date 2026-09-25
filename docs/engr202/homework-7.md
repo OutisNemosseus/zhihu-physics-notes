@@ -1,5 +1,5 @@
 ---
-title: Homework #7
+title: "Homework #7"
 description: ENGR 202 Homework guide
 ---
 
