@@ -5,6 +5,8 @@ description: ENGR 202 Assignment guide
 
 # Week 8 Lab 7 Weekly Project Plan
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-8-project-plan.md){ .md-button download }
+
 **Type:** Assignment
 
 ## 完成指引
