@@ -5,6 +5,8 @@ description: ENGR 202 Homework guide
 
 # Homework #4: Instantaneous and Average Power Calculations
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/homework-4-power.md){ .md-button download }
+
 **Type:** Homework
 
 ## 完成指引
