@@ -1,5 +1,5 @@
 ---
-title: Homework #5: Complex Power
+title: "Homework #5: Complex Power"
 description: ENGR 202 Homework guide
 ---
 
