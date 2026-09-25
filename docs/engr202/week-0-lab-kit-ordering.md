@@ -5,6 +5,8 @@ description: ENGR 202 Assignment guide
 
 # Week 0 — Proof Of Lab Kit Ordering
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-0-lab-kit-ordering.md){ .md-button download }
+
 **Type:** Assignment
 
 ## 完成指引
