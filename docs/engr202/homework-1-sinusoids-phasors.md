@@ -1,5 +1,5 @@
 ---
-title: Homework #1: Sinusoids and Phasors
+title: "Homework #1: Sinusoids and Phasors"
 description: ENGR 202 Homework guide
 ---
 
