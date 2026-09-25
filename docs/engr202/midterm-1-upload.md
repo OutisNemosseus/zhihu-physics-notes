@@ -5,6 +5,8 @@ description: ENGR 202 File upload guide
 
 # File Upload for Midterm #1 Fall 2025
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/midterm-1-upload.md){ .md-button download }
+
 **Type:** File upload
 
 ## 完成指引
