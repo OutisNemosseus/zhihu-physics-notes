@@ -1,5 +1,5 @@
 ---
-title: Homework #2: Impedance
+title: "Homework #2: Impedance"
 description: ENGR 202 Homework guide
 ---
 
