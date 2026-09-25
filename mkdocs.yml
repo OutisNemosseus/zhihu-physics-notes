@@ -49,6 +49,57 @@ nav:
       - Overview: engr202/index.md
       - All assignment guides: engr202/all-assignments.md
       - Assignment status: engr202/assignment-status.md
+      - Week 0 Student Background Survey: engr202/week-0-student-background-survey.md
+      - Week 0 Location and Lab Hours: engr202/week-0-location-lab-hours.md
+      - Homework 0: engr202/homework-0.md
+      - Week 0 Lab Kit Ordering: engr202/week-0-lab-kit-ordering.md
+      - Introduce Yourself: engr202/introduce-yourself.md
+      - Week 1 SPICE Installation: engr202/week-1-spice-installation.md
+      - Homework 1 Sinusoids and Phasors: engr202/homework-1-sinusoids-phasors.md
+      - Week 2 Lab 0 Inventory: engr202/week-2-lab-0-inventory.md
+      - Homework 2 Impedance: engr202/homework-2-impedance.md
+      - Week 2 Lab 1 ADALM2000: engr202/week-2-lab-1-adalm2000.md
+      - Week 3 Lab 2 Sinusoidal Signals: engr202/week-3-lab-2-sinusoidal-signals.md
+      - Week 3 Lab Partners: engr202/week-3-lab-partners.md
+      - Homework 3 Phasors and Impedance: engr202/homework-3-phonors-impedance.md
+      - Practice Exam 1: engr202/practice-exam-1.md
+      - Week 4 Project Plan: engr202/week-4-project-plan.md
+      - Practice Exam 1 PDF: engr202/practice-exam-1-pdf.md
+      - Week 4 Lab 3 Impedance: engr202/week-4-lab-3-impedance.md
+      - Week 4 Group Report: engr202/week-4-group-report.md
+      - Week 4 Individual Contribution: engr202/week-4-individual-contribution.md
+      - Homework 4 Power: engr202/homework-4-power.md
+      - Homework 5 Complex Power: engr202/homework-5-complex-power.md
+      - Midterm 1: engr202/midterm-1.md
+      - Midterm 1 Upload: engr202/midterm-1-upload.md
+      - Week 6 Project Plan: engr202/week-6-project-plan.md
+      - Week 6 Mystery Box: engr202/week-6-mystery-box.md
+      - Week 6 Group Report: engr202/week-6-group-report.md
+      - Week 6 Homework: engr202/week-6-homework.md
+      - Week 7 Project Plan: engr202/week-7-project-plan.md
+      - Week 7 Frequency Circuits: engr202/week-7-frequency-circuits.md
+      - Week 7 Group Report: engr202/week-7-group-report.md
+      - Homework 7: engr202/homework-7.md
+      - Week 8 Project Plan: engr202/week-8-project-plan.md
+      - Week 8 Crossover Design: engr202/week-8-crossover-design.md
+      - Week 8 Group Report: engr202/week-8-group-report.md
+      - Homework 8: engr202/homework-8.md
+      - Week 9 Project Plan: engr202/week-9-project-plan.md
+      - Midterm 2: engr202/midterm-2.md
+      - Midterm 2 Upload: engr202/midterm-2-upload.md
+      - Week 9 Homework: engr202/week-9-homework.md
+      - Week 9 Crossover Part 1: engr202/week-9-crossover-part-1.md
+      - Week 9 Group Report: engr202/week-9-group-report.md
+      - Week 9 Crossover Part 2: engr202/week-9-crossover-part-2.md
+      - Week 9 Individual Contribution: engr202/week-9-individual.md
+      - Week 10 Project Plan: engr202/week-10-project-plan.md
+      - Homework 10 Transformers: engr202/homework-10-transformers.md
+      - Week 10 Mystery Box: engr202/week-10-mystery-box.md
+      - Week 10 Group Report: engr202/week-10-group-report.md
+      - Week 10 Individual Contribution: engr202/week-10-individual.md
+      - Video Survey: engr202/video-survey.md
+      - Final Exam: engr202/final-exam.md
+      - Final Upload: engr202/final-upload.md
   - Circuits:
       - Chapters: circuits/index.md
       - "Chapter 10 — Current Sources":
