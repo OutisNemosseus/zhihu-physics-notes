@@ -1,5 +1,5 @@
 ---
-title: Homework #0: Review of Circuit Analysis Techniques
+title: "Homework #0: Review of Circuit Analysis Techniques"
 description: ENGR 202 Homework guide
 ---
 
