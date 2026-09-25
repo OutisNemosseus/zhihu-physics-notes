@@ -1,5 +1,5 @@
 ---
-title: Homework #4: Instantaneous and Average Power Calculations
+title: "Homework #4: Instantaneous and Average Power Calculations"
 description: ENGR 202 Homework guide
 ---
 
