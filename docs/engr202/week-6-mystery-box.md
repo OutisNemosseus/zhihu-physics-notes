@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 6 Lab 5 - Part 1: Mystery Box Challenge
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-6-mystery-box.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
