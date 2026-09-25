@@ -28,6 +28,8 @@ I_x=\frac{V_A-V_B}{6}=-\frac{31}{53}\ \mathrm A.$$
 
 三个网孔电流均按题目图示取顺时针。
 
+### A · 网孔方程
+
 左侧网孔：
 
 $$6i_1+8(i_1-i_3)=12.$$
@@ -44,11 +46,33 @@ $$\begin{bmatrix}14&0&-8\\0&14&-10\\-8&-10&25\end{bmatrix}
 \begin{bmatrix}i_1\\i_2\\i_3\end{bmatrix}
 =\begin{bmatrix}12\\-6\\-10\end{bmatrix}.$$
 
+### B · 网孔电流
+
 $$i_1=\frac{50}{93}\ \mathrm A,\quad
 i_2=-\frac{77}{93}\ \mathrm A,\quad
 i_3=-\frac{52}{93}\ \mathrm A.$$
 
-$$I_x=i_3-i_1=-\frac{34}{31}\ \mathrm A,\qquad I_y=i_2=-\frac{77}{93}\ \mathrm A.$$
+### C · 求 Iy
+
+R1 只属于右上网孔，Iy 的向下参考方向与 i2 在 R1 上的方向一致。
+
+$$\boxed{I_y=i_2=-\frac{77}{93}\ \mathrm A\approx-0.827957\ \mathrm A.}$$
+
+因此实际电流沿 R1 向上，大小为 0.827957 A。
+只有一个网孔经过的支路，其支路电流可以直接等于该网孔电流。
+
+### D · 求 Ix
+
+R5 由左侧和右下网孔共用；i3 在 R5 上向上，i1 在 R5 上向下。
+按题目 Ix 的向上参考方向：
+
+$$\boxed{I_x=i_3-i_1=-\frac{52}{93}-\frac{50}{93}=-\frac{34}{31}\ \mathrm A\approx-1.096774\ \mathrm A.}$$
+
+因此实际电流沿 R5 向下，大小为 1.096774 A。
+
+打开 Problem3_Log.asc，点击 Run 后按 Ctrl+L；iy_a 对应 C 问，ix_a 对应 D 问。
+
+### LTspice 电流参考方向
 
 LTspice 的 R5 符号方向设成从下向上，因此 I(R5) 直接等于题目的 Ix。
 R2 的电流参考方向设成从右向左，因此 I(R2) 直接等于 i3。
