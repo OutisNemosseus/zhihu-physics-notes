@@ -1,0 +1,16 @@
+ENGR202 Problem 1 - Run then Ctrl+L for answers
+* All resistances in ohms. Current references follow the supplied diagram.
+V1 VS 0 10
+R6 VS B 2
+R1 B A 4
+R2 A 0 10
+R3 B C 6
+R4 B C 8
+R5 C 0 12
+.tran 10m 1
+.options plotwinsize=0 numdgt=12 measdgt=12
+.meas TRAN Ix_A FIND I(R6) AT=1
+.meas TRAN Iy_A FIND I(R5) AT=1
+.meas TRAN VB_V FIND V(B) AT=1
+.meas TRAN Vx_V FIND V(A,B) AT=1
+.end

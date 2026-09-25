@@ -1,0 +1,55 @@
+# 第二、三题的方程与方向核对
+
+## Problem 2 — Nodal analysis
+
+R1 的电流由串联的 1 A 电流源确定：从左侧流入 A 为 1 A。
+R4 下端接电源正端，因此该节点 C 的电压是 10 V。
+
+节点 A 的原始方程：
+
+$$\frac{V_A}{2}+\frac{V_A-V_B}{6}+\frac{V_A-V_B}{6}=1.$$
+
+节点 B 的原始方程：
+
+$$\frac{V_B-V_A}{6}+\frac{V_B-V_A}{6}+\frac{V_B}{8}+\frac{V_B-10}{1}=0.$$
+
+合并并清除分母：
+
+$$\begin{bmatrix}5&-2\\-8&35\end{bmatrix}
+\begin{bmatrix}V_A\\V_B\end{bmatrix}
+=\begin{bmatrix}6\\240\end{bmatrix}.$$
+
+$$V_A=\frac{230}{53}\ \mathrm V,\qquad V_B=V_x=\frac{416}{53}\ \mathrm V.$$
+
+$$I_y=\frac{V_A}{2}=\frac{115}{53}\ \mathrm A,\qquad
+I_x=\frac{V_A-V_B}{6}=-\frac{31}{53}\ \mathrm A.$$
+
+## Problem 3 — Mesh analysis
+
+三个网孔电流均按题目图示取顺时针。
+
+左侧网孔：
+
+$$6i_1+8(i_1-i_3)=12.$$
+
+右上网孔：沿顺时针方向经过 V2 是从正到负，电源电压升为 −6 V。
+
+$$4i_2+10(i_2-i_3)=-6.$$
+
+右下网孔：沿顺时针方向经过 V1 是从正到负，电源电压升为 −10 V。
+
+$$8(i_3-i_1)+10(i_3-i_2)+7i_3=-10.$$
+
+$$\begin{bmatrix}14&0&-8\\0&14&-10\\-8&-10&25\end{bmatrix}
+\begin{bmatrix}i_1\\i_2\\i_3\end{bmatrix}
+=\begin{bmatrix}12\\-6\\-10\end{bmatrix}.$$
+
+$$i_1=\frac{50}{93}\ \mathrm A,\quad
+i_2=-\frac{77}{93}\ \mathrm A,\quad
+i_3=-\frac{52}{93}\ \mathrm A.$$
+
+$$I_x=i_3-i_1=-\frac{34}{31}\ \mathrm A,\qquad I_y=i_2=-\frac{77}{93}\ \mathrm A.$$
+
+LTspice 的 R5 符号方向设成从下向上，因此 I(R5) 直接等于题目的 Ix。
+R2 的电流参考方向设成从右向左，因此 I(R2) 直接等于 i3。
+这只规定电流读数的参考方向，不改变电阻连接或电路行为。

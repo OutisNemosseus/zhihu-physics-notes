@@ -24,6 +24,10 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 - [Why Do Linearly Independent Columns Make a Square Matrix Invertible?](linear-algebra/linear-independence-and-invertibility.md)
 - [Is the Pseudogap a Universal Phenomenon?](condensed-matter/pseudogap.md)
 
+## ENGR 202
+
+[电路作业、三道原题截图与 LTspice 下载](engr202/index.md) · Run 后按 Ctrl+L 查看答案。
+
 ## Circuits
 
 [Browse all chapters / 按章节浏览](circuits/index.md)

@@ -1,0 +1,134 @@
+# ENGR202 — Problem 1: Series/parallel resistor circuit
+
+## Final answers / 最终结果
+
+| Part | Quantity | Exact value | Numerical result |
+|---|---|---|---|
+| A | $I_x$，沿箭头向右 | $515/481\ \mathrm{A}$ | **1.070686 A** |
+| B | $I_y$，沿箭头向下 | $245/481\ \mathrm{A}$ | **0.509356 A** |
+| C | $V_B$，相对于地 | $3780/481\ \mathrm{V}$ | **7.858628 V** |
+| D | $V_x=V_A-V_B$，下正上负 | $-1080/481\ \mathrm{V}$ | **−2.245322 V** |
+
+所有电阻数值的单位都是 Ω。下方整条导线为参考地（0 V）。
+
+本解答只使用串并联化简、欧姆定律、分流和分压；没有使用节点电压法或网孔电流法。
+
+## 1. Reduce the resistor network / 电阻化简
+
+$R_3$ 和 $R_4$ 的两端分别接到同一对节点 B、C，因此它们并联：
+
+$$
+R_{34}=R_3\parallel R_4
+=\frac{6\times8}{6+8}
+=\frac{24}{7}\ \Omega.
+$$
+
+右支路是 $R_{34}$ 与 $R_5$ 串联；左支路是 $R_1$ 与 $R_2$ 串联：
+
+$$
+R_{\mathrm{right}}=\frac{24}{7}+12=\frac{108}{7}\ \Omega,
+\qquad
+R_{\mathrm{left}}=4+10=14\ \Omega.
+$$
+
+两条支路都接在 B 与地之间，因此并联：
+
+$$
+R_{B0}=14\parallel\frac{108}{7}
+=\frac{14(108/7)}{14+108/7}
+=\frac{756}{103}\ \Omega.
+$$
+
+最后与 $R_6$ 串联，得到电源看到的总电阻：
+
+$$
+R_{\mathrm{total}}=2+\frac{756}{103}
+=\frac{962}{103}\ \Omega
+\approx9.339806\ \Omega.
+$$
+
+## A. Find the current Ix
+
+$R_6$ 在分流之前，流过它的电流就是电源提供的总电流。由欧姆定律：
+
+$$
+\boxed{I_x=\frac{10}{R_{\mathrm{total}}}
+=\frac{10}{962/103}
+=\frac{515}{481}\ \mathrm{A}
+\approx1.070686\ \mathrm{A}.}
+$$
+
+结果为正，方向与图中向右的箭头一致。
+
+## B. Find the current Iy
+
+$I_y$ 是流入整个右支路的电流。将左右两支路看成两个并联电阻，使用分流公式：
+
+$$
+I_y=I_x\frac{R_{\mathrm{left}}}
+{R_{\mathrm{left}}+R_{\mathrm{right}}}.
+$$
+
+分子使用另一条支路的电阻 $R_{\mathrm{left}}$：
+
+$$
+\boxed{I_y=\frac{515}{481}\frac{14}{14+108/7}
+=\frac{245}{481}\ \mathrm{A}
+\approx0.509356\ \mathrm{A}.}
+$$
+
+虽然电流在 $R_3$、$R_4$ 处分开，但在 $R_5$ 上方重新汇合，所以 $R_5$ 的电流等于整个右支路的电流。
+
+## C. Find the voltage at node B
+
+B 对地电压就是并联部分两端的电压，由分压公式：
+
+$$
+V_B=10\frac{R_{B0}}{R_6+R_{B0}}.
+$$
+
+因此：
+
+$$
+\boxed{V_B=10\frac{756/103}{962/103}
+=\frac{3780}{481}\ \mathrm{V}
+\approx7.858628\ \mathrm{V}.}
+$$
+
+等价地，电源正端为 10 V，减去 $R_6$ 的压降也得到
+$V_B=10-I_xR_6$。
+
+## D. Find the voltage Vx
+
+图中 $V_x$ 的正端位于 A，负端位于 B，因此必须使用：
+
+$$
+V_x=V_A-V_B.
+$$
+
+先对左支路的 $R_1$、$R_2$ 分压：
+
+$$
+V_A=V_B\frac{R_2}{R_1+R_2}
+=\frac{3780}{481}\frac{10}{14}
+=\frac{2700}{481}\ \mathrm{V}.
+$$
+
+所以：
+
+$$
+\boxed{V_x=\frac{2700-3780}{481}
+=-\frac{1080}{481}\ \mathrm{V}
+\approx-2.245322\ \mathrm{V}.}
+$$
+
+也可以直接写成 $V_x=-V_B\,R_1/(R_1+R_2)$。
+负号表示实际电位是 B 高于 A，和题目指定的“下正上负”参考极性相反。
+
+## Simulation / 仿真读数
+
+打开本文件夹的 `Problem1_Log.asc`，点击 Run，再按 Ctrl+L。
+日志中 `Ix_A`、`Iy_A`、`VB_V`、`Vx_V` 四行就是对应答案。
+详见总目录 README.md。
+
+AI assistance: ChatGPT was used to explain the solution and prepare/check the SPICE files.

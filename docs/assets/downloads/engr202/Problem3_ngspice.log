@@ -1,0 +1,31 @@
+stdout Note: No compatibility mode selected!
+stdout Circuit: engr202 problem 3 - ngspice numerical validation
+stdout ******
+stdout ** ngspice-39 : Circuit level simulation program
+stdout ** The U. C. Berkeley CAD Group
+stdout ** Copyright 1985-1994, Regents of the University of California.
+stdout ** Copyright 2001-2022, The ngspice team.
+stdout ** Please get your ngspice manual from http://ngspice.sourceforge.net/docs.html
+stdout ** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html
+stdout ** Creation Date: Sun Feb  5 13:44:35 UTC 2023
+stdout ******
+stdout Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+stdout Initial Transient Solution
+stdout --------------------------
+stdout Node                                   Voltage
+stdout ----                                   -------
+stdout l                                           12
+stdout a                                      8.77419
+stdout u                                      2.77419
+stdout m                                      6.08602
+stdout d                                     -3.91398
+stdout v3#branch                            -0.537634
+stdout v1#branch                             -0.55914
+stdout v2#branch                            -0.827957
+stdout No. of Data Rows : 108
+stdout Measurements for Transient Analysis
+stdout i1_a                =  5.376344e-01
+stdout i2_a                =  -8.279570e-01
+stdout i3_a                =  -5.591398e-01
+stdout ix_a                =  -1.096774e+00
+stdout iy_a                =  -8.279570e-01
