@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 8 - Lab 7: Designing a Crossover Network
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-8-crossover-design.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
