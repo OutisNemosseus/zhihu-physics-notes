@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 4 Lab 3 - Measuring Impedance
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-4-lab-3-impedance.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
