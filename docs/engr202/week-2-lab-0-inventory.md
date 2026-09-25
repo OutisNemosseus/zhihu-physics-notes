@@ -1,24 +1,23 @@
 ---
-title: Week 2 - Lab 0: Lab Kit Inventory
-description: ENGR 202 Lab guide
+title: "Week 2 - Lab 0: Lab Kit Inventory"
+description: ENGR 202 assignment guide based on Canvas requirements
 ---
 
 # Week 2 - Lab 0: Lab Kit Inventory
 
 [下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-2-lab-0-inventory.md){ .md-button download }
 
-**Type:** Lab
+## Canvas 要求
 
-## 完成指引
+**Oct 11, 11:59 PM · 10 points**
 
-按 inventory 清点器材，记录型号和数量，拍摄缺失或损坏物品并提交表格。
+课程 rubric 要求提交已签名的 inventory 才得 10 分。收到 lab kit 后，对照 inventory 表逐项清点，记录缺失或损坏物品，在表上签名并按 Canvas 指定格式提交。只有订购证明而没有 inventory 最多 5 分。
 
-## 提交前检查
+## 完成步骤
 
-- 对照 Canvas 原题逐项确认没有遗漏。
-- 所有计算写出公式、代入、单位和最终答案。
-- 实验项目附原始数据、仪器截图和误差分析。
-- Survey、Discussion 和小组报告使用真实个人或小组信息。
-- PDF 上传前检查页序、清晰度和文件是否成功附加。
+1. 打开 [Canvas assignment](https://canvas.oregonstate.edu/courses/2061800/assignments/10612679)。
+2. 对照上面的 Canvas 要求准备材料或答案。
+3. 提交前检查文件、参数、截图和个人信息是否与 rubric 一致。
+4. 提交后返回 assignment 页面确认出现 submitted 状态或提交时间。
 
 [返回 ENGR 202 assignment 总页](all-assignments.md) · [返回 ENGR 202 首页](index.md)
