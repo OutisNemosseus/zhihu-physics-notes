@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 2 - Lab 1: Installing ADALM2000 SW-FW-Drivers
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-2-lab-1-adalm2000.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
