@@ -1,5 +1,5 @@
 ---
-title: Homework #3: Circuit Analysis with Phasors and Impedance
+title: "Homework #3: Circuit Analysis with Phasors and Impedance"
 description: ENGR 202 Homework guide
 ---
 
