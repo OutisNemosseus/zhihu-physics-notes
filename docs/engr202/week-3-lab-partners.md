@@ -5,6 +5,8 @@ description: ENGR 202 Assignment guide
 
 # Week 3 - Lab: Get to know your lab partners
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-3-lab-partners.md){ .md-button download }
+
 **Type:** Assignment
 
 ## 完成指引
