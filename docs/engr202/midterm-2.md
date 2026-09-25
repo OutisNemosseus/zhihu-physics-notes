@@ -5,6 +5,8 @@ description: ENGR 202 Exam guide
 
 # Midterm Exam #2 Fall 2025
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/midterm-2.md){ .md-button download }
+
 **Type:** Exam
 
 ## 完成指引
