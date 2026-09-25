@@ -5,6 +5,8 @@ description: ENGR 202 Homework guide
 
 # Homework #3: Circuit Analysis with Phasors and Impedance
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/homework-3-phonors-impedance.md){ .md-button download }
+
 **Type:** Homework
 
 ## 完成指引
