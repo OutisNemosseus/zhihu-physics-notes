@@ -5,6 +5,8 @@ description: ENGR 202 Exam guide
 
 # Final Exam Fall 2025
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/final-exam.md){ .md-button download }
+
 **Type:** Exam
 
 ## 完成指引
