@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 7 Lab 6 - Characterizing Frequency Dependent Circuits
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-7-frequency-circuits.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
