@@ -1,6 +1,6 @@
 # 12.56 — MOS 差分跨导反馈与 LED
 
-[41 题完成清单](status-12-20-60.md) · [本题文件包](../../assets/downloads/ch12-20-60/p12-56.zip)
+[41 题完成清单](status-12-20-60.md) · [本题文件包](../../assets/downloads/ch12-20-60/p12-56.zip) · [本页 Markdown 源码](../../assets/downloads/ch12-20-60/12-56.md.txt)
 
 ## 教材题目与引用图
 
@@ -10,83 +10,398 @@
 
 ![12.56 原题或引用图 2，书内第 940 页／PDF 第 963 页](../../assets/images/ch12-source/12-56-2.png)
 
-## 按教材模型展开推导
+## 解题顺序与符号
 
+本题分为四部分：**直流工作点 → 三个跨导 → 开环 A 的两个分式 → 接回反馈得到闭环增益**。以下端子名称统一使用 **gate、source、drain**。
 
-### (a) 静态量 → 平衡差分对 → PMOS平方律
+| 符号 | 在电路中的位置或含义 |
+|---|---|
+| $v_i=v_{\mathrm{gate1}}$ | M1 gate 对地的小信号电压 |
+| $v_{g2}=v_{\mathrm{gate2}}$ | M2 gate 对地的小信号电压，也是反馈电压 |
+| $v_{\mathrm{diff}}=v_i-v_{g2}$ | 两个 gate 之间的差分电压 |
+| $v_s$ | M1、M2 公共 source 对地的小信号电压 |
+| $v_{gs1},v_{gs2}$ | 各自的 gate 电压减去公共 source 电压 |
+| $v_{g3}=v_{\mathrm{gate3}}=v_{\mathrm{drain1}}$ | M3 gate 与 M1 drain 相连的节点电压 |
+| $i_o$ | 图中向下流过 LED 和 $R_L$ 的小信号输出电流 |
+
+大写 $V,I$ 表示直流工作点，小写 $v,i$ 表示工作点附近的变化量。展开图沿用此前的 $v_d$，**图中的 $v_d$ 就是这里的 $v_{\mathrm{diff}}$，不是 drain 电压**。
+
+## (a) 先算直流工作点
+
+取输入的静态电压 $V_i=0$，使用本书的饱和区平方律约定：
+
+$$
+I_{Dn}=K_n(V_{GS}-V_{TN})^2,\qquad
+I_{Dp}=K_p(V_{SG}-|V_{TP}|)^2.
+$$
+
+### 先用平衡近似得到教材数值
+
+尾电流为 $I_Q=2\,\mathrm{mA}$。先假设两个 gate 的静态电压很接近，则：
+
+$$
+I_{D1}\simeq I_{D2}\simeq\frac{I_Q}{2}=1\,\mathrm{mA}.
+$$
+
+M1 drain 电压，同时也是 M3 gate 电压：
+
+$$
+\boxed{V_{D1}=V_{G3}\simeq3-R_DI_{D1}
+=3-(1.6\,\mathrm{k}\Omega)(1\,\mathrm{mA})=1.4\,\mathrm V.}
+$$
+
+M3 是 PMOS，source 接 $+3\,\mathrm V$，所以：
+
+$$
+V_{SG3}=3-1.4=1.6\,\mathrm V,
+$$
+
+$$
+\boxed{I_{DQ3}\simeq K_p(1.6-0.5)^2
+=10(1.1)^2\,\mathrm{mA}=12.1\,\mathrm{mA}.}
+$$
+
+M2 gate 不取电流，因此输出电流全部流过 $R_L$。$R_L$ 下端为 $-3\,\mathrm V$，上端电压为：
+
+$$
+\boxed{V_{G2}\simeq-3+I_{DQ3}R_L
+=-3+(12.1\,\mathrm{mA})(248\,\Omega)
+=0.0008\,\mathrm V=0.8\,\mathrm{mV}.}
+$$
+
+这个值接近输入静态电压 $0\,\mathrm V$，支持最初的平衡近似。**$0.8\,\mathrm{mV}$ 是用平衡电流回代得到的近似值，不是严格非线性方程的解。**
+
+工作区检查：M1、M2 的过驱动约为 $\sqrt{1/2}=0.7071\,\mathrm V$，公共 source 电压约为 $-1.2071\,\mathrm V$，两管的 $V_{DS}\simeq2.6071\,\mathrm V$，满足饱和条件。LED 直流压降为 $1.6\,\mathrm V$，故 M3 drain 电压约为 $1.6008\,\mathrm V$：
+
+$$
+V_{SD3}\simeq3-1.6008=1.3992\,\mathrm V
+>
+V_{SG3}-|V_{TP}|=1.1\,\mathrm V.
+$$
+
+M3 也处于饱和区。
+
+### 需要严格工作点时怎样联立
+
+将 $I_{D1}$ 作为唯一待求电流，依次写：
 
 $$
 \begin{aligned}
-V_{D1}&\leftarrow3-R_DI_{D1},\quad I_{D1}\simeq I_Q/2=1\,\mathrm{mA},\\
-I_{DQ3}&\leftarrow K_p(3-V_{D1}-|V_{TP}|)^2,\\
-V_{G2}&\leftarrow-3+I_{DQ3}R_L.
+I_{D2}&=I_Q-I_{D1},\\
+V_{D1}&=3-R_DI_{D1},\\
+I_{DQ3}&=K_p(3-V_{D1}-|V_{TP}|)^2,\\
+V_{G2}&=-3+I_{DQ3}R_L.
 \end{aligned}
 $$
 
-向上代入：$V_{D1}=1.4$ V，$I_{DQ3}=10(3-1.4-0.5)^2=12.1$ mA，$V_{G2}=-3+12.1\mathrm{mA}(248)=0.8$ mV。最后值很接近输入静态0 V，验证平衡近似；**0.8 mV不是严格非线性解的反馈误差**，严格解需重新求两支差分电流。
+M1、M2 共用 source，且阈值相同，所以还必须满足：
 
-### (b) 跨导 → 差分级 → 输出反馈
+$$
+V_{G2}-V_i
+=V_{GS2}-V_{GS1}
+=\sqrt{\frac{I_{D2}}{K_n}}-\sqrt{\frac{I_{D1}}{K_n}}.
+$$
+
+把前四式代入这一式即可求出严格工作点。本题约为 $I_{D1}=0.99991522\,\mathrm{mA}$、$I_{D2}=1.00008478\,\mathrm{mA}$、$I_{DQ3}=12.09701592\,\mathrm{mA}$、$V_{D1}=1.40013565\,\mathrm V$、$V_{G2}=0.05994869\,\mathrm{mV}$。下文与原有 AC 仿真的数值对比统一使用教材平衡近似。
+
+## 小信号准备：由工作点求跨导
+
+本书使用 $I_D=K V_{\mathrm{OV}}^2$，所以：
+
+$$
+g_m=\frac{\partial I_D}{\partial V_{\mathrm{OV}}}
+=2K V_{\mathrm{OV}}=2\sqrt{K I_D}.
+$$
+
+代入上面的平衡近似：
+
+$$
+g_{m1}\simeq g_{m2}
+=2\sqrt{K_nI_{D1}}
+=2\sqrt{(2\,\mathrm{mA/V^2})(1\,\mathrm{mA})}
+=2.828427125\,\mathrm{mS},
+$$
+
+$$
+g_{m3}=2\sqrt{K_pI_{DQ3}}
+=2\sqrt{(10\,\mathrm{mA/V^2})(12.1\,\mathrm{mA})}
+=22\,\mathrm{mS}.
+$$
+
+| 原电路元件 | 小信号处理 |
+|---|---|
+| $+3\,\mathrm V$、$-3\,\mathrm V$ 理想直流电源 | 接交流地 |
+| 理想尾电流源 $I_Q$ | 小信号电流为零，相当于开路 |
+| LED，题给 $r_f=0$ | 小信号短路；直流仍保留 $1.6\,\mathrm V$ 压降 |
+| 三个 MOS，题给 $\lambda=0$ | $r_o=\infty$ |
+
+## (b) 先求反馈系数 F，再把开环 A 拆成两个分式
+
+### 反馈系数为什么就是 RL
+
+本题的反馈路径是 **输出电流经过 $R_L$ 产生电压，再送到 M2 gate**。M2 gate 不取电流，$R_L$ 下端在交流中接地，因此：
+
+$$
+v_f=v_{g2}=i_oR_L.
+$$
+
+于是：
+
+$$
+\boxed{F=\frac{v_f}{i_o}=R_L=248\,\Omega.}
+$$
+
+这里 $F$ 的单位为 $\Omega$，因为它是电压除以电流。本题没有单独标为 $R_F$ 的反馈电阻；产生反馈的是 $R_L$。
+
+### 开环 A 只分成两个分式
+
+前向跨导 $A$ 的输入是差分电压：
+
+$$
+v_{\mathrm{diff}}=v_i-v_{g2}.
+$$
+
+信号经过的节点是：
+
+$$
+v_{\mathrm{diff}}
+\xrightarrow{\ M_1,M_2\ }
+v_{g3}=v_{\mathrm{drain1}}
+\xrightarrow{\ M_3\ }
+i_o.
+$$
+
+所以：
+
+$$
+\boxed{
+A=\frac{i_o}{v_{\mathrm{diff}}}
+=
+\underbrace{\frac{v_{g3}}{v_{\mathrm{diff}}}}_{\text{第一项：差分对}}
+\underbrace{\frac{i_o}{v_{g3}}}_{\text{第二项：M3}}.
+}
+$$
+
+$A$ 是相对于两个 gate 之间电压差的增益。求前向增益时保持已求出的直流工作点及 $g_m$；如在小信号模型中断开通往 M2 gate 的反馈连接，可将 M2 gate 接交流地，此时 $v_{\mathrm{diff}}=v_i$。
+
+### 第一项：从未知向下展开
+
+[![12.56 差分对电压增益展开图：分子和分母分别向下展开，再合并](../../assets/images/12-56/vg3-vd-expansion.png)](../../assets/images/12-56/vg3-vd-expansion.png)
+
+图中 $v_d=v_{\mathrm{diff}}$。从顶部的未知比值向下读：左边展开分子，右边展开分母，底部代回合并。点击图片可放大。
+
+**第一步：两管共用 source，电压相减时 source 电压消掉。**
+
+$$
+v_{gs1}=v_{\mathrm{gate1}}-v_s,\qquad
+v_{gs2}=v_{\mathrm{gate2}}-v_s.
+$$
+
+$$
+v_{\mathrm{diff}}
+=v_{\mathrm{gate1}}-v_{\mathrm{gate2}}
+=v_{gs1}-v_{gs2}.
+$$
+
+**第二步：理想尾电流源固定总电流，所以两管电流的变化之和为零。**
+
+$$
+i_{d1}+i_{d2}=0.
+$$
+
+分别代入 $i_{d1}=g_{m1}v_{gs1}$ 和 $i_{d2}=g_{m2}v_{gs2}$：
+
+$$
+g_{m1}v_{gs1}+g_{m2}v_{gs2}=0,
+$$
+
+$$
+v_{gs2}=-\frac{g_{m1}}{g_{m2}}v_{gs1}.
+$$
+
+**第三步：代回差分电压，求 M1 实际得到的 gate–source 电压。**
+
+$$
+v_{\mathrm{diff}}
+=v_{gs1}-\left(-\frac{g_{m1}}{g_{m2}}v_{gs1}\right)
+=\frac{g_{m1}+g_{m2}}{g_{m2}}v_{gs1}.
+$$
+
+$$
+v_{gs1}
+=\frac{g_{m2}}{g_{m1}+g_{m2}}v_{\mathrm{diff}}.
+$$
+
+$$
+i_{d1}=g_{m1}v_{gs1}
+=\frac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}v_{\mathrm{diff}}.
+$$
+
+**第四步：在 M1 drain 节点列 KCL。**
+
+M1 drain 连接 M3 gate，M3 gate 不取电流，$R_D$ 上端是交流地，所以：
+
+$$
+\frac{v_{g3}}{R_D}+i_{d1}=0.
+$$
+
+$$
+v_{g3}=-R_Di_{d1}
+=-\frac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_Dv_{\mathrm{diff}}.
+$$
+
+两边除以差分电压：
+
+$$
+\boxed{
+\frac{v_{g3}}{v_{\mathrm{diff}}}
+=-\frac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_D.
+}
+$$
+
+若 $g_{m1}=g_{m2}=g_m$，则 $v_{gs1}=v_{\mathrm{diff}}/2$，这一项简化为：
+
+$$
+\boxed{\frac{v_{g3}}{v_{\mathrm{diff}}}=-\frac{g_mR_D}{2}.}
+$$
+
+这里的 $1/2$ 来自差分对公共 source 的运动：M1 的 gate–source 电压只占两 gate 电压差的一半。
+
+### 第二项：M3 把 gate 电压变为输出电流
+
+M3 是 PMOS，source 接交流地，所以它的 source–gate 电压是：
+
+$$
+v_{sg3}=v_{\mathrm{source3}}-v_{\mathrm{gate3}}
+=0-v_{g3}=-v_{g3}.
+$$
+
+按图中向下的输出电流方向：
+
+$$
+i_o=g_{m3}v_{sg3}=-g_{m3}v_{g3}.
+$$
+
+于是：
+
+$$
+\boxed{\frac{i_o}{v_{g3}}=-g_{m3}.}
+$$
+
+### 两个分式相乘，再接回反馈
+
+$$
+\boxed{
+A=\left(-\frac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_D\right)(-g_{m3})
+=\frac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_Dg_{m3}.
+}
+$$
+
+两管跨导相等时：
+
+$$
+A=\frac{g_mR_Dg_{m3}}{2}.
+$$
+
+从定义 $i_o=A v_{\mathrm{diff}}$ 出发，代入反馈电压：
+
+$$
+i_o=A(v_i-v_{g2})=A(v_i-i_oR_L).
+$$
+
+移项并提取 $i_o$：
+
+$$
+i_o+AR_Li_o=Av_i,\qquad
+i_o(1+AR_L)=Av_i.
+$$
+
+因此：
+
+$$
+\boxed{
+A_{gf}=\frac{i_o}{v_i}
+=\frac{A}{1+AR_L}
+=\frac{
+\dfrac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_Dg_{m3}
+}{
+1+\dfrac{g_{m1}g_{m2}}{g_{m1}+g_{m2}}R_Dg_{m3}R_L
+}.
+}
+$$
+
+在题给理想尾电流源、$r_o=\infty$ 和 $r_f=0$ 的小信号模型中，上面的不等跨导公式成立；只有把 $g_{m1},g_{m2}$ 取相等时，才使用平衡工作点近似。
+
+## (c) 代入数值
+
+使用 (a) 的平衡近似参数：
+
+$$
+\frac{v_{g3}}{v_{\mathrm{diff}}}
+=-\frac{(2.828427125\,\mathrm{mS})(1.6\,\mathrm{k}\Omega)}{2}
+=-2.262741700.
+$$
+
+$$
+\frac{i_o}{v_{g3}}=-22\,\mathrm{mA/V}.
+$$
+
+$$
+A=(-2.262741700)(-22\,\mathrm{mA/V})
+=49.780317396\,\mathrm{mA/V}.
+$$
+
+在闭环公式中将 $A$ 换成 $\mathrm{A/V}$：
+
+$$
+AF=AR_L=(0.049780317396)(248)=12.345518714.
+$$
+
+$$
+\boxed{
+A_{gf}
+=\frac{0.049780317396}{1+12.345518714}
+=0.003730114839\,\mathrm{A/V}
+\simeq3.7301\,\mathrm{mA/V}.
+}
+$$
+
+只用反馈电阻做强反馈估算，会得到 $1/F=1/R_L=4.0323\,\mathrm{mA/V}$；本题环路增益有限，应使用上面的闭环公式得到 $3.7301\,\mathrm{mA/V}$。
+
+## 用完整节点方程核对
+
+小信号模型有四个待求节点电压：公共 source 的 $v_s$、M1 drain／M3 gate 的 $v_{g3}$、M2 drain 的 $v_{\mathrm{drain2}}$、反馈节点的 $v_{g2}$。
 
 $$
 \begin{aligned}
-i_o&=-g_{m3}v_{d1},\quad v_{d1}=-(g_{m1}R_D/2)(v_i-v_{g2}),\\
-v_{g2}&=i_oR_L,\quad G=g_{m1}R_Dg_{m3}/2,\\
-\boxed{A_{gf}}&=\boxed{G/(1+GR_L)}.
+g_{m1}(v_i-v_s)+g_{m2}(v_{g2}-v_s)&=0
+&&\text{（公共 source）},\\[4pt]
+\frac{v_{g3}}{R_D}+g_{m1}(v_i-v_s)&=0
+&&\text{（M1 drain）},\\[4pt]
+\frac{v_{\mathrm{drain2}}}{R_D}+g_{m2}(v_{g2}-v_s)&=0
+&&\text{（M2 drain）},\\[4pt]
+\frac{v_{g2}}{R_L}+g_{m3}v_{g3}&=0
+&&\text{（反馈节点）}.
 \end{aligned}
 $$
 
-### (c) 参数向上代入
+最后用 $i_o=v_{g2}/R_L$ 得到目标比值。第四式中的 $g_{m3}v_{g3}$ 是电流项；必须把跨导与电压相乘。
 
-$g_{m1}=2\sqrt{K_n I_{D1}}=2.828427125$ mS，$g_{m3}=2\sqrt{K_p I_{DQ3}}=22$ mS，故 $A_{gf}=3.730114839$ mA/V。LED 使用题给1.6 V固定压降且 $r_f=0$，检查 PMOS静态 $V_{SD}\simeq1.3992$ V大于过驱动1.1 V。
+下表将符号与现有 SPICE 文件对应，方便对照原日志。独立输入取 AC 1 V 只是线性响应归一化，不表示允许输入 1 V 的大信号。
 
-### 从依赖量展开到可代入的节点方程
-
-教材平衡偏置近似ID1=ID2=1mA；由M3求VG2=0.8mV后检查接近0V。LED题给1.6V、rf=0。
-
-
-为了逐节点核对，下面直接列出与原理图同名的全部节点 KCL。先由这些方程确定输出节点及输入电流，再向上组成所求比值。$i_V$ 是独立／受控电压源由正端流向负端的电流，所有理想直流电源在交流中接地，理想恒流偏置在交流中开路。
-
-$$
-\begin{aligned}
-\frac{v_{\mathrm{d1}}}{\mathrm{Rd1}}+\mathrm{G1}(v_{\mathrm{in}}-v_{\mathrm{tail}})&=0\quad(v_{\mathrm{d1}}\text{ 节点})\\[5pt]
-\frac{v_{\mathrm{d2}}}{\mathrm{Rd2}}+\mathrm{G2}(v_{\mathrm{fb}}-v_{\mathrm{tail}})&=0\quad(v_{\mathrm{d2}}\text{ 节点})\\[5pt]
-\frac{v_{\mathrm{fb}}}{\mathrm{RL}}-\mathrm{G3}-v_{\mathrm{d1}}&=0\quad(v_{\mathrm{fb}}\text{ 节点})
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-i_{\mathrm{Vin}}&=0\quad(v_{\mathrm{in}}\text{ 节点})\\[5pt]
-i_{\mathrm{Emonitor}}&=0\quad(v_{\mathrm{out}}\text{ 节点})\\[5pt]
--\mathrm{G1}(v_{\mathrm{in}}-v_{\mathrm{tail}})-\mathrm{G2}(v_{\mathrm{fb}}-v_{\mathrm{tail}})&=0\quad(v_{\mathrm{tail}}\text{ 节点})
-\end{aligned}
-$$
-
-$$
-\begin{aligned}
-v_{\mathrm{in}}&=\mathrm{Vin}\\[4pt]
-v_{\mathrm{out}}&=\mathrm{Emonitor}v_{\mathrm{fb}}
-\end{aligned}
-$$
-
-本组方程中的已知量如下。G 的系数为器件跨导（S），E 为开环电压增益或不加载电路的测量转换；不是题目闭环答案。1 V／1 A 是线性响应归一化，不是允许的大信号幅度。
-
-|元件|连接节点（顺序同网表）|参数（SI 单位）|
+| SPICE 元件 | 连接／作用 | 参数（SI 单位） |
 |---|---|---:|
-|`Vin`|`in → 0`|1|
-|`Rd1`|`d1 → 0`|1600|
-|`Rd2`|`d2 → 0`|1600|
-|`RL`|`fb → 0`|248|
-|`G1`|`d1 → tail → in → tail`|0.00282842712475|
-|`G2`|`d2 → tail → fb → tail`|0.00282842712475|
-|`G3`|`0 → fb → 0 → d1`|0.022|
-|`Emonitor`|`out → 0 → fb → 0`|1|
+| Vin | in → 0，即 $v_i$ | AC 1 |
+| Rd1 | d1 → 0，d1 即 $v_{g3}$ | 1600 |
+| Rd2 | d2 → 0 | 1600 |
+| RL | fb → 0，fb 即 $v_{g2}$ | 248 |
+| G1 | d1 → tail，控制电压 in − tail | 0.00282842712475 |
+| G2 | d2 → tail，控制电压 fb − tail | 0.00282842712475 |
+| G3 | 0 → fb，控制电压 0 − d1 | 0.022 |
+| Emonitor | out → 0，复制 fb 电压用于测量 | 1 |
 
-### 向上代入得到结果
+将这些参数代入节点方程，同样得到 **$0.003730114839\,\mathrm{A/V}$**。
 
-将上述已知参数代入 KCL（线性方程组数值求解），再取目标端口量。计算脚本为仓库中的 `scripts/ch12_models.py`，与 LTspice 引擎独立。
-
-主结果：**0.003730114839 A/V**。
 
 ## 实际 LTspice 电路与频响截图
 
@@ -96,7 +411,7 @@ $$
 
 ![12.56 LTspice 实际原理图及 AC 结果](../../assets/images/ch12-spice/p12-56-run.png)
 
-未加入题目没有给出的结电容；因此 1 Hz–1 MHz 的平坦曲线只验证本页中频／理想等效模型，不代表实际器件带宽。对比值在 **1 kHz、同一套 $g_m,r_\pi$、同一端口定义**下提取。原日志的 AC 测量以 dB 和相位显示，数值表按 $x=10^{d/20}\cos\phi$ 换回线性值；180° 对应负号。
+未加入题目没有给出的结电容；因此 1 Hz–1 MHz 的平坦曲线只验证本页中频／理想等效模型，不代表实际器件带宽。对比值在 **1 kHz、同一套 $g_m$、同一端口定义**下提取。原日志的 AC 测量以 dB 和相位显示，数值表按 $x=10^{d/20}\cos\phi$ 换回线性值；180° 对应负号。
 
 <div class="p1240-results-grid">
 <section class="p1240-result-panel">
@@ -155,14 +470,14 @@ vg2: V(fb)=5.9948687807e-05 at 3
 </section>
 <section class="p1240-result-panel">
 <h3>教材计算与实际仿真</h3>
-<div class="p1240-table-scroll"><table><thead><tr><th>物理量</th><th>教材近似计算</th><th>实际仿真</th><th>单位</th><th>相对误差</th><th>原因／定义</th></tr></thead><tbody><tr><td>主结果</td><td>0.003730114839</td><td>0.003730114835</td><td>A/V</td><td>-1.2441e-07%</td><td>相同教材等效模型；数值舍入</td></tr><tr><td>id1（器件DC）</td><td>0.001</td><td>0.0009999152198</td><td>A</td><td>-0.008478%</td><td>单列器件模型：偏置近似、26mV与27°C热电压差异</td></tr><tr><td>id2（器件DC）</td><td>0.001</td><td>0.00100008478</td><td>A</td><td>+0.008478%</td><td>单列器件模型：偏置近似、26mV与27°C热电压差异</td></tr><tr><td>id3（器件DC）</td><td>0.0121</td><td>0.01209701592</td><td>A</td><td>-0.024662%</td><td>单列器件模型：偏置近似、26mV与27°C热电压差异</td></tr><tr><td>VD1（器件DC）</td><td>1.4</td><td>1.400135648</td><td>V</td><td>+0.0096892%</td><td>平衡差分对近似与精确平方律</td></tr><tr><td>VG2（器件DC）</td><td>0.0008</td><td>5.994868781e-05</td><td>V</td><td>-92.506%</td><td>平衡电流回代估算不是严格非线性解</td></tr></tbody></table></div>
+<div class="p1240-table-scroll"><table><thead><tr><th>物理量</th><th>教材近似计算</th><th>实际仿真</th><th>单位</th><th>相对误差</th><th>原因／定义</th></tr></thead><tbody><tr><td>主结果</td><td>0.003730114839</td><td>0.003730114835</td><td>A/V</td><td>-1.2441e-07%</td><td>相同教材等效模型；数值舍入</td></tr><tr><td>id1（器件DC）</td><td>0.001</td><td>0.0009999152198</td><td>A</td><td>-0.008478%</td><td>平衡差分对近似与严格平方律工作点</td></tr><tr><td>id2（器件DC）</td><td>0.001</td><td>0.00100008478</td><td>A</td><td>+0.008478%</td><td>平衡差分对近似与严格平方律工作点</td></tr><tr><td>id3（器件DC）</td><td>0.0121</td><td>0.01209701592</td><td>A</td><td>-0.024662%</td><td>平衡差分对近似与严格平方律工作点</td></tr><tr><td>VD1（器件DC）</td><td>1.4</td><td>1.400135648</td><td>V</td><td>+0.0096892%</td><td>平衡差分对近似与精确平方律</td></tr><tr><td>VG2（器件DC）</td><td>0.0008</td><td>5.994868781e-05</td><td>V</td><td>-92.506%</td><td>平衡电流回代估算不是严格非线性解</td></tr></tbody></table></div>
 <p>计算来自上文节点方程，不以日志数值回填手算列。相对误差为 (仿真−计算)/计算；手算为零时只列绝对误差。同模型吻合验证代数与接线，不证明忽略寄生参数的近似适用于任意实物。</p>
 </section>
 </div>
 
 ### 单列：非线性器件直流检查
 
-`DeviceDC.cir` 使用 LEVEL=1 MOS 或题给 IS 的 BJT 器件，在27°C实际运行。它与上面的教材近似偏置不同，**没有用新工作点悄悄替换上方 AC 对比的参数**。MOS 差异来自分压器负载／差分对非平衡；BJT 差异还包含26 mV近似与27°C实际热电压的区别。
+`DeviceDC.cir` 使用 LEVEL=1 MOS 模型，在 27°C 实际运行。它允许两支差分电流略有不同；与平衡近似的差异来自直流方程的自洽求解。上方 AC 对比保持原来的平衡近似跨导，便于在同一参数下比较手算和仿真。
 
 |日志量|实际值（SI）|
 |---|---:|
