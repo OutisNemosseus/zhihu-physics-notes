@@ -5,6 +5,8 @@ description: ENGR 202 Lab guide
 
 # Week 3 Lab - Lab 2: Characterizing Sinusoidal Signals
 
+[下载本页 Markdown](https://raw.githubusercontent.com/OutisNemosseus/zhihu-physics-notes/main/docs/engr202/week-3-lab-2-sinusoidal-signals.md){ .md-button download }
+
 **Type:** Lab
 
 ## 完成指引
