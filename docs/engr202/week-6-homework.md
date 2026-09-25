@@ -1,5 +1,5 @@
 ---
-title: Week #6 Homework
+title: "Week #6 Homework"
 description: ENGR 202 Homework guide
 ---
 
