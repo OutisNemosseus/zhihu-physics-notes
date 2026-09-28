@@ -45,6 +45,27 @@ nav:
       - p-Wave Superconductivity: quantum/p-wave-superconductivity.md
   - Signal Processing:
       - Continuous-to-Discrete Bandpass: signal-processing/continuous-to-discrete-bandpass.md
+  - ENGR 103:
+      - Overview: engr103/index.md
+      - ICA 1: engr103/ica-01.md
+      - Homework 1: engr103/hw-01.md
+      - ICA 2: engr103/ica-02.md
+      - Homework 2: engr103/hw-02.md
+      - ICA 3: engr103/ica-03.md
+      - Homework 3: engr103/hw-03.md
+      - ICA 4: engr103/ica-04.md
+      - Homework 4: engr103/hw-04.md
+      - ICA 5: engr103/ica-05.md
+      - Homework 5: engr103/hw-05.md
+      - ICA 6: engr103/ica-06.md
+      - Homework 6: engr103/hw-06.md
+      - ICA 7: engr103/ica-07.md
+      - Homework 7: engr103/hw-07.md
+      - ICA 8: engr103/ica-08.md
+      - Homework 8: engr103/hw-08.md
+      - ICA 9: engr103/ica-09.md
+      - Homework 9: engr103/hw-09.md
+      - ICA 10: engr103/ica-10.md
   - ENGR 202:
       - Overview: engr202/index.md
       - All assignment guides: engr202/all-assignments.md
