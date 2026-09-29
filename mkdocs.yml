@@ -125,6 +125,9 @@ nav:
       - Chapters: circuits/index.md
       - "Chapter 10 — Current Sources":
           - Overview: circuits/current-sources/index.md
+          - "10.19–10.25 汇总": circuits/current-sources/10-19-25-solutions.md
+          - "D10.19": circuits/current-sources/10-19.md
+          - "D10.20": circuits/current-sources/10-20.md
           - "10.21": circuits/current-sources/10-21.md
           - "10.22": circuits/current-sources/10-22.md
           - "10.23": circuits/current-sources/10-23.md
