@@ -125,9 +125,36 @@ nav:
       - Chapters: circuits/index.md
       - "Chapter 8 — Power Amplifiers":
           - Overview: circuits/power-amplifiers/index.md
+          - "8.1": circuits/power-amplifiers/8-1.md
+          - "8.2": circuits/power-amplifiers/8-2.md
+          - "8.3": circuits/power-amplifiers/8-3.md
+          - "8.4": circuits/power-amplifiers/8-4.md
+          - "8.5": circuits/power-amplifiers/8-5.md
+          - "8.6": circuits/power-amplifiers/8-6.md
+          - "8.7": circuits/power-amplifiers/8-7.md
+          - "8.8": circuits/power-amplifiers/8-8.md
+          - "8.9": circuits/power-amplifiers/8-9.md
+          - "8.10": circuits/power-amplifiers/8-10.md
+          - "8.11": circuits/power-amplifiers/8-11.md
+          - "8.12": circuits/power-amplifiers/8-12.md
+          - "8.13": circuits/power-amplifiers/8-13.md
+          - "8.14": circuits/power-amplifiers/8-14.md
+          - "8.15": circuits/power-amplifiers/8-15.md
+          - "8.16": circuits/power-amplifiers/8-16.md
+          - "8.17": circuits/power-amplifiers/8-17.md
           - "8.18": circuits/power-amplifiers/8-18.md
           - "8.19": circuits/power-amplifiers/8-19.md
           - "8.20": circuits/power-amplifiers/8-20.md
+          - "8.21": circuits/power-amplifiers/8-21.md
+          - "8.22": circuits/power-amplifiers/8-22.md
+          - "8.23": circuits/power-amplifiers/8-23.md
+          - "8.24": circuits/power-amplifiers/8-24.md
+          - "8.25": circuits/power-amplifiers/8-25.md
+          - "8.26": circuits/power-amplifiers/8-26.md
+          - "8.27": circuits/power-amplifiers/8-27.md
+          - "8.28": circuits/power-amplifiers/8-28.md
+          - "8.29": circuits/power-amplifiers/8-29.md
+          - "8.30": circuits/power-amplifiers/8-30.md
       - "Chapter 10 — Current Sources":
           - Overview: circuits/current-sources/index.md
           - "10.19–10.25 汇总": circuits/current-sources/10-19-25-solutions.md

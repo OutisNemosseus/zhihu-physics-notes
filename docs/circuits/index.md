@@ -4,7 +4,7 @@
 
 | Chapter | 当前收录内容 | 题目范围 | 下载 |
 |---|---|---|---|
-| [Chapter 8 — Power Amplifiers](power-amplifiers/index.md) | class-A 与 BiCMOS 跟随器 | 8.18–8.20（部分推导，待完整电路图） | — |
+| [Chapter 8 — Power Amplifiers](power-amplifiers/index.md) | 功率放大器题目与对应图片 | 8.1–8.30（30 题） | [Markdown 与图片 ZIP](../assets/downloads/ch8-problems-1-30.zip) |
 | [Chapter 10 — Current Sources](current-sources/index.md) | 电流源与电流镜 | 10.19–10.26（8 题） | [Markdown ZIP](../assets/downloads/ch10-current-sources.zip) |
 | [Chapter 12 — Basic Feedback](basic-feedback/index.md) | 基本反馈概念、增益、带宽与失真 | 12.1–12.15、12.40（16 题） | [12.1–12.15 Markdown](../assets/downloads/ch12-basic-feedback.zip) · [12.40 LTspice](../assets/downloads/P12_40_Auto.zip) |
 
