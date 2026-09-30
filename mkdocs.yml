@@ -123,6 +123,11 @@ nav:
       - Final Upload: engr202/final-upload.md
   - Circuits:
       - Chapters: circuits/index.md
+      - "Chapter 8 — Power Amplifiers":
+          - Overview: circuits/power-amplifiers/index.md
+          - "8.18": circuits/power-amplifiers/8-18.md
+          - "8.19": circuits/power-amplifiers/8-19.md
+          - "8.20": circuits/power-amplifiers/8-20.md
       - "Chapter 10 — Current Sources":
           - Overview: circuits/current-sources/index.md
           - "10.19–10.25 汇总": circuits/current-sources/10-19-25-solutions.md
