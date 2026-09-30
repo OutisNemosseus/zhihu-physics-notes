@@ -1,6 +1,6 @@
 # 第 10 章 10.19–10.25：电流源解答
 
-按题目截图逐题整理。电流均以题目所示方向的幅值计算。10.23、10.24 缺原书图 10.8、10.9，采用各节注明的标准拓扑；10.25 的电路图在本次截图中未完整显示，沿用已有笔记的输出管发射极电阻连接，需原图核对。10.19 采用基极电流补偿式基本三管电流镜。
+已按完整教材逐题核对 10.19–10.25 的题干和引用图。设计题使用原图的 PNP 版本；10.23 的输出电阻采用文中注明的大 $\beta$ 近似。
 
 10.19–10.22 是直流设计与 KCL 消元，不需要引入小信号模型；10.23 使用小信号输出电阻；10.24–10.25 使用指数模型与发射极电阻。
 
@@ -19,9 +19,27 @@
 
 ## D10.19 — PNP 三晶体管电流源设计
 
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Design a pnp version of the basic three-transistor current source circuit, using a resistor to establish IREF. The bias current is to be IO = 0.15 mA, and the circuit is to be biased at V+ = 3 V and V−= −3 V. The transistor parameters are β = 40, VEB(on) = 0.7 V, and VA = ∞.
+
+### 原题截图
+
+![题目 10.19 原文](../../assets/images/ch10/problem-10-19.webp)
+
+### 对应电路图：Figure 10.5
+
+![Figure 10.5](../../assets/images/ch10/fig-10-5.webp)
+
+图片来源：教材页 693（PDF 第 716 页）。 原图为 NPN 电路；本题要求设计其 PNP 版本，以下推导和连接表给出极性翻转后的电路。
+
+### 解答与推导
+
 已知 $I_O=0.15\,\mathrm{mA}$、$V^+=+3\,\mathrm V$、$V^-=-3\,\mathrm V$、$\beta=40$、$V_{EB}(\mathrm{on})=0.7\,\mathrm V$、$V_A=\infty$。
 
-采用带第三管基极电流补偿的基本三管电流镜，即 P10.22 的单位面积、PNP 版本。截图没有画出本题所指的基本电路；以下明确采用这组连接。
+已按教材图 10.5 核对基本三管电流镜的连接。题目要求其 PNP 版本：将原图 NPN 管、电源极性和电流方向相应翻转；以下连接表给出具体 PNP 设计。
 
 ### 1. PNP 电路怎样连接
 
@@ -89,6 +107,24 @@ $$
 ---
 
 ## D10.20 — PNP Wilson 电流源设计
+
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Design a pnp version of the Wilson current source, using a resistor to establish IREF. The circuit parameters are V+ = 9 V and V−= −9 V, and the transistor parameters are: VEB(on) = 0.7 V, β = 25, and VA = ∞. If the load current is 0.8 mA, what is IREF?
+
+### 原题截图
+
+![题目 10.20 原文](../../assets/images/ch10/problem-10-20.webp)
+
+### 对应电路图：Figure 10.8
+
+![Figure 10.8](../../assets/images/ch10/fig-10-8.webp)
+
+图片来源：教材页 697（PDF 第 720 页）。 原图为 NPN 电路；本题要求设计其 PNP 版本，以下推导和连接表给出极性翻转后的电路。
+
+### 解答与推导
 
 已知 $I_O=0.8\,\mathrm{mA}$、$V^+=+9\,\mathrm V$、$V^-=-9\,\mathrm V$、$\beta=25$、$V_{EB}(\mathrm{on})=0.7\,\mathrm V$、$V_A=\infty$。求 $I_{\mathrm{REF}}$，并设计建立该电流的电阻。
 
@@ -173,6 +209,24 @@ $$
 
 ## 10.21 — Wilson 电流源
 
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Consider the Wilson current source in Figure P10.21. The transistors have a finite β and an infinite Early voltage. Derive the expression for IO in terms of IREF and β.
+
+### 原题截图
+
+![题目 10.21 原文](../../assets/images/ch10/problem-10-21.webp)
+
+### 对应电路图：Figure P10.21
+
+![Figure P10.21](../../assets/images/ch10/fig-P10-21.webp)
+
+图片来源：教材页 740（PDF 第 763 页）。
+
+### 解答与推导
+
 求 $I_O$ 与 $I_{\mathrm{REF}}$、$\beta$ 的关系。所有管子具有相同有限 $\beta$，$V_A=\infty$；按图中正常放大区工作分析。
 
 $Q_1,Q_2$ 的基极相连、发射极相连，且单位面积相同。因此 $I_{C1}=I_{C2}=I$。图中 $Q_2$ 的集电极与基极相连。$Q_3$ 的发射极连接公共基极节点；双发射极标记不会改变本题使用的端口关系 $I_{E3}=I_{C3}(1+1/\beta)$。
@@ -232,6 +286,28 @@ $$
 ---
 
 ## 10.22 — 带基极电流补偿的比例电流镜
+
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Consider the circuit in Figure P10.22. The transistor parameters for Q1 and Q2 are VBE1,2(on) = 0.7 V and β1,2 = 90. The parameters for Q3 are VBE3(on) = 0.6 V and β3 = 60. Assume VA = ∞ for all transistors. Design the circuit such that IO = 0.5 mA.
+
+(a) What are the values of IREF and R1?
+
+(b) What are the values of IB1, IB2, IE3, and IB3?
+
+### 原题截图
+
+![题目 10.22 原文](../../assets/images/ch10/problem-10-22.webp)
+
+### 对应电路图：Figure P10.22
+
+![Figure P10.22](../../assets/images/ch10/fig-P10-22.webp)
+
+图片来源：教材页 740（PDF 第 763 页）。 解题采用本题题干给定的参数；其他题引用同一拓扑时数值可能不同。
+
+### 解答与推导
 
 已知 $I_O=0.5\,\mathrm{mA}$，$\beta_1=\beta_2=90$，$\beta_3=60$，$V_{BE1}=V_{BE2}=0.7\,\mathrm V$，$V_{BE3}=0.6\,\mathrm V$，电源为 $+5\,\mathrm V$ 与 $-5\,\mathrm V$，$V_A=\infty$。
 
@@ -306,7 +382,29 @@ $$
 
 ## 10.23 — Wilson 电流源的输出电阻
 
-**适用条件：截图没有提供原书图 10.8。以下采用标准三管 Wilson 电流源：输出取自 $Q_3$ 集电极，参考支路为理想电流源，拓扑与本页 P10.21 的 Wilson 连接相同。若图 10.8 的参考支路或连接不同，需要重算。**
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Consider the Wilson current-source circuit shown in Figure 10.8. Assume the reference current is 0.25 mA and assume transistor parameters of VBE(on) = 0.7 V, β = 100, and VA = 100 V.
+
+(a) Determine the output resistance looking into the collector of Q3.
+
+(b) What is the change in IO as the output voltage changes by +5 V?
+
+### 原题截图
+
+![题目 10.23 原文](../../assets/images/ch10/problem-10-23.webp)
+
+### 对应电路图：Figure 10.8
+
+![Figure 10.8](../../assets/images/ch10/fig-10-8.webp)
+
+图片来源：教材页 697（PDF 第 720 页）。
+
+### 解答与推导
+
+**原图已核对：教材图 10.8 的输出取自 $Q_3$ 集电极，参考支路为理想电流源；拓扑与 P10.21 相同。以下保留大 $\beta$、近似相等偏置参数下的输出电阻推导。**
 
 已知 $I_{\mathrm{REF}}=0.25\,\mathrm{mA}$，$\beta=100$，$V_A=100\,\mathrm V$，$V_{BE}(\mathrm{on})=0.7\,\mathrm V$。求输出电阻，以及输出电压增加 $5\,\mathrm V$ 时的电流变化。
 
@@ -379,7 +477,7 @@ R_{\mathrm{out}}=r_o\,
 \frac{A^2+2AB+2A+2B^2+5B+2}{2AB+A+2B^2+4B+1}.
 $$
 
-当 $A\gg\beta\gg1$，主导项之比约为 $A^2/(2AB)=\beta/2$。题中 $A\approx V_A/V_T\approx3846$（取 $V_T=26\,\mathrm{mV}$），满足常用近似条件。保留上式各项时约为 $19.95\,\mathrm{M}\Omega$；这仍是相等偏置参数模型，不是未提供电路图的精确大信号解。
+当 $A\gg\beta\gg1$，主导项之比约为 $A^2/(2AB)=\beta/2$。题中 $A\approx V_A/V_T\approx3846$（取 $V_T=26\,\mathrm{mV}$），满足常用近似条件。保留上式各项时约为 $19.95\,\mathrm{M}\Omega$；这仍是相等偏置参数模型，不是考虑不同偏置电流的精确大信号解。
 
 $V_{BE}(\mathrm{on})=0.7\,\mathrm V$ 主要用于直流电位和工作区检查，不直接进入上述输出电阻主导项。电压变化估算要求管子保持放大区。
 
@@ -387,7 +485,25 @@ $V_{BE}(\mathrm{on})=0.7\,\mathrm V$ 主要用于直流电位和工作区检查�
 
 ## 10.24 — Widlar 电流源
 
-**截图未提供原书图 10.9。以下按标准 Widlar 连接：$R_1$ 从 $V^+$ 接到二极管连接的 $Q_1$，$Q_1$ 发射极接 $V^-$；$Q_2$ 基极接 $Q_1$ 基极，$Q_2$ 发射极经 $R_E$ 接 $V^-$。假设两管匹配，忽略 Early 效应。需要原图作最终核对。**
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+Consider the Widlar current source shown in Figure 10.9. The circuit parameters are V+ = +5 V, V−= 0, R1 = 9.3 kΩ, and RE = 1.5 kΩ. Assume VBE1 = 0.7 V. Neglecting base currents, determine IREF, IO, and VBE2.
+
+### 原题截图
+
+![题目 10.24 原文](../../assets/images/ch10/problem-10-24.webp)
+
+### 对应电路图：Figure 10.9
+
+![Figure 10.9](../../assets/images/ch10/fig-10-9.webp)
+
+图片来源：教材页 699（PDF 第 722 页）。 解题采用本题题干给定的参数；其他题引用同一拓扑时数值可能不同。
+
+### 解答与推导
+
+**已按教材图 10.9 核对：$R_1$ 从 $V^+$ 接到二极管连接的 $Q_1$，$Q_1$ 发射极接 $V^-$；$Q_2$ 基极接 $Q_1$ 基极，$Q_2$ 发射极经 $R_E$ 接 $V^-$。两管匹配，采用忽略 Early 效应的指数模型。**
 
 已知 $V^+=5\,\mathrm V$、$V^-=0$、$R_1=9.3\,\mathrm{k}\Omega$、$R_E=1.5\,\mathrm{k}\Omega$、$V_{BE1}=0.7\,\mathrm V$，忽略基极电流。主计算取 $V_T=26\,\mathrm{mV}$。
 
@@ -462,7 +578,29 @@ $$
 
 ## 10.25 — 输出管发射极带电阻
 
-本次截图未完整显示图 P10.25；以下沿用已有笔记的标准 Widlar 连接，需原图最终核对：$Q_1$ 二极管连接且发射极接地；$Q_2$ 发射极经 $R_E$ 接地。忽略基极电流，$V_A=\infty$。
+来源：Donald A. Neamen, *Microelectronics: Circuit Analysis and Design*, 4th ed.，教材页 740（PDF 第 763 页）。
+
+### 完整题目
+
+For the circuit shown in Figure P10.25, neglect base currents and assume VA = ∞. Let IREF = 200 μA and RE = 500 Ω.
+
+(a) Assume the transistor parameters are IS1 = IS2 = $5\times10^{-15}$ A. Find VBE1, VBE2, and IO.
+
+(b) Repeat part (a) if the transistor parameters are IS1 = $5\times10^{-15}$ A and IS2 = $7\times10^{-15}$ A.
+
+### 原题截图
+
+![题目 10.25 原文](../../assets/images/ch10/problem-10-25.webp)
+
+### 对应电路图：Figure P10.25
+
+![Figure P10.25](../../assets/images/ch10/fig-P10-25.webp)
+
+图片来源：教材页 740（PDF 第 763 页）。
+
+### 解答与推导
+
+已按教材完整图 P10.25 核对：$Q_1$ 二极管连接且发射极接地；$Q_2$ 发射极经 $R_E$ 接地。忽略基极电流，$V_A=\infty$。
 
 已知 $I_{\mathrm{REF}}=200\,\mu\mathrm A$、$R_E=500\,\Omega$。主计算取 $V_T=26\,\mathrm{mV}$。
 
