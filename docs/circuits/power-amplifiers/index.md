@@ -6,6 +6,17 @@
 
 [下载全部 Markdown 与图片（ZIP）](../../assets/downloads/ch8-problems-1-30.zip)
 
+<div style="margin: 1rem 0 1.5rem 0;">
+  <a href="../../tools/chapter8-calculators.html"
+     target="_blank"
+     rel="noopener"
+     style="display:inline-block;padding:0.8rem 1rem;border-radius:0.6rem;background:#2563eb;color:white;text-decoration:none;font-weight:700;">
+    打开 Chapter 8 Design Calculators ↗
+  </a>
+</div>
+
+这个总计算器把前 30 题里重复出现的计算整理成 5 个模块：Class-A load line、thermal、Class-B/AB power、follower gain / \(g_m\) 设计、Class-AB bias。
+
 | 题目 | 内容 | 对应图 | 教材页 |
 |---|---|---|---|
 | [8.1](8-1.md) | 功率 MOSFET 安全工作区 | Figure P8.1（教材 p. 605） | 604, 605 |
