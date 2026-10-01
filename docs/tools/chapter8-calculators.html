@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chapter 8 Design Calculators</title>
+<script>
+window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg:{fontCache:'global'}};
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<style>
+:root{color-scheme:light dark;--bg:#fff;--card:#f7f7f8;--text:#111827;--muted:#6b7280;--border:#d1d5db;--accent:#2563eb;--accentbg:#dbeafe;--ok:#166534;--warn:#92400e}
+@media(prefers-color-scheme:dark){:root{--bg:#111827;--card:#1f2937;--text:#f9fafb;--muted:#9ca3af;--border:#374151;--accent:#60a5fa;--accentbg:#1e3a8a;--ok:#86efac;--warn:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+.wrap{max-width:1100px;margin:0 auto;padding:20px}h1{margin:0 0 8px;font-size:1.7rem}h2{margin:0 0 12px;font-size:1.15rem}.sub{color:var(--muted);margin-bottom:18px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}.tab{border:1px solid var(--border);background:var(--card);color:var(--text);padding:10px 12px;border-radius:9px;cursor:pointer}
+.tab.active{border-color:var(--accent);background:var(--accentbg)}.panel{display:none}.panel.active{display:block}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.card{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:16px}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{font-size:.92rem}input,select{width:100%;margin-top:5px;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:1rem}
+.result{display:grid;grid-template-columns:1fr auto;gap:8px 16px}.name{color:var(--muted)}.value{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.big{font-size:1.15rem;font-weight:700}
+.formula{margin-top:16px;line-height:1.65}.formula .math{overflow-x:auto}.status{margin-top:12px;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}.ok{color:var(--ok)}.warn{color:var(--warn)}
+.small{font-size:.9rem;color:var(--muted)}@media(max-width:760px){.grid,.fields{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Chapter 8 Design Calculators</h1>
+<div class="sub">Neamen 4th ed. — Output Stages and Power Amplifiers。把第 8 章前 30 题中重复出现的计算抽成 5 个通用工具。</div>
+
+<div class="tabs" role="tablist">
+<button class="tab active" data-tab="a">Class-A Load Line</button>
+<button class="tab" data-tab="thermal">Thermal</button>
+<button class="tab" data-tab="classb">Class-B / AB Power</button>
+<button class="tab" data-tab="follower">Follower Gain / gm</button>
+<button class="tab" data-tab="abbias">Class-AB Bias</button>
+</div>
+
+<section id="a" class="panel active">
+<div class="grid">
+<div class="card">
+<h2>Class-A Load-Line Calculator</h2>
+<div class="small">适合：8.1–8.6 一类 Q-point、最大摆幅、负载功率题。</div>
+<div class="fields">
+<label>VCC (V)<input id="aVcc" type="number" value="24" step="0.1"></label>
+<label>VQ / VCEQ / VDSQ (V)<input id="aVq" type="number" value="12" step="0.1"></label>
+<label>IQ (A)<input id="aIq" type="number" value="2" step="0.01"></label>
+<label>RL (Ω)<input id="aRl" type="number" value="6" step="0.1"></label>
+</div><div id="aStatus" class="status ok"></div>
+</div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">正向电压摆幅</div><div id="aVpPlus" class="value"></div>
+<div class="name">负向电压摆幅</div><div id="aVpMinus" class="value"></div>
+<div class="name">可用峰值 Vp</div><div id="aVp" class="value big"></div>
+<div class="name">峰值负载电流 Ip</div><div id="aIp" class="value"></div>
+<div class="name">最大正弦负载功率 PL</div><div id="aPl" class="value"></div>
+<div class="name">静态器件耗散 PQ</div><div id="aPq" class="value"></div>
+</div></div>
+</div>
+<div class="card formula"><div class="math">\[
+V_p=\min(V_{CC}-V_Q,\;I_QR_L),\qquad
+I_p=\frac{V_p}{R_L},\qquad
+P_L=\frac{V_p^2}{2R_L}
+\]</div></div>
+</section>
+
+<section id="thermal" class="panel">
+<div class="grid">
+<div class="card">
+<h2>Power Transistor Thermal Calculator</h2>
+<div class="small">适合：8.7–8.11。热阻像电阻串联一样相加。</div>
+<div class="fields">
+<label>Tj,max (°C)<input id="tTjmax" type="number" value="150"></label>
+<label>Ta (°C)<input id="tTa" type="number" value="25"></label>
+<label>Pd (W)<input id="tPd" type="number" value="20" step="0.1"></label>
+<label>θJC (°C/W)<input id="tJC" type="number" value="0.8" step="0.01"></label>
+<label>θCS (°C/W)<input id="tCS" type="number" value="0.2" step="0.01"></label>
+<label>θSA (°C/W)<input id="tSA" type="number" value="2" step="0.01"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">总热阻 θJA</div><div id="tJA" class="value"></div>
+<div class="name">预测结温 Tj</div><div id="tTj" class="value big"></div>
+<div class="name">允许最大 θSA</div><div id="tSAmax" class="value"></div>
+<div class="name">给定热阻下最大 Pd</div><div id="tPdmax" class="value"></div>
+</div><div id="tStatus" class="status ok"></div></div>
+</div>
+<div class="card formula"><div class="math">\[
+T_J=T_A+P_D(\theta_{JC}+\theta_{CS}+\theta_{SA})
+\]
+\[
+\theta_{SA,\max}=\frac{T_{J,\max}-T_A}{P_D}-\theta_{JC}-\theta_{CS}
+\]</div></div>
+</section>
+
+<section id="classb" class="panel">
+<div class="grid">
+<div class="card">
+<h2>Class-B / AB Power & Efficiency</h2>
+<div class="small">适合：8.12、8.18–8.24。这里采用理想双电源 class-B 正弦输出模型。</div>
+<div class="fields">
+<label>VCC (V)<input id="bVcc" type="number" value="10" step="0.1"></label>
+<label>输出峰值 Vp (V)<input id="bVp" type="number" value="8" step="0.1"></label>
+<label>RL (Ω)<input id="bRl" type="number" value="8" step="0.1"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">峰值负载电流 Ip</div><div id="bIp" class="value"></div>
+<div class="name">负载功率 PL</div><div id="bPl" class="value"></div>
+<div class="name">电源平均功率 PS</div><div id="bPs" class="value"></div>
+<div class="name">总晶体管耗散</div><div id="bPd" class="value"></div>
+<div class="name">效率 η</div><div id="bEta" class="value big"></div>
+</div><div id="bStatus" class="status ok"></div></div>
+</div>
+<div class="card formula"><div class="math">\[
+I_p=\frac{V_p}{R_L},\qquad
+P_L=\frac{V_p^2}{2R_L},\qquad
+P_S=\frac{2V_{CC}I_p}{\pi}
+\]
+\[
+\eta=\frac{P_L}{P_S}=\frac{\pi}{4}\frac{V_p}{V_{CC}}
+\]</div></div>
+</section>
+
+<section id="follower" class="panel">
+<div class="grid">
+<div class="card">
+<h2>Follower Gain / gm Designer</h2>
+<div class="small">适合：8.13、8.15、8.25、8.29、8.30。</div>
+<div class="fields">
+<label>模式
+<select id="fMode"><option value="analysis">Analysis: gm → Av</option><option value="design">Design: Av → gm</option></select>
+</label>
+<label>RL (Ω)<input id="fRl" type="number" value="500" step="1"></label>
+<label id="fGmLabel">总等效 Gm (mS)<input id="fGm" type="number" value="14.142" step="0.001"></label>
+<label id="fAvLabel" style="display:none">目标 Av<input id="fAvTarget" type="number" value="0.95" step="0.001" min="0" max="0.9999"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">Gm RL</div><div id="fLoop" class="value"></div>
+<div class="name">Av</div><div id="fAv" class="value big"></div>
+<div class="name">所需 Gm</div><div id="fGmOut" class="value"></div>
+</div></div>
+</div>
+<div class="card formula"><div class="math">\[
+A_v=\frac{G_mR_L}{1+G_mR_L}
+\qquad\Longleftrightarrow\qquad
+G_m=\frac{A_v}{R_L(1-A_v)}
+\]</div></div>
+</section>
+
+<section id="abbias" class="panel">
+<div class="grid">
+<div class="card">
+<h2>Class-AB MOS Bias Designer</h2>
+<div class="small">适合：8.27、8.29、8.30 的 MOS class-AB bias / gm 设计。</div>
+<div class="fields">
+<label>K1 = K2 (mA/V²)<input id="cK" type="number" value="5" step="0.01"></label>
+<label>IQ (mA)<input id="cIq" type="number" value="5" step="0.01"></label>
+<label>|VT| (V)<input id="cVt" type="number" value="1" step="0.01"></label>
+<label>IBias (mA)<input id="cIb" type="number" value="0.2" step="0.01"></label>
+<label>RL (Ω)<input id="cRl" type="number" value="500" step="1"></label>
+<label>vO 工作点 (V)<input id="cVo" type="number" value="0" step="0.1"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">VOV,Q</div><div id="cVov" class="value"></div>
+<div class="name">VBB ≈ 2(VT+VOV)</div><div id="cVbb" class="value"></div>
+<div class="name">K3 = K4</div><div id="cK3" class="value"></div>
+<div class="name">gm1 + gm2</div><div id="cGm" class="value"></div>
+<div class="name">Av</div><div id="cAv" class="value big"></div>
+<div class="name">IL</div><div id="cIl" class="value"></div>
+<div class="name">VOV1</div><div id="cV1" class="value"></div>
+<div class="name">VOV2</div><div id="cV2" class="value"></div>
+</div><div id="cStatus" class="status ok"></div></div>
+</div>
+<div class="card formula"><div class="math">\[
+V_{OV,Q}=\sqrt{\frac{2I_Q}{K}},\qquad
+V_{BB}\approx 2(V_T+V_{OV,Q})
+\]
+\[
+G_m=2KV_{OV,Q},\qquad
+A_v=\frac{G_mR_L}{1+G_mR_L}
+\]</div></div>
+</section>
+</div>
+
+<script>
+(()=>{
+const $=id=>document.getElementById(id);
+const n=(x,d=3)=>Number.isFinite(x)?x.toFixed(d):"—";
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); $(b.dataset.tab).classList.add("active");
+}));
+
+function calcA(){
+ const Vcc=+$("aVcc").value,Vq=+$("aVq").value,Iq=+$("aIq").value,R=+$("aRl").value;
+ const vpP=Vcc-Vq,vpM=Iq*R,vp=Math.max(0,Math.min(vpP,vpM)),ip=R>0?vp/R:NaN,pl=R>0?vp*vp/(2*R):NaN,pq=Vq*Iq;
+ $("aVpPlus").textContent=n(vpP)+" V";$("aVpMinus").textContent=n(vpM)+" V";$("aVp").textContent=n(vp)+" V";$("aIp").textContent=n(ip)+" A";$("aPl").textContent=n(pl)+" W";$("aPq").textContent=n(pq)+" W";
+ $("aStatus").textContent=vpP<0||vpM<0?"参数导致无有效对称摆幅。":"限制来自较小的一侧："+(vpP<vpM?"电压余量":"电流余量");
+}
+function calcT(){
+ const tj=+$("tTjmax").value,ta=+$("tTa").value,p=+$("tPd").value,jc=+$("tJC").value,cs=+$("tCS").value,sa=+$("tSA").value;
+ const ja=jc+cs+sa,pred=ta+p*ja,samax=p>0?(tj-ta)/p-jc-cs:NaN,pmax=ja>0?(tj-ta)/ja:NaN;
+ $("tJA").textContent=n(ja)+" °C/W";$("tTj").textContent=n(pred)+" °C";$("tSAmax").textContent=n(samax)+" °C/W";$("tPdmax").textContent=n(pmax)+" W";
+ const st=$("tStatus");st.textContent=pred<=tj?"当前热设计满足结温限制。":"当前结温超过上限。";st.className="status "+(pred<=tj?"ok":"warn");
+}
+function calcB(){
+ const vcc=+$("bVcc").value,vp=+$("bVp").value,r=+$("bRl").value;
+ const ip=r>0?vp/r:NaN,pl=r>0?vp*vp/(2*r):NaN,ps=2*vcc*ip/Math.PI,pd=ps-pl,eta=ps>0?pl/ps:NaN;
+ $("bIp").textContent=n(ip)+" A";$("bPl").textContent=n(pl)+" W";$("bPs").textContent=n(ps)+" W";$("bPd").textContent=n(pd)+" W";$("bEta").textContent=n(eta*100,2)+" %";
+ const st=$("bStatus");st.textContent=vp<=vcc?"理想 class-B 范围内。":"Vp > VCC：理想模型下无法达到该摆幅。";st.className="status "+(vp<=vcc?"ok":"warn");
+}
+function calcF(){
+ const mode=$("fMode").value,r=+$("fRl").value;
+ $("fGmLabel").style.display=mode==="analysis"?"block":"none";$("fAvLabel").style.display=mode==="design"?"block":"none";
+ let gm,av;
+ if(mode==="analysis"){gm=+$("fGm").value/1000;const x=gm*r;av=x/(1+x);}
+ else{av=+$("fAvTarget").value;gm=(r>0&&av>0&&av<1)?av/(r*(1-av)):NaN;}
+ const loop=gm*r;
+ $("fLoop").textContent=n(loop);$("fAv").textContent=n(av,4);$("fGmOut").textContent=n(gm*1000,3)+" mS";
+}
+function calcC(){
+ const K=+$("cK").value,Iq=+$("cIq").value,Vt=+$("cVt").value,Ib=+$("cIb").value,R=+$("cRl").value,Vo=+$("cVo").value;
+ const vov=Math.sqrt(2*Iq/K),vbb=2*(Vt+vov),k3=2*Ib/(vov*vov),gm=2*K*vov,loop=gm/1000*R,av=loop/(1+loop),il=1000*Vo/R,sum=2*vov,delta=2*il/(K*sum),v1=(sum+delta)/2,v2=(sum-delta)/2;
+ $("cVov").textContent=n(vov,4)+" V";$("cVbb").textContent=n(vbb,4)+" V";$("cK3").textContent=n(k3,4)+" mA/V²";$("cGm").textContent=n(gm,3)+" mS";$("cAv").textContent=n(av,4);$("cIl").textContent=n(il,3)+" mA";$("cV1").textContent=n(v1,4)+" V";$("cV2").textContent=n(v2,4)+" V";
+ const st=$("cStatus");st.textContent=v1>=0&&v2>=0?"两只输出 MOS 都导通，恒定 gm 总和近似有效。":"一个输出 MOS 已截止，需改用单管导通模型。";st.className="status "+(v1>=0&&v2>=0?"ok":"warn");
+}
+["aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
+["tTjmax","tTa","tPd","tJC","tCS","tSA"].forEach(id=>$(id).addEventListener("input",calcT));
+["bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
+["fMode","fRl","fGm","fAvTarget"].forEach(id=>$(id).addEventListener("input",calcF));
+["cK","cIq","cVt","cIb","cRl","cVo"].forEach(id=>$(id).addEventListener("input",calcC));
+calcA();calcT();calcB();calcF();calcC();
+})();
+</script>
+</body></html>
