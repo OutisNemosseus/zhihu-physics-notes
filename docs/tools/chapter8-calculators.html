@@ -19,7 +19,13 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{font-size:.92rem}input,select{width:100%;margin-top:5px;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:1rem}
 .result{display:grid;grid-template-columns:1fr auto;gap:8px 16px}.name{color:var(--muted)}.value{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.big{font-size:1.15rem;font-weight:700}
 .formula{margin-top:16px;line-height:1.65}.formula .math{overflow-x:auto}.status{margin-top:12px;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}.ok{color:var(--ok)}.warn{color:var(--warn)}
-.small{font-size:.9rem;color:var(--muted)}.compact .tabs,.compact>h1,.compact>.sub{display:none}.compact{padding-top:8px}.compact .panel{display:none}.compact .panel.active{display:block}.compact .formula{margin-top:10px}
+.small{font-size:.9rem;color:var(--muted)}
+.chart-card{margin-top:16px}.chart-title{font-weight:700;margin-bottom:4px}.chart-sub{font-size:.88rem;color:var(--muted);margin-bottom:10px}
+.chart-wrap{position:relative;width:100%;height:300px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:6px}
+.chart-wrap canvas{width:100%;height:100%;display:block}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px;font-size:.85rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:18px;height:3px;margin-right:5px;vertical-align:middle;background:currentColor}
+.compact .tabs,.compact>h1,.compact>.sub{display:none}.compact{padding-top:8px}.compact .panel{display:none}.compact .panel.active{display:block}.compact .formula{margin-top:10px}
 @media(max-width:760px){.grid,.fields{grid-template-columns:1fr}}
 </style>
 </head>
@@ -69,6 +75,7 @@ V_p=\min(V_{CC}-V_Q,\;I_QR_L),\qquad
 I_p=\frac{V_p}{R_L},\qquad
 P_L=\frac{V_p^2}{2R_L}
 \]</div></div>
+<div class="card chart-card"><div class="chart-title">Load line / Q-point</div><div class="chart-sub">改变 (V_Q)、(I_Q)、(R_L) 后，负载线和 Q-point 会实时移动。</div><div class="chart-wrap"><canvas id="chartA"></canvas></div><div class="legend"><span>Load line</span><span>Q-point</span><span>Power hyperbola (P=V_QI_Q)</span></div></div>
 </section>
 
 
@@ -96,6 +103,7 @@ P_L=\frac{V_p^2}{2R_L},\qquad
 V_p=\sqrt{2P_LR_L},\qquad
 I_p=\frac{V_p}{R_L}
 \]</div></div>
+<div class="card chart-card"><div class="chart-title">Load power vs output peak</div><div class="chart-sub">固定 (R_L)，观察 (V_p) 增大时负载功率如何按平方增长。</div><div class="chart-wrap"><canvas id="chartL"></canvas></div></div>
 </section>
 
 <section id="thermal" class="panel">
@@ -124,6 +132,7 @@ T_J=T_A+P_D(\theta_{JC}+\theta_{CS}+\theta_{SA})
 \[
 \theta_{SA,\max}=\frac{T_{J,\max}-T_A}{P_D}-\theta_{JC}-\theta_{CS}
 \]</div></div>
+<div class="card chart-card"><div class="chart-title">Junction temperature vs dissipation</div><div class="chart-sub">斜率就是总热阻 (	heta_{JA})；虚线表示 (T_{J,max})。</div><div class="chart-wrap"><canvas id="chartT"></canvas></div></div>
 </section>
 
 <section id="classb" class="panel">
@@ -155,6 +164,7 @@ P_S=\frac{2V_{CC}I_p}{\pi}
 \[
 \eta=\frac{P_L}{P_S}=\frac{\pi}{4}\frac{V_p}{V_{CC}}
 \]</div></div>
+<div class="card chart-card"><div class="chart-title">Power and efficiency vs output peak</div><div class="chart-sub">扫描 (V_p)；显示负载功率、器件耗散与效率趋势。</div><div class="chart-wrap"><canvas id="chartB"></canvas></div><div class="legend"><span>(P_L)</span><span>(P_D)</span><span>(eta) scaled</span></div></div>
 </section>
 
 
@@ -200,6 +210,7 @@ v_I=v_O+\sqrt{\frac{v_O}{KR_L}}
 A_v=\frac{2\sqrt{KR_Lv_O}}{1+2\sqrt{KR_Lv_O}}
 \]</div>
 </div>
+<div class="card chart-card"><div class="chart-title">MOS characteristic view</div><div class="chart-sub" id="mChartSub">DC 模式：扫描 (V_{GS})，显示 (I_D) 与功耗。Transfer 模式：显示 (v_O(v_I)) 与增量增益。</div><div class="chart-wrap"><canvas id="chartM"></canvas></div></div>
 </section>
 
 <section id="follower" class="panel">
@@ -226,6 +237,7 @@ A_v=\frac{G_mR_L}{1+G_mR_L}
 \qquad\Longleftrightarrow\qquad
 G_m=\frac{A_v}{R_L(1-A_v)}
 \]</div></div>
+<div class="card chart-card"><div class="chart-title">Follower gain vs transconductance</div><div class="chart-sub">固定 (R_L)，查看 (G_m) 增大时 (A_v) 如何逐渐逼近 1。</div><div class="chart-wrap"><canvas id="chartF"></canvas></div></div>
 </section>
 
 <section id="abbias" class="panel">
@@ -279,6 +291,7 @@ G_m\approx\frac{2I_Q}{V_T},\qquad
 A_v\approx\frac{G_mR_L}{1+G_mR_L}
 \]</div>
 </div>
+<div class="card chart-card"><div class="chart-title">Class-AB operating-point sweep</div><div class="chart-sub" id="cChartSub">MOS 模式：扫描 (v_O)，显示 (V_{OV1})、(V_{OV2}) 与总跨导趋势。</div><div class="chart-wrap"><canvas id="chartC"></canvas></div></div>
 </section>
 </div>
 
@@ -286,6 +299,50 @@ A_v\approx\frac{G_mR_L}{1+G_mR_L}
 (()=>{
 const $=id=>document.getElementById(id);
 const n=(x,d=3)=>Number.isFinite(x)?x.toFixed(d):"—";
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function drawChart(id,series,opt={}){
+  const canvas=$(id); if(!canvas) return;
+  const box=canvas.getBoundingClientRect(), dpr=Math.max(1,window.devicePixelRatio||1);
+  const W=Math.max(320,Math.floor(box.width||700)), H=Math.max(220,Math.floor(box.height||300));
+  canvas.width=W*dpr; canvas.height=H*dpr;
+  const ctx=canvas.getContext("2d"); ctx.setTransform(dpr,0,0,dpr,0,0);
+  ctx.clearRect(0,0,W,H);
+  const pad={l:54,r:18,t:18,b:42};
+  const pts=series.flatMap(s=>s.data||[]).filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y));
+  if(!pts.length) return;
+  let xmin=opt.xmin??Math.min(...pts.map(p=>p.x)), xmax=opt.xmax??Math.max(...pts.map(p=>p.x));
+  let ymin=opt.ymin??Math.min(0,...pts.map(p=>p.y)), ymax=opt.ymax??Math.max(...pts.map(p=>p.y));
+  if(xmax===xmin)xmax=xmin+1;if(ymax===ymin)ymax=ymin+1;
+  const xm=(x)=>pad.l+(x-xmin)/(xmax-xmin)*(W-pad.l-pad.r);
+  const ym=(y)=>H-pad.b-(y-ymin)/(ymax-ymin)*(H-pad.t-pad.b);
+  ctx.strokeStyle=css("--border");ctx.fillStyle=css("--muted");ctx.lineWidth=1;ctx.font="12px system-ui";
+  for(let i=0;i<=5;i++){
+    const x=xmin+(xmax-xmin)*i/5, px=xm(x);
+    ctx.beginPath();ctx.moveTo(px,pad.t);ctx.lineTo(px,H-pad.b);ctx.stroke();
+    ctx.fillText((Math.abs(x)>=100?x.toFixed(0):x.toFixed(2)),px-12,H-18);
+    const y=ymin+(ymax-ymin)*i/5, py=ym(y);
+    ctx.beginPath();ctx.moveTo(pad.l,py);ctx.lineTo(W-pad.r,py);ctx.stroke();
+    ctx.fillText((Math.abs(y)>=100?y.toFixed(0):y.toFixed(2)),4,py+4);
+  }
+  const palette=["#2563eb","#dc2626","#059669","#7c3aed","#ea580c","#0891b2"];
+  series.forEach((s,idx)=>{
+    const col=s.color||palette[idx%palette.length];
+    ctx.strokeStyle=col;ctx.fillStyle=col;ctx.lineWidth=s.width||2;
+    if(s.dash)ctx.setLineDash(s.dash);else ctx.setLineDash([]);
+    if(s.data?.length){
+      ctx.beginPath();
+      s.data.forEach((p,j)=>{const px=xm(p.x),py=ym(p.y);j?ctx.lineTo(px,py):ctx.moveTo(px,py);});
+      ctx.stroke();
+    }
+    if(s.points){
+      s.points.forEach(p=>{ctx.beginPath();ctx.arc(xm(p.x),ym(p.y),5,0,Math.PI*2);ctx.fill();});
+    }
+  });
+  ctx.setLineDash([]);
+  ctx.fillStyle=css("--text");ctx.font="12px system-ui";
+  if(opt.xlabel)ctx.fillText(opt.xlabel,W/2-30,H-4);
+  if(opt.ylabel){ctx.save();ctx.translate(14,H/2+25);ctx.rotate(-Math.PI/2);ctx.fillText(opt.ylabel,0,0);ctx.restore();}
+}
 const params=new URLSearchParams(location.search);
 if(params.get("compact")==="1") document.querySelector(".wrap").classList.add("compact");
 const inputMap={
@@ -315,6 +372,10 @@ function calcA(){
  const vpP=Vcc-Vq,vpM=Iq*R,vp=Math.max(0,Math.min(vpP,vpM)),ip=R>0?vp/R:NaN,pl=R>0?(wave==="square"?vp*vp/R:vp*vp/(2*R)):NaN,pq=Vq*Iq,ps=Vcc*Iq,eta=ps>0?pl/ps:NaN;
  $("aVpPlus").textContent=n(vpP)+" V";$("aVpMinus").textContent=n(vpM)+" V";$("aVp").textContent=n(vp)+" V";$("aIp").textContent=n(ip)+" A";$("aPl").textContent=n(pl)+" W";$("aPq").textContent=n(pq)+" W";$("aPs").textContent=n(ps)+" W";$("aEta").textContent=n(eta*100,2)+" %";
  $("aStatus").textContent=vpP<0||vpM<0?"参数导致无有效对称摆幅。":"限制来自较小的一侧："+(vpP<vpM?"电压余量":"电流余量");
+ const vmax=Math.max(Vcc,Vq*2,1), imax=Math.max(Iq*2,Vcc/R,1e-6), Pq=Vq*Iq;
+ const line=[],hyp=[];
+ for(let j=0;j<=120;j++){const v=vmax*j/120;line.push({x:v,y:Math.max(0,(Vcc-v)/R)}); if(v>0)hyp.push({x:v,y:Pq/v});}
+ drawChart("chartA",[{data:line},{points:[{x:Vq,y:Iq}],data:[]},{data:hyp}],{xmin:0,xmax:vmax,ymin:0,ymax:imax,xlabel:"V (V)",ylabel:"I (A)"});
 }
 function calcL(){
  const mode=$("lMode").value,r=+$("lRl").value;
@@ -324,12 +385,16 @@ function calcL(){
  else{vp=+$("lVp").value;pl=r>0?vp*vp/(2*r):NaN;}
  const ip=r>0?vp/r:NaN;
  $("lVpOut").textContent=n(vp,4)+" V"; $("lIpOut").textContent=n(ip,4)+" A"; $("lPlOut").textContent=n(pl,4)+" W";
+ const vmax=Math.max(vp*1.5,1),curve=[];for(let j=0;j<=120;j++){const x=vmax*j/120;curve.push({x,y:x*x/(2*r)});}
+ drawChart("chartL",[{data:curve},{points:[{x:vp,y:pl}],data:[]}],{xmin:0,xmax:vmax,ymin:0,ymax:Math.max(pl*1.6,0.1),xlabel:"Vp (V)",ylabel:"PL (W)"});
 }
 function calcT(){
  const tj=+$("tTjmax").value,ta=+$("tTa").value,p=+$("tPd").value,jc=+$("tJC").value,cs=+$("tCS").value,sa=+$("tSA").value;
  const ja=jc+cs+sa,pred=ta+p*ja,samax=p>0?(tj-ta)/p-jc-cs:NaN,pmax=ja>0?(tj-ta)/ja:NaN;
  $("tJA").textContent=n(ja)+" °C/W";$("tTj").textContent=n(pred)+" °C";$("tSAmax").textContent=n(samax)+" °C/W";$("tPdmax").textContent=n(pmax)+" W";
  const st=$("tStatus");st.textContent=pred<=tj?"当前热设计满足结温限制。":"当前结温超过上限。";st.className="status "+(pred<=tj?"ok":"warn");
+ const pmaxPlot=Math.max(pmax*1.25,p*1.5,1),curve=[],limit=[];for(let j=0;j<=120;j++){const x=pmaxPlot*j/120;curve.push({x,y:ta+x*ja});limit.push({x,y:tj});}
+ drawChart("chartT",[{data:curve},{data:limit,dash:[6,5]},{points:[{x:p,y:pred}],data:[]}],{xmin:0,xmax:pmaxPlot,ymin:ta,ymax:Math.max(tj*1.08,pred*1.08),xlabel:"PD (W)",ylabel:"TJ (°C)"});
 }
 function calcB(){
  const wave=$("bWave").value,vcc=+$("bVcc").value,vp=+$("bVp").value,r=+$("bRl").value;
@@ -339,6 +404,8 @@ function calcB(){
  const pd=ps-pl,eta=ps>0?pl/ps:NaN;
  $("bIp").textContent=n(ip)+" A";$("bPl").textContent=n(pl)+" W";$("bPs").textContent=n(ps)+" W";$("bPd").textContent=n(pd)+" W";$("bEta").textContent=n(eta*100,2)+" %";
  const st=$("bStatus");st.textContent=vp<=vcc?"理想 class-B 范围内。":"Vp > VCC：理想模型下无法达到该摆幅。";st.className="status "+(vp<=vcc?"ok":"warn");
+ const plC=[],pdC=[],etaC=[],scale=Math.max(1,vcc*vcc/r);for(let j=0;j<=120;j++){const x=vcc*j/120,ii=x/r,pL=wave==="square"?x*x/r:x*x/(2*r),pS=wave==="square"?vcc*ii:2*vcc*ii/Math.PI,pD=pS-pL,e=pS>0?pL/pS:0;plC.push({x,y:pL});pdC.push({x,y:pD});etaC.push({x,y:e*scale});}
+ drawChart("chartB",[{data:plC},{data:pdC},{data:etaC},{points:[{x:Math.min(vp,vcc),y:pl}],data:[]}],{xmin:0,xmax:vcc,ymin:0,ymax:scale*1.1,xlabel:"Vp (V)",ylabel:"Power / scaled η"});
 }
 function calcM(){
  const mode=$("mMode").value,K=+$("mK").value,Vt=+$("mVt").value,R=+$("mRl").value;
@@ -350,7 +417,7 @@ function calcM(){
  if(!(K>0&&R>0)){ $("mRegion").textContent="invalid"; return; }
  if(dc){
    const Vdd=+$("mVdd").value,Vg=+$("mVg").value,Vov=Vg-Vt;
-   if(Vov<=0){$("mId").textContent="0 A";$("mVds").textContent=n(Vdd,3)+" V";$("mPd").textContent="0 W";$("mRegion").textContent="cutoff";return;}
+   if(Vov<=0){$("mId").textContent="0 A";$("mVds").textContent=n(Vdd,3)+" V";$("mPd").textContent="0 W";$("mRegion").textContent="cutoff";}
    const IdSat=K*Vov*Vov, VdsSat=Vdd-IdSat*R;
    let Id,Vds,region;
    if(VdsSat>=Vov){
@@ -363,10 +430,14 @@ function calcM(){
      if(!Number.isFinite(Vds)){Vds=NaN;Id=NaN;region="no physical root";}else{Id=(Vdd-Vds)/R;region="triode";}
    }
    $("mId").textContent=n(Id,4)+" A";$("mVds").textContent=n(Vds,4)+" V";$("mPd").textContent=n(Id*Vds,4)+" W";$("mRegion").textContent=region;
+   const vgMax=Math.max(Vt+Math.sqrt(Math.max(Vdd/R/K,0))*1.6,Vg*1.2,Vt+1),idC=[],pdC=[];for(let j=0;j<=120;j++){const vg=vgMax*j/120,vovx=vg-Vt;let idx=0,vdsx=Vdd;if(vovx>0){const ids=K*vovx*vovx,vdss=Vdd-ids*R;if(vdss>=vovx){idx=ids;vdsx=vdss;}else{const A=K,B=-(2*K*vovx+1/R),C=Vdd/R,D=B*B-4*A*C;if(D>=0){const roots=[(-B-Math.sqrt(D))/(2*A),(-B+Math.sqrt(D))/(2*A)];vdsx=roots.find(x=>x>=0&&x<=vovx);if(Number.isFinite(vdsx))idx=(Vdd-vdsx)/R;}}}idC.push({x:vg,y:idx});pdC.push({x:vg,y:idx*vdsx});}
+   drawChart("chartM",[{data:idC},{data:pdC}],{xmin:0,xmax:vgMax,ymin:0,xlabel:"VGS / VGG (V)",ylabel:"ID (A), PD (W)"});
  } else {
    const Vi=Math.abs(+$("mVi").value), a=1/Math.sqrt(K*R);
    const x=(-a+Math.sqrt(a*a+4*Vi))/2, Vo=x*x, z=2*Math.sqrt(K*R*Vo), Av=z/(1+z);
    $("mVo").textContent=n(Vo,4)+" V";$("mAv").textContent=n(Av,4);$("mRegion").textContent="positive half-cycle";
+   const vmax=Math.max(Vi*1.25,1),voC=[],avC=[];for(let j=0;j<=120;j++){const x=vmax*j/120,xx=(-a+Math.sqrt(a*a+4*x))/2,vo=xx*xx,zx=2*Math.sqrt(K*R*vo),aa=zx/(1+zx);voC.push({x,y:vo});avC.push({x,y:aa*vmax});}
+   drawChart("chartM",[{data:voC},{data:avC},{points:[{x:Vi,y:Vo}],data:[]}],{xmin:0,xmax:vmax,ymin:0,ymax:vmax,xlabel:"vI (V)",ylabel:"vO / scaled Av"});
  }
 }
 function calcF(){
@@ -377,6 +448,8 @@ function calcF(){
  else{av=+$("fAvTarget").value;gm=(r>0&&av>0&&av<1)?av/(r*(1-av)):NaN;}
  const loop=gm*r;
  $("fLoop").textContent=n(loop);$("fAv").textContent=n(av,4);$("fGmOut").textContent=n(gm*1000,3)+" mS";
+ const gmMax=Math.max(gm*1000*1.6,50),curve=[];for(let j=0;j<=140;j++){const g=gmMax*j/140/1000,x=g*r;curve.push({x:g*1000,y:x/(1+x)});}
+ drawChart("chartF",[{data:curve},{points:[{x:gm*1000,y:av}],data:[]}],{xmin:0,xmax:gmMax,ymin:0,ymax:1.02,xlabel:"Gm (mS)",ylabel:"Av"});
 }
 function calcC(){
  const type=$("cType").value,Iq=+$("cIq").value,Ib=+$("cIb").value,R=+$("cRl").value,Vo=+$("cVo").value;
@@ -394,6 +467,8 @@ function calcC(){
    $("cVov").textContent=n(vov,4)+" V"; $("cVbe").textContent="—";
    $("cVbb").textContent=n(vbb,4)+" V";$("cK3").textContent=n(k3,4)+" mA/V²";$("cGm").textContent=n(gm,3)+" mS";$("cAv").textContent=n(av,4);$("cIl").textContent=n(il,3)+" mA";$("cV1").textContent=n(v1,4)+" V";$("cV2").textContent=n(v2,4)+" V";
    st.textContent=v1>=0&&v2>=0?"两只输出 MOS 都导通，恒定 gm 总和近似有效。":"一个输出 MOS 已截止，需改用单管导通模型。";st.className="status "+(v1>=0&&v2>=0?"ok":"warn");
+   const voMax=Math.max(R*(0.5*K*(2*vov)*(2*vov))/1000,Math.abs(Vo)*1.3,1),v1C=[],v2C=[],sumC=[];for(let j=0;j<=140;j++){const xo=-voMax+2*voMax*j/140,ilx=1000*xo/R,dx=2*ilx/(K*sum),a=(sum+dx)/2,b=(sum-dx)/2;v1C.push({x:xo,y:a});v2C.push({x:xo,y:b});sumC.push({x:xo,y:Math.max(0,K*a)+Math.max(0,K*b)});}
+   drawChart("chartC",[{data:v1C},{data:v2C},{data:sumC}],{xmin:-voMax,xmax:voMax,ymin:0,xlabel:"vO (V)",ylabel:"VOV (V) / gm sum (mS)"});
  } else {
    const Is=+$("cIs").value,Vt=+$("cVtThermal").value;
    if(!(Is>0&&Iq>0&&Vt>0&&R>0)){st.textContent="请输入有效 BJT 参数。";st.className="status warn";return;}
@@ -401,6 +476,8 @@ function calcC(){
    $("cVbe").textContent=n(vbe,4)+" V"; $("cVbb").textContent=n(vbb,4)+" V"; $("cK3").textContent="N/A (BJT)";
    $("cGm").textContent=n(gmS*1000,3)+" mS"; $("cAv").textContent=n(av,4); $("cIl").textContent=n(il,3)+" mA"; $("cV1").textContent="N/A"; $("cV2").textContent="N/A";
    st.textContent="BJT 模式使用匹配晶体管 + 指数模型；VBB≈2VBE,Q。"; st.className="status ok";
+   const iMax=Math.max(Iq*3,1),vbeC=[],gmC=[];for(let j=1;j<=140;j++){const im=iMax*j/140,ia=im/1000,vb=Vt*Math.log(ia/Is),gg=2*ia/Vt*1000;vbeC.push({x:im,y:vb});gmC.push({x:im,y:gg/Math.max(1,gmS*1000)*vbe});}
+   drawChart("chartC",[{data:vbeC},{data:gmC},{points:[{x:Iq,y:vbe}],data:[]}],{xmin:0,xmax:iMax,ymin:0,xlabel:"IQ (mA)",ylabel:"VBE / scaled gm"});
  }
 }
 ["aWave","aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
@@ -411,6 +488,7 @@ function calcC(){
 ["fMode","fRl","fGm","fAvTarget"].forEach(id=>$(id).addEventListener("input",calcF));
 ["cType","cK","cIq","cVt","cIb","cRl","cVo","cIs","cVtThermal"].forEach(id=>$(id).addEventListener("input",calcC));
 calcA();calcL();calcT();calcB();calcM();calcF();calcC();
+let rt;window.addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{calcA();calcL();calcT();calcB();calcM();calcF();calcC();},120);});
 })();
 </script>
 </body></html>
