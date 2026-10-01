@@ -30,6 +30,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 
 <div class="tabs" role="tablist">
 <button class="tab active" data-tab="a">Class-A Load Line</button>
+<button class="tab" data-tab="load">AC Load</button>
 <button class="tab" data-tab="thermal">Thermal</button>
 <button class="tab" data-tab="classb">Class-B / AB Power</button>
 <button class="tab" data-tab="follower">Follower Gain / gm</button>
@@ -61,6 +62,33 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 V_p=\min(V_{CC}-V_Q,\;I_QR_L),\qquad
 I_p=\frac{V_p}{R_L},\qquad
 P_L=\frac{V_p^2}{2R_L}
+\]</div></div>
+</section>
+
+
+<section id="load" class="panel">
+<div class="grid">
+<div class="card">
+<h2>AC Load Calculator</h2>
+<div class="small">通用的正弦负载功率换算：\(P_L\)、\(V_p\)、\(I_p\)、\(R_L\) 互相转换。</div>
+<div class="fields">
+<label>模式
+<select id="lMode"><option value="power">PL + RL → Vp, Ip</option><option value="voltage">Vp + RL → PL, Ip</option></select>
+</label>
+<label>RL (Ω)<input id="lRl" type="number" value="8" step="0.1"></label>
+<label id="lPlWrap">PL (W)<input id="lPl" type="number" value="0.5" step="0.01"></label>
+<label id="lVpWrap" style="display:none">Vp (V)<input id="lVp" type="number" value="2.828" step="0.01"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name">峰值输出 Vp</div><div id="lVpOut" class="value big"></div>
+<div class="name">峰值负载电流 Ip</div><div id="lIpOut" class="value"></div>
+<div class="name">平均负载功率 PL</div><div id="lPlOut" class="value"></div>
+</div></div>
+</div>
+<div class="card formula"><div class="math">\[
+P_L=\frac{V_p^2}{2R_L},\qquad
+V_p=\sqrt{2P_LR_L},\qquad
+I_p=\frac{V_p}{R_L}
 \]</div></div>
 </section>
 
@@ -98,6 +126,9 @@ T_J=T_A+P_D(\theta_{JC}+\theta_{CS}+\theta_{SA})
 <h2>Class-B / AB Power & Efficiency</h2>
 <div class="small">适合：8.12、8.18–8.24。这里采用理想双电源 class-B 正弦输出模型。</div>
 <div class="fields">
+<label>Waveform
+<select id="bWave"><option value="sine">Sine</option><option value="square">Square</option></select>
+</label>
 <label>VCC (V)<input id="bVcc" type="number" value="10" step="0.1"></label>
 <label>输出峰值 Vp (V)<input id="bVp" type="number" value="8" step="0.1"></label>
 <label>RL (Ω)<input id="bRl" type="number" value="8" step="0.1"></label>
@@ -208,8 +239,9 @@ const params=new URLSearchParams(location.search);
 if(params.get("compact")==="1") document.querySelector(".wrap").classList.add("compact");
 const inputMap={
   aVcc:"aVcc",aVq:"aVq",aIq:"aIq",aRl:"aRl",
+  lMode:"lMode",lRl:"lRl",lPl:"lPl",lVp:"lVp",
   tTjmax:"tTjmax",tTa:"tTa",tPd:"tPd",tJC:"tJC",tCS:"tCS",tSA:"tSA",
-  bVcc:"bVcc",bVp:"bVp",bRl:"bRl",
+  bWave:"bWave",bVcc:"bVcc",bVp:"bVp",bRl:"bRl",
   fMode:"fMode",fRl:"fRl",fGm:"fGm",fAvTarget:"fAvTarget",
   cType:"cType",cK:"cK",cIq:"cIq",cVt:"cVt",cIb:"cIb",cRl:"cRl",cVo:"cVo",cIs:"cIs",cVtThermal:"cVtThermal"
 };
@@ -232,6 +264,15 @@ function calcA(){
  $("aVpPlus").textContent=n(vpP)+" V";$("aVpMinus").textContent=n(vpM)+" V";$("aVp").textContent=n(vp)+" V";$("aIp").textContent=n(ip)+" A";$("aPl").textContent=n(pl)+" W";$("aPq").textContent=n(pq)+" W";
  $("aStatus").textContent=vpP<0||vpM<0?"参数导致无有效对称摆幅。":"限制来自较小的一侧："+(vpP<vpM?"电压余量":"电流余量");
 }
+function calcL(){
+ const mode=$("lMode").value,r=+$("lRl").value;
+ $("lPlWrap").style.display=mode==="power"?"block":"none"; $("lVpWrap").style.display=mode==="voltage"?"block":"none";
+ let vp,pl;
+ if(mode==="power"){pl=+$("lPl").value;vp=r>0&&pl>=0?Math.sqrt(2*pl*r):NaN;}
+ else{vp=+$("lVp").value;pl=r>0?vp*vp/(2*r):NaN;}
+ const ip=r>0?vp/r:NaN;
+ $("lVpOut").textContent=n(vp,4)+" V"; $("lIpOut").textContent=n(ip,4)+" A"; $("lPlOut").textContent=n(pl,4)+" W";
+}
 function calcT(){
  const tj=+$("tTjmax").value,ta=+$("tTa").value,p=+$("tPd").value,jc=+$("tJC").value,cs=+$("tCS").value,sa=+$("tSA").value;
  const ja=jc+cs+sa,pred=ta+p*ja,samax=p>0?(tj-ta)/p-jc-cs:NaN,pmax=ja>0?(tj-ta)/ja:NaN;
@@ -239,8 +280,11 @@ function calcT(){
  const st=$("tStatus");st.textContent=pred<=tj?"当前热设计满足结温限制。":"当前结温超过上限。";st.className="status "+(pred<=tj?"ok":"warn");
 }
 function calcB(){
- const vcc=+$("bVcc").value,vp=+$("bVp").value,r=+$("bRl").value;
- const ip=r>0?vp/r:NaN,pl=r>0?vp*vp/(2*r):NaN,ps=2*vcc*ip/Math.PI,pd=ps-pl,eta=ps>0?pl/ps:NaN;
+ const wave=$("bWave").value,vcc=+$("bVcc").value,vp=+$("bVp").value,r=+$("bRl").value;
+ const ip=r>0?vp/r:NaN;
+ const pl=r>0?(wave==="square"?vp*vp/r:vp*vp/(2*r)):NaN;
+ const ps=wave==="square"?vcc*ip:2*vcc*ip/Math.PI;
+ const pd=ps-pl,eta=ps>0?pl/ps:NaN;
  $("bIp").textContent=n(ip)+" A";$("bPl").textContent=n(pl)+" W";$("bPs").textContent=n(ps)+" W";$("bPd").textContent=n(pd)+" W";$("bEta").textContent=n(eta*100,2)+" %";
  const st=$("bStatus");st.textContent=vp<=vcc?"理想 class-B 范围内。":"Vp > VCC：理想模型下无法达到该摆幅。";st.className="status "+(vp<=vcc?"ok":"warn");
 }
@@ -279,11 +323,12 @@ function calcC(){
  }
 }
 ["aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
+["lMode","lRl","lPl","lVp"].forEach(id=>$(id).addEventListener("input",calcL));
 ["tTjmax","tTa","tPd","tJC","tCS","tSA"].forEach(id=>$(id).addEventListener("input",calcT));
-["bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
+["bWave","bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
 ["fMode","fRl","fGm","fAvTarget"].forEach(id=>$(id).addEventListener("input",calcF));
 ["cType","cK","cIq","cVt","cIb","cRl","cVo","cIs","cVtThermal"].forEach(id=>$(id).addEventListener("input",calcC));
-calcA();calcT();calcB();calcF();calcC();
+calcA();calcL();calcT();calcB();calcF();calcC();
 })();
 </script>
 </body></html>
