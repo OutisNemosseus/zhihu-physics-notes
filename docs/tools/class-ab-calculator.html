@@ -4,6 +4,16 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Class-AB MOSFET Design Calculator</title>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(','\\)']],
+        displayMath: [['\\[','\\]']]
+      },
+      svg: { fontCache: 'global' }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
   <style>
     :root {
       color-scheme: light dark;
@@ -105,6 +115,24 @@
       font-size: .92rem;
       color: var(--muted);
     }
+    .latex-panel {
+      margin-top: 16px;
+      text-align: left;
+      line-height: 1.65;
+    }
+    .latex-step {
+      padding: 12px 0;
+      border-top: 1px solid var(--border);
+    }
+    .latex-step:first-of-type { border-top: 0; }
+    .latex-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .math-scroll {
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
     @media (max-width: 700px) {
       .grid, .fields { grid-template-columns: 1fr; }
     }
@@ -170,6 +198,95 @@
     <div class="eq">A<sub>v</sub> = G<sub>m</sub>R<sub>L</sub> / (1 + G<sub>m</sub>R<sub>L</sub>)</div>
   </section>
 
+
+  <section class="card latex-panel">
+    <h2>LaTeX 推导（随输入参数实时更新）</h2>
+
+    <div class="latex-step">
+      <div class="latex-title">1. 静态过驱动电压</div>
+      <div class="math-scroll">
+        \[
+        V_{OV,Q}=\sqrt{\frac{2I_Q}{K}}
+        \]
+      </div>
+      <div id="latex-vov" class="math-scroll"></div>
+    </div>
+
+    <div class="latex-step">
+      <div class="latex-title">2. 偏置晶体管尺寸参数</div>
+      <div class="math-scroll">
+        \[
+        K_3=K_4=\frac{2I_{Bias}}{V_{OV,Q}^2}
+        \]
+      </div>
+      <div id="latex-k3" class="math-scroll"></div>
+    </div>
+
+    <div class="latex-step">
+      <div class="latex-title">3. 等效跨导</div>
+      <div class="math-scroll">
+        \[
+        G_m=g_{m1}+g_{m2}
+        =K\left(V_{OV1}+V_{OV2}\right)
+        =2KV_{OV,Q}
+        \]
+      </div>
+      <div id="latex-gm" class="math-scroll"></div>
+    </div>
+
+    <div class="latex-step">
+      <div class="latex-title">4. 小信号增益</div>
+      <div class="math-scroll">
+        \[
+        A_v
+        =
+        \frac{G_mR_L}{1+G_mR_L}
+        \]
+      </div>
+      <div id="latex-av" class="math-scroll"></div>
+    </div>
+
+    <div class="latex-step">
+      <div class="latex-title">5. 非零输出工作点</div>
+      <div class="math-scroll">
+        \[
+        I_L=\frac{v_O}{R_L}
+        \]
+        \[
+        I_{D1}-I_{D2}
+        =
+        \frac12K\left(V_{OV1}^2-V_{OV2}^2\right)
+        \]
+        \[
+        =
+        \frac12K
+        \left(V_{OV1}-V_{OV2}\right)
+        \left(V_{OV1}+V_{OV2}\right)
+        \]
+      </div>
+      <div id="latex-biaspoint" class="math-scroll"></div>
+    </div>
+
+    <div class="latex-step">
+      <div class="latex-title">6. 关键直觉</div>
+      <div class="math-scroll">
+        \[
+        V_{OV1}+V_{OV2}=2V_{OV,Q}=\text{constant}
+        \]
+        \[
+        \Longrightarrow
+        \quad
+        g_{m1}+g_{m2}=\text{constant}
+        \]
+        \[
+        \Longrightarrow
+        \quad
+        A_v\approx\text{constant}
+        \]
+      </div>
+    </div>
+  </section>
+
   <div class="note">
     适用前提：M₁、M₂ 匹配，K₁ = K₂，偏置网络维持 V<sub>OV1</sub> + V<sub>OV2</sub> 近似恒定，且两只输出管都保持导通。
   </div>
@@ -231,6 +348,31 @@
     $("v2").textContent = fmt(vov2) + " V";
     $("id1").textContent = fmt(id1, 3) + " mA";
     $("id2").textContent = fmt(id2, 3) + " mA";
+
+    $("latex-vov").innerHTML =
+      "\\[V_{OV,Q}=\\sqrt{\\frac{2("+fmt(Iq,3)+"\\,\\mathrm{mA})}{"+fmt(K,3)+"\\,\\mathrm{mA/V^2}}}="+fmt(vovQ,4)+"\\,\\mathrm{V}\\]";
+
+    $("latex-k3").innerHTML =
+      "\\[K_3=K_4=\\frac{2("+fmt(Ib,3)+"\\,\\mathrm{mA})}{("+fmt(vovQ,4)+"\\,\\mathrm{V})^2}="+fmt(k3,4)+"\\,\\mathrm{mA/V^2}\\]";
+
+    $("latex-gm").innerHTML =
+      "\\[G_m=2("+fmt(K,3)+"\\,\\mathrm{mA/V^2})("+fmt(vovQ,4)+"\\,\\mathrm{V})="+fmt(gmSum_mS,3)+"\\,\\mathrm{mS}\\]";
+
+    $("latex-av").innerHTML =
+      "\\[A_v=\\frac{("+fmt(gmSum_mS/1000,6)+"\\,\\mathrm{S})("+fmt(RL,1)+"\\,\\Omega)}{1+("+fmt(gmSum_mS/1000,6)+"\\,\\mathrm{S})("+fmt(RL,1)+"\\,\\Omega)}="+fmt(Av,4)+"\\]";
+
+    $("latex-biaspoint").innerHTML =
+      "\\[I_L=\\frac{"+fmt(Vo,3)+"\\,\\mathrm{V}}{"+fmt(RL,1)+"\\,\\Omega}="+fmt(IL_mA,3)+"\\,\\mathrm{mA}\\]" +
+      "\\[V_{OV1}="+fmt(vov1,4)+"\\,\\mathrm{V},\\qquad V_{OV2}="+fmt(vov2,4)+"\\,\\mathrm{V}\\]";
+
+    if (window.MathJax && MathJax.typesetPromise) {
+      MathJax.typesetClear([
+        $("latex-vov"), $("latex-k3"), $("latex-gm"), $("latex-av"), $("latex-biaspoint")
+      ]);
+      MathJax.typesetPromise([
+        $("latex-vov"), $("latex-k3"), $("latex-gm"), $("latex-av"), $("latex-biaspoint")
+      ]).catch(() => {});
+    }
 
     if (vov1 < 0 || vov2 < 0) {
       status.className = "status warn";
