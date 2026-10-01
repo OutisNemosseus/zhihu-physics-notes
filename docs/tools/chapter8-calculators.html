@@ -20,6 +20,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 .result{display:grid;grid-template-columns:1fr auto;gap:8px 16px}.name{color:var(--muted)}.value{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.big{font-size:1.15rem;font-weight:700}
 .formula{margin-top:16px;line-height:1.65}.formula .math{overflow-x:auto}.status{margin-top:12px;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}.ok{color:var(--ok)}.warn{color:var(--warn)}
 .small{font-size:.9rem;color:var(--muted)}
+.circuit-card{margin-bottom:16px;text-align:center}.circuit-card img{max-width:100%;max-height:360px;object-fit:contain;background:white;border-radius:10px;border:1px solid var(--border)}.circuit-caption{margin-top:8px;font-size:.9rem;color:var(--muted)}
 .chart-card{margin-top:16px}.chart-title{font-weight:700;margin-bottom:4px}.chart-sub{font-size:.88rem;color:var(--muted);margin-bottom:10px}
 .chart-wrap{position:relative;width:100%;height:300px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:6px}
 .chart-wrap canvas{width:100%;height:100%;display:block}
@@ -43,6 +44,12 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <button class="tab" data-tab="follower">Follower Gain / gm</button>
 <button class="tab" data-tab="abbias">Class-AB Bias</button>
 </div>
+
+<section class="card circuit-card" id="circuitCard">
+  <h2 id="circuitTitle">对应电路图</h2>
+  <img id="circuitImg" alt="Corresponding circuit schematic">
+  <div id="circuitCaption" class="circuit-caption"></div>
+</section>
 
 <section id="a" class="panel active">
 <div class="grid">
@@ -344,6 +351,30 @@ function drawChart(id,series,opt={}){
   if(opt.ylabel){ctx.save();ctx.translate(14,H/2+25);ctx.rotate(-Math.PI/2);ctx.fillText(opt.ylabel,0,0);ctx.restore();}
 }
 const params=new URLSearchParams(location.search);
+const figureDefaults={
+  a:{file:"fig-P8-2.webp",caption:"Class-A / load-line representative circuit"},
+  load:{file:"fig-P8-13.webp",caption:"Follower driving a resistive load"},
+  thermal:{file:"thermal-equivalent.svg",caption:"Thermal-resistance equivalent circuit"},
+  classb:{file:"fig-P8-22.webp",caption:"Idealized Class-B output stage"},
+  mosout:{file:"fig-P8-24.webp",caption:"Complementary MOS output stage"},
+  follower:{file:"fig-P8-13.webp",caption:"Emitter-follower output stage"},
+  abbias:{file:"fig-8-26.webp",caption:"Complementary MOS Class-AB output stage"}
+};
+function updateCircuitFigure(tab){
+  let file=params.get("fig");
+  let cap=params.get("figcap");
+  if(!file && figureDefaults[tab]) file=figureDefaults[tab].file;
+  if(!cap && figureDefaults[tab]) cap=figureDefaults[tab].caption;
+  const img=$("circuitImg"), card=$("circuitCard");
+  if(file && /^[A-Za-z0-9._-]+$/.test(file)){
+    img.src="../assets/images/ch8/"+file;
+    img.style.display="inline-block";
+    card.style.display="block";
+    $("circuitCaption").textContent=cap||file;
+  } else {
+    card.style.display="none";
+  }
+}
 if(params.get("compact")==="1") document.querySelector(".wrap").classList.add("compact");
 const inputMap={
   aWave:"aWave",aVcc:"aVcc",aVq:"aVq",aIq:"aIq",aRl:"aRl",
@@ -362,6 +393,7 @@ function activateTab(id, updateHash=false){
  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===id));
  document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("active",x.id===id));
  if(updateHash && location.hash!=="#"+id) history.replaceState(null,"","#"+id);
+ updateCircuitFigure(id);
 }
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>activateTab(b.dataset.tab,true)));
 window.addEventListener("hashchange",()=>activateTab(location.hash.slice(1)||"a"));
@@ -409,6 +441,10 @@ function calcB(){
 }
 function calcM(){
  const mode=$("mMode").value,K=+$("mK").value,Vt=+$("mVt").value,R=+$("mRl").value;
+ if(!params.get("fig") && document.querySelector(".panel.active")?.id==="mosout"){
+   $("circuitImg").src="../assets/images/ch8/"+(mode==="dc"?"fig-P8-1.webp":"fig-P8-24.webp");
+   $("circuitCaption").textContent=mode==="dc"?"Power MOS common-source / load-line circuit":"Complementary MOS Class-B output stage";
+ }
  const dc=mode==="dc";
  $("mVddWrap").style.display=dc?"block":"none"; $("mVgWrap").style.display=dc?"block":"none"; $("mViWrap").style.display=dc?"none":"block";
  ["mIdName","mId","mVdsName","mVds","mPdName","mPd"].forEach(id=>$(id).style.display=dc?"block":"none");
@@ -453,6 +489,10 @@ function calcF(){
 }
 function calcC(){
  const type=$("cType").value,Iq=+$("cIq").value,Ib=+$("cIb").value,R=+$("cRl").value,Vo=+$("cVo").value;
+ if(!params.get("fig") && document.querySelector(".panel.active")?.id==="abbias"){
+   $("circuitImg").src="../assets/images/ch8/"+(type==="mos"?"fig-8-26.webp":"fig-8-24.webp");
+   $("circuitCaption").textContent=type==="mos"?"Complementary MOS Class-AB output stage":"Complementary BJT Class-AB output stage";
+ }
  const mos=type==="mos";
  $("cKWrap").style.display=mos?"block":"none"; $("cVtWrap").style.display=mos?"block":"none";
  $("cIsWrap").style.display=mos?"none":"block"; $("cVtThermalWrap").style.display=mos?"none":"block";
