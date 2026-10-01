@@ -19,7 +19,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}label{font-size:.92rem}input,select{width:100%;margin-top:5px;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--text);font-size:1rem}
 .result{display:grid;grid-template-columns:1fr auto;gap:8px 16px}.name{color:var(--muted)}.value{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}.big{font-size:1.15rem;font-weight:700}
 .formula{margin-top:16px;line-height:1.65}.formula .math{overflow-x:auto}.status{margin-top:12px;padding:9px 11px;border:1px solid var(--border);border-radius:8px;background:var(--bg)}.ok{color:var(--ok)}.warn{color:var(--warn)}
-.small{font-size:.9rem;color:var(--muted)}@media(max-width:760px){.grid,.fields{grid-template-columns:1fr}}
+.small{font-size:.9rem;color:var(--muted)}.compact .tabs,.compact>h1,.compact>.sub{display:none}.compact{padding-top:8px}.compact .panel{display:none}.compact .panel.active{display:block}.compact .formula{margin-top:10px}
+@media(max-width:760px){.grid,.fields{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -203,6 +204,18 @@ A_v\approx\frac{G_mR_L}{1+G_mR_L}
 (()=>{
 const $=id=>document.getElementById(id);
 const n=(x,d=3)=>Number.isFinite(x)?x.toFixed(d):"—";
+const params=new URLSearchParams(location.search);
+if(params.get("compact")==="1") document.querySelector(".wrap").classList.add("compact");
+const inputMap={
+  aVcc:"aVcc",aVq:"aVq",aIq:"aIq",aRl:"aRl",
+  tTjmax:"tTjmax",tTa:"tTa",tPd:"tPd",tJC:"tJC",tCS:"tCS",tSA:"tSA",
+  bVcc:"bVcc",bVp:"bVp",bRl:"bRl",
+  fMode:"fMode",fRl:"fRl",fGm:"fGm",fAvTarget:"fAvTarget",
+  cType:"cType",cK:"cK",cIq:"cIq",cVt:"cVt",cIb:"cIb",cRl:"cRl",cVo:"cVo",cIs:"cIs",cVtThermal:"cVtThermal"
+};
+for(const [q,id] of Object.entries(inputMap)){
+  if(params.has(q) && $(id)) $(id).value=params.get(q);
+}
 function activateTab(id, updateHash=false){
  const panel=$(id); if(!panel) return;
  document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===id));
@@ -211,7 +224,7 @@ function activateTab(id, updateHash=false){
 }
 document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>activateTab(b.dataset.tab,true)));
 window.addEventListener("hashchange",()=>activateTab(location.hash.slice(1)||"a"));
-activateTab(location.hash.slice(1)||"a");
+activateTab(params.get("tab")||location.hash.slice(1)||"a");
 
 function calcA(){
  const Vcc=+$("aVcc").value,Vq=+$("aVq").value,Iq=+$("aIq").value,R=+$("aRl").value;
