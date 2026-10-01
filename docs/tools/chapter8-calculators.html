@@ -44,6 +44,9 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <h2>Class-A Load-Line Calculator</h2>
 <div class="small">适合：8.1–8.6 一类 Q-point、最大摆幅、负载功率题。</div>
 <div class="fields">
+<label>Waveform
+<select id="aWave"><option value="sine">Sine</option><option value="square">Square</option></select>
+</label>
 <label>VCC (V)<input id="aVcc" type="number" value="24" step="0.1"></label>
 <label>VQ / VCEQ / VDSQ (V)<input id="aVq" type="number" value="12" step="0.1"></label>
 <label>IQ (A)<input id="aIq" type="number" value="2" step="0.01"></label>
@@ -57,6 +60,8 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <div class="name">峰值负载电流 Ip</div><div id="aIp" class="value"></div>
 <div class="name">最大正弦负载功率 PL</div><div id="aPl" class="value"></div>
 <div class="name">静态器件耗散 PQ</div><div id="aPq" class="value"></div>
+<div class="name">DC supply power PS</div><div id="aPs" class="value"></div>
+<div class="name">Conversion efficiency η</div><div id="aEta" class="value"></div>
 </div></div>
 </div>
 <div class="card formula"><div class="math">\[
@@ -284,7 +289,7 @@ const n=(x,d=3)=>Number.isFinite(x)?x.toFixed(d):"—";
 const params=new URLSearchParams(location.search);
 if(params.get("compact")==="1") document.querySelector(".wrap").classList.add("compact");
 const inputMap={
-  aVcc:"aVcc",aVq:"aVq",aIq:"aIq",aRl:"aRl",
+  aWave:"aWave",aVcc:"aVcc",aVq:"aVq",aIq:"aIq",aRl:"aRl",
   lMode:"lMode",lRl:"lRl",lPl:"lPl",lVp:"lVp",
   tTjmax:"tTjmax",tTa:"tTa",tPd:"tPd",tJC:"tJC",tCS:"tCS",tSA:"tSA",
   bWave:"bWave",bVcc:"bVcc",bVp:"bVp",bRl:"bRl",
@@ -306,9 +311,9 @@ window.addEventListener("hashchange",()=>activateTab(location.hash.slice(1)||"a"
 activateTab(params.get("tab")||location.hash.slice(1)||"a");
 
 function calcA(){
- const Vcc=+$("aVcc").value,Vq=+$("aVq").value,Iq=+$("aIq").value,R=+$("aRl").value;
- const vpP=Vcc-Vq,vpM=Iq*R,vp=Math.max(0,Math.min(vpP,vpM)),ip=R>0?vp/R:NaN,pl=R>0?vp*vp/(2*R):NaN,pq=Vq*Iq;
- $("aVpPlus").textContent=n(vpP)+" V";$("aVpMinus").textContent=n(vpM)+" V";$("aVp").textContent=n(vp)+" V";$("aIp").textContent=n(ip)+" A";$("aPl").textContent=n(pl)+" W";$("aPq").textContent=n(pq)+" W";
+ const wave=$("aWave").value,Vcc=+$("aVcc").value,Vq=+$("aVq").value,Iq=+$("aIq").value,R=+$("aRl").value;
+ const vpP=Vcc-Vq,vpM=Iq*R,vp=Math.max(0,Math.min(vpP,vpM)),ip=R>0?vp/R:NaN,pl=R>0?(wave==="square"?vp*vp/R:vp*vp/(2*R)):NaN,pq=Vq*Iq,ps=Vcc*Iq,eta=ps>0?pl/ps:NaN;
+ $("aVpPlus").textContent=n(vpP)+" V";$("aVpMinus").textContent=n(vpM)+" V";$("aVp").textContent=n(vp)+" V";$("aIp").textContent=n(ip)+" A";$("aPl").textContent=n(pl)+" W";$("aPq").textContent=n(pq)+" W";$("aPs").textContent=n(ps)+" W";$("aEta").textContent=n(eta*100,2)+" %";
  $("aStatus").textContent=vpP<0||vpM<0?"参数导致无有效对称摆幅。":"限制来自较小的一侧："+(vpP<vpM?"电压余量":"电流余量");
 }
 function calcL(){
@@ -398,7 +403,7 @@ function calcC(){
    st.textContent="BJT 模式使用匹配晶体管 + 指数模型；VBB≈2VBE,Q。"; st.className="status ok";
  }
 }
-["aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
+["aWave","aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
 ["lMode","lRl","lPl","lVp"].forEach(id=>$(id).addEventListener("input",calcL));
 ["tTjmax","tTa","tPd","tJC","tCS","tSA"].forEach(id=>$(id).addEventListener("input",calcT));
 ["bWave","bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
