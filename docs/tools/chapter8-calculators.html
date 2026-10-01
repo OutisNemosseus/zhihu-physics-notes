@@ -33,6 +33,7 @@ window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]},svg
 <button class="tab" data-tab="load">AC Load</button>
 <button class="tab" data-tab="thermal">Thermal</button>
 <button class="tab" data-tab="classb">Class-B / AB Power</button>
+<button class="tab" data-tab="mosout">MOS Output / Transfer</button>
 <button class="tab" data-tab="follower">Follower Gain / gm</button>
 <button class="tab" data-tab="abbias">Class-AB Bias</button>
 </div>
@@ -151,6 +152,51 @@ P_S=\frac{2V_{CC}I_p}{\pi}
 \]</div></div>
 </section>
 
+
+<section id="mosout" class="panel">
+<div class="grid">
+<div class="card">
+<h2>MOS Output / Transfer Calculator</h2>
+<div class="small">DC 模式覆盖功率 MOS + load line；Class-B transfer 模式覆盖互补 MOS source follower 的非线性传输与增量增益。</div>
+<div class="fields">
+<label>模式
+<select id="mMode"><option value="dc">DC power MOS</option><option value="transfer">Class-B transfer</option></select>
+</label>
+<label>K (A/V²)<input id="mK" type="number" value="0.25" step="0.001"></label>
+<label>VT (V)<input id="mVt" type="number" value="4" step="0.01"></label>
+<label id="mVddWrap">VDD (V)<input id="mVdd" type="number" value="40" step="0.1"></label>
+<label>RL (Ω)<input id="mRl" type="number" value="10" step="0.1"></label>
+<label id="mVgWrap">VGG / VGS (V)<input id="mVg" type="number" value="7" step="0.1"></label>
+<label id="mViWrap" style="display:none">vI (V, positive half-cycle)<input id="mVi" type="number" value="1" step="0.1"></label>
+</div></div>
+<div class="card"><h2>结果</h2><div class="result">
+<div class="name" id="mIdName">ID</div><div id="mId" class="value"></div>
+<div class="name" id="mVdsName">VDS</div><div id="mVds" class="value"></div>
+<div class="name" id="mPdName">PD</div><div id="mPd" class="value"></div>
+<div class="name" id="mVoName" style="display:none">vO</div><div id="mVo" class="value" style="display:none"></div>
+<div class="name" id="mAvName" style="display:none">Av=dvO/dvI</div><div id="mAv" class="value big" style="display:none"></div>
+<div class="name">Region / status</div><div id="mRegion" class="value"></div>
+</div></div>
+</div>
+<div class="card formula">
+<div class="math" id="mDcFormula">\[
+I_D=K(V_{GS}-V_T)^2\quad(\text{saturation})
+\]
+\[
+I_D=K\left[2(V_{GS}-V_T)V_{DS}-V_{DS}^2\right]\quad(\text{triode})
+\]
+\[
+V_{DS}=V_{DD}-I_DR_L
+\]</div>
+<div class="math" id="mTfFormula" style="display:none">\[
+v_I=v_O+\sqrt{\frac{v_O}{KR_L}}
+\]
+\[
+A_v=\frac{2\sqrt{KR_Lv_O}}{1+2\sqrt{KR_Lv_O}}
+\]</div>
+</div>
+</section>
+
 <section id="follower" class="panel">
 <div class="grid">
 <div class="card">
@@ -242,6 +288,7 @@ const inputMap={
   lMode:"lMode",lRl:"lRl",lPl:"lPl",lVp:"lVp",
   tTjmax:"tTjmax",tTa:"tTa",tPd:"tPd",tJC:"tJC",tCS:"tCS",tSA:"tSA",
   bWave:"bWave",bVcc:"bVcc",bVp:"bVp",bRl:"bRl",
+  mMode:"mMode",mK:"mK",mVt:"mVt",mVdd:"mVdd",mRl:"mRl",mVg:"mVg",mVi:"mVi",
   fMode:"fMode",fRl:"fRl",fGm:"fGm",fAvTarget:"fAvTarget",
   cType:"cType",cK:"cK",cIq:"cIq",cVt:"cVt",cIb:"cIb",cRl:"cRl",cVo:"cVo",cIs:"cIs",cVtThermal:"cVtThermal"
 };
@@ -288,6 +335,35 @@ function calcB(){
  $("bIp").textContent=n(ip)+" A";$("bPl").textContent=n(pl)+" W";$("bPs").textContent=n(ps)+" W";$("bPd").textContent=n(pd)+" W";$("bEta").textContent=n(eta*100,2)+" %";
  const st=$("bStatus");st.textContent=vp<=vcc?"理想 class-B 范围内。":"Vp > VCC：理想模型下无法达到该摆幅。";st.className="status "+(vp<=vcc?"ok":"warn");
 }
+function calcM(){
+ const mode=$("mMode").value,K=+$("mK").value,Vt=+$("mVt").value,R=+$("mRl").value;
+ const dc=mode==="dc";
+ $("mVddWrap").style.display=dc?"block":"none"; $("mVgWrap").style.display=dc?"block":"none"; $("mViWrap").style.display=dc?"none":"block";
+ ["mIdName","mId","mVdsName","mVds","mPdName","mPd"].forEach(id=>$(id).style.display=dc?"block":"none");
+ ["mVoName","mVo","mAvName","mAv"].forEach(id=>$(id).style.display=dc?"none":"block");
+ $("mDcFormula").style.display=dc?"block":"none"; $("mTfFormula").style.display=dc?"none":"block";
+ if(!(K>0&&R>0)){ $("mRegion").textContent="invalid"; return; }
+ if(dc){
+   const Vdd=+$("mVdd").value,Vg=+$("mVg").value,Vov=Vg-Vt;
+   if(Vov<=0){$("mId").textContent="0 A";$("mVds").textContent=n(Vdd,3)+" V";$("mPd").textContent="0 W";$("mRegion").textContent="cutoff";return;}
+   const IdSat=K*Vov*Vov, VdsSat=Vdd-IdSat*R;
+   let Id,Vds,region;
+   if(VdsSat>=Vov){
+     Id=IdSat;Vds=VdsSat;region="saturation";
+   } else {
+     const A=K, B=-(2*K*Vov+1/R), C=Vdd/R;
+     const disc=B*B-4*A*C;
+     const roots=disc>=0?[(-B-Math.sqrt(disc))/(2*A),(-B+Math.sqrt(disc))/(2*A)]:[];
+     Vds=roots.find(x=>x>=0&&x<=Vov);
+     if(!Number.isFinite(Vds)){Vds=NaN;Id=NaN;region="no physical root";}else{Id=(Vdd-Vds)/R;region="triode";}
+   }
+   $("mId").textContent=n(Id,4)+" A";$("mVds").textContent=n(Vds,4)+" V";$("mPd").textContent=n(Id*Vds,4)+" W";$("mRegion").textContent=region;
+ } else {
+   const Vi=Math.abs(+$("mVi").value), a=1/Math.sqrt(K*R);
+   const x=(-a+Math.sqrt(a*a+4*Vi))/2, Vo=x*x, z=2*Math.sqrt(K*R*Vo), Av=z/(1+z);
+   $("mVo").textContent=n(Vo,4)+" V";$("mAv").textContent=n(Av,4);$("mRegion").textContent="positive half-cycle";
+ }
+}
 function calcF(){
  const mode=$("fMode").value,r=+$("fRl").value;
  $("fGmLabel").style.display=mode==="analysis"?"block":"none";$("fAvLabel").style.display=mode==="design"?"block":"none";
@@ -326,9 +402,10 @@ function calcC(){
 ["lMode","lRl","lPl","lVp"].forEach(id=>$(id).addEventListener("input",calcL));
 ["tTjmax","tTa","tPd","tJC","tCS","tSA"].forEach(id=>$(id).addEventListener("input",calcT));
 ["bWave","bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
+["mMode","mK","mVt","mVdd","mRl","mVg","mVi"].forEach(id=>$(id).addEventListener("input",calcM));
 ["fMode","fRl","fGm","fAvTarget"].forEach(id=>$(id).addEventListener("input",calcF));
 ["cType","cK","cIq","cVt","cIb","cRl","cVo","cIs","cVtThermal"].forEach(id=>$(id).addEventListener("input",calcC));
-calcA();calcL();calcT();calcB();calcF();calcC();
+calcA();calcL();calcT();calcB();calcM();calcF();calcC();
 })();
 </script>
 </body></html>
