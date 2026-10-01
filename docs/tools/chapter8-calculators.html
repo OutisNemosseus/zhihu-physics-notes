@@ -151,15 +151,24 @@ G_m=\frac{A_v}{R_L(1-A_v)}
 <h2>Class-AB MOS Bias Designer</h2>
 <div class="small">适合：8.27、8.29、8.30 的 MOS class-AB bias / gm 设计。</div>
 <div class="fields">
-<label>K1 = K2 (mA/V²)<input id="cK" type="number" value="5" step="0.01"></label>
+<label>器件类型
+<select id="cType">
+<option value="mos">MOS complementary AB</option>
+<option value="bjt">BJT complementary AB</option>
+</select>
+</label>
+<label id="cKWrap">K1 = K2 (mA/V²)<input id="cK" type="number" value="5" step="0.01"></label>
+<label id="cIsWrap" style="display:none">IS (A)<input id="cIs" type="number" value="1e-15" step="1e-15"></label>
+<label id="cVtThermalWrap" style="display:none">Thermal voltage VT (V)<input id="cVtThermal" type="number" value="0.026" step="0.001"></label>
 <label>IQ (mA)<input id="cIq" type="number" value="5" step="0.01"></label>
-<label>|VT| (V)<input id="cVt" type="number" value="1" step="0.01"></label>
+<label id="cVtWrap">|VTH| (V)<input id="cVt" type="number" value="1" step="0.01"></label>
 <label>IBias (mA)<input id="cIb" type="number" value="0.2" step="0.01"></label>
 <label>RL (Ω)<input id="cRl" type="number" value="500" step="1"></label>
 <label>vO 工作点 (V)<input id="cVo" type="number" value="0" step="0.1"></label>
 </div></div>
 <div class="card"><h2>结果</h2><div class="result">
-<div class="name">VOV,Q</div><div id="cVov" class="value"></div>
+<div class="name" id="cVovName">VOV,Q</div><div id="cVov" class="value"></div>
+<div class="name" id="cVbeName" style="display:none">VBE,Q</div><div id="cVbe" class="value" style="display:none"></div>
 <div class="name">VBB ≈ 2(VT+VOV)</div><div id="cVbb" class="value"></div>
 <div class="name">K3 = K4</div><div id="cK3" class="value"></div>
 <div class="name">gm1 + gm2</div><div id="cGm" class="value"></div>
@@ -169,14 +178,24 @@ G_m=\frac{A_v}{R_L(1-A_v)}
 <div class="name">VOV2</div><div id="cV2" class="value"></div>
 </div><div id="cStatus" class="status ok"></div></div>
 </div>
-<div class="card formula"><div class="math">\[
+<div class="card formula">
+<div class="math" id="cMosFormula">\[
 V_{OV,Q}=\sqrt{\frac{2I_Q}{K}},\qquad
-V_{BB}\approx 2(V_T+V_{OV,Q})
+V_{BB}\approx 2(V_{TH}+V_{OV,Q})
 \]
 \[
 G_m=2KV_{OV,Q},\qquad
 A_v=\frac{G_mR_L}{1+G_mR_L}
-\]</div></div>
+\]</div>
+<div class="math" id="cBjtFormula" style="display:none">\[
+V_{BE,Q}=V_T\ln\!\left(\frac{I_Q}{I_S}\right),\qquad
+V_{BB}\approx 2V_{BE,Q}
+\]
+\[
+G_m\approx\frac{2I_Q}{V_T},\qquad
+A_v\approx\frac{G_mR_L}{1+G_mR_L}
+\]</div>
+</div>
 </section>
 </div>
 
@@ -184,11 +203,15 @@ A_v=\frac{G_mR_L}{1+G_mR_L}
 (()=>{
 const $=id=>document.getElementById(id);
 const n=(x,d=3)=>Number.isFinite(x)?x.toFixed(d):"—";
-document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{
- document.querySelectorAll(".tab").forEach(x=>x.classList.remove("active"));
- document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
- b.classList.add("active"); $(b.dataset.tab).classList.add("active");
-}));
+function activateTab(id, updateHash=false){
+ const panel=$(id); if(!panel) return;
+ document.querySelectorAll(".tab").forEach(x=>x.classList.toggle("active",x.dataset.tab===id));
+ document.querySelectorAll(".panel").forEach(x=>x.classList.toggle("active",x.id===id));
+ if(updateHash && location.hash!=="#"+id) history.replaceState(null,"","#"+id);
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>activateTab(b.dataset.tab,true)));
+window.addEventListener("hashchange",()=>activateTab(location.hash.slice(1)||"a"));
+activateTab(location.hash.slice(1)||"a");
 
 function calcA(){
  const Vcc=+$("aVcc").value,Vq=+$("aVq").value,Iq=+$("aIq").value,R=+$("aRl").value;
@@ -218,16 +241,35 @@ function calcF(){
  $("fLoop").textContent=n(loop);$("fAv").textContent=n(av,4);$("fGmOut").textContent=n(gm*1000,3)+" mS";
 }
 function calcC(){
- const K=+$("cK").value,Iq=+$("cIq").value,Vt=+$("cVt").value,Ib=+$("cIb").value,R=+$("cRl").value,Vo=+$("cVo").value;
- const vov=Math.sqrt(2*Iq/K),vbb=2*(Vt+vov),k3=2*Ib/(vov*vov),gm=2*K*vov,loop=gm/1000*R,av=loop/(1+loop),il=1000*Vo/R,sum=2*vov,delta=2*il/(K*sum),v1=(sum+delta)/2,v2=(sum-delta)/2;
- $("cVov").textContent=n(vov,4)+" V";$("cVbb").textContent=n(vbb,4)+" V";$("cK3").textContent=n(k3,4)+" mA/V²";$("cGm").textContent=n(gm,3)+" mS";$("cAv").textContent=n(av,4);$("cIl").textContent=n(il,3)+" mA";$("cV1").textContent=n(v1,4)+" V";$("cV2").textContent=n(v2,4)+" V";
- const st=$("cStatus");st.textContent=v1>=0&&v2>=0?"两只输出 MOS 都导通，恒定 gm 总和近似有效。":"一个输出 MOS 已截止，需改用单管导通模型。";st.className="status "+(v1>=0&&v2>=0?"ok":"warn");
+ const type=$("cType").value,Iq=+$("cIq").value,Ib=+$("cIb").value,R=+$("cRl").value,Vo=+$("cVo").value;
+ const mos=type==="mos";
+ $("cKWrap").style.display=mos?"block":"none"; $("cVtWrap").style.display=mos?"block":"none";
+ $("cIsWrap").style.display=mos?"none":"block"; $("cVtThermalWrap").style.display=mos?"none":"block";
+ $("cVovName").style.display=mos?"block":"none"; $("cVov").style.display=mos?"block":"none";
+ $("cVbeName").style.display=mos?"none":"block"; $("cVbe").style.display=mos?"none":"block";
+ $("cMosFormula").style.display=mos?"block":"none"; $("cBjtFormula").style.display=mos?"none":"block";
+ const st=$("cStatus");
+ if(mos){
+   const K=+$("cK").value,Vth=+$("cVt").value;
+   if(!(K>0&&Iq>=0&&Ib>=0&&R>0)){st.textContent="请输入有效 MOS 参数。";st.className="status warn";return;}
+   const vov=Math.sqrt(2*Iq/K),vbb=2*(Vth+vov),k3=vov>0?2*Ib/(vov*vov):0,gm=2*K*vov,loop=gm/1000*R,av=loop/(1+loop),il=1000*Vo/R,sum=2*vov,delta=(K*sum)!==0?2*il/(K*sum):0,v1=(sum+delta)/2,v2=(sum-delta)/2;
+   $("cVov").textContent=n(vov,4)+" V"; $("cVbe").textContent="—";
+   $("cVbb").textContent=n(vbb,4)+" V";$("cK3").textContent=n(k3,4)+" mA/V²";$("cGm").textContent=n(gm,3)+" mS";$("cAv").textContent=n(av,4);$("cIl").textContent=n(il,3)+" mA";$("cV1").textContent=n(v1,4)+" V";$("cV2").textContent=n(v2,4)+" V";
+   st.textContent=v1>=0&&v2>=0?"两只输出 MOS 都导通，恒定 gm 总和近似有效。":"一个输出 MOS 已截止，需改用单管导通模型。";st.className="status "+(v1>=0&&v2>=0?"ok":"warn");
+ } else {
+   const Is=+$("cIs").value,Vt=+$("cVtThermal").value;
+   if(!(Is>0&&Iq>0&&Vt>0&&R>0)){st.textContent="请输入有效 BJT 参数。";st.className="status warn";return;}
+   const iqA=Iq/1000,vbe=Vt*Math.log(iqA/Is),vbb=2*vbe,gmS=2*iqA/Vt,loop=gmS*R,av=loop/(1+loop),il=1000*Vo/R;
+   $("cVbe").textContent=n(vbe,4)+" V"; $("cVbb").textContent=n(vbb,4)+" V"; $("cK3").textContent="N/A (BJT)";
+   $("cGm").textContent=n(gmS*1000,3)+" mS"; $("cAv").textContent=n(av,4); $("cIl").textContent=n(il,3)+" mA"; $("cV1").textContent="N/A"; $("cV2").textContent="N/A";
+   st.textContent="BJT 模式使用匹配晶体管 + 指数模型；VBB≈2VBE,Q。"; st.className="status ok";
+ }
 }
 ["aVcc","aVq","aIq","aRl"].forEach(id=>$(id).addEventListener("input",calcA));
 ["tTjmax","tTa","tPd","tJC","tCS","tSA"].forEach(id=>$(id).addEventListener("input",calcT));
 ["bVcc","bVp","bRl"].forEach(id=>$(id).addEventListener("input",calcB));
 ["fMode","fRl","fGm","fAvTarget"].forEach(id=>$(id).addEventListener("input",calcF));
-["cK","cIq","cVt","cIb","cRl","cVo"].forEach(id=>$(id).addEventListener("input",calcC));
+["cType","cK","cIq","cVt","cIb","cRl","cVo","cIs","cVtThermal"].forEach(id=>$(id).addEventListener("input",calcC));
 calcA();calcT();calcB();calcF();calcC();
 })();
 </script>
