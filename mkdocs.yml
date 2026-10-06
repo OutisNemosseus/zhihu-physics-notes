@@ -47,6 +47,7 @@ nav:
       - Continuous-to-Discrete Bandpass: signal-processing/continuous-to-discrete-bandpass.md
       - "Boulet × Osgood":
           - "Overview / 算子与交换图": signal-processing/boulet/index.md
+          - "Boulet × Lathi — 优先对应习题": signal-processing/boulet/lathi-priority-map.md
           - "Chapter 1 — Signals and Systems":
               - "1.2 — 系统与平移": signal-processing/boulet/1-2.md
               - "1.5 — 偶奇正交投影": signal-processing/boulet/1-5.md
