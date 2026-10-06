@@ -4,6 +4,8 @@
 
 另见：[Boulet × Lathi：优先对应习题](lathi-priority-map.md)，列出前三章九组值得配合 Lathi 第三版解答阅读的题目。
 
+[Boulet 前三章全部 34 题的 Lathi 对应题号](lathi-exercise-map.md)。每题均有独立页面；已有算子讲解的页面保留完整内容，其余页面目前列出对应题号。
+
 ## 按章节阅读
 
 | 章节 | 题目 | 核心操作 |

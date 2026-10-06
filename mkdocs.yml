@@ -48,21 +48,44 @@ nav:
       - "Boulet × Osgood":
           - "Overview / 算子与交换图": signal-processing/boulet/index.md
           - "Boulet × Lathi — 优先对应习题": signal-processing/boulet/lathi-priority-map.md
+          - "Boulet × Lathi — 全部对应题号": signal-processing/boulet/lathi-exercise-map.md
           - "Chapter 1 — Signals and Systems":
+              - "1.1 — Lathi 对应题号": signal-processing/boulet/1-1.md
               - "1.2 — 系统与平移": signal-processing/boulet/1-2.md
+              - "1.3 — Lathi 对应题号": signal-processing/boulet/1-3.md
+              - "1.4 — Lathi 对应题号": signal-processing/boulet/1-4.md
               - "1.5 — 偶奇正交投影": signal-processing/boulet/1-5.md
+              - "1.6 — Lathi 对应题号": signal-processing/boulet/1-6.md
+              - "1.7 — Lathi 对应题号": signal-processing/boulet/1-7.md
+              - "1.8 — Lathi 对应题号": signal-processing/boulet/1-8.md
+              - "1.9 — Lathi 对应题号": signal-processing/boulet/1-9.md
               - "1.10 — 基本算子与系统性质": signal-processing/boulet/1-10.md
+              - "1.11 — Lathi 对应题号": signal-processing/boulet/1-11.md
           - "Chapter 2 — Convolution":
+              - "2.1 — Lathi 对应题号": signal-processing/boulet/2-1.md
               - "2.2 — 基本阶跃响应": signal-processing/boulet/2-2.md
+              - "2.3 — Lathi 对应题号": signal-processing/boulet/2-3.md
+              - "2.4 — Lathi 对应题号": signal-processing/boulet/2-4.md
+              - "2.5 — Lathi 对应题号": signal-processing/boulet/2-5.md
               - "2.6 — 提前与负矩形": signal-processing/boulet/2-6.md
+              - "2.7 — Lathi 对应题号": signal-processing/boulet/2-7.md
               - "2.8 — 平移抵消": signal-processing/boulet/2-8.md
+              - "2.9 — Lathi 对应题号": signal-processing/boulet/2-9.md
               - "2.10 — 串联与并联": signal-processing/boulet/2-10.md
           - "Chapter 3 — Differential Systems":
               - "3.1 — 分布求导与直接通路": signal-processing/boulet/3-1.md
               - "3.2 — 一阶因子的串联": signal-processing/boulet/3-2.md
+              - "3.3 — Lathi 对应题号": signal-processing/boulet/3-3.md
+              - "3.4 — Lathi 对应题号": signal-processing/boulet/3-4.md
+              - "3.5 — Lathi 对应题号": signal-processing/boulet/3-5.md
               - "3.6 — 因子消去与稳定性": signal-processing/boulet/3-6.md
+              - "3.7 — Lathi 对应题号": signal-processing/boulet/3-7.md
+              - "3.8 — Lathi 对应题号": signal-processing/boulet/3-8.md
+              - "3.9 — Lathi 对应题号": signal-processing/boulet/3-9.md
               - "3.10 — 多项式除法与冲激": signal-processing/boulet/3-10.md
+              - "3.11 — Lathi 对应题号": signal-processing/boulet/3-11.md
               - "3.12 — 衰减正弦核": signal-processing/boulet/3-12.md
+              - "3.13 — Lathi 对应题号": signal-processing/boulet/3-13.md
   - ENGR 103:
       - Overview: engr103/index.md
       - ICA 1: engr103/ica-01.md
