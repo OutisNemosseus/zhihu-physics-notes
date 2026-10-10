@@ -114,6 +114,8 @@ Lathi 印刷页：327；原 PDF 页序：347
 
 ### 11 · Lathi 2.3-1：连续系统的特征方程、模态与冲激响应 {#exercise-2-3-1}
 
+[另页查看 (a)–(c) 完整解答与 SymPy / WASM 运行器](lathi-2-3-1-sympy.md)
+
 **对应主题：** Boulet 第3章：Impulse Response of a Differential LTI System，p.101；Characteristic Polynomials and Stability，p.112
 
 Lathi 印刷页：224、225；原 PDF 页序：244、245

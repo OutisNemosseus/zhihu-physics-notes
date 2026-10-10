@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline' 'wasm-unsafe-eval' https://cdn.jsdelivr.net; worker-src blob:; connect-src https://cdn.jsdelivr.net; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Lathi 2.3-1 · SymPy / WASM 运行器</title>
+<style>
+:root{color-scheme:dark;--bg:#101827;--panel:#182338;--line:#3f516b;--text:#edf3ff;--muted:#b5c4dc;--accent:#7dd3fc}*{box-sizing:border-box}body{margin:0;padding:22px;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1100px;margin:auto;min-width:0}h1{font-size:clamp(21px,4vw,28px);margin:0 0 5px;line-height:1.3}h2,label{font-size:16px;font-weight:650;margin:14px 0 6px;display:block}p{margin:6px 0 12px}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.08em;font-weight:700}.muted{color:var(--muted);font-size:13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar button{font:inherit;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--text);padding:9px 13px;cursor:pointer;min-height:44px}button.primary{background:#75d4f8;color:#072231;border-color:#75d4f8;font-weight:700}button:disabled{opacity:.45;cursor:default}button:focus-visible,textarea:focus-visible,pre:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}#status{border-left:3px solid var(--accent);padding:8px 12px;background:var(--panel);font-size:14px;overflow-wrap:anywhere}#status[data-state="error"]{border-color:#fca5a5}#status[data-state="done"]{border-color:#86efac}textarea{display:block;resize:vertical;width:100%;height:370px;min-height:200px;max-height:900px;background:#0a1221;color:#e1eafa;border:1px solid var(--line);border-radius:8px;padding:14px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;white-space:pre;overflow:auto}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;min-height:160px;max-height:320px;background:#0a1221;border:1px solid var(--line);border-radius:8px;padding:14px;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}summary{cursor:pointer;color:var(--accent);padding:8px 0}details{font-size:13px;color:var(--muted)}#runtime{margin-top:8px;overflow-wrap:anywhere}kbd{border:1px solid var(--line);border-radius:3px;padding:0 4px}a{color:var(--accent)}@media(max-width:520px){body{padding:14px}textarea{height:340px;font-size:12px}.toolbar{gap:7px}.toolbar button{flex:1 1 45%;padding:9px 8px;font-size:13px}pre{font-size:12px;max-height:310px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>
+</head>
+<body><main>
+<div class="eyebrow">BROWSER PYTHON · WEBASSEMBLY · WEB WORKER</div>
+<h1>Lathi 2.3-1 · SymPy 验算</h1>
+<p class="muted">求特征根、实模态和因果冲激响应。完整保留 (b) 的 2δ(t)，并逐项验证原点处的分布等式。</p>
+<div id="status" role="status" aria-live="polite" data-state="idle">尚未加载。点击“加载并运行”下载 Python / SymPy。</div>
+<div id="runtime" class="muted">固定发行版：Pyodide 0.27.7；实际 Python / SymPy 版本将在加载后显示</div>
+<div class="toolbar">
+<button id="run" class="primary" type="button">加载并运行</button>
+<button id="stop" type="button" disabled>停止 / 重启环境</button>
+<button id="reset" type="button">恢复示例并重置</button>
+</div>
+<label for="code">Python 代码 <span class="muted">（可编辑，Ctrl / ⌘ + Enter 运行）</span></label>
+<textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"># Lathi 2.3-1 (a)-(c): exact causal, initially-at-rest solutions.
+# t must be REAL, not positive: otherwise DiracDelta(t) can simplify to zero.
+import sympy as sp
+s = sp.symbols(&#x27;s&#x27;)
+t = sp.symbols(&#x27;t&#x27;, real=True)
+tau = sp.symbols(&#x27;tau&#x27;, positive=True)  # only for the regular t&gt;0 part
+
+systems = {
+    &#x27;a&#x27;: (s**2 + 1, 2*s),
+    &#x27;b&#x27;: (s**3 + s, 2*s**3 + 1),
+    &#x27;c&#x27;: (s**2 + 2*s + 5, sp.Integer(8)),
+}
+expected = {
+    &#x27;a&#x27;: (sp.Integer(0), 2*sp.cos(t)),
+    &#x27;b&#x27;: (sp.Integer(2), 1-sp.cos(t)-2*sp.sin(t)),
+    &#x27;c&#x27;: (sp.Integer(0), 4*sp.exp(-t)*sp.sin(2*t)),
+}
+
+def operator(Q, f):
+    return sp.simplify(sum(c*sp.diff(f,t,k[0]) for k,c in sp.Poly(Q,s).terms()))
+
+def real_modes(roots):
+    modes = []
+    for root, multiplicity in roots.items():
+        a, b = sp.simplify(sp.re(root)), sp.simplify(sp.im(root))
+        for k in range(multiplicity):
+            if b == 0:
+                modes.append(t**k*sp.exp(a*t))
+            elif b.is_positive:  # one representative of each conjugate pair
+                modes += [t**k*sp.exp(a*t)*sp.cos(b*t),
+                          t**k*sp.exp(a*t)*sp.sin(b*t)]
+    return modes
+
+print(&#x27;SymPy&#x27;, sp.__version__, &#x27;| causal, initially at rest&#x27;)
+print(&#x27;u(t) = Heaviside(t); delta(t) = DiracDelta(t); I = j&#x27;)
+for label, (Q,P) in systems.items():
+    H = sp.cancel(P/Q)
+    roots = sp.roots(Q,s)
+    modes = real_modes(roots)
+    polynomial, remainder = sp.div(P,Q,s)
+    # Inverse-transform the polynomial explicitly: s^k maps to delta^(k).
+    singular = sum(c*sp.DiracDelta(t,k[0])
+                   for k,c in sp.Poly(polynomial,s).terms())
+    regular = sp.simplify(sp.inverse_laplace_transform(remainder/Q,s,tau).subs(tau,t))
+    h = singular + regular*sp.Heaviside(t)
+
+    # Three independent exact checks, including every delta derivative.
+    assert all(operator(Q, mode) == 0 for mode in modes)
+    assert sp.simplify(polynomial + sp.laplace_transform(regular,t,s,noconds=True)-H) == 0
+    assert operator(Q,regular) == 0
+    jumps = {}
+    for (n,), c in sp.Poly(Q,s).terms():
+        for k in range(n):
+            jumps[k] = jumps.get(k,0) + c*sp.diff(regular,t,n-1-k).subs(t,0)
+    singular_transform = sp.expand(Q*polynomial + sum(c*s**k for k,c in jumps.items()))
+    assert sp.simplify(singular_transform-P) == 0
+    d, f = expected[label]
+    assert sp.simplify(polynomial-d) == 0 and sp.simplify(regular-f) == 0
+
+    print(&#x27;\n(&#x27; + label + &#x27;)&#x27;)
+    print(&#x27;Characteristic equation:&#x27;, sp.factor(Q), &#x27;= 0&#x27;)
+    print(&#x27;Roots (multiplicity):&#x27;, roots)
+    print(&#x27;Real mode basis:&#x27;, modes)
+    print(&#x27;H(s) =&#x27;, H)
+    print(&#x27;Partial fractions:&#x27;, sp.apart(H,s))
+    print(&#x27;Polynomial / direct part:&#x27;, polynomial)
+    print(&#x27;h(t) =&#x27;, h)
+    print(&#x27;Q(D)h = P(D)delta: singular polynomial =&#x27;, singular_transform)
+    print(&#x27;PASS: modes, Laplace, full distribution equation, expected answer&#x27;)
+print(&#x27;\nALL 3 CASES PASSED&#x27;)
+</textarea>
+<p id="editor-help" class="muted">t 使用 real=True。完整分布不要声明 t&gt;0，否则 δ(t) 可能被误消去。代码不会自动保存。</p>
+<h2 id="output-heading">运行输出</h2>
+<pre id="output" tabindex="0" aria-labelledby="output-heading">运行后，精确符号结果和 PASS / 错误信息会显示在这里。</pre>
+<details><summary>加载、隔离与超时说明</summary><p>首次加载需联网，从官方文档指定的 jsDelivr 地址下载 Pyodide 0.27.7 和其发行版内的 SymPy。计算在本浏览器的独立 Worker 中执行，不需要服务器计算或 API 密钥。嵌入时 iframe 仅允许脚本，不授予同源权限；运行器的网络访问限定为运行时 CDN。</p><p>加载限时 120 秒、单次计算限时 30 秒。停止会终止 Worker，保留编辑内容；下次运行重建环境。恢复示例会覆盖编辑内容并清空输出。每次运行使用新的 Python 全局命名空间。请仅运行自己信任的代码。</p></details>
+<noscript>此运行器需要启用 JavaScript。上方静态解析不依赖此运行器。</noscript>
+</main>
+<script id="worker-source" type="text/plain">
+let pyodide;
+let running = false;
+let runId = 0;
+let outputLength = 0;
+function emit(text, stream = 'stdout') {
+  if (outputLength >= 50000) return;
+  let safe = String(text).slice(0, 50000 - outputLength);
+  outputLength += safe.length + 1;
+  self.postMessage({type: 'output', id: runId, text: safe, stream});
+  if (outputLength >= 50000) self.postMessage({type:'output',id:runId,text:'[输出达到 50,000 字符限制，后续输出已省略]'});
+}
+self.onmessage = async ({data}) => {
+  if (data.type === 'init') {
+    try {
+      self.postMessage({type:'loading',text:'正在下载 Python / WebAssembly 运行时…'});
+      importScripts('https://cdn.jsdelivr.net/pyodide/v0.27.7/full/pyodide.js');
+      pyodide = await loadPyodide({indexURL:'https://cdn.jsdelivr.net/pyodide/v0.27.7/full/'});
+      self.postMessage({type:'loading',text:'Python 已启动，正在加载 SymPy…'});
+      await pyodide.loadPackage('sympy');
+      pyodide.setStdout({batched:text=>emit(text)});
+      pyodide.setStderr({batched:text=>emit(text,'stderr')});
+      const versions = pyodide.runPython("import sys, sympy\n'Python ' + sys.version.split()[0] + ' · SymPy ' + sympy.__version__");
+      self.postMessage({type:'ready',versions:'Pyodide ' + pyodide.version + ' · ' + versions});
+    } catch(error) {
+      self.postMessage({type:'load-error',text:String(error.message || error)});
+    }
+  } else if (data.type === 'run' && pyodide && !running) {
+    running = true; runId = data.id; outputLength = 0;
+    let namespace;
+    try {
+      const dict = pyodide.globals.get('dict');
+      namespace = dict(); dict.destroy();
+      namespace.set('__name__','__main__');
+      const result = await pyodide.runPythonAsync(data.code,{globals:namespace});
+      if (result !== undefined && result !== null) {
+        emit(String(result));
+        if (typeof result.destroy === 'function') result.destroy();
+      }
+      self.postMessage({type:'done',id:runId});
+    } catch(error) {
+      self.postMessage({type:'error',id:runId,text:String(error.message || error)});
+    } finally {
+      if (namespace) namespace.destroy();
+      running = false;
+    }
+  }
+};
+</script>
+<script>
+(() => {
+'use strict';
+const editor = document.getElementById('code');
+const original = editor.value;
+const output = document.getElementById('output');
+const status = document.getElementById('status');
+const runtime = document.getElementById('runtime');
+const run = document.getElementById('run');
+const stop = document.getElementById('stop');
+const reset = document.getElementById('reset');
+let worker = null, ready = false, busy = false, timer = null;
+let generation = 0, id = 0, pendingCode = '', started = 0;
+function message(text, state) { status.textContent=text; status.dataset.state=state; }
+function setBusy(value) { busy=value; run.disabled=value; stop.disabled=!worker; editor.readOnly=value; }
+function release() {
+  clearTimeout(timer); timer=null;
+  generation++;
+  if(worker) worker.terminate();
+  worker=null; ready=false; pendingCode='';
+  run.textContent='加载并运行';
+  setBusy(false);
+  runtime.textContent='环境已释放；下次运行将重新加载（浏览器可能已有下载缓存）';
+}
+function fail(text) {
+  release(); message(text,'error');
+}
+function append(text) {
+  const remaining=52000-output.textContent.length;
+  if(remaining>0) output.textContent += String(text).slice(0,remaining)+'\n';
+}
+function execute() {
+  clearTimeout(timer);
+  started=performance.now();
+  message('正在进行精确符号运算… 可随时停止（最长 30 秒）','running');
+  timer=setTimeout(()=>fail('计算超过 30 秒，已安全停止。可修改代码后重新运行。'),30000);
+  worker.postMessage({type:'run',id,code:pendingCode});
+}
+function start() {
+  if(busy) return;
+  if(!editor.value.trim()) { message('请先输入 Python 代码。','error'); return; }
+  pendingCode=editor.value; id++; output.textContent='';
+  if(ready) {setBusy(true);execute();return;}
+  message('正在加载 Pyodide / SymPy… 首次下载可能需要一会儿（最长 120 秒）','loading');
+  const current=++generation;
+  try {
+    const blob=new Blob([document.getElementById('worker-source').textContent],{type:'text/javascript'});
+    const url=URL.createObjectURL(blob);
+    try { worker=new Worker(url); } finally { URL.revokeObjectURL(url); }
+    setBusy(true);
+    timer=setTimeout(()=>fail('加载超过 120 秒，已停止。请检查网络后重试；静态答案仍可阅读。'),120000);
+    worker.onmessage=({data})=>{
+      if(current!==generation) return;
+      if(data.type==='loading') message(data.text,'loading');
+      else if(data.type==='ready') {
+        ready=true; runtime.textContent=data.versions;
+        run.textContent='运行代码'; execute();
+      } else if(data.type==='load-error') {
+        append(data.text);fail('运行时加载失败。请检查 CDN 网络访问后重试；错误详情见输出。');
+      } else if(data.id===id && data.type==='output') append(data.text);
+      else if(data.id===id && (data.type==='done'||data.type==='error')) {
+        clearTimeout(timer);timer=null;setBusy(false);
+        if(data.type==='error') {
+          append(data.text);message('代码执行出错。修改代码后可重新运行，或恢复示例。','error');
+        } else {
+          if(!output.textContent) output.textContent='执行完成（无打印输出）。';
+          message('运行完成 · '+((performance.now()-started)/1000).toFixed(2)+' 秒。可修改后再次运行。','done');
+        }
+      }
+    };
+    worker.onerror=event=>{
+      if(current!==generation) return;
+      append(event.message||'Web Worker error');fail('Web Worker 启动或执行失败。错误详情见输出，可重试。');
+    };
+    worker.postMessage({type:'init'});
+  } catch(error) {append(String(error));fail('浏览器未能创建 Web Worker，请使用支持 WebAssembly 的现代浏览器。');}
+}
+run.addEventListener('click',start);
+stop.addEventListener('click',()=>{release();message('已停止并释放环境，保留当前代码。点击“加载并运行”重新开始。','idle');});
+reset.addEventListener('click',()=>{release();editor.value=original;output.textContent='已恢复示例，等待运行。';message('已恢复 (a)–(c) 示例并重置环境。','idle');});
+editor.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();start();}});
+window.addEventListener('pagehide',release);
+})();
+</script>
+</body></html>
