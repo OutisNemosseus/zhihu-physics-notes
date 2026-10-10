@@ -49,6 +49,7 @@ nav:
           - "Overview / 算子与交换图": signal-processing/boulet/index.md
           - "Boulet × Lathi — 优先对应习题": signal-processing/boulet/lathi-priority-map.md
           - "Boulet × Lathi — 全部对应题号": signal-processing/boulet/lathi-exercise-map.md
+          - "Boulet × Lathi — 前四章20题（无答案）": signal-processing/boulet/lathi-20-exercises.md
           - "Chapter 1 — Signals and Systems":
               - "1.1 — Lathi 对应题号": signal-processing/boulet/1-1.md
               - "1.2 — 系统与平移": signal-processing/boulet/1-2.md
