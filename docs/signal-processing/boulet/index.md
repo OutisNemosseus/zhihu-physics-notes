@@ -1,6 +1,6 @@
 # Boulet × Osgood：第 1–3 章的算子与交换图
 
-**新增练习：** [Boulet 前四章 × Lathi：20 道原题（每章 5 题，无答案）](lathi-20-exercises.md)，附完整 PDF 下载。
+**配套练习集：** [第 1 组 20 题](lathi-20-exercises.md) · [第 2 组 20 题](lathi-20-exercises-batch-02.md)。每组按 Boulet 前四章各选 5 道 Lathi 原题，附独立 PDF 下载，不含答案。
 
 这组讲解把 Boulet 的十二道习题与 Osgood 的卷积、分布、正交投影和 LTI 算子观点联系起来。每题保留完整计算、成立条件和核对方法。题意采用重述，图由公式重新绘制；交换图是根据 Osgood 的算子关系制作的学习图。
 
