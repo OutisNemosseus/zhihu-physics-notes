@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="590" viewBox="0 0 1040 590" role="img" aria-labelledby="title desc">
+  <title id="title">Series RC loop with an unknown capacitance and two voltage readings</title>
+  <desc id="desc">A constant 10 volt ideal source, positive at its upper terminal, connects through a 500 ohm resistor to the upper plate of a capacitor. Capacitance C is an unknown positive constant in farads. The capacitor lower plate returns to the source negative terminal on the common zero volt wire. Current i is defined clockwise into the upper capacitor plate. Voltage v is upper plate minus lower plate; v at zero seconds is 2 volts and v at four seconds is 6 volts. The loop remains connected for time at least zero seconds.</desc>
+  <defs>
+    <marker id="de10-arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#156f7a"/></marker>
+  </defs>
+  <rect width="1040" height="590" fill="#fffdf8"/>
+  <g font-family="DejaVu Sans, sans-serif" fill="#183044">
+    <text x="40" y="44" font-size="25" font-weight="700">Estimate the capacitance from a voltage reading</text>
+    <text x="40" y="76" font-size="17">One connected series loop · ideal components · t ≥ 0 s</text>
+    <g stroke="#183044" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M220 215 V164 H396"/>
+      <path d="M396 164 l14 -18 l22 36 l22 -36 l22 36 l22 -36 l22 36 l16 -18"/>
+      <path d="M536 164 H768 V250"/>
+      <path d="M721 250 H815 M721 276 H815"/>
+      <path d="M768 276 V381 H220 V305"/>
+      <circle cx="220" cy="260" r="45"/>
+      <path d="M220 381 V400 M198 400 H242 M205 411 H235 M212 422 H228"/>
+    </g>
+    <text x="212" y="248" font-size="26">+</text>
+    <text x="212" y="288" font-size="27">−</text>
+    <text x="55" y="248" font-size="21" font-weight="700">E = 10 V</text>
+    <text x="55" y="278" font-size="16">constant</text>
+    <text x="55" y="303" font-size="16">ideal source</text>
+    <text x="401" y="128" font-size="21" font-weight="700">R = 500 Ω</text>
+    <path d="M596 127 H708" stroke="#156f7a" stroke-width="3" fill="none" marker-end="url(#de10-arrow)"/>
+    <text x="595" y="106" font-size="18" fill="#156f7a">i(t), clockwise</text>
+    <text x="685" y="243" font-size="28">+</text>
+    <text x="685" y="291" font-size="28">−</text>
+    <text x="625" y="266" font-size="21">v(t)</text>
+    <text x="836" y="246" font-size="20" font-weight="700">C unknown</text>
+    <text x="836" y="274" font-size="17">C &gt; 0 F</text>
+    <text x="836" y="305" font-size="17">v(0) = 2 V</text>
+    <text x="836" y="332" font-size="17">v(4 s) = 6 V</text>
+    <text x="271" y="414" font-size="17">Common return · 0 V reference</text>
+    <rect x="40" y="449" width="960" height="98" rx="12" fill="#edf5f5"/>
+    <text x="61" y="479" font-size="18">Voltage reference: v = upper-plate potential − lower-plate potential</text>
+    <text x="61" y="507" font-size="18">Loop model: Ri + v = 10 V · Capacitor model: i = C dv/dt</text>
+    <text x="61" y="534" font-size="17">The measurement draws no current; all three components stay connected</text>
+    <text x="40" y="576" font-size="13" fill="#5a6c76">Original practice diagram · MTH 256 · Batch 10, Question 10 · Not a course-provided figure</text>
+  </g>
+</svg>
