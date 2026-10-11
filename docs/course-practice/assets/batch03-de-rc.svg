@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 345" role="img" aria-labelledby="title desc">
+<title id="title">Precharged series RC circuit with a ramped voltage source</title>
+<desc id="desc">A single series loop: the source at left has its positive terminal at the top. A 50 ohm resistor is in the top wire. Clockwise reference current enters the top positive plate of the 0.040 farad capacitor at right. The bottom wire returns to the negative source terminal. Capacitor voltage v of t is positive top relative to bottom and initially equals 6 volts. The source E of t is specified in the problem.</desc>
+<defs><marker id="batch03-de-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#17615a"/></marker></defs>
+<rect x="1" y="1" width="678" height="343" rx="18" fill="#fbfcfe" stroke="#c9d4df"/>
+<g fill="none" stroke="#26364a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M105 124 V75 H188 M322 75 H445 V143 M445 159 V264 H105 V196"/>
+ <circle cx="105" cy="160" r="36"/>
+ <path d="M188 75 H201 L211 63 L229 87 L247 63 L265 87 L283 63 L301 87 L311 75 H322"/>
+ <path d="M411 143 H479 M411 159 H479"/>
+ <path d="M98 149 H112 M105 142 V156 M98 178 H112"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" fill="#26364a" font-size="19">
+ <text x="255" y="42" text-anchor="middle">R = 50 Ω</text>
+ <text x="39" y="166" text-anchor="middle">E(t)</text>
+ <text x="498" y="146">C = 0.040 F</text>
+ <text x="498" y="177">v(0) = 6 V</text>
+ <text x="385" y="136" text-anchor="middle">+</text>
+ <text x="385" y="161" text-anchor="middle" font-style="italic">v(t)</text>
+ <text x="385" y="187" text-anchor="middle">−</text>
+ <text x="276" y="294" text-anchor="middle" font-size="16" fill="#5d6b7c">Return wire</text>
+ <text x="340" y="325" text-anchor="middle" font-size="16" fill="#5d6b7c">Positive current enters the capacitor's positive plate</text>
+</g>
+<path d="M339 75 H414" fill="none" stroke="#17615a" stroke-width="3.5" marker-end="url(#batch03-de-arrow)"/>
+<text x="373" y="48" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" font-style="italic" fill="#17615a">i(t)</text>
+</svg>
