@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="480" viewBox="0 0 1000 480" role="img" aria-labelledby="title desc">
+<title id="title">Series RC circuit with a 6 volt source and an initially 18 volt capacitor</title>
+<desc id="desc">A single rectangular loop has an ideal 6 volt source on the left, positive above and negative below; a 400 ohm resistor across the top; and a 0.0050 farad capacitor on the right. Clockwise reference current points toward the upper capacitor plate. Capacitor voltage is positive at the upper plate. The initial capacitor voltage is 18 volts. The bottom wire returns to the source.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L8 4 L0 8 Z" fill="#195e88"/></marker></defs>
+<rect x="0" y="0" width="1000" height="480" rx="20" fill="#f8fafc"/>
+<text x="500" y="39" text-anchor="middle" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#14263d">Precharged capacitor, lower constant source</text>
+<g stroke="#26384b" stroke-width="3.5" fill="none" stroke-linejoin="round" stroke-linecap="round">
+<path d="M200 218 V130 H355"/>
+<path d="M355 130 L367 112 L391 148 L415 112 L439 148 L463 112 L487 148 L511 112 L535 130 H700 V240"/>
+<circle cx="200" cy="260" r="42"/>
+<path d="M200 302 V370 H700 V270"/>
+<path d="M654 240 H746 M654 270 H746"/>
+</g>
+<g fill="#14263d" font-family="Arial,sans-serif">
+<text x="445" y="90" text-anchor="middle" font-size="21">R = 400 Ω</text>
+<text x="85" y="252" text-anchor="middle" font-size="21">Ideal source</text>
+<text x="85" y="281" text-anchor="middle" font-size="22">E = 6 V</text>
+<text x="200" y="250" text-anchor="middle" font-size="24">+</text>
+<text x="200" y="284" text-anchor="middle" font-size="28">−</text>
+<text x="790" y="248" font-size="21">C = 0.0050 F</text>
+<text x="790" y="281" font-size="19">v(0) = 18 V</text>
+<text x="752" y="217" font-size="24">+</text>
+<text x="753" y="310" font-size="28">−</text>
+<text x="775" y="193" font-size="20">v(t)</text>
+<text x="500" y="418" text-anchor="middle" font-size="19">One series loop · reference current is clockwise</text>
+<text x="500" y="448" text-anchor="middle" font-size="18">Source accepts current in either direction · t ≥ 0</text>
+</g>
+<g fill="none" stroke="#195e88" stroke-width="2.5" marker-end="url(#arrow)"><path d="M572 109 H654"/><path d="M673 167 V214"/></g>
+<text x="610" y="93" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" fill="#195e88">i(t)</text>
+</svg>
