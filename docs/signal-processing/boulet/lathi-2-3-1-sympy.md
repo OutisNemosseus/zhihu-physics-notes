@@ -11,13 +11,19 @@ title: "Lathi 2.3-1：特征模态与冲激响应 · SymPy / WASM"
 !!! note "解题约定"
     以下求**因果、初始静止（零状态）**系统的冲激响应。\(D=d/dt\)，\(u(t)\) 为单位阶跃，\(\delta(t)\) 为单位冲激。只有微分方程而不指定因果性或边界条件，不能唯一确定双边冲激响应。所有最终 \(h(t)\) 都用实数项表示。
 
-## 先看答案
+## 直接答案：冲激输入对应的解
 
-| 小题 | 特征方程 | 一组实特征模态 | 因果冲激响应 \(h(t)\) |
-| --- | --- | --- | --- |
-| (a) | \(\lambda^2+1=0\) | \(\cos t,\ \sin t\) | \(2\cos t\,u(t)\) |
-| (b) | \(\lambda(\lambda^2+1)=0\) | \(1,\ \cos t,\ \sin t\) | \(2\delta(t)+(1-\cos t-2\sin t)u(t)\) |
-| (c) | \((\lambda+1)^2+4=0\) | \(e^{-t}\cos2t,\ e^{-t}\sin2t\) | \(4e^{-t}\sin2t\,u(t)\) |
+这里的输入是 \(x(t)=\delta(t)\)，初始静止、因果条件下 \(y(t)=h(t)\)。对于任意输入，零状态解为 \(y=h*x\)；有非零初始条件时还需加上自然响应。
+
+<style>
+.lathi-solution-card{padding:14px 20px;margin:14px 0;border:1px solid #6b86a8;border-radius:10px;background:var(--md-code-bg-color)}.lathi-solution-card h3{margin:0!important}.lathi-solution-card .arithmatex{font-size:1.15em}
+</style>
+
+<div class="lathi-solution-card"><h3>(a)</h3><div class="arithmatex">\[h_{a}{\left(t \right)} = 2 u{\left(t \right)} \cos{\left(t \right)}\]</div></div>
+
+<div class="lathi-solution-card"><h3>(b)</h3><div class="arithmatex">\[h_{b}{\left(t \right)} = \left(- 2 \sin{\left(t \right)} - \cos{\left(t \right)} + 1\right) u{\left(t \right)} + 2 \delta\left(t\right)\]</div></div>
+
+<div class="lathi-solution-card"><h3>(c)</h3><div class="arithmatex">\[h_{c}{\left(t \right)} = 4 u{\left(t \right)} e^{- t} \sin{\left(2 t \right)}\]</div></div>
 
 !!! warning "(b) 的直接通路不能丢"
     \(H_b(s)\) 的多项式部分为 \(2\)，对应 \(2\delta(t)\)。它表示面积（权重）为 2 的冲激，不是有限高度的点。只画 \(t>0\) 的数值曲线会漏掉它，也不能据此验证完整冲激响应。
@@ -111,7 +117,7 @@ H_b(s)&=\frac{2s^3+1}{s(s^2+1)}\\
 
 因果 ROC 为 \(\operatorname{Re}s>0\)。\(\lim_{s\to+\infty}H_b(s)=2\) 也验证了直接通路系数。
 
-### 为什么仅检查 \(t>0\) 不够？
+### 为什么仅检查 t > 0 不够？
 
 设 \(f=1-\cos t-2\sin t\)，则
 
@@ -178,9 +184,9 @@ H_c(s)=\frac8{(s+1)^2+4}
 
 ## 在线 SymPy / WASM {#sympy-wasm}
 
-点击“加载并运行”。Python 与 SymPy 在下方 iframe 内的 Web Worker 中运行，不需要服务器计算或 API 密钥。首次会从 Pyodide 官方文档指定的 jsDelivr 发行地址下载 **Pyodide 0.27.7** 及该发行版附带的 SymPy；下载速度取决于网络。
+上方先显示已经排版的答案；点击“加载并运行”后，三张答案卡片会更新为 **SymPy 实际计算、`sp.latex()` 生成、MathJax 渲染**的公式。代码与特征根/验证日志默认折叠。Python 与 SymPy 在下方 iframe 内的 Web Worker 中运行，不需要服务器计算或 API 密钥。首次会从 Pyodide 官方文档指定的 jsDelivr 发行地址下载 **Pyodide 0.27.7** 及该发行版附带的 SymPy；下载速度取决于网络。
 
-可编辑代码、重复运行、停止运算或恢复示例。**静态答案与推导无需等待运行时下载。** 加载超过 120 秒、计算超过 30 秒会自动停止；网络恢复后可重试。代码不会自动保存，请自行下载需要保留的版本。
+展开“查看 / 编辑 Python 代码”可修改代码，也可重复运行、停止运算或恢复示例。**静态答案与推导无需等待运行时下载。** 加载超过 120 秒、计算超过 30 秒会自动停止；网络恢复后可重试。代码不会自动保存，请自行下载需要保留的版本。
 
 [单独打开运行器](../../tools/lathi-2-3-1-sympy.html){ .md-button target="_blank" rel="noopener" } [下载示例 .py](../../assets/python/lathi-2-3-1.py){ .md-button download }
 

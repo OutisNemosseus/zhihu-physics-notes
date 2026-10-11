@@ -1,6 +1,8 @@
 # Lathi 2.3-1 (a)-(c): exact causal, initially-at-rest solutions.
 # t must be REAL, not positive: otherwise DiracDelta(t) can simplify to zero.
 import sympy as sp
+import json
+answers_latex = {}
 s = sp.symbols('s')
 t = sp.symbols('t', real=True)
 tau = sp.symbols('tau', positive=True)  # only for the regular t>0 part
@@ -57,6 +59,10 @@ for label, (Q,P) in systems.items():
     d, f = expected[label]
     assert sp.simplify(polynomial-d) == 0 and sp.simplify(regular-f) == 0
 
+    # Export the computed solution as LaTeX, with u(t) for the unit step.
+    display_h = h.xreplace({sp.Heaviside(t): sp.Function('u')(t)})
+    answers_latex[label] = sp.latex(sp.Eq(sp.Function('h_' + label)(t), display_h, evaluate=False))
+
     print('\n(' + label + ')')
     print('Characteristic equation:', sp.factor(Q), '= 0')
     print('Roots (multiplicity):', roots)
@@ -68,3 +74,6 @@ for label, (Q,P) in systems.items():
     print('Q(D)h = P(D)delta: singular polynomial =', singular_transform)
     print('PASS: modes, Laplace, full distribution equation, expected answer')
 print('\nALL 3 CASES PASSED')
+
+# The iframe reads this JSON after a successful execution.
+answers_latex_json = json.dumps(answers_latex)

@@ -7,23 +7,29 @@
 <title>Lathi 2.3-1 · SymPy / WASM 运行器</title>
 <style>
 :root{color-scheme:dark;--bg:#101827;--panel:#182338;--line:#3f516b;--text:#edf3ff;--muted:#b5c4dc;--accent:#7dd3fc}*{box-sizing:border-box}body{margin:0;padding:22px;background:var(--bg);color:var(--text);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}main{max-width:1100px;margin:auto;min-width:0}h1{font-size:clamp(21px,4vw,28px);margin:0 0 5px;line-height:1.3}h2,label{font-size:16px;font-weight:650;margin:14px 0 6px;display:block}p{margin:6px 0 12px}.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.08em;font-weight:700}.muted{color:var(--muted);font-size:13px}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.toolbar button{font:inherit;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--text);padding:9px 13px;cursor:pointer;min-height:44px}button.primary{background:#75d4f8;color:#072231;border-color:#75d4f8;font-weight:700}button:disabled{opacity:.45;cursor:default}button:focus-visible,textarea:focus-visible,pre:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}#status{border-left:3px solid var(--accent);padding:8px 12px;background:var(--panel);font-size:14px;overflow-wrap:anywhere}#status[data-state="error"]{border-color:#fca5a5}#status[data-state="done"]{border-color:#86efac}textarea{display:block;resize:vertical;width:100%;height:370px;min-height:200px;max-height:900px;background:#0a1221;color:#e1eafa;border:1px solid var(--line);border-radius:8px;padding:14px;font:13px/1.55 ui-monospace,SFMono-Regular,Consolas,monospace;tab-size:4;white-space:pre;overflow:auto}pre{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;overflow:auto;min-height:160px;max-height:320px;background:#0a1221;border:1px solid var(--line);border-radius:8px;padding:14px;font:13px/1.65 ui-monospace,SFMono-Regular,Consolas,monospace}summary{cursor:pointer;color:var(--accent);padding:8px 0}details{font-size:13px;color:var(--muted)}#runtime{margin-top:8px;overflow-wrap:anywhere}kbd{border:1px solid var(--line);border-radius:3px;padding:0 4px}a{color:var(--accent)}@media(max-width:520px){body{padding:14px}textarea{height:340px;font-size:12px}.toolbar{gap:7px}.toolbar button{flex:1 1 45%;padding:9px 8px;font-size:13px}pre{font-size:12px;max-height:310px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+.answer-card{padding:12px 16px;margin:12px 0;border:1px solid var(--line);border-radius:10px;background:var(--panel)}.answer-card h2{margin:0;font-size:14px;color:var(--accent)}.formula{font-size:clamp(17px,2.6vw,24px);overflow-x:auto;overflow-y:hidden;padding:10px 0;min-height:70px}.formula math{margin:6px 0}.formula mjx-container{margin:6px 0!important}.formula svg{max-width:none}#answer-source{min-height:22px}@media(max-width:520px){.answer-card{padding:10px}.formula{font-size:16px}}
 </style>
 </head>
 <body><main>
 <div class="eyebrow">BROWSER PYTHON · WEBASSEMBLY · WEB WORKER</div>
-<h1>Lathi 2.3-1 · SymPy 验算</h1>
-<p class="muted">求特征根、实模态和因果冲激响应。完整保留 (b) 的 2δ(t)，并逐项验证原点处的分布等式。</p>
-<div id="status" role="status" aria-live="polite" data-state="idle">尚未加载。点击“加载并运行”下载 Python / SymPy。</div>
+<h1>Lathi 2.3-1 · 直接看解</h1>
+<p class="muted">以下是输入 x(t)=δ(t) 时、初始静止的因果解 y(t)=h(t)。一般输入的零状态解为 y=h*x；下列公式不是任意输入的通解。</p>
+<section id="answers" aria-label="三题的因果冲激响应" data-source="preset"><section class="answer-card"><h2>(a)</h2><div class="formula" id="answer-a" data-latex="h_{a}{\left(t \right)} = 2 u{\left(t \right)} \cos{\left(t \right)}" data-rendered="native-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>h</mi><mi>a</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mrow><mn>2</mn><mo>&InvisibleTimes;</mo><mrow><mi>u</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow><mo>&InvisibleTimes;</mo><mrow><mi>cos</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow></mrow></mrow></math></div></section><section class="answer-card"><h2>(b)</h2><div class="formula" id="answer-b" data-latex="h_{b}{\left(t \right)} = \left(- 2 \sin{\left(t \right)} - \cos{\left(t \right)} + 1\right) u{\left(t \right)} + 2 \delta\left(t\right)" data-rendered="native-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>h</mi><mi>b</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mrow><mrow><mrow><mo>(</mo><mrow><mrow><mo>-</mo><mn>2</mn><mo>&InvisibleTimes;</mo><mrow><mi>sin</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow></mrow><mo>-</mo><mrow><mi>cos</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow><mo>+</mo><mn>1</mn></mrow><mo>)</mo></mrow><mo>&InvisibleTimes;</mo><mrow><mi>u</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow></mrow><mo>+</mo><mrow><mn>2</mn><mo>&InvisibleTimes;</mo><mrow><mi>diracdelta</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow></mrow></mrow></mrow></math></div></section><section class="answer-card"><h2>(c)</h2><div class="formula" id="answer-c" data-latex="h_{c}{\left(t \right)} = 4 u{\left(t \right)} e^{- t} \sin{\left(2 t \right)}" data-rendered="native-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mrow><msub><mi>h</mi><mi>c</mi></msub><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mrow><mfrac><mrow><mn>4</mn><mo>&InvisibleTimes;</mo><mrow><mi>u</mi><mrow><mo>(</mo><mi>t</mi><mo>)</mo></mrow></mrow><mo>&InvisibleTimes;</mo><mrow><mi>sin</mi><mrow><mo>(</mo><mrow><mn>2</mn><mo>&InvisibleTimes;</mo><mi>t</mi></mrow><mo>)</mo></mrow></mrow></mrow><msup><mi>&ExponentialE;</mi><mi>t</mi></msup></mfrac></mrow></mrow></math></div></section></section>
+<p id="answer-source" class="muted" role="status">预置解析答案。运行后由 SymPy 重新计算并生成 LaTeX。</p>
+<div id="status" role="status" aria-live="polite" data-state="idle">公式已显示。点击“加载并运行”可用 SymPy 重新计算并渲染。</div>
 <div id="runtime" class="muted">固定发行版：Pyodide 0.27.7；实际 Python / SymPy 版本将在加载后显示</div>
 <div class="toolbar">
 <button id="run" class="primary" type="button">加载并运行</button>
 <button id="stop" type="button" disabled>停止 / 重启环境</button>
 <button id="reset" type="button">恢复示例并重置</button>
 </div>
+<details id="code-details"><summary>查看 / 编辑 Python 代码</summary>
 <label for="code">Python 代码 <span class="muted">（可编辑，Ctrl / ⌘ + Enter 运行）</span></label>
 <textarea id="code" spellcheck="false" autocomplete="off" autocapitalize="off" aria-describedby="editor-help"># Lathi 2.3-1 (a)-(c): exact causal, initially-at-rest solutions.
 # t must be REAL, not positive: otherwise DiracDelta(t) can simplify to zero.
 import sympy as sp
+import json
+answers_latex = {}
 s = sp.symbols(&#x27;s&#x27;)
 t = sp.symbols(&#x27;t&#x27;, real=True)
 tau = sp.symbols(&#x27;tau&#x27;, positive=True)  # only for the regular t&gt;0 part
@@ -80,6 +86,10 @@ for label, (Q,P) in systems.items():
     d, f = expected[label]
     assert sp.simplify(polynomial-d) == 0 and sp.simplify(regular-f) == 0
 
+    # Export the computed solution as LaTeX, with u(t) for the unit step.
+    display_h = h.xreplace({sp.Heaviside(t): sp.Function(&#x27;u&#x27;)(t)})
+    answers_latex[label] = sp.latex(sp.Eq(sp.Function(&#x27;h_&#x27; + label)(t), display_h, evaluate=False))
+
     print(&#x27;\n(&#x27; + label + &#x27;)&#x27;)
     print(&#x27;Characteristic equation:&#x27;, sp.factor(Q), &#x27;= 0&#x27;)
     print(&#x27;Roots (multiplicity):&#x27;, roots)
@@ -91,10 +101,14 @@ for label, (Q,P) in systems.items():
     print(&#x27;Q(D)h = P(D)delta: singular polynomial =&#x27;, singular_transform)
     print(&#x27;PASS: modes, Laplace, full distribution equation, expected answer&#x27;)
 print(&#x27;\nALL 3 CASES PASSED&#x27;)
+
+# The iframe reads this JSON after a successful execution.
+answers_latex_json = json.dumps(answers_latex)
 </textarea>
 <p id="editor-help" class="muted">t 使用 real=True。完整分布不要声明 t&gt;0，否则 δ(t) 可能被误消去。代码不会自动保存。</p>
-<h2 id="output-heading">运行输出</h2>
-<pre id="output" tabindex="0" aria-labelledby="output-heading">运行后，精确符号结果和 PASS / 错误信息会显示在这里。</pre>
+</details>
+<details id="log-details"><summary id="output-heading">查看特征根、模态与符号验证日志</summary>
+<pre id="output" tabindex="0" aria-labelledby="output-heading">运行后，精确符号结果和 PASS / 错误信息会显示在这里。</pre></details>
 <details><summary>加载、隔离与超时说明</summary><p>首次加载需联网，从官方文档指定的 jsDelivr 地址下载 Pyodide 0.27.7 和其发行版内的 SymPy。计算在本浏览器的独立 Worker 中执行，不需要服务器计算或 API 密钥。嵌入时 iframe 仅允许脚本，不授予同源权限；运行器的网络访问限定为运行时 CDN。</p><p>加载限时 120 秒、单次计算限时 30 秒。停止会终止 Worker，保留编辑内容；下次运行重建环境。恢复示例会覆盖编辑内容并清空输出。每次运行使用新的 Python 全局命名空间。请仅运行自己信任的代码。</p></details>
 <noscript>此运行器需要启用 JavaScript。上方静态解析不依赖此运行器。</noscript>
 </main>
@@ -137,7 +151,9 @@ self.onmessage = async ({data}) => {
         emit(String(result));
         if (typeof result.destroy === 'function') result.destroy();
       }
-      self.postMessage({type:'done',id:runId});
+      const exported = namespace.get('answers_latex_json');
+      const answers = typeof exported === 'string' ? JSON.parse(exported) : null;
+      self.postMessage({type:'done',id:runId,answers});
     } catch(error) {
       self.postMessage({type:'error',id:runId,text:String(error.message || error)});
     } finally {
@@ -158,6 +174,46 @@ const runtime = document.getElementById('runtime');
 const run = document.getElementById('run');
 const stop = document.getElementById('stop');
 const reset = document.getElementById('reset');
+const cards = document.getElementById('answers');
+const answerSource = document.getElementById('answer-source');
+const logDetails = document.getElementById('log-details');
+const preset = Object.fromEntries(['a','b','c'].map(label=>[label,document.getElementById('answer-'+label).dataset.latex]));
+const nativeFallback = Object.fromEntries(['a','b','c'].map(label=>[label,document.getElementById('answer-'+label).innerHTML]));
+let renderSerial = 0;
+window.MathJax = {startup:{typeset:false},svg:{fontCache:'local'},loader:{load:['ui/safe']}};
+const mathReady = new Promise((resolve,reject)=>{
+  const script=document.createElement('script');
+  script.src='https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js';
+  script.onload=()=>window.MathJax.startup.promise.then(resolve,reject);
+  script.onerror=()=>reject(new Error('MathJax CDN unavailable'));
+  document.head.appendChild(script);
+});
+let renderQueue = Promise.resolve();
+function renderAnswers(answers, source) {
+  const serial=++renderSerial;
+  renderQueue=renderQueue.then(async()=>{
+    try {
+      await mathReady;
+      if(serial!==renderSerial) return;
+      const rendered=[];
+      for(const label of ['a','b','c']) {
+        if(typeof answers[label]!=='string'||answers[label].length>20000) throw new Error('missing formula');
+        rendered.push(await MathJax.tex2svgPromise(answers[label],{display:true}));
+      }
+      if(serial!==renderSerial) return;
+      ['a','b','c'].forEach((label,index)=>{
+        const el=document.getElementById('answer-'+label);
+        el.replaceChildren(rendered[index]);el.dataset.latex=answers[label];el.dataset.rendered='mathjax-svg';
+      });
+      cards.dataset.source=source;
+      answerSource.textContent=source==='sympy'?'本次 SymPy 计算结果 · sp.latex → MathJax · 已更新三题公式':'预置解析答案。运行后由 SymPy 重新计算并生成 LaTeX。';
+    } catch(error) {
+      answerSource.textContent='公式渲染服务暂不可用，保留上方已排版答案；本次计算详情见日志。';
+    }
+  });
+  return renderQueue;
+}
+renderAnswers(preset,'preset');
 let worker = null, ready = false, busy = false, timer = null;
 let generation = 0, id = 0, pendingCode = '', started = 0;
 function message(text, state) { status.textContent=text; status.dataset.state=state; }
@@ -172,7 +228,7 @@ function release() {
   runtime.textContent='环境已释放；下次运行将重新加载（浏览器可能已有下载缓存）';
 }
 function fail(text) {
-  release(); message(text,'error');
+  release(); answerSource.textContent='本次运行未完成，卡片保留预置或上次成功的答案。';message(text,'error');
 }
 function append(text) {
   const remaining=52000-output.textContent.length;
@@ -189,6 +245,7 @@ function start() {
   if(busy) return;
   if(!editor.value.trim()) { message('请先输入 Python 代码。','error'); return; }
   pendingCode=editor.value; id++; output.textContent='';
+  answerSource.textContent='正在计算；卡片暂显示预置或上次成功的结果。';
   if(ready) {setBusy(true);execute();return;}
   message('正在加载 Pyodide / SymPy… 首次下载可能需要一会儿（最长 120 秒）','loading');
   const current=++generation;
@@ -210,8 +267,10 @@ function start() {
       else if(data.id===id && (data.type==='done'||data.type==='error')) {
         clearTimeout(timer);timer=null;setBusy(false);
         if(data.type==='error') {
-          append(data.text);message('代码执行出错。修改代码后可重新运行，或恢复示例。','error');
+          append(data.text);logDetails.open=true;answerSource.textContent='本次代码出错，卡片保留上次答案。';message('代码执行出错。修改代码后可重新运行，或恢复示例。','error');
         } else {
+          if(data.answers) renderAnswers(data.answers,'sympy');
+          else answerSource.textContent='本次代码未导出 answers_latex_json，卡片保留上次答案。';
           if(!output.textContent) output.textContent='执行完成（无打印输出）。';
           message('运行完成 · '+((performance.now()-started)/1000).toFixed(2)+' 秒。可修改后再次运行。','done');
         }
@@ -225,8 +284,8 @@ function start() {
   } catch(error) {append(String(error));fail('浏览器未能创建 Web Worker，请使用支持 WebAssembly 的现代浏览器。');}
 }
 run.addEventListener('click',start);
-stop.addEventListener('click',()=>{release();message('已停止并释放环境，保留当前代码。点击“加载并运行”重新开始。','idle');});
-reset.addEventListener('click',()=>{release();editor.value=original;output.textContent='已恢复示例，等待运行。';message('已恢复 (a)–(c) 示例并重置环境。','idle');});
+stop.addEventListener('click',()=>{release();answerSource.textContent='已停止本次运算，卡片保留预置或上次成功的答案。';message('已停止并释放环境，保留当前代码。点击“加载并运行”重新开始。','idle');});
+reset.addEventListener('click',()=>{release();editor.value=original;output.textContent='已恢复示例，等待运行。';logDetails.open=false;['a','b','c'].forEach(label=>{const el=document.getElementById('answer-'+label);el.innerHTML=nativeFallback[label];el.dataset.rendered='native-mathml';});cards.dataset.source='preset';renderAnswers(preset,'preset');message('已恢复 (a)–(c) 示例并重置环境。','idle');});
 editor.addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();start();}});
 window.addEventListener('pagehide',release);
 })();
