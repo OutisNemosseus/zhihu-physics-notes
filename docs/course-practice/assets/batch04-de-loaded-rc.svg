@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 420" role="img" aria-labelledby="title desc">
+<title id="title">Loaded RC circuit driven by a voltage pulse</title>
+<desc id="desc">An ideal voltage source E of t at the left has positive polarity at its upper terminal. A 100 ohm series resistor connects its upper terminal to the positive voltage node. A 300 ohm leakage resistor and a 0.020 farad capacitor connect in parallel from this upper node to the common bottom return. Source current points right toward the node. Leakage and capacitor currents point downward. Capacitor voltage v of t is upper positive and lower negative, initially 3 volts. The source is 12 volts until 4 seconds and zero volts afterward; its terminals remain connected.</desc>
+<defs><marker id="batch04-de-arrow" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M1,1 L8,4.5 L1,8 Z" fill="#166b62"/></marker></defs>
+<rect x="1" y="1" width="848" height="418" rx="18" fill="#fbfcfe" stroke="#c9d4df"/>
+<g fill="none" stroke="#26364a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+ <path d="M98 163 V84 H162 M296 84 H675 V192 M675 210 V314 H98 V235 M443 84 V151 M443 250 V314"/>
+ <circle cx="98" cy="199" r="36"/>
+ <path d="M162 84 H177 L187 72 L205 96 L223 72 L241 96 L259 72 L277 96 L287 84 H296"/>
+ <path d="M443 151 V161 L431 170 L455 184 L431 198 L455 212 L431 226 L443 238 V250"/>
+ <path d="M637 192 H713 M637 210 H713"/>
+ <path d="M91 187 H105 M98 180 V194 M91 218 H105"/>
+</g>
+<g fill="#26364a"><circle cx="443" cy="84" r="5"/><circle cx="443" cy="314" r="5"/></g>
+<g font-family="Arial, Helvetica, sans-serif" fill="#26364a" font-size="20">
+ <text x="231" y="42" text-anchor="middle">Rₛ = 100 Ω</text>
+ <text x="34" y="207" text-anchor="middle">E(t)</text>
+ <text x="463" y="204">Rℓ = 300 Ω</text>
+ <text x="620" y="263" text-anchor="end">C = 0.020 F</text>
+ <text x="766" y="169" text-anchor="middle">+</text>
+ <text x="766" y="205" text-anchor="middle" font-style="italic">v(t)</text>
+ <text x="766" y="241" text-anchor="middle">−</text>
+ <text x="766" y="288" text-anchor="middle" font-size="17">v(0) = 3 V</text>
+ <text x="428" y="345" text-anchor="middle" font-size="17" fill="#5d6b7c">Common return: 0 V</text>
+ <text x="425" y="381" text-anchor="middle" font-size="17">E(t) = 12 V for 0 ≤ t &lt; 4 s; E(t) = 0 V for t ≥ 4 s</text>
+ <text x="425" y="404" text-anchor="middle" font-size="16" fill="#5d6b7c">The ideal source remains connected at zero voltage</text>
+</g>
+<g fill="none" stroke="#166b62" stroke-width="3.5" marker-end="url(#batch04-de-arrow)">
+ <path d="M326 84 H397"/><path d="M410 110 V144"/><path d="M675 114 V161"/>
+</g>
+<g font-family="Arial, Helvetica, sans-serif" font-style="italic" fill="#166b62" font-size="20">
+ <text x="358" y="61" text-anchor="middle">iₛ(t)</text>
+ <text x="383" y="134" text-anchor="middle">iℓ(t)</text>
+ <text x="714" y="144" text-anchor="middle">i<tspan baseline-shift="sub" font-size="14">C</tspan><tspan baseline-shift="baseline">(t)</tspan></text>
+</g>
+</svg>
