@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="590" viewBox="0 0 1000 590" role="img" aria-labelledby="title desc">
+<title id="title">Series RC loop with a negative initial capacitor voltage</title>
+<desc id="desc">A 9 volt ideal source has positive upper terminal and negative lower terminal. A 300 ohm resistor is in series with a 0.010 farad capacitor. Positive current is clockwise. Capacitor voltage is upper plate minus lower plate and initially negative 3 volts. The bottom wire is a common zero volt reference. The ideal connected loop applies for time at least zero seconds.</desc>
+<defs><marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#156f7a"/></marker></defs>
+<rect width="1000" height="590" fill="#fffdf8"/><g font-family="DejaVu Sans, sans-serif" fill="#183044">
+<text x="40" y="45" font-size="25" font-weight="700">One connected series RC loop · t ≥ 0 s</text>
+<text x="40" y="77" font-size="17">Ideal components · fixed voltage and current reference directions</text>
+<g stroke="#183044" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
+<path d="M200 208 V150 H380"/><path d="M380 150 l15 -18 l22 36 l22 -36 l22 36 l22 -36 l22 36 l15 -18"/>
+<path d="M520 150 H740 V242"/><path d="M694 242 H786 M694 266 H786"/><path d="M740 266 V380 H200 V302"/>
+<circle cx="200" cy="255" r="47"/>
+<path d="M200 380 V400 M178 400 H222 M185 410 H215 M192 420 H208"/>
+</g>
+<text x="193" y="242" font-size="25">+</text><text x="193" y="287" font-size="27">−</text>
+<text x="52" y="241" font-size="20" font-weight="700">E = 9 V</text><text x="48" y="269" font-size="16">constant</text><text x="48" y="291" font-size="16">ideal source</text>
+<text x="390" y="118" font-size="21" font-weight="700">R = 300 Ω</text>
+<path d="M567 114 H675" stroke="#156f7a" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="561" y="94" font-size="18" fill="#156f7a">i(t) positive →</text>
+<text x="806" y="242" font-size="21" font-weight="700">C = 0.010 F</text>
+<text x="659" y="237" font-size="27">+</text><text x="659" y="281" font-size="27">−</text>
+<text x="586" y="261" font-size="20">v(t)</text>
+<text x="805" y="274" font-size="18">v(0) = −3 V</text>
+<text x="805" y="300" font-size="16">Q<tspan baseline-shift="sub" font-size="12">C</tspan>(t) = Cv(t)</text>
+<text x="245" y="412" font-size="17">Common return · 0 V reference</text>
+<rect x="40" y="449" width="920" height="100" rx="12" fill="#edf5f5"/>
+<text x="60" y="478" font-size="18">Reference polarity: v = upper-plate potential − lower-plate potential</text>
+<text x="60" y="506" font-size="18">At t = 0 the lower plate is higher in potential; the reference labels stay fixed</text>
+<text x="60" y="534" font-size="18">Model: Ri + v = 9 V,  i = C dv/dt     ·     One source, one resistor, one capacitor</text>
+<text x="40" y="577" font-size="13" fill="#5a6c76">Original practice diagram · MTH 256 · Batch 09, Question 10 · Not a course-provided figure</text>
+</g></svg>
