@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 460" role="img" aria-labelledby="title desc">
+<title id="title">Series RC circuit with a resistance change at three seconds</title>
+<desc id="desc">A constant fifteen volt ideal source, positive at its top terminal, connects through one adjustable resistor to the upper plate of a 0.010 farad capacitor. The capacitor lower plate and source negative terminal connect to the common zero volt return. Resistance is 300 ohms before three seconds and 100 ohms from three seconds onward. Capacitor voltage is positive at the upper plate with an initial value of three volts. Current flows rightward through the resistor into that plate.</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#1d4ed8"/></marker></defs>
+<rect width="920" height="460" rx="18" fill="#f8fafc"/>
+<g stroke="#14283e" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path id="upper-left-wire" d="M120 190 V140 H260"/>
+<path id="resistor" d="M260 140 L274 126 L298 154 L322 126 L346 154 L370 126 L394 154 L418 126 L432 140"/>
+<path id="upper-right-wire" d="M432 140 H630 V212"/>
+<circle id="voltage-source" cx="120" cy="230" r="40"/>
+<path id="lower-return-wire" d="M120 270 V350 H630 V236"/>
+<path id="capacitor-upper-plate" d="M594 212 H666"/>
+<path id="capacitor-lower-plate" d="M594 236 H666"/>
+<path id="source-plus" d="M110 216 H130 M120 206 V226"/>
+<path id="source-minus" d="M110 248 H130"/>
+<path d="M365 350 V370 M350 370 H380 M355 379 H375 M360 388 H370"/>
+</g>
+<path d="M488 108 H562" stroke="#1d4ed8" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+<g font-family="Arial, Helvetica, sans-serif" font-size="21" fill="#14283e">
+<text x="346" y="40" text-anchor="middle" font-weight="700">R(t)</text>
+<text x="346" y="70" text-anchor="middle">300 Ω for 0 ≤ t &lt; 3 s</text>
+<text x="346" y="98" text-anchor="middle">100 Ω for t ≥ 3 s</text>
+<text x="525" y="88" text-anchor="middle" fill="#1d4ed8">i(t)</text>
+<text x="120" y="100" text-anchor="middle">E = 15 V</text>
+<text x="704" y="213" font-size="27" fill="#1d4ed8">+</text>
+<text x="704" y="258" font-size="27" fill="#1d4ed8">−</text>
+<text x="741" y="230">C = 0.010 F</text>
+<text x="701" y="291" fill="#1d4ed8">v(t)</text>
+<text x="694" y="325">v(0) = 3 V</text>
+<text x="412" y="391">0 V return</text>
+<text x="460" y="432" text-anchor="middle" font-size="18" fill="#475569">One closed series loop • ideal components • capacitor voltage is continuous at t = 3 s</text>
+</g></svg>
