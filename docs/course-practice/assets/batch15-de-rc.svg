@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">Series RC circuit with two measured currents and unknown resistance and capacitance</title>
+  <desc id="desc">One closed loop has a constant 16 volt ideal voltage source on the left, an unknown resistor R on top, and an unknown capacitor C on the right. The source is positive at its top terminal. Current i is referenced clockwise, from the source through the resistor into the upper capacitor plate. Capacitor voltage v is upper minus lower plate, initially 4 volts. Measurements are 24 milliamperes at 2 seconds and 8 milliamperes at 6 seconds. The loop equation is R times i plus v equals 16 volts.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#a04c0c"/></marker></defs>
+  <rect width="960" height="560" rx="20" fill="#fbfaf7"/>
+  <text x="42" y="48" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#172d3e">Calibrate one RC loop from current readings</text>
+  <text x="42" y="80" font-family="Arial, sans-serif" font-size="18" fill="#466070">Constant source · fixed components · no switching</text>
+  <g stroke="#173b50" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 216 214 V 148 H 342"/>
+    <path d="M 342 148 l 14 -16 l 26 32 l 26 -32 l 26 32 l 26 -32 l 26 32 l 14 -16 H 710 V 239"/>
+    <path d="M 710 269 V 375 H 216 V 300"/>
+    <circle cx="216" cy="257" r="43" fill="#fff"/>
+    <path d="M 672 239 H 748 M 672 269 H 748"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#173b50">
+    <text x="207" y="247" font-size="28">+</text>
+    <text x="208" y="283" font-size="28">−</text>
+    <text x="355" y="115" font-size="22" font-weight="700">R &gt; 0, unknown Ω</text>
+    <text x="746" y="206" font-size="21" font-weight="700">C &gt; 0</text>
+    <text x="782" y="234" font-size="18">unknown F</text>
+    <text x="49" y="245" font-size="23" font-weight="700">E = 16 V</text>
+    <text x="49" y="276" font-size="17">ideal source</text>
+    <text x="646" y="228" font-size="25">+</text>
+    <text x="646" y="299" font-size="25">−</text>
+    <text x="778" y="276" font-size="24" font-style="italic">v(t)</text>
+    <text x="753" y="323" font-size="19">v(0) = 4 V</text>
+    <text x="375" y="345" font-size="23">Ri + v = 16 V</text>
+  </g>
+  <path d="M 547 184 H 640" stroke="#a04c0c" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="421" y="216" font-family="Arial, sans-serif" font-size="20" fill="#914000">i(t): clockwise reference</text>
+  <rect x="42" y="412" width="876" height="113" rx="12" fill="#eaf0f1"/>
+  <g font-family="Arial, sans-serif" fill="#173b50">
+    <text x="65" y="445" font-size="21" font-weight="700">Non-loading current measurements</text>
+    <text x="65" y="479" font-size="23">i(2 s) = 24 mA</text>
+    <text x="455" y="479" font-size="23">i(6 s) = 8 mA</text>
+    <text x="65" y="508" font-size="17">Voltage labels are reference polarities; the loop stays closed for t ≥ 0</text>
+  </g>
+</svg>
