@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="560" viewBox="0 0 960 560" role="img" aria-labelledby="title desc">
+  <title id="title">One series RC loop with a two-level voltage source</title>
+  <desc id="desc">An ideal source on the left, a 250 ohm resistor on the top, and a 0.0080 farad capacitor on the right form a closed series loop. The source is positive at the upper terminal. Current is referenced clockwise into the upper capacitor plate. The capacitor voltage is referenced positive at its upper plate. The source changes from 8 volts to 20 volts at 2 seconds; the initial capacitor voltage is zero.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#b45309"/></marker></defs>
+  <rect width="960" height="560" rx="20" fill="#fbfaf7"/>
+  <text x="42" y="47" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="#172d3e">A source step in one closed RC loop</text>
+  <text x="42" y="79" font-family="Arial, sans-serif" font-size="18" fill="#466070">Reference directions stay fixed in both stages</text>
+  <g stroke="#173b50" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 215 214 V 145 H 344"/>
+    <path d="M 344 145 l 14 -16 l 26 32 l 26 -32 l 26 32 l 26 -32 l 26 32 l 14 -16 H 714 V 244"/>
+    <path d="M 714 274 V 376 H 215 V 300"/>
+    <circle cx="215" cy="257" r="43" fill="#ffffff"/>
+    <path d="M 676 244 H 752 M 676 274 H 752"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#173b50">
+    <text x="206" y="247" font-size="28">+</text>
+    <text x="207" y="283" font-size="28">−</text>
+    <text x="375" y="113" font-size="23" font-weight="700">R = 250 Ω</text>
+    <text x="758" y="208" font-size="22" font-weight="700">C = 0.0080 F</text>
+    <text x="90" y="242" font-size="25" font-weight="700">E(t)</text>
+    <text x="68" y="274" font-size="18">ideal source</text>
+    <text x="653" y="233" font-size="25">+</text>
+    <text x="653" y="303" font-size="25">−</text>
+    <text x="774" y="270" font-size="24" font-style="italic">v(t)</text>
+    <text x="755" y="333" font-size="19">v(0) = 0 V</text>
+    <text x="385" y="350" font-size="22">250i + v = E(t)</text>
+  </g>
+  <path d="M 547 183 H 644" stroke="#b45309" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <text x="535" y="213" font-family="Arial, sans-serif" font-size="21" fill="#914000">i(t), clockwise</text>
+  <rect x="42" y="413" width="876" height="113" rx="12" fill="#eaf0f1"/>
+  <g font-family="Arial, sans-serif" fill="#173b50">
+    <text x="65" y="446" font-size="21" font-weight="700">Source schedule</text>
+    <text x="65" y="479" font-size="22">8 V for 0 ≤ t &lt; 2 s</text>
+    <text x="401" y="479" font-size="22">20 V for t &gt; 2 s</text>
+    <text x="65" y="508" font-size="17">At 2 s: capacitor voltage is continuous; use one-sided currents</text>
+  </g>
+</svg>
