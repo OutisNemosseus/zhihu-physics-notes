@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="620" viewBox="0 0 1040 620" role="img" aria-labelledby="title desc">
+<title id="title">Series RC loop: use the initial current to find the resistance</title>
+<desc id="desc">One closed loop contains a constant 14 volt source, with its upper terminal positive, a resistor of unknown positive resistance R in the top branch, and a 0.0030 farad capacitor in the right branch. The capacitor voltage v is measured upper plate minus lower plate, initially 2 volts. Clockwise current i enters the upper plate and is initially 20 milliamperes. Resistor voltage drop v R is measured left to right. The loop equation is R i plus v equals 14 volts.</desc>
+<defs><marker id="de12-arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L10 5 L0 10 Z" fill="#116b78"/></marker></defs>
+<rect width="1040" height="620" rx="18" fill="#f7fafb"/>
+<g font-family="DejaVu Sans,sans-serif" fill="#193641">
+<text x="42" y="45" font-size="26" font-weight="700">Identify R from the initial current</text>
+<text x="42" y="78" font-size="18" fill="#4c626d">One closed series loop · ideal components · t ≥ 0 s</text>
+<g fill="none" stroke="#193641" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M218 237 V190 H374 M594 190 H750 V282 M750 310 V423 H218 V327"/>
+<circle cx="218" cy="282" r="45"/>
+<path d="M374 190 H388 L403 174 L423 206 L443 174 L463 206 L483 174 L503 206 L523 174 L543 206 L563 174 L580 190 H594"/>
+<path d="M698 282 H802 M698 310 H802"/>
+</g>
+<text x="207" y="268" font-size="27">+</text>
+<text x="207" y="307" font-size="28">−</text>
+<text x="45" y="271" font-size="23" font-weight="700">E = 14 V</text>
+<text x="45" y="302" font-size="17">constant</text>
+<text x="45" y="329" font-size="17">source</text>
+<text x="404" y="151" font-size="23" font-weight="700">R unknown</text>
+<text x="391" y="236" font-size="23">+</text>
+<text x="478" y="236" text-anchor="middle" font-size="20">v_R(t)</text>
+<text x="570" y="236" font-size="23">−</text>
+<path d="M617 153 H744" stroke="#116b78" stroke-width="3" fill="none" marker-end="url(#de12-arrow)"/>
+<text x="613" y="124" font-size="18" fill="#116b78">i(t), clockwise</text>
+<text x="671" y="275" font-size="26">+</text>
+<text x="671" y="337" font-size="26">−</text>
+<text x="615" y="303" font-size="22">v(t)</text>
+<text x="827" y="285" font-size="21" font-weight="700">C = 0.0030 F</text>
+<text x="827" y="320" font-size="19">v(0) = 2 V</text>
+<text x="352" y="342" font-size="22" font-weight="700">i(0) = 20 mA</text>
+<text x="352" y="372" font-size="17" fill="#4c626d">Non-loading current measurement</text>
+<text x="265" y="461" font-size="18" fill="#4c626d">v = upper-plate potential − lower-plate potential</text>
+<rect x="42" y="485" width="956" height="88" rx="12" fill="#e7f0f3"/>
+<text x="64" y="519" font-size="20">Loop: Ri + v = 14 V;   capacitor: i = C dv/dt</text>
+<text x="64" y="550" font-size="18" fill="#4c626d">Resistor drop v_R = Ri, positive from its left terminal to its right terminal</text>
+<text x="42" y="601" font-size="13" fill="#4c626d">Original practice diagram · MTH 256 · Batch 12, Question 10 · Not a course-provided figure</text>
+</g></svg>
