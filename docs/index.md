@@ -12,6 +12,8 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 
 ## Questions
 
+[Python Editor — 在线编辑、语义高亮与运行](tools/python-editor.md)
+
 - [Why Is \(k\) Restricted to the First Brillouin Zone?](condensed-matter/first-brillouin-zone.md)
 - [What Is the Essence of Linearity?](linear-algebra/what-is-linearity.md)
 - [Why Is the Divergence of a Curl Zero?](vector-calculus/boundary-of-boundary-zero.md)

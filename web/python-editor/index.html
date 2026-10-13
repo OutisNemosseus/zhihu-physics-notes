@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1e1e1e">
+  <title>Python Editor · Tong Su</title>
+</head>
+<body>
+  <header class="toolbar">
+    <div class="identity"><span class="python-mark">Py</span><div><strong>Python Editor</strong><span class="subtitle">Tong Su · Python 3</span></div></div>
+    <div class="actions">
+      <button id="open">打开 .py</button>
+      <button id="save">下载 .py</button>
+      <button id="copy">复制</button>
+      <button id="reset">恢复示例</button>
+      <button id="run" class="primary" disabled>▶ 运行</button>
+      <button id="stop" disabled>■ 停止</button>
+    </div>
+  </header>
+  <div class="filebar"><input id="filename" aria-label="Python 文件名" value="main.py" spellcheck="false"><label><input id="autocomplete" type="checkbox"> 自动补全</label><span class="shortcut">运行 Ctrl / ⌘ + Enter</span></div>
+  <main>
+    <section class="editor-pane" aria-label="Python 代码编辑器"><div id="editor"></div><textarea id="fallback" spellcheck="false" aria-label="Python 源代码"></textarea></section>
+    <section class="console-pane" aria-label="运行结果和问题">
+      <div class="tabs" role="tablist" aria-label="控制台">
+        <button id="output-tab" role="tab" aria-selected="true" aria-controls="output-panel">输出</button>
+        <button id="problems-tab" role="tab" aria-selected="false" aria-controls="problems-panel">问题 <span id="problem-count">0</span></button>
+        <button id="clear" class="quiet">清空</button>
+      </div>
+      <div id="output-panel" role="tabpanel" aria-labelledby="output-tab">
+        <label class="stdin-label" for="stdin">输入数据 <span>每行对应一次 input()</span></label>
+        <textarea id="stdin" rows="2" placeholder="需要输入时，在运行前填入这里" spellcheck="false"></textarea>
+        <pre id="output" tabindex="0" aria-live="polite">点击「运行」或按 Ctrl / ⌘ + Enter。</pre>
+      </div>
+      <div id="problems-panel" role="tabpanel" aria-labelledby="problems-tab" hidden><ul id="problems"><li class="empty">正在加载 Python 分析器…</li></ul></div>
+    </section>
+  </main>
+  <footer><button id="analysis-status" class="status" title="重新加载 Python 分析器">● 正在加载 basedpyright…</button><span id="cursor">Ln 1, Col 1</span><span id="save-status">自动保存</span><span class="engine">Monaco + basedpyright</span></footer>
+  <input id="file-input" type="file" accept=".py,.pyi,text/plain" hidden>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

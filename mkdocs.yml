@@ -29,6 +29,7 @@ theme:
 nav:
   - Home: index.md
   - Course Practice: https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/
+  - Python Editor: tools/python-editor.md
   - Condensed Matter:
       - First Brillouin Zone: condensed-matter/first-brillouin-zone.md
       - Topology in Materials: condensed-matter/topology-in-materials.md

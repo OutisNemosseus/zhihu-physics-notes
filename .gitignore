@@ -7,3 +7,8 @@ venv/
 .DS_Store
 .ipynb_checkpoints/
 *.pyc
+
+# Built by the Pages workflow from web/python-editor.
+web/python-editor/node_modules/
+web/python-editor/public/
+docs/assets/python-editor/

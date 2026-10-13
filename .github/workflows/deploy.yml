@@ -20,6 +20,18 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
+      - name: Set up Node for the Python editor
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+          cache-dependency-path: web/python-editor/package-lock.json
+      - name: Build Monaco and basedpyright Python editor
+        working-directory: web/python-editor
+        run: |
+          npm ci --no-audit --no-fund
+          npm test
+          npm run build
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
