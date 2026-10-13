@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="625" viewBox="0 0 1200 625" role="img" aria-labelledby="title desc">
+<title id="title">Two independent RC loops with matching voltage histories</title>
+<desc id="desc">Two electrically separate closed series loops each have their own ideal 28 volt source, positive at the upper terminal. Circuit A has an 800 ohm resistor and 0.0025 farad capacitor. Circuit B has a 200 ohm resistor and 0.0100 farad capacitor. Both capacitor voltages initially equal 4 volts. Each current is referenced clockwise into the upper capacitor plate. Each capacitor voltage is upper-plate potential minus lower-plate potential. No wire connects the circuits.</desc>
+<defs><marker id="arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L12 6 L0 12 Z" fill="#a64d21"/></marker></defs>
+<rect width="1200" height="625" rx="18" fill="#fbfaf7"/>
+<g font-family="Arial, sans-serif" fill="#153b50"><text x="40" y="48" font-size="29" font-weight="700">Two circuits, one voltage history?</text><text x="40" y="81" font-size="19" fill="#506572">Independent sources and loops · ideal components · t ≥ 0</text></g>
+<g transform="translate(28,0)">
+<rect x="0" y="110" width="558" height="365" rx="14" fill="#f0f4f4" stroke="#cad8da" stroke-width="2"/>
+<g font-family="Arial, sans-serif" fill="#153b50">
+<text x="24" y="145" font-size="24" font-weight="700">Circuit A</text>
+<text x="210" y="166" font-size="22" font-weight="700">R = 800 Ω</text>
+</g>
+<g fill="none" stroke="#173b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M105 280 V200 H200 L212 184 L236 216 L260 184 L284 216 L308 184 L332 216 L344 200 H420 V300"/>
+<path d="M385 300 H455 M385 335 H455 M420 335 V430 H105 V350"/>
+<circle cx="105" cy="315" r="35" fill="white"/>
+</g>
+<g font-family="Arial, sans-serif" fill="#153b50">
+<text x="96" y="305" font-size="27">+</text><text x="96" y="338" font-size="27">−</text>
+<text x="35" y="390" font-size="23" font-weight="700">28 V</text>
+<text x="360" y="289" font-size="25">+</text><text x="360" y="366" font-size="25">−</text>
+<text x="477" y="325" font-size="24" font-style="italic">v<tspan baseline-shift="sub" font-size="15">A</tspan>(t)</text>
+<text x="230" y="383" font-size="20">C = 0.0025 F</text>
+<text x="185" y="458" font-size="20">v<tspan baseline-shift="sub" font-size="14">A</tspan>(0) = 4 V</text>
+</g>
+<path d="M230 246 H332" fill="none" stroke="#a64d21" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="248" y="280" font-family="Arial, sans-serif" font-size="20" fill="#94411c">i<tspan baseline-shift="sub" font-size="14">A</tspan>(t)</text>
+</g>
+<g transform="translate(614,0)">
+<rect x="0" y="110" width="558" height="365" rx="14" fill="#f0f4f4" stroke="#cad8da" stroke-width="2"/>
+<g font-family="Arial, sans-serif" fill="#153b50">
+<text x="24" y="145" font-size="24" font-weight="700">Circuit B</text>
+<text x="210" y="166" font-size="22" font-weight="700">R = 200 Ω</text>
+</g>
+<g fill="none" stroke="#173b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<path d="M105 280 V200 H200 L212 184 L236 216 L260 184 L284 216 L308 184 L332 216 L344 200 H420 V300"/>
+<path d="M385 300 H455 M385 335 H455 M420 335 V430 H105 V350"/>
+<circle cx="105" cy="315" r="35" fill="white"/>
+</g>
+<g font-family="Arial, sans-serif" fill="#153b50">
+<text x="96" y="305" font-size="27">+</text><text x="96" y="338" font-size="27">−</text>
+<text x="35" y="390" font-size="23" font-weight="700">28 V</text>
+<text x="360" y="289" font-size="25">+</text><text x="360" y="366" font-size="25">−</text>
+<text x="477" y="325" font-size="24" font-style="italic">v<tspan baseline-shift="sub" font-size="15">B</tspan>(t)</text>
+<text x="230" y="383" font-size="20">C = 0.0100 F</text>
+<text x="185" y="458" font-size="20">v<tspan baseline-shift="sub" font-size="14">B</tspan>(0) = 4 V</text>
+</g>
+<path d="M230 246 H332" fill="none" stroke="#a64d21" stroke-width="3" marker-end="url(#arrow)"/>
+<text x="248" y="280" font-family="Arial, sans-serif" font-size="20" fill="#94411c">i<tspan baseline-shift="sub" font-size="14">B</tspan>(t)</text>
+</g>
+<rect x="40" y="503" width="1120" height="87" rx="12" fill="#e7eef2"/>
+<g font-family="Arial, sans-serif" fill="#153b50"><text x="61" y="536" font-size="21" font-weight="700">Each loop: Ri + v = 28 V     and     i = C dv/dt</text><text x="61" y="570" font-size="19">Clockwise current enters the upper plate. Voltage is upper minus lower. No connection joins A and B.</text></g>
+</svg>
