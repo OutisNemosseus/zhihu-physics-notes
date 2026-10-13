@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="680" viewBox="0 0 1100 680" role="img" aria-labelledby="title desc">
+  <title id="title">Energy in a series RC circuit with a precharged capacitor</title>
+  <desc id="desc">A closed series loop contains a constant ideal 24 volt source on the left, a 600 ohm resistor on the top branch, and a 0.0025 farad capacitor on the right. The source has plus at its top terminal and minus at its bottom. A clockwise current reference points right along the top branch and downward into the upper capacitor plate. Capacitor voltage v equals the upper-plate potential minus the lower-plate potential, and its initial voltage is 6 volts. The resistor drop is referenced plus at the left and minus at the right. The loop law is 600 i plus v equals 24 volts. Resistor power is 600 i squared; source delivered power is 24 i; capacitor stored energy is C v squared divided by 2.</desc>
+  <defs>
+    <marker id="current-arrow" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 12 6 L 0 12 z" fill="#9b4414"/></marker>
+  </defs>
+  <rect width="1100" height="680" rx="20" fill="#fbfaf7"/>
+  <g font-family="Arial, sans-serif" fill="#153b50">
+    <text x="44" y="48" font-size="29" font-weight="700">A precharged capacitor gains more energy</text>
+    <text x="44" y="83" font-size="19" fill="#506572">One closed series loop · constant components · t ≥ 0</text>
+  </g>
+  <g fill="none" stroke="#173b50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M 210 290 V 182 H 358"/>
+    <path d="M 358 182 L 371 165 L 397 199 L 423 165 L 449 199 L 475 165 L 501 199 L 514 182 H 765 V 309"/>
+    <path d="M 720 309 H 810 M 720 352 H 810"/>
+    <path d="M 765 352 V 449 H 210 V 374"/>
+    <circle cx="210" cy="332" r="42" fill="#ffffff"/>
+  </g>
+  <g font-family="Arial, sans-serif" fill="#153b50">
+    <text x="201" y="320" font-size="29">+</text>
+    <text x="201" y="359" font-size="29">−</text>
+    <text x="48" y="322" font-size="25" font-weight="700">E = 24 V</text>
+    <text x="48" y="354" font-size="18">ideal source</text>
+    <text x="360" y="143" font-size="25" font-weight="700">R = 600 Ω</text>
+    <text x="343" y="241" font-size="25">+</text>
+    <text x="430" y="241" font-size="24" font-style="italic">v<tspan baseline-shift="sub" font-size="16">R</tspan></text>
+    <text x="513" y="241" font-size="25">−</text>
+    <text x="846" y="313" font-size="25" font-weight="700">C = 0.0025 F</text>
+    <text x="698" y="292" font-size="29">+</text>
+    <text x="698" y="389" font-size="29">−</text>
+    <text x="846" y="356" font-size="27" font-style="italic">v(t)</text>
+    <text x="846" y="395" font-size="21">v(0) = 6 V</text>
+    <text x="379" y="402" font-size="26">600 i + v = 24 V</text>
+  </g>
+  <path d="M 582 219 H 692" stroke="#9b4414" stroke-width="3" fill="none" marker-end="url(#current-arrow)"/>
+  <path d="M 805 222 V 270" stroke="#9b4414" stroke-width="3" fill="none" marker-end="url(#current-arrow)"/>
+  <text x="565" y="264" font-family="Arial, sans-serif" font-size="20" fill="#8f3f12">i(t), clockwise</text>
+  <rect x="44" y="493" width="1012" height="143" rx="14" fill="#e9f0f2"/>
+  <g font-family="Arial, sans-serif" fill="#153b50">
+    <text x="66" y="528" font-size="22" font-weight="700">Energy accounting quantities</text>
+    <text x="66" y="572" font-size="22">Resistor: p<tspan baseline-shift="sub" font-size="15">R</tspan> = 600 i²</text>
+    <text x="412" y="572" font-size="22">Source: p<tspan baseline-shift="sub" font-size="15">s</tspan> = 24 i</text>
+    <text x="744" y="572" font-size="22">Capacitor: U = Cv² / 2</text>
+    <text x="66" y="608" font-size="18">Power in watts · energy in joules · voltage references stay fixed throughout</text>
+  </g>
+</svg>
