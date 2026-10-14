@@ -8,6 +8,10 @@ import EditorWorker from 'monaco-editor/editor/editor.worker?worker';
 import { PythonLanguageService } from './lsp.js';
 import './style.css';
 import { PlotOutput } from './plot-output.js';
+import { changePlotArgument, renderPlotControls } from './plot-controls.js';
+import { CsvWorkspace } from './csv-workspace.js';
+import q01Csv from './data/batch19-engr103-q01-threshold.csv?raw';
+import q07Csv from './data/batch19-engr103-q07-transistors.csv?raw';
 
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 const $ = (id) => document.getElementById(id);
@@ -42,6 +46,8 @@ try { saved = JSON.parse(localStorage.getItem(storageKey) || '{}'); } catch { /*
 $('filename').value = saved.filename || 'main.py';
 $('stdin').value = saved.stdin || '';
 $('fallback').value = typeof saved.code === 'string' ? saved.code : example;
+const csvWorkspace = new CsvWorkspace({ q01: q01Csv, q07: q07Csv, saved, initialCode: $('fallback').value });
+$('fallback').value = csvWorkspace.active.code;
 
 monaco.editor.defineTheme('tong-dark', {
   base: 'vs-dark', inherit: true,
@@ -89,11 +95,12 @@ try {
   console.error(error);
 }
 const getCode = () => editor ? editor.getValue() : $('fallback').value;
-const setCode = (text) => { if (editor) editor.setValue(text); else $('fallback').value = text; persist(); };
+const setCode = (text) => { if (editor) editor.setValue(text); else $('fallback').value = text; persist(); if (!$('plot-settings').hidden) refreshPlotControls(); };
 
 function persist() {
+  csvWorkspace.saveCode(getCode());
   try {
-    localStorage.setItem(storageKey, JSON.stringify({ code: getCode(), filename: $('filename').value, stdin: $('stdin').value }));
+    localStorage.setItem(storageKey, JSON.stringify({ code: getCode(), filename: $('filename').value, stdin: $('stdin').value, ...csvWorkspace.snapshot() }));
     $('save-status').textContent = '已自动保存';
   } catch { $('save-status').textContent = '无法自动保存，请下载 .py'; }
 }
@@ -229,6 +236,7 @@ async function startAnalysis() {
 
 function codeChanged() {
   persist();
+  if (!$('plot-settings').hidden) refreshPlotControls();
   if (languageService?.legend && !languageService.disposed) {
     languageService.change(getCode());
     clearTimeout(changeTimer);
@@ -237,6 +245,18 @@ function codeChanged() {
 }
 editor?.onDidChangeModelContent(codeChanged);
 $('fallback').addEventListener('input', codeChanged);
+function refreshPlotControls() {
+  renderPlotControls({ container: $('plot-settings-controls'), code: getCode(), onChange: (index, key, value) => {
+    setCode(changePlotArgument(getCode(), index, key, value));
+    refreshPlotControls();
+  } });
+}
+$('plot-settings-toggle').addEventListener('click', () => {
+  $('plot-settings').hidden = !$('plot-settings').hidden;
+  $('plot-settings-toggle').setAttribute('aria-expanded', String(!$('plot-settings').hidden));
+  if (!$('plot-settings').hidden) refreshPlotControls();
+  editor?.layout();
+});
 editor?.onDidChangeCursorPosition(({ position }) => { $('cursor').textContent = `Ln ${position.lineNumber}, Col ${position.column}`; });
 editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, runCode);
 $('analysis-status').addEventListener('click', startAnalysis);
@@ -299,6 +319,40 @@ $('copy').addEventListener('click', async () => {
 });
 
 const plotOutput = new PlotOutput({ container: $('plots'), panel: $('plots-panel'), consolePane: document.querySelector('.console-pane'), layout: document.querySelector('main'), onLayoutChange: () => editor?.layout() });
+function renderDatasetTabs() {
+  $('dataset-tabs').replaceChildren();
+  for (const tab of csvWorkspace.tabs) {
+    const button = document.createElement('button'); button.textContent = tab.label;
+    button.title = tab.name || '不切换 CSV，自由编写 Python';
+    button.setAttribute('aria-pressed', String(tab.id === csvWorkspace.activeId));
+    button.disabled = running;
+    button.addEventListener('click', () => switchDataset(tab.id));
+    $('dataset-tabs').append(button);
+  }
+  $('csv-upload').disabled = running;
+  $('csv-status').textContent = csvWorkspace.active.name ? `可直接读取：${csvWorkspace.active.name}` : 'Q01、Q07 已预置；选择标签即可运行示例或编写代码。';
+}
+function switchDataset(id) {
+  if (running) return;
+  csvWorkspace.saveCode(getCode());
+  const tab = csvWorkspace.select(id);
+  setCode(tab.code); plotOutput.reset(); $('output').textContent = '';
+  renderDatasetTabs(); editor?.focus();
+}
+$('csv-upload').addEventListener('click', () => $('csv-input').click());
+$('csv-input').addEventListener('change', async () => {
+  if (running) return;
+  const files = [...$('csv-input').files];
+  for (const file of files) {
+    try {
+      if (file.size > 5 * 1024 * 1024) throw new Error('每个 CSV 请小于 5 MB。');
+      const content = await file.text();
+      const id = csvWorkspace.addFile(file.name, content);
+      switchDataset(id);
+    } catch (error) { $('csv-status').textContent = `${file.name}：${error.message}`; }
+  }
+  $('csv-input').value = '';
+});
 let runner;
 let running = false;
 let hasOutput = false;
@@ -308,11 +362,11 @@ function appendOutput(text) {
   $('output').textContent += `${text}\n`;
   $('output-panel').scrollTop = $('output-panel').scrollHeight;
 }
-function finishRun() { running = false; $('run').disabled = false; $('stop').disabled = true; $('run').textContent = '▶ 运行'; }
+function finishRun() { running = false; $('run').disabled = false; $('stop').disabled = true; $('run').textContent = '▶ 运行'; renderDatasetTabs(); }
 function runCode() {
   if (running) return;
   persist(); plotOutput.reset(); selectTab('output'); running = true; hasOutput = false;
-  $('output').textContent = ''; $('run').disabled = true; $('stop').disabled = false; $('run').textContent = '运行中…';
+  $('output').textContent = ''; $('run').disabled = true; $('stop').disabled = false; $('run').textContent = '运行中…'; renderDatasetTabs();
   if (!runner) {
     runner = new Worker(new URL('./runner-worker.js', import.meta.url));
     runner.addEventListener('message', ({ data }) => {
@@ -328,10 +382,11 @@ function runCode() {
     });
     runner.addEventListener('error', (error) => { appendOutput(`Python 加载或运行失败：${error.message}`); runner?.terminate(); runner = null; finishRun(); });
   }
-  runner.postMessage({ code: getCode(), stdin: $('stdin').value });
+  runner.postMessage({ code: getCode(), stdin: $('stdin').value, files: csvWorkspace.files() });
 }
 $('run').disabled = false;
 $('run').addEventListener('click', runCode);
 $('stop').addEventListener('click', () => { runner?.terminate(); runner = null; appendOutput('已停止运行。'); finishRun(); });
 window.addEventListener('beforeunload', () => { persist(); plotOutput.reset(); languageService?.dispose(); runner?.terminate(); });
+renderDatasetTabs();
 startAnalysis();

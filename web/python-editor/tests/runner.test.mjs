@@ -61,3 +61,18 @@ test('real Pyodide displays saved, shown and implicit figures and clears old plo
   assert.ok(Buffer.from(svg[0].data, 'base64').toString().includes('<svg'));
   assert.equal(Buffer.from(svg[0].preview, 'base64').subarray(1, 4).toString(), 'PNG');
 });
+
+test('preloaded Q01/Q07 and uploaded CSVs are readable and generate downloadable plots', { timeout: 120000 }, async () => {
+  const {q01Code,q07Code}=await import('../csv-workspace.js');
+  const messages=[];
+  const scope={self:{postMessage:(message)=>messages.push(message)},importScripts:()=>{},loadPyodide:(options)=>loadPyodide({...options,indexURL:fileURLToPath(new URL('../node_modules/pyodide/',import.meta.url))})};
+  runInNewContext(await readFile(new URL('../runner-worker.js',import.meta.url),'utf8'),scope);
+  const files=await Promise.all(['batch19-engr103-q01-threshold.csv','batch19-engr103-q07-transistors.csv'].map(async name=>({name,content:await readFile(new URL('../data/'+name,import.meta.url),'utf8')})));
+  async function run(code,extra=[]){messages.length=0;await scope.self.onmessage({data:{code,stdin:'',files:[...files,...extra]}});assert.equal(messages.at(-1).type,'done',messages.at(-1).text);assert(!messages.some(m=>m.type==='stderr'&&m.text.includes('图像导出失败')));return messages.filter(m=>m.type==='image');}
+  const q01=await run(q01Code);assert.equal(q01.length,1);assert.equal(q01[0].filename,'threshold-voltage-fit.png');
+  assert.equal(Buffer.from(q01[0].data,'base64').readUInt32BE(16),1920);
+  const q07=await run(q07Code);assert.equal(q07.length,1);assert.equal(q07[0].filename,'transistor-count-fit.png');
+  assert(messages.some(m=>m.type==='stdout'&&m.text.includes('ln(count)')));
+  await run('import numpy as np\na=np.loadtxt("my data.csv",delimiter=",",skiprows=1)\nprint(a.shape)\nprint(a[:, 1].sum())',[{name:'my data.csv',content:'x,y\n1,2\n3,4\n'}]);
+  assert(messages.some(m=>m.type==='stdout'&&m.text==='(2, 2)'));assert(messages.some(m=>m.type==='stdout'&&m.text==='6.0'));
+});

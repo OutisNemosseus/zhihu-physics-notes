@@ -47,3 +47,16 @@ a saved document until the user selects it.
 The plotting integration test uses the real pinned Pyodide/Matplotlib runtime
 and the ENGR103 Q04 example. Its first execution may download scientific
 package wheels from the versioned Pyodide CDN; later runs use cached wheels.
+
+The CSV upload button adds files to Pyodide's virtual filesystem before each
+execution. Q01 threshold-voltage and Q07 transistor-count CSVs are bundled from
+the user's supplied practice files and available on every run. Their tabs start
+with matching plotting examples; each tab keeps its own editable code. Preset
+code drafts are restored from browser localStorage. Uploaded CSV content remains
+in the current page session. The runtime accepts plain basenames only.
+
+The Plot Settings toolbar button reads common `plt.title`, `plt.xlabel`,
+`plt.ylabel`, and `plt.grid` calls. Font-size +/- buttons, text fields, color,
+weight, padding, and axis-position choices modify the corresponding Python
+argument. Code containing an expression instead of a literal keeps that
+argument under direct code control. Run again to render the edited plot.

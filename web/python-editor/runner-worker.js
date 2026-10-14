@@ -80,7 +80,7 @@ sys.modules["_tong_editor_plots"].begin_run()
   return true;
 }
 self.onmessage = async (event) => {
-  const { code, stdin } = event.data;
+  const { code, stdin, files = [] } = event.data;
   try {
     if (!runtime) {
       self.postMessage({ type: 'status', text: '首次运行正在加载 Python，稍等片刻…' });
@@ -92,6 +92,11 @@ self.onmessage = async (event) => {
     runtime.setStdin({ stdin: () => inputIndex < lines.length ? lines[inputIndex++] : null });
     runtime.setStdout({ batched: (text) => self.postMessage({ type: 'stdout', text }) });
     runtime.setStderr({ batched: (text) => self.postMessage({ type: 'stderr', text }) });
+    runtime.FS.chdir('/');
+    for (const file of files) {
+      if (!file || typeof file.name !== 'string' || !file.name || /[\\/\0]/.test(file.name) || file.name === '.' || file.name === '..' || typeof file.content !== 'string') throw new Error('Invalid CSV filename or content');
+      runtime.FS.writeFile('/' + file.name, file.content, { encoding: 'utf8' });
+    }
     self.postMessage({ type: 'started' });
     // Package installation doesn't import pyplot. Configure Agg before user code.
     await runtime.loadPackagesFromImports(code);
