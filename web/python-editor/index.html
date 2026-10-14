@@ -14,6 +14,7 @@
       <button id="save">下载 .py</button>
       <button id="copy">复制</button>
       <button id="reset">恢复示例</button>
+      <button id="plot-example">绘图示例</button>
       <button id="run" class="primary" disabled>▶ 运行</button>
       <button id="stop" disabled>■ 停止</button>
     </div>
@@ -32,6 +33,7 @@
         <textarea id="stdin" rows="2" placeholder="需要输入时，在运行前填入这里" spellcheck="false"></textarea>
         <pre id="output" tabindex="0" aria-live="polite">点击「运行」或按 Ctrl / ⌘ + Enter。</pre>
       </div>
+      <div id="plots-panel" hidden><div class="plots-heading"><strong>生成的图片</strong><span>每张图均可一键下载</span></div><div id="plots"></div></div>
       <div id="problems-panel" role="tabpanel" aria-labelledby="problems-tab" hidden><ul id="problems"><li class="empty">正在加载 Python 分析器…</li></ul></div>
     </section>
   </main>

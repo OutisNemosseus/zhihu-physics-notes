@@ -7,6 +7,7 @@ import 'monaco-editor/editor/contrib/find/browser/findController';
 import EditorWorker from 'monaco-editor/editor/editor.worker?worker';
 import { PythonLanguageService } from './lsp.js';
 import './style.css';
+import { PlotOutput } from './plot-output.js';
 
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 const $ = (id) => document.getElementById(id);
@@ -244,6 +245,7 @@ $('filename').addEventListener('input', persist);
 $('stdin').addEventListener('input', persist);
 
 function selectTab(name) {
+  plotOutput.updateVisibility(name);
   for (const tab of ['output', 'problems']) {
     $(`${tab}-tab`).setAttribute('aria-selected', String(tab === name));
     $(`${tab}-panel`).hidden = tab !== name;
@@ -251,8 +253,31 @@ function selectTab(name) {
 }
 $('output-tab').addEventListener('click', () => selectTab('output'));
 $('problems-tab').addEventListener('click', () => selectTab('problems'));
-$('clear').addEventListener('click', () => { $('output').textContent = ''; });
+$('clear').addEventListener('click', () => { $('output').textContent = ''; plotOutput.reset(); });
 $('reset').addEventListener('click', () => { if (window.confirm('恢复示例会替换当前代码。继续？')) setCode(example); });
+const plotExample = `import numpy as np
+import matplotlib.pyplot as plt
+
+A0, m, k = 1.2, 10, 2.5
+b = np.array([np.sqrt(4*m*k)/2, np.sqrt(4*m*k), np.sqrt(4*m*k)/0.5])
+w0 = np.sqrt(k/m)
+alpha = b / (2*m)
+t = np.linspace(0, 20, 2001)
+
+labels = [r"Underdamped $b=\\sqrt{4mk}/2$", r"Critically Damped $b=\\sqrt{4mk}$", r"Overdamped $b=\\sqrt{4mk}/0.5$"]
+for a, color, style, label in zip(alpha, ["blue", "red", "black"], ["-", "--", ":"], labels):
+    plt.plot(t, A0*np.exp(-a*t)*np.cos(w0*t), color=color, linestyle=style, label=label)
+plt.title("Damped Harmonic Motion of Springs")
+plt.xlabel("Time (t) [sec]")
+plt.ylabel("Displacement (y) [m]")
+plt.legend()
+plt.grid(color="green")
+plt.text(0.35, 0.85, r"$y(t)=A_0e^{-\\alpha t}\\cos(\\omega_0 t)$, $\\alpha=b/(2m)$", transform=plt.gca().transAxes)
+plt.savefig("q04.png", dpi=120)
+plt.show()
+print("图已生成，可以点击下载图片。")
+`;
+$('plot-example').addEventListener('click', () => { if (window.confirm('载入绘图示例会替换当前代码。继续？')) setCode(plotExample); });
 $('open').addEventListener('click', () => $('file-input').click());
 $('file-input').addEventListener('change', async () => {
   const file = $('file-input').files[0]; if (!file) return;
@@ -273,6 +298,7 @@ $('copy').addEventListener('click', async () => {
   } catch { editor?.focus(); editor?.trigger('copy', 'editor.action.selectAll'); $('copy').textContent = '请按 Ctrl / ⌘ + C'; }
 });
 
+const plotOutput = new PlotOutput({ container: $('plots'), panel: $('plots-panel'), consolePane: document.querySelector('.console-pane'), layout: document.querySelector('main'), onLayoutChange: () => editor?.layout() });
 let runner;
 let running = false;
 let hasOutput = false;
@@ -285,7 +311,7 @@ function appendOutput(text) {
 function finishRun() { running = false; $('run').disabled = false; $('stop').disabled = true; $('run').textContent = '▶ 运行'; }
 function runCode() {
   if (running) return;
-  persist(); selectTab('output'); running = true; hasOutput = false;
+  persist(); plotOutput.reset(); selectTab('output'); running = true; hasOutput = false;
   $('output').textContent = ''; $('run').disabled = true; $('stop').disabled = false; $('run').textContent = '运行中…';
   if (!runner) {
     runner = new Worker(new URL('./runner-worker.js', import.meta.url));
@@ -293,6 +319,10 @@ function runCode() {
       if (data.type === 'status') $('output').textContent = `${data.text}\n`;
       if (data.type === 'started') $('output').textContent = '';
       if (data.type === 'stdout' || data.type === 'stderr') appendOutput(data.text);
+      if (data.type === 'image') {
+        try { plotOutput.add(data); hasOutput = true; }
+        catch (error) { appendOutput(`图片显示失败：${error.message}`); }
+      }
       if (data.type === 'error') { appendOutput(data.text); finishRun(); }
       if (data.type === 'done') { if (!hasOutput) appendOutput('(运行完成，无输出)'); finishRun(); }
     });
@@ -303,5 +333,5 @@ function runCode() {
 $('run').disabled = false;
 $('run').addEventListener('click', runCode);
 $('stop').addEventListener('click', () => { runner?.terminate(); runner = null; appendOutput('已停止运行。'); finishRun(); });
-window.addEventListener('beforeunload', () => { persist(); languageService?.dispose(); runner?.terminate(); });
+window.addEventListener('beforeunload', () => { persist(); plotOutput.reset(); languageService?.dispose(); runner?.terminate(); });
 startAnalysis();

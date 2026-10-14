@@ -34,3 +34,16 @@ QA.
 Dependencies: Monaco and basedpyright are MIT licensed. The deployed basedpyright
 bundle retains its upstream LICENSE.txt. Monaco's notices are copied during the
 build.
+
+Matplotlib plotting uses Agg inside the runtime worker. `plt.show()` and
+`plt.savefig("q04.png", dpi=120)` produce inline image previews with a named
+one-click download. Unsaved open figures are captured at the end of execution;
+figures displayed or saved before `plt.close()` remain available. Saving preserves
+the original output bytes and filename (SVG/PDF use a PNG preview). Each run
+closes old figures and resets the gallery. Clearing output revokes image URLs.
+The plotting example button loads a damped-motion example without changing
+a saved document until the user selects it.
+
+The plotting integration test uses the real pinned Pyodide/Matplotlib runtime
+and the ENGR103 Q04 example. Its first execution may download scientific
+package wheels from the versioned Pyodide CDN; later runs use cached wheels.
