@@ -232,3 +232,10 @@ $$\boxed{I_x=i_3-i_1=-\frac{52}{93}-\frac{50}{93}=-\frac{34}{31}\ \mathrm A\appr
 下载的验证日志标为 ngspice；在 LTspice 中点击 Run 后，会生成本机的 LTspice 日志。Windows 版 LTspice 界面未在生成环境中实测。
 
 AI assistance: ChatGPT was used to explain and check the calculations and prepare the SPICE files.
+
+
+## 考前训练
+
+[考前训练 01：10 道原创题（附折叠答案）](../course-practice/engr202/exam-training-01/index.html)
+
+涵盖前四周：相量、阻抗、节点法、网孔法与交流功率。尚未与 Canvas Practice Exam 原题逐题对照。
