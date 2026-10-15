@@ -1,4 +1,30 @@
-export const q01Code = `import numpy as np
+const previousQ07Code = `import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt("batch19-engr103-q07-transistors.csv", delimiter=",", skiprows=1)
+count = data[:, 0]  # First column: transistor count
+year = data[:, 1]   # Second column: year
+t = year - 1983
+b, a = np.polyfit(t, np.log(count), 1)
+year_fit = np.linspace(year.min(), year.max(), 300)
+count_fit = np.exp(a + b * (year_fit - 1983))
+
+plt.plot(year, count, linestyle="none", marker="o", markersize=8,
+         markerfacecolor="lightblue", markeredgecolor="black", label="Observed data")
+plt.plot(year_fit, count_fit, color="red", label="Exponential trendline")
+plt.yscale("log")
+plt.title("Moore's Law: The number of transistors on a microchip\\ndoubles every two years (synthetic practice data)", fontsize=12)
+plt.xlabel("Year the Microchip was Introduced (x) [Years]", fontsize=10)
+plt.ylabel("Transistor Count (y) [Transistors]", fontsize=10)
+plt.legend()
+plt.grid(color="black")
+plt.tight_layout()
+plt.savefig("transistor-count-fit.png", dpi=200)
+plt.show()
+print(f"ln(count) = {a:.7g} + {b:.7g} * (year - 1983)")
+`;;
+
+const previousQ01Code = `import numpy as np
 import matplotlib.pyplot as plt
 
 data = np.loadtxt("batch19-engr103-q01-threshold.csv", delimiter=",", skiprows=1)
@@ -25,31 +51,19 @@ plt.tight_layout()
 plt.savefig("threshold-voltage-fit.png", dpi=300)
 plt.show()
 print(f"m = {m:.7g}, c = {c:.7g}")
+`;;
+
+export const q01Code = `import numpy as np
+import matplotlib.pyplot as plt
+
+data = np.loadtxt("batch19-engr103-q01-threshold.csv", delimiter=",", skiprows=1)
+
 `;
 export const q07Code = `import numpy as np
 import matplotlib.pyplot as plt
 
 data = np.loadtxt("batch19-engr103-q07-transistors.csv", delimiter=",", skiprows=1)
-count = data[:, 0]  # First column: transistor count
-year = data[:, 1]   # Second column: year
-t = year - 1983
-b, a = np.polyfit(t, np.log(count), 1)
-year_fit = np.linspace(year.min(), year.max(), 300)
-count_fit = np.exp(a + b * (year_fit - 1983))
 
-plt.plot(year, count, linestyle="none", marker="o", markersize=8,
-         markerfacecolor="lightblue", markeredgecolor="black", label="Observed data")
-plt.plot(year_fit, count_fit, color="red", label="Exponential trendline")
-plt.yscale("log")
-plt.title("Moore's Law: The number of transistors on a microchip\\ndoubles every two years (synthetic practice data)", fontsize=12)
-plt.xlabel("Year the Microchip was Introduced (x) [Years]", fontsize=10)
-plt.ylabel("Transistor Count (y) [Transistors]", fontsize=10)
-plt.legend()
-plt.grid(color="black")
-plt.tight_layout()
-plt.savefig("transistor-count-fit.png", dpi=200)
-plt.show()
-print(f"ln(count) = {a:.7g} + {b:.7g} * (year - 1983)")
 `;
 export function uploadedCode(filename) {
   return `import numpy as np\nimport matplotlib.pyplot as plt\n\ndata = np.loadtxt(${JSON.stringify(filename)}, delimiter=",", skiprows=1, ndmin=2)\nprint("Data shape:", data.shape)\n\n# Edit this code for your CSV columns.\nx = data[:, 0]\ny = data[:, 1]\nplt.plot(x, y, "o", label="CSV data")\nplt.title("CSV plot", fontsize=16, color="blue")\nplt.xlabel("x", fontsize=12)\nplt.ylabel("y", fontsize=12)\nplt.legend()\nplt.grid(color="green")\nplt.tight_layout()\nplt.savefig("csv-plot.png", dpi=150)\nplt.show()\n`;
@@ -62,10 +76,15 @@ export class CsvWorkspace {
       { id: 'q07', label: 'Q07 · 晶体管 CSV', name: 'batch19-engr103-q07-transistors.csv', content: q07, code: q07Code },
     ];
     const savedCodes = saved.datasetCodes && typeof saved.datasetCodes === 'object' ? saved.datasetCodes : {};
-    for (const tab of this.tabs) if (typeof savedCodes[tab.id] === 'string') tab.code = savedCodes[tab.id];
+    for (const tab of this.tabs) if (typeof savedCodes[tab.id] === 'string') {
+      const stored = savedCodes[tab.id];
+      const previous = { q01: previousQ01Code, q07: previousQ07Code }[tab.id];
+      tab.code = previous && stored.trim() === previous.trim() ? (tab.id === 'q01' ? q01Code : q07Code) : stored;
+    }
     this.activeId = this.tabs.some((tab) => tab.id === saved.datasetId) ? saved.datasetId : 'scratch';
   }
   get active() { return this.tabs.find((tab) => tab.id === this.activeId); }
+  starterCode() { return this.activeId === 'q01' ? q01Code : this.activeId === 'q07' ? q07Code : this.active.name ? uploadedCode(this.active.name) : null; }
   saveCode(code) { this.active.code = code; }
   select(id) { if (!this.tabs.some((tab) => tab.id === id)) throw new Error('Unknown CSV tab'); this.activeId = id; return this.active; }
   addFile(name, content) {

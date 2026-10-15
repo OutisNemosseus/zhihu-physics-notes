@@ -51,7 +51,7 @@ package wheels from the versioned Pyodide CDN; later runs use cached wheels.
 The CSV upload button adds files to Pyodide's virtual filesystem before each
 execution. Q01 threshold-voltage and Q07 transistor-count CSVs are bundled from
 the user's supplied practice files and available on every run. Their tabs start
-with matching plotting examples; each tab keeps its own editable code. Preset
+with NumPy/Matplotlib imports and the CSV-loading statement only; each tab keeps its own editable code. Preset
 code drafts are restored from browser localStorage. Uploaded CSV content remains
 in the current page session. The runtime accepts plain basenames only.
 

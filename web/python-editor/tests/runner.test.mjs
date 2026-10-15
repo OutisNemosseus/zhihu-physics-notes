@@ -69,9 +69,9 @@ test('preloaded Q01/Q07 and uploaded CSVs are readable and generate downloadable
   runInNewContext(await readFile(new URL('../runner-worker.js',import.meta.url),'utf8'),scope);
   const files=await Promise.all(['batch19-engr103-q01-threshold.csv','batch19-engr103-q07-transistors.csv'].map(async name=>({name,content:await readFile(new URL('../data/'+name,import.meta.url),'utf8')})));
   async function run(code,extra=[]){messages.length=0;await scope.self.onmessage({data:{code,stdin:'',files:[...files,...extra]}});assert.equal(messages.at(-1).type,'done',messages.at(-1).text);assert(!messages.some(m=>m.type==='stderr'&&m.text.includes('图像导出失败')));return messages.filter(m=>m.type==='image');}
-  const q01=await run(q01Code);assert.equal(q01.length,1);assert.equal(q01[0].filename,'threshold-voltage-fit.png');
+  const q01=await run(q01Code + '\nplt.plot(data[:, 0], data[:, 1])\nplt.savefig("threshold-voltage-fit.png", dpi=300)\nplt.show()\n');assert.equal(q01.length,1);assert.equal(q01[0].filename,'threshold-voltage-fit.png');
   assert.equal(Buffer.from(q01[0].data,'base64').readUInt32BE(16),1920);
-  const q07=await run(q07Code);assert.equal(q07.length,1);assert.equal(q07[0].filename,'transistor-count-fit.png');
+  const q07=await run(q07Code + '\ncount, year = data[:, 0], data[:, 1]\nb, a = np.polyfit(year - 1983, np.log(count), 1)\nplt.plot(year, np.exp(a + b * (year - 1983)))\nplt.yscale("log")\nplt.savefig("transistor-count-fit.png", dpi=200)\nplt.show()\nprint("ln(count)", a, b)\n');assert.equal(q07.length,1);assert.equal(q07[0].filename,'transistor-count-fit.png');
   assert(messages.some(m=>m.type==='stdout'&&m.text.includes('ln(count)')));
   await run('import numpy as np\na=np.loadtxt("my data.csv",delimiter=",",skiprows=1)\nprint(a.shape)\nprint(a[:, 1].sum())',[{name:'my data.csv',content:'x,y\n1,2\n3,4\n'}]);
   assert(messages.some(m=>m.type==='stdout'&&m.text==='(2, 2)'));assert(messages.some(m=>m.type==='stdout'&&m.text==='6.0'));

@@ -274,7 +274,7 @@ function selectTab(name) {
 $('output-tab').addEventListener('click', () => selectTab('output'));
 $('problems-tab').addEventListener('click', () => selectTab('problems'));
 $('clear').addEventListener('click', () => { $('output').textContent = ''; plotOutput.reset(); });
-$('reset').addEventListener('click', () => { if (window.confirm('恢复示例会替换当前代码。继续？')) setCode(example); });
+$('reset').addEventListener('click', () => { if (window.confirm('恢复起始代码会替换当前标签的代码。继续？')) setCode(csvWorkspace.starterCode() || example); });
 const plotExample = `import numpy as np
 import matplotlib.pyplot as plt
 
