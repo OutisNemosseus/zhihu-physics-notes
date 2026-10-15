@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 350" role="img" aria-labelledby="title desc">
+<title id="title">Series RC charging circuit</title>
+<desc id="desc">Original series circuit. A 36-volt DC source, a 45-ohm resistor and a 0.08-farad capacitor form one closed loop. Positive current flows clockwise from the source positive terminal through the resistor into the capacitor upper plate. Initial capacitor charge is zero coulombs.</desc>
+<rect width="720" height="350" rx="18" fill="#fffdf7"/>
+<g stroke="#243846" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+<path d="M100 146V85H300M400 85H540V170M540 195V285H100V234"/>
+<rect x="300" y="65" width="100" height="40" rx="2"/>
+<circle cx="100" cy="190" r="44"/>
+<path d="M520 170H560M520 195H560M88 176H112M100 164V188M88 210H112"/>
+<path d="M200 55H266M256 48L266 55L256 62" stroke="#167d89"/>
+</g>
+<g font-family="Arial, sans-serif" fill="#243846" font-size="25">
+<text x="350" y="45" text-anchor="middle">R = 45 Ω</text>
+<text x="175" y="202">E = 36 V</text>
+<text x="578" y="175">C =</text><text x="578" y="207">0.08 F</text>
+<text x="230" y="34" text-anchor="middle" fill="#167d89">I(t)</text>
+<text x="500" y="166" text-anchor="middle">+</text><text x="500" y="211" text-anchor="middle">−</text>
+<text x="320" y="326" text-anchor="middle">Q(0) = 0 coulombs</text>
+</g></svg>
