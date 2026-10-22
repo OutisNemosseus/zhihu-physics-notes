@@ -1,0 +1,2558 @@
+{
+  "version": 1,
+  "title": "ENGR 103 · HW2 + ICA2 · 80 道代码实现选择题",
+  "programs": [
+    {
+      "id": "hw2-1",
+      "name": "HW2 · 程序 2_1",
+      "topic": "实现抛体运动计算",
+      "questions": [
+        {
+          "id": "impl-hw2-1-q1",
+          "number": 1,
+          "local": 1,
+          "prompt": "Create the launch-angle array [15,25,35,45,55,65,75]. 请选择把它保存为一维 NumPy 数组 angles_deg 的代码。",
+          "code": "",
+          "hint": "检查中括号层数及是否包含末项 75。",
+          "explanation": "np.array 接收列表后创建一维数组，顺序和数值均符合要求。",
+          "options": [
+            {
+              "label": "angles_deg = np.linspace(15,75,6)",
+              "feedback": "点数为 6，不能得到要求的 7 个角度。",
+              "correct": false
+            },
+            {
+              "label": "angles_deg = np.array([15,25,35,45,55,65,75])",
+              "feedback": "np.array 接收列表后创建一维数组，顺序和数值均符合要求。",
+              "correct": true
+            },
+            {
+              "label": "angles_deg = np.array([[15,25,35,45,55,65,75]])",
+              "feedback": "多加一层中括号得到 (1,7)，不是一维数组。",
+              "correct": false
+            },
+            {
+              "label": "angles_deg = np.arange(15,75,10)",
+              "feedback": "停止值 75 不包含，会漏掉最后一个角度。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q2",
+          "number": 2,
+          "local": 2,
+          "prompt": "Convert all launch angles from degrees to radians. 选择生成弧度数组 theta 的代码。",
+          "code": "angles_deg = np.array([15,25,35,45,55,65,75])",
+          "hint": "函数名应表示 degrees to radians。",
+          "explanation": "deg2rad 对整个数组逐元素执行 度×π/180。",
+          "options": [
+            {
+              "label": "theta = angles_deg * 180 / np.pi",
+              "feedback": "这也是弧度转度的因子。",
+              "correct": false
+            },
+            {
+              "label": "theta = np.deg2rad(angles_deg[0])",
+              "feedback": "只转换第一项，结果不是所有角度的数组。",
+              "correct": false
+            },
+            {
+              "label": "theta = np.deg2rad(angles_deg)",
+              "feedback": "deg2rad 对整个数组逐元素执行 度×π/180。",
+              "correct": true
+            },
+            {
+              "label": "theta = np.rad2deg(angles_deg)",
+              "feedback": "rad2deg 的转换方向相反。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q3",
+          "number": 3,
+          "local": 3,
+          "prompt": "Compute the range s=v0² sin(2θ)/g for every angle. 选择生成 range_m 的代码。",
+          "code": "v0, g = 260.0, 9.81\ntheta = np.deg2rad([15,25,35,45,55,65,75])",
+          "hint": "二倍角要写在 sin 的括号里面。",
+          "explanation": "先计算二倍角正弦，再乘 v0²/g，逐项得到射程。",
+          "options": [
+            {
+              "label": "range_m = v0**2 / g * np.sin(theta)**2",
+              "feedback": "使用了 sin²θ，题目要求 sin(2θ)。",
+              "correct": false
+            },
+            {
+              "label": "range_m = v0 / g * np.sin(2*theta)",
+              "feedback": "缺少速度平方。",
+              "correct": false
+            },
+            {
+              "label": "range_m = v0**2 * g * np.sin(2*theta)",
+              "feedback": "应除以 g，而不是乘 g。",
+              "correct": false
+            },
+            {
+              "label": "range_m = v0**2 / g * np.sin(2*theta)",
+              "feedback": "先计算二倍角正弦，再乘 v0²/g，逐项得到射程。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q4",
+          "number": 4,
+          "local": 4,
+          "prompt": "Compute the peak height h=v0²sin²θ/(2g) for every angle. 选择生成 height_m 的代码。",
+          "code": "v0, g = 260.0, 9.81\ntheta = np.deg2rad([15,25,35,45,55,65,75])",
+          "hint": "先求竖直速度 v0 sinθ，再平方。",
+          "explanation": "正弦的平方位于函数调用外，分母保留 2g。",
+          "options": [
+            {
+              "label": "height_m = v0**2 * np.sin(2*theta) / (2*g)",
+              "feedback": "把 sin²θ 换成了 sin(2θ)。",
+              "correct": false
+            },
+            {
+              "label": "height_m = v0**2 * np.sin(theta)**2 / g",
+              "feedback": "分母漏掉了 2。",
+              "correct": false
+            },
+            {
+              "label": "height_m = v0**2 * np.cos(theta)**2 / (2*g)",
+              "feedback": "竖直速度分量使用 sinθ，不是 cosθ。",
+              "correct": false
+            },
+            {
+              "label": "height_m = v0**2 * np.sin(theta)**2 / (2*g)",
+              "feedback": "正弦的平方位于函数调用外，分母保留 2g。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q5",
+          "number": 5,
+          "local": 5,
+          "prompt": "Round all ranges to 3 decimal places and save the resulting numerical array as rounded. 应选哪段代码？",
+          "code": "range_m = np.array([1.23456,2.34567,3.45678])",
+          "hint": "保留数组数值类型，使用 decimals 参数。",
+          "explanation": "round 的第二个参数是小数位数，返回数值数组。",
+          "options": [
+            {
+              "label": "rounded = np.round(range_m,3)",
+              "feedback": "round 的第二个参数是小数位数，返回数值数组。",
+              "correct": true
+            },
+            {
+              "label": "rounded = range_m[:3]",
+              "feedback": "这是截取前三项，未进行小数舍入。",
+              "correct": false
+            },
+            {
+              "label": "rounded = np.round(range_m)",
+              "feedback": "未指定 decimals，默认舍入到整数。",
+              "correct": false
+            },
+            {
+              "label": "rounded = np.array([f\"{x:.3f}\" for x in range_m])",
+              "feedback": "这得到字符串数组，题目要求数值数组。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q6",
+          "number": 6,
+          "local": 6,
+          "prompt": "Print the label “Ranges [m]:” followed by the array rounded on the same line. 选择代码。",
+          "code": "rounded = np.array([1.235,2.346])",
+          "hint": "标签需要引号，变量名不加引号。",
+          "explanation": "print 的逗号分隔参数能把标签与数组依次输出在同一行。",
+          "options": [
+            {
+              "label": "print(\"Ranges [cm]:\",rounded)",
+              "feedback": "输出的单位标签错误。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Ranges [m]:\",rounded)",
+              "feedback": "print 的逗号分隔参数能把标签与数组依次输出在同一行。",
+              "correct": true
+            },
+            {
+              "label": "print(\"Ranges [m]:\", \"rounded\")",
+              "feedback": "引号中的 rounded 只是变量名文字，不是数组。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Ranges [m]:\")\nprint(rounded)",
+              "feedback": "分成了两行，不符合同行要求。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q7",
+          "number": 7,
+          "local": 7,
+          "prompt": "Display the maximum-height array with the label “Maximum heights [m]:”.（改写：显示高度矩阵及单位。）",
+          "code": "height_m = np.array([10.,20.,30.])",
+          "hint": "完整输出高度数组，同时保留题设单位。",
+          "explanation": "标签明确指出最大高度和米单位，变量不加引号。",
+          "options": [
+            {
+              "label": "print(\"Maximum heights [cm]:\",height_m)",
+              "feedback": "标签把米误写成厘米。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Maximum heights [m]:\",height_m[0])",
+              "feedback": "只输出第一项，没有显示整个数组。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Maximum heights [m]:\",height_m)",
+              "feedback": "标签明确指出最大高度和米单位，变量不加引号。",
+              "correct": true
+            },
+            {
+              "label": "print(\"Maximum heights [m]:\",\"height_m\")",
+              "feedback": "输出的是变量名文字。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q8",
+          "number": 8,
+          "local": 8,
+          "prompt": "Compute ranges for a launch speed of 100 m/s at angles [20,35,45,55,70] degrees.（数值变式：生成射程数组。）",
+          "code": "v0,g=100.0,9.81\nangles_deg=np.array([20,35,45,55,70])",
+          "hint": "角度转换和射程公式必须同时正确。",
+          "explanation": "先把全部角度转弧度，再在射程公式中计算二倍角。",
+          "options": [
+            {
+              "label": "range_m = v0**2/g*np.sin(np.deg2rad(angles_deg))**2",
+              "feedback": "这是正弦平方结构，不是射程二倍角。",
+              "correct": false
+            },
+            {
+              "label": "range_m = v0/g*np.sin(2*np.deg2rad(angles_deg))",
+              "feedback": "遗漏速度平方。",
+              "correct": false
+            },
+            {
+              "label": "range_m = v0**2/g*np.sin(2*np.deg2rad(angles_deg))",
+              "feedback": "先把全部角度转弧度，再在射程公式中计算二倍角。",
+              "correct": true
+            },
+            {
+              "label": "range_m = v0**2/g*np.sin(2*angles_deg)",
+              "feedback": "NumPy 正弦接受弧度，不能直接放角度。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q9",
+          "number": 9,
+          "local": 9,
+          "prompt": "Create the launch-angle vector [10,20,30,40,50,60,70] using arange.（数值变式：创建角度向量。）",
+          "code": "",
+          "hint": "第三个参数是步长，不是目标元素个数。",
+          "explanation": "步长 10 且停止边界大于 70，可以生成指定七项。",
+          "options": [
+            {
+              "label": "angles_deg = np.arange(10,70,10)",
+              "feedback": "停止边界不包含，漏掉 70。",
+              "correct": false
+            },
+            {
+              "label": "angles_deg = np.arange(0,71,10)",
+              "feedback": "多出了起点 0。",
+              "correct": false
+            },
+            {
+              "label": "angles_deg = np.arange(10,71,7)",
+              "feedback": "把七个点误用为步长 7。",
+              "correct": false
+            },
+            {
+              "label": "angles_deg = np.arange(10,71,10)",
+              "feedback": "步长 10 且停止边界大于 70，可以生成指定七项。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-1-q10",
+          "number": 10,
+          "local": 10,
+          "prompt": "Compute the maximum-height array for v0=100 m/s and the supplied radian angles.（数值变式：计算峰值高度。）",
+          "code": "v0,g=100.0,9.81\ntheta=np.deg2rad([20,35,45,55,70])",
+          "hint": "先形成竖直速度，再将其整体平方。",
+          "explanation": "竖直初速度 v0 sinθ 整体平方，再除以 2g。",
+          "options": [
+            {
+              "label": "height_m = (v0*np.sin(theta))**2/(2*g)",
+              "feedback": "竖直初速度 v0 sinθ 整体平方，再除以 2g。",
+              "correct": true
+            },
+            {
+              "label": "height_m = (v0*np.sin(2*theta))**2/(2*g)",
+              "feedback": "高度公式不应使用二倍角。",
+              "correct": false
+            },
+            {
+              "label": "height_m = (v0*np.cos(theta))**2/(2*g)",
+              "feedback": "使用了水平而非竖直速度分量。",
+              "correct": false
+            },
+            {
+              "label": "height_m = (v0*np.sin(theta))/(2*g)",
+              "feedback": "未对竖直速度平方。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 HW 2-1 | Projectile range and peak height in m.\"\"\"\nimport numpy as np\n\nv0, g = 260.0, 9.81  # m/s, m/s^2\nangles_deg = np.array([15, 25, 35, 45, 55, 65, 75])\ntheta = np.deg2rad(angles_deg)\nrange_m = v0**2 / g * np.sin(2 * theta)\nheight_m = v0**2 * np.sin(theta)**2 / (2 * g)\nprint(\"Angles (deg):\", angles_deg)\nprint(\"Maximum horizontal distances (m):\", np.round(range_m, 3))\nprint(\"Maximum heights (m):\", np.round(height_m, 3))\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/HW2/Su_Tong_HW2_1.py"
+    },
+    {
+      "id": "hw2-2",
+      "name": "HW2 · 程序 2_2",
+      "topic": "实现流体压力表",
+      "questions": [
+        {
+          "id": "impl-hw2-2-q1",
+          "number": 11,
+          "local": 1,
+          "prompt": "Create depths 10,12,14,16,18,20 m using arange. 选择生成 heights_m 的代码。",
+          "code": "",
+          "hint": "要包含 20，stop 应放在它后面。",
+          "explanation": "停止值 21 不包含，故保留 20。",
+          "options": [
+            {
+              "label": "heights_m = np.linspace(10,20,5)",
+              "feedback": "只给出 5 个采样点，不是要求的六个高度。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.arange(10,21,2)",
+              "feedback": "停止值 21 不包含，故保留 20。",
+              "correct": true
+            },
+            {
+              "label": "heights_m = np.arange(10,20,2)",
+              "feedback": "停止值 20 不包含，漏掉末项。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.arange(10,21,1)",
+              "feedback": "步长为 1，多出不需要的奇数高度。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q2",
+          "number": 12,
+          "local": 2,
+          "prompt": "Create a 1D array of fluid specific gravities 0.87,1.00,1.24. 选择代码。",
+          "code": "",
+          "hint": "比重无单位，约为 1；不要预先乘水密度。",
+          "explanation": "使用一层列表创建包含三个比重的一维数组。",
+          "options": [
+            {
+              "label": "sg = np.arange(0.87,1.24,1.00)",
+              "feedback": "把三个目标数错误地当作起点、终点和步长。",
+              "correct": false
+            },
+            {
+              "label": "sg = np.array([0.87,1.00,1.24])",
+              "feedback": "使用一层列表创建包含三个比重的一维数组。",
+              "correct": true
+            },
+            {
+              "label": "sg = np.array([[0.87],[1.00],[1.24]])",
+              "feedback": "生成了 (3,1) 二维列数组。",
+              "correct": false
+            },
+            {
+              "label": "sg = np.array([870,1000,1240])",
+              "feedback": "这些数是密度，不是要求的比重。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q3",
+          "number": 13,
+          "local": 3,
+          "prompt": "Make grids with rows for depths and columns for fluids. 默认 xy 索引下，哪段代码将比重网格保存为 SG、高度网格保存为 H？",
+          "code": "sg = np.array([0.87,1.00,1.24])\nheights_m = np.array([10,12,14,16,18,20])",
+          "hint": "默认 xy 模式下，第二个输入控制行数。",
+          "explanation": "先传列方向的比重，再传行方向的高度，输出均为 (6,3)。",
+          "options": [
+            {
+              "label": "SG,H = np.meshgrid(heights_m,sg)",
+              "feedback": "输入顺序反了，得到 (3,6)，变量含义也不符。",
+              "correct": false
+            },
+            {
+              "label": "SG,H = np.meshgrid(sg,heights_m,indexing=\"ij\")",
+              "feedback": "ij 模式会得到 (3,6)，不满足题目行列方向。",
+              "correct": false
+            },
+            {
+              "label": "SG,H = np.meshgrid(sg,heights_m)",
+              "feedback": "先传列方向的比重，再传行方向的高度，输出均为 (6,3)。",
+              "correct": true
+            },
+            {
+              "label": "H,SG = np.meshgrid(sg,heights_m)",
+              "feedback": "输出变量名交换，SG 实际接到高度网格。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q4",
+          "number": 14,
+          "local": 4,
+          "prompt": "Convert the SG grid to a density grid rho in kg/m³; water density is 1000 kg/m³. 选择代码。",
+          "code": "SG = np.array([[0.87,1.00,1.24],[0.87,1.00,1.24]])",
+          "hint": "SG=ρ/ρ水，把 ρ 单独移到等号一边。",
+          "explanation": "液体密度等于比重乘参考水密度。",
+          "options": [
+            {
+              "label": "rho = SG / 1000.0",
+              "feedback": "换算方向反了。",
+              "correct": false
+            },
+            {
+              "label": "rho = SG * 9.81",
+              "feedback": "把重力加速度当成水密度。",
+              "correct": false
+            },
+            {
+              "label": "rho = SG + 1000.0",
+              "feedback": "比重是比例，不能加上参考密度。",
+              "correct": false
+            },
+            {
+              "label": "rho = SG * 1000.0",
+              "feedback": "液体密度等于比重乘参考水密度。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q5",
+          "number": 15,
+          "local": 5,
+          "prompt": "Calculate the entire hydrostatic gauge-pressure grid in Pa. 选择生成 pressure_pa 的代码。",
+          "code": "SG,H = np.meshgrid([0.87,1.00,1.24],[10,12,14,16,18,20])",
+          "hint": "P=ρgH，三个因子全部相乘。",
+          "explanation": "把密度 SG×1000 乘 g 与每个深度即可得到帕斯卡。",
+          "options": [
+            {
+              "label": "pressure_pa = SG * 1000.0 * 9.81 * H",
+              "feedback": "把密度 SG×1000 乘 g 与每个深度即可得到帕斯卡。",
+              "correct": true
+            },
+            {
+              "label": "pressure_pa = SG * 9.81 * H",
+              "feedback": "漏掉了水密度因子 1000。",
+              "correct": false
+            },
+            {
+              "label": "pressure_pa = SG * 1000.0 * 9.81 + H",
+              "feedback": "深度应该相乘，不是相加。",
+              "correct": false
+            },
+            {
+              "label": "pressure_pa = SG * 1000.0 * 9.81 * H**2",
+              "feedback": "压力对深度是一次关系，不应平方。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q6",
+          "number": 16,
+          "local": 6,
+          "prompt": "Create a pressure table for SG=[0.8,1.0,1.2] and depths [2,4,6,8] m, with depths as rows.（数值变式：计算各流体压力。）",
+          "code": "",
+          "hint": "先明确表格方向，再把比重转换为密度。",
+          "explanation": "比重控制三列，深度控制四行，再用 ρgH 计算。",
+          "options": [
+            {
+              "label": "SG,H = np.meshgrid([0.8,1.0,1.2],[2,4,6,8])\npressure_pa = SG*1000*9.81*H",
+              "feedback": "比重控制三列，深度控制四行，再用 ρgH 计算。",
+              "correct": true
+            },
+            {
+              "label": "SG,H = np.meshgrid([2,4,6,8],[0.8,1.0,1.2])\npressure_pa = SG*1000*9.81*H",
+              "feedback": "网格输入顺序和行列含义相反，形状也不同。",
+              "correct": false
+            },
+            {
+              "label": "SG,H = np.meshgrid([0.8,1.0,1.2],[2,4,6,8])\npressure_pa = SG*9.81*H",
+              "feedback": "遗漏水密度因子 1000。",
+              "correct": false
+            },
+            {
+              "label": "SG,H = np.meshgrid([0.8,1.0,1.2],[2,4,6,8])\npressure_pa = SG*1000*9.81/H",
+              "feedback": "压力应乘以深度，不是除。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q7",
+          "number": 17,
+          "local": 7,
+          "prompt": "Convert all pressure values from Pa to kPa. 选择生成 pressure_kpa 的代码。",
+          "code": "pressure_pa = np.array([[98100.,117720.],[196200.,235440.]])",
+          "hint": "用 1000 Pa 应等于 1 kPa 检查方向。",
+          "explanation": "1 kPa=1000 Pa，转成较大单位时数值除以 1000。",
+          "options": [
+            {
+              "label": "pressure_kpa = pressure_pa + 1000",
+              "feedback": "单位换算需要比例，不是加常数。",
+              "correct": false
+            },
+            {
+              "label": "pressure_kpa = pressure_pa / 1000",
+              "feedback": "1 kPa=1000 Pa，转成较大单位时数值除以 1000。",
+              "correct": true
+            },
+            {
+              "label": "pressure_kpa = pressure_pa * 1000",
+              "feedback": "把换算方向反了。",
+              "correct": false
+            },
+            {
+              "label": "pressure_kpa = pressure_pa / 100",
+              "feedback": "换算因子应是 1000。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q8",
+          "number": 18,
+          "local": 8,
+          "prompt": "Create depths from 5 through 15 m in increments of 2 m.（数值变式：创建压力计算高度向量。）",
+          "code": "",
+          "hint": "含末项的步进序列需要 stop 稍大于末项。",
+          "explanation": "得到 5、7、9、11、13、15，包含两端。",
+          "options": [
+            {
+              "label": "heights_m = np.arange(5,16,1)",
+              "feedback": "步长为 1，不符合要求。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.linspace(5,15,5)",
+              "feedback": "五个点不能产生要求的六个高度。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.arange(5,16,2)",
+              "feedback": "得到 5、7、9、11、13、15，包含两端。",
+              "correct": true
+            },
+            {
+              "label": "heights_m = np.arange(5,15,2)",
+              "feedback": "排除了 15。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q9",
+          "number": 19,
+          "local": 9,
+          "prompt": "Without meshgrid, create a 6×3 pressure table with depth rows and SG columns using broadcasting. 选择代码。",
+          "code": "h = np.array([10,12,14,16,18,20])\nsg = np.array([0.87,1.00,1.24])",
+          "hint": "把行方向的变化量写成列数组。",
+          "explanation": "(6,1) 与 (1,3) 广播成 (6,3)，分别对应深度和流体。",
+          "options": [
+            {
+              "label": "P = h * sg * 1000 * 9.81",
+              "feedback": "一维长度 6 和 3 不兼容，不能直接广播。",
+              "correct": false
+            },
+            {
+              "label": "P = h[None,:] * sg[:,None] * 1000 * 9.81",
+              "feedback": "得到 3×6，方向相反。",
+              "correct": false
+            },
+            {
+              "label": "P = h[:,None] + sg[None,:] * 1000 * 9.81",
+              "feedback": "形状虽匹配，但深度应该相乘。",
+              "correct": false
+            },
+            {
+              "label": "P = h[:,None] * sg[None,:] * 1000 * 9.81",
+              "feedback": "(6,1) 与 (1,3) 广播成 (6,3)，分别对应深度和流体。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-2-q10",
+          "number": 20,
+          "local": 10,
+          "prompt": "Print a heading “Pressure [Pa]:” on one line and print the complete table on the next line. 选择代码。",
+          "code": "pressure_pa = np.array([[1.,2.],[3.,4.]])",
+          "hint": "题目要求标题和表格分开起行。",
+          "explanation": "第一条 print 输出标题与换行，第二条输出表格。",
+          "options": [
+            {
+              "label": "print(\"Pressure [Pa]:\",pressure_pa)",
+              "feedback": "数组第一行会紧跟标题，未在下一行开始。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Pressure [Pa]:\")\nprint(\"pressure_pa\")",
+              "feedback": "第二行打印变量名文字，不是表格。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Pressure [kPa]:\")\nprint(pressure_pa)",
+              "feedback": "标签单位应为 Pa。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Pressure [Pa]:\")\nprint(pressure_pa)",
+              "feedback": "第一条 print 输出标题与换行，第二条输出表格。",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 HW 2-2 | Hydrostatic pressure table in Pa.\"\"\"\nimport numpy as np\n\nheights_m = np.arange(10, 21, 2)\nsg = np.array([0.87, 1.00, 1.24])\nSG, H = np.meshgrid(sg, heights_m)\npressure_pa = SG * 1000.0 * 9.81 * H\nprint(\"Columns: fluids A, B, C; rows: heights 10, 12, ..., 20 m\")\nprint(\"Pressure (Pa):\\n\", pressure_pa)\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/HW2/Su_Tong_HW2_2.py"
+    },
+    {
+      "id": "hw2-3",
+      "name": "HW2 · 程序 2_3",
+      "topic": "实现数组索引与拼接",
+      "questions": [
+        {
+          "id": "impl-hw2-3-q1",
+          "number": 21,
+          "local": 1,
+          "prompt": "Create D from the third column of A, keeping a 1D array. 应选哪段代码？",
+          "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])\nB = np.array([1,5,6])\nC = np.array([12,18,5,2])",
+          "hint": "要取出一维列，用单个整数列索引。",
+          "explanation": "全部行配合列索引 2，提取第三列为一维数组。",
+          "options": [
+            {
+              "label": "D = A[:,2]",
+              "feedback": "全部行配合列索引 2，提取第三列为一维数组。",
+              "correct": true
+            },
+            {
+              "label": "D = A[2,:]",
+              "feedback": "提取了第三行。",
+              "correct": false
+            },
+            {
+              "label": "D = A[:,3]",
+              "feedback": "列索引 3 越界。",
+              "correct": false
+            },
+            {
+              "label": "D = A[:,2:3]",
+              "feedback": "切片保留二维列结构，形状为 (3,1)，不符合一维要求。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q2",
+          "number": 22,
+          "local": 2,
+          "prompt": "Build E as a 3×2 matrix: first column B, second column D. 选择代码。",
+          "code": "B = np.array([1,5,6])\nD = np.array([22,5,82])",
+          "hint": "函数名中的 column 表示列方向。",
+          "explanation": "column_stack 按参数顺序把一维输入作为列。",
+          "options": [
+            {
+              "label": "E = np.concatenate((B,D))",
+              "feedback": "得到长度为 6 的一维数组。",
+              "correct": false
+            },
+            {
+              "label": "E = np.column_stack((B,D))",
+              "feedback": "column_stack 按参数顺序把一维输入作为列。",
+              "correct": true
+            },
+            {
+              "label": "E = np.vstack((B,D))",
+              "feedback": "vstack 把输入作为行，得到 2×3。",
+              "correct": false
+            },
+            {
+              "label": "E = np.column_stack((D,B))",
+              "feedback": "两列顺序相反。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q3",
+          "number": 23,
+          "local": 3,
+          "prompt": "Build F as a 6×1 column: all of B followed by all of D. 选择代码。",
+          "code": "B = np.array([1,5,6])\nD = np.array([22,5,82])",
+          "hint": "先把顺序确定为 B 的三项、D 的三项，再改变形状。",
+          "explanation": "先按 B 后 D 首尾连接，再改为六行一列。",
+          "options": [
+            {
+              "label": "F = np.concatenate((B,D)).reshape(1,6)",
+              "feedback": "生成一行六列。",
+              "correct": false
+            },
+            {
+              "label": "F = np.column_stack((B,D)).reshape(6,1)",
+              "feedback": "列拼接后按默认行顺序展平会交错 B 与 D 的元素。",
+              "correct": false
+            },
+            {
+              "label": "F = np.concatenate((B,D)).reshape(6,1)",
+              "feedback": "先按 B 后 D 首尾连接，再改为六行一列。",
+              "correct": true
+            },
+            {
+              "label": "F = np.concatenate((D,B)).reshape(6,1)",
+              "feedback": "元素分组顺序相反。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q4",
+          "number": 24,
+          "local": 4,
+          "prompt": "Append the first three entries of C as a fourth row of A, storing G. 选择代码。",
+          "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])\nB = np.array([1,5,6])\nC = np.array([12,18,5,2])",
+          "hint": "追加到下方用 vstack，先确保新行长度与列数相同。",
+          "explanation": "C[:3] 作为长度为 3 的新行，竖直追加到 A。",
+          "options": [
+            {
+              "label": "G = np.column_stack((A,C[:3]))",
+              "feedback": "添加的是第四列，而不是第四行。",
+              "correct": false
+            },
+            {
+              "label": "G = np.vstack((C[:3],A))",
+              "feedback": "把新行放到了顶部，而不是第四行。",
+              "correct": false
+            },
+            {
+              "label": "G = np.vstack((A,C[:3]))",
+              "feedback": "C[:3] 作为长度为 3 的新行，竖直追加到 A。",
+              "correct": true
+            },
+            {
+              "label": "G = np.vstack((A,C))",
+              "feedback": "C 有四项，与 A 的三列不匹配。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q5",
+          "number": 25,
+          "local": 5,
+          "prompt": "Build H from A row 1 column 3, the second entry of C, and the second entry of B, in that order. 选择代码。",
+          "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])\nB = np.array([1,5,6])\nC = np.array([12,18,5,2])",
+          "hint": "按题目要求逐个写出元素位置，最后统一放入 np.array。",
+          "explanation": "题目的一基位置分别转换为 (0,2)、1、1。",
+          "options": [
+            {
+              "label": "H = np.array([A[2,0],C[1],B[1]])",
+              "feedback": "A 的行列位置交换了。",
+              "correct": false
+            },
+            {
+              "label": "H = np.array([A[0,2],C[2],B[2]])",
+              "feedback": "后两项用了第三项索引。",
+              "correct": false
+            },
+            {
+              "label": "H = np.array([B[1],C[1],A[0,2]])",
+              "feedback": "所需三个值的组合顺序相反。",
+              "correct": false
+            },
+            {
+              "label": "H = np.array([A[0,2],C[1],B[1]])",
+              "feedback": "题目的一基位置分别转换为 (0,2)、1、1。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q6",
+          "number": 26,
+          "local": 6,
+          "prompt": "x contains 6 elements. Make it a column array without hard-coding the row count. 选择代码。",
+          "code": "x = np.array([1,5,6,22,5,82])",
+          "hint": "把 1 放在列维度，自动推算行维度。",
+          "explanation": "固定列数 1，行数由 −1 自动推算。",
+          "options": [
+            {
+              "label": "column = x.reshape(-1,1)",
+              "feedback": "固定列数 1，行数由 −1 自动推算。",
+              "correct": true
+            },
+            {
+              "label": "column = x.reshape(-1)",
+              "feedback": "只展平为一维，不产生列维度。",
+              "correct": false
+            },
+            {
+              "label": "column = x.reshape(1,-1)",
+              "feedback": "固定为一行，而非一列。",
+              "correct": false
+            },
+            {
+              "label": "column = x.T",
+              "feedback": "一维数组转置后仍是一维。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q7",
+          "number": 27,
+          "local": 7,
+          "prompt": "Select the upper-left 2×2 block from A and store block. 应选哪段代码？",
+          "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])\nB = np.array([1,5,6])\nC = np.array([12,18,5,2])",
+          "hint": "前两行和前两列都需要切片。",
+          "explanation": "行和列均取前两项，保持二维结构。",
+          "options": [
+            {
+              "label": "block = A[:2,2]",
+              "feedback": "仅提取前两行的第三列，结果是一维。",
+              "correct": false
+            },
+            {
+              "label": "block = A[:2,:2]",
+              "feedback": "行和列均取前两项，保持二维结构。",
+              "correct": true
+            },
+            {
+              "label": "block = A[2,2]",
+              "feedback": "只取一个元素。",
+              "correct": false
+            },
+            {
+              "label": "block = A[1:3,1:3]",
+              "feedback": "取的是右下角区域，不是左上角。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q8",
+          "number": 28,
+          "local": 8,
+          "prompt": "Select the first three entries of C as a 1D array named row. 选择代码。",
+          "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])\nB = np.array([1,5,6])\nC = np.array([12,18,5,2])",
+          "hint": "stop 位置不包含，且此处不需要 reshape。",
+          "explanation": "切片保留索引 0、1、2，得到所需一维数组。",
+          "options": [
+            {
+              "label": "row = C[:3].reshape(3,1)",
+              "feedback": "变成了二维列数组。",
+              "correct": false
+            },
+            {
+              "label": "row = C[:3]",
+              "feedback": "切片保留索引 0、1、2，得到所需一维数组。",
+              "correct": true
+            },
+            {
+              "label": "row = C[3]",
+              "feedback": "只取第四项。",
+              "correct": false
+            },
+            {
+              "label": "row = C[1:4]",
+              "feedback": "从第二项开始，遗漏第一项。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q9",
+          "number": 29,
+          "local": 9,
+          "prompt": "Print E and its shape, with labels, on two separate lines. 选择代码。",
+          "code": "E = np.array([[1,22],[5,5],[6,82]])",
+          "hint": "shape 不带括号，size 和 shape 含义不同。",
+          "explanation": "第一条输出数组内容，第二条读取 shape 属性并输出形状。",
+          "options": [
+            {
+              "label": "print(\"E =\",E)\nprint(\"Shape:\",E.shape())",
+              "feedback": "shape 是属性，不是可调用方法。",
+              "correct": false
+            },
+            {
+              "label": "print(\"E =\",E)\nprint(\"Shape:\",E.size)",
+              "feedback": "size 给元素总数，不能代替形状。",
+              "correct": false
+            },
+            {
+              "label": "print(\"E =\",E)\nprint(\"Shape:\",E.shape)",
+              "feedback": "第一条输出数组内容，第二条读取 shape 属性并输出形状。",
+              "correct": true
+            },
+            {
+              "label": "print(\"E =\",\"E\")\nprint(\"Shape:\",E.shape)",
+              "feedback": "第一条打印了变量名文字，不是数组。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-3-q10",
+          "number": 30,
+          "local": 10,
+          "prompt": "Make a single 1D array with all of B followed by all of D. 选择生成 joined 的代码。",
+          "code": "B = np.array([1,5,6])\nD = np.array([22,5,82])",
+          "hint": "这里要首尾连接，不是加法或二维堆叠。",
+          "explanation": "concatenate 对两个一维数组按顺序连接。",
+          "options": [
+            {
+              "label": "joined = B + D",
+              "feedback": "逐元素相加，只有三项。",
+              "correct": false
+            },
+            {
+              "label": "joined = np.array([B,D])",
+              "feedback": "生成 2×3 的二维数组。",
+              "correct": false
+            },
+            {
+              "label": "joined = np.concatenate((D,B))",
+              "feedback": "把 D 放在了 B 前面。",
+              "correct": false
+            },
+            {
+              "label": "joined = np.concatenate((B,D))",
+              "feedback": "concatenate 对两个一维数组按顺序连接。",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 HW 2-3 | NumPy array slicing and stacking.\"\"\"\nimport numpy as np\n\nA = np.array([[15, 3, 22], [3, 8, 5], [14, 3, 82]])\nB = np.array([1, 5, 6])\nC = np.array([12, 18, 5, 2])\nD = A[:, 2]\nE = np.column_stack((B, D))\nF = np.concatenate((B, D)).reshape(6, 1)\nG = np.vstack((A, C[:3]))\nH = np.array([A[0, 2], C[1], B[1]])\nfor name, arr in ((\"A\", A), (\"B\", B), (\"C\", C), (\"D\", D),\n                  (\"E\", E), (\"F\", F), (\"G\", G), (\"H\", H)):\n    print(f\"{name} =\\n{arr}\")\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/HW2/Su_Tong_HW2_3.py"
+    },
+    {
+      "id": "hw2-4",
+      "name": "HW2 · 程序 2_4",
+      "topic": "实现线性方程组求解",
+      "questions": [
+        {
+          "id": "impl-hw2-4-q1",
+          "number": 31,
+          "local": 1,
+          "prompt": "Create a 1D coefficient row for 2a−4b+5c−3.5d+1.8e+4f=52.52, in variable order a,b,c,d,e,f. 选择代码。",
+          "code": "",
+          "hint": "先排好未知数顺序，右端单独保存。",
+          "explanation": "按变量顺序保留六个系数及其正负号，不把右端放进系数行。",
+          "options": [
+            {
+              "label": "row = np.array([2,-4,5,-3.5,1.8,4])",
+              "feedback": "按变量顺序保留六个系数及其正负号，不把右端放进系数行。",
+              "correct": true
+            },
+            {
+              "label": "row = np.array([2,4,5,-3.5,1.8,4])",
+              "feedback": "b 的系数丢失负号。",
+              "correct": false
+            },
+            {
+              "label": "row = np.array([2,-4,5,3.5,1.8,4])",
+              "feedback": "d 的系数丢失负号。",
+              "correct": false
+            },
+            {
+              "label": "row = np.array([2,-4,5,-3.5,1.8,4,52.52])",
+              "feedback": "把右端也放进了系数行，多出一项。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q2",
+          "number": 32,
+          "local": 2,
+          "prompt": "Store right-hand sides 52.52,−21.1,−27.6,9.16,−17.9,−16.2 as a 1D array rhs in this order. 选择代码。",
+          "code": "",
+          "hint": "每个右端必须匹配相同位置的方程。",
+          "explanation": "一层列表按方程顺序创建一维右端。",
+          "options": [
+            {
+              "label": "rhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])",
+              "feedback": "一层列表按方程顺序创建一维右端。",
+              "correct": true
+            },
+            {
+              "label": "rhs = np.array([[52.52,-21.1,-27.6,9.16,-17.9,-16.2]])",
+              "feedback": "多一层列表使其变为二维行数组。",
+              "correct": false
+            },
+            {
+              "label": "rhs = np.array([52.52,21.1,-27.6,9.16,-17.9,-16.2])",
+              "feedback": "第二个右端遗漏了负号。",
+              "correct": false
+            },
+            {
+              "label": "rhs = np.array([-16.2,-17.9,9.16,-27.6,-21.1,52.52])",
+              "feedback": "颠倒方程右端顺序，不能与原系数行对应。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q3",
+          "number": 33,
+          "local": 3,
+          "prompt": "Solve A @ solution = rhs using NumPy. 选择代码。",
+          "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)\nrhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])",
+          "hint": "解方程使用 linalg.solve，顺序与 A x = rhs 一致。",
+          "explanation": "solve 依次接收系数矩阵与右端，直接求解。",
+          "options": [
+            {
+              "label": "solution = A @ rhs",
+              "feedback": "这只是矩阵乘向量，不是求解。",
+              "correct": false
+            },
+            {
+              "label": "solution = np.linalg.solve(A,rhs)",
+              "feedback": "solve 依次接收系数矩阵与右端，直接求解。",
+              "correct": true
+            },
+            {
+              "label": "solution = A / rhs",
+              "feedback": "逐元素除法不能求解线性方程。",
+              "correct": false
+            },
+            {
+              "label": "solution = np.linalg.solve(rhs,A)",
+              "feedback": "把右端当成系数矩阵，参数顺序错误。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q4",
+          "number": 34,
+          "local": 4,
+          "prompt": "Check the computed solution against the original equations, allowing small floating-point errors. 选择生成 ok 的代码。",
+          "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)\nrhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])\nsolution = np.linalg.solve(A,rhs)",
+          "hint": "矩阵乘法对应代入；浮点结果用容差判断。",
+          "explanation": "先代入得到六个左端，再用 allclose 与右端比较。",
+          "options": [
+            {
+              "label": "ok = np.allclose(solution,rhs)",
+              "feedback": "比较的是不同含义的两个向量。",
+              "correct": false
+            },
+            {
+              "label": "ok = np.array_equal(A @ solution,rhs + 1)",
+              "feedback": "人为把右端加 1，不是检查原方程。",
+              "correct": false
+            },
+            {
+              "label": "ok = np.allclose(A @ solution,rhs)",
+              "feedback": "先代入得到六个左端，再用 allclose 与右端比较。",
+              "correct": true
+            },
+            {
+              "label": "ok = np.allclose(A * solution,rhs)",
+              "feedback": "逐元素乘法没有完成各方程的求和。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q5",
+          "number": 35,
+          "local": 5,
+          "prompt": "Calculate the residual vector A @ solution − rhs and save residual. 选择代码。",
+          "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)\nrhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])\nsolution = np.ones(6)",
+          "hint": "先计算每条方程左端，再减对应右端。",
+          "explanation": "残差按定义为方程左端减右端，六条方程对应六个分量。",
+          "options": [
+            {
+              "label": "residual = A * solution - rhs",
+              "feedback": "逐元素乘法得到 6×6，非六条方程的残差。",
+              "correct": false
+            },
+            {
+              "label": "residual = rhs - A @ solution",
+              "feedback": "这与题目指定的残差方向相反。",
+              "correct": false
+            },
+            {
+              "label": "residual = solution - rhs",
+              "feedback": "遗漏了系数矩阵的作用。",
+              "correct": false
+            },
+            {
+              "label": "residual = A @ solution - rhs",
+              "feedback": "残差按定义为方程左端减右端，六条方程对应六个分量。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q6",
+          "number": 36,
+          "local": 6,
+          "prompt": "Print each variable a–f beside its solution value using three decimal places and unit m. 选择完整循环。",
+          "code": "solution = np.array([1.8,-6.2,2.6,-1.6,4.4,-0.6])",
+          "hint": "同时检查配对方法、f 字符串前缀和 .3f。",
+          "explanation": "zip 按顺序配对变量名与结果，.3f 固定输出三位小数。",
+          "options": [
+            {
+              "label": "for name,value in zip(\"abcdef\",solution):\n    print(f\"{name} = {value:.1f} m\")",
+              "feedback": "只显示一位小数。",
+              "correct": false
+            },
+            {
+              "label": "for name,value in enumerate(solution):\n    print(f\"{name} = {value:.3f} m\")",
+              "feedback": "enumerate 给出数字索引，不是 a–f。",
+              "correct": false
+            },
+            {
+              "label": "for name,value in zip(\"abcdef\",solution):\n    print(\"{name} = {value:.3f} m\")",
+              "feedback": "遗漏 f 前缀，占位表达式不会被替换。",
+              "correct": false
+            },
+            {
+              "label": "for name,value in zip(\"abcdef\",solution):\n    print(f\"{name} = {value:.3f} m\")",
+              "feedback": "zip 按顺序配对变量名与结果，.3f 固定输出三位小数。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q7",
+          "number": 37,
+          "local": 7,
+          "prompt": "Assign the six solution components to scalar variables a,b,c,d,e,f in order. 选择代码。",
+          "code": "solution = np.array([1.8,-6.2,2.6,-1.6,4.4,-0.6])",
+          "hint": "等号左边变量数应等于向量长度，且顺序不变。",
+          "explanation": "序列解包按顺序把六项分别赋给六个变量。",
+          "options": [
+            {
+              "label": "a,b,c,d,e,f = solution",
+              "feedback": "序列解包按顺序把六项分别赋给六个变量。",
+              "correct": true
+            },
+            {
+              "label": "a,b,c,d,e,f = solution[::-1]",
+              "feedback": "解向量顺序被反转。",
+              "correct": false
+            },
+            {
+              "label": "a,b,c,d,e,f = solution[0]",
+              "feedback": "单个标量不能解包成六个值。",
+              "correct": false
+            },
+            {
+              "label": "a,b,c,d,e = solution",
+              "feedback": "变量数量与六个元素不匹配。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q8",
+          "number": 38,
+          "local": 8,
+          "prompt": "Turn a 1D six-component solution into a 6×1 column for display. 选择代码。",
+          "code": "solution = np.arange(1,7,dtype=float)",
+          "hint": "一维数组需要显式增加第二维。",
+          "explanation": "固定一列并自动计算行数，保持元素顺序。",
+          "options": [
+            {
+              "label": "column = solution.reshape(2,3)",
+              "feedback": "生成两行三列，不是列向量。",
+              "correct": false
+            },
+            {
+              "label": "column = solution.reshape(-1,1)",
+              "feedback": "固定一列并自动计算行数，保持元素顺序。",
+              "correct": true
+            },
+            {
+              "label": "column = solution.T",
+              "feedback": "一维转置不会增加列维度。",
+              "correct": false
+            },
+            {
+              "label": "column = solution.reshape(1,-1)",
+              "feedback": "生成 1×6 行数组。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q9",
+          "number": 39,
+          "local": 9,
+          "prompt": "Create a floating-point coefficient matrix A from the supplied rows without changing their values.（改写：建立方程系数矩阵。）",
+          "code": "coefficients = [[2,-4,5,-3.5,1.8,4],[-1.5,3,4,-1,-2,5],\n                [5,1,-6,3,-2,2],[1.2,-2,3,4,-1,4],\n                [4,1,-2,-3,-4,1.5],[3,1,-1,4,-2,-4]]",
+          "hint": "系数包含小数，要保留二维布局和浮点类型。",
+          "explanation": "浮点类型保留 −3.5、1.8 等小数系数，且行列结构不变。",
+          "options": [
+            {
+              "label": "A = np.array(coefficients,dtype=float).T",
+              "feedback": "交换了方程行与未知数列。",
+              "correct": false
+            },
+            {
+              "label": "A = np.array(coefficients,dtype=float).ravel()",
+              "feedback": "展平后不再是系数矩阵。",
+              "correct": false
+            },
+            {
+              "label": "A = np.array(coefficients,dtype=float)",
+              "feedback": "浮点类型保留 −3.5、1.8 等小数系数，且行列结构不变。",
+              "correct": true
+            },
+            {
+              "label": "A = np.array(coefficients,dtype=int)",
+              "feedback": "整数转换会截断小数系数。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-hw2-4-q10",
+          "number": 40,
+          "local": 10,
+          "prompt": "Solve the supplied two-equation system and save its solution vector x.（规模变式：解联立方程组。）",
+          "code": "A = np.array([[1,1],[2,-1]],dtype=float)\nrhs = np.array([5,1],dtype=float)",
+          "hint": "直接解给定 A x = rhs，不改 A 或 rhs。",
+          "explanation": "solve 用方程系数和右端求未知数向量。",
+          "options": [
+            {
+              "label": "x = np.linalg.solve(A.T,rhs)",
+              "feedback": "转置改变了原方程系数。",
+              "correct": false
+            },
+            {
+              "label": "x = np.linalg.solve(A,-rhs)",
+              "feedback": "把原右端符号改变了。",
+              "correct": false
+            },
+            {
+              "label": "x = np.linalg.solve(A,rhs)",
+              "feedback": "solve 用方程系数和右端求未知数向量。",
+              "correct": true
+            },
+            {
+              "label": "x = A @ rhs",
+              "feedback": "这是矩阵乘向量。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 HW 2-4 | Solve six simultaneous equations.\"\"\"\nimport numpy as np\n\nA = np.array([[2, -4, 5, -3.5, 1.8, 4],\n              [-1.5, 3, 4, -1, -2, 5],\n              [5, 1, -6, 3, -2, 2],\n              [1.2, -2, 3, 4, -1, 4],\n              [4, 1, -2, -3, -4, 1.5],\n              [3, 1, -1, 4, -2, -4]])\nb = np.array([52.52, -21.1, -27.6, 9.16, -17.9, -16.2])\nsolution = np.linalg.solve(A, b)\nfor name, value in zip(\"abcdef\", solution):\n    print(f\"{name} = {value:.3f} m\")\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/HW2/Su_Tong_HW2_4.py"
+    },
+    {
+      "id": "ica2-1",
+      "name": "ICA2 · 程序 2_1",
+      "topic": "实现输入与数组生成",
+      "questions": [
+        {
+          "id": "impl-ica2-1-q1",
+          "number": 41,
+          "local": 1,
+          "prompt": "Read a space-separated row of numbers into a 1D NumPy array A.（改写：用 input 输入一维数组。）",
+          "code": "",
+          "hint": "先确定输入分隔符是空格。",
+          "explanation": "按空格拆分输入并生成一维数值数组。",
+          "options": [
+            {
+              "label": "A = np.array(input())",
+              "feedback": "把整段字符串保存为字符串标量，没有拆分为数值。",
+              "correct": false
+            },
+            {
+              "label": "A = np.fromstring(input(),sep=\",\")",
+              "feedback": "输入使用空格，应按空格分隔。",
+              "correct": false
+            },
+            {
+              "label": "A = np.array([input()])",
+              "feedback": "得到包含一整行字符串的一维数组，不是逐个数值。",
+              "correct": false
+            },
+            {
+              "label": "A = np.fromstring(input(),sep=\" \")",
+              "feedback": "按空格拆分输入并生成一维数值数组。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q2",
+          "number": 42,
+          "local": 2,
+          "prompt": "Read the user’s integer row count into rows.（改写：读取二维数组的行数。）",
+          "code": "",
+          "hint": "行数是整数而不是文字或浮点值。",
+          "explanation": "input 返回字符串，int 将其转换为整数行数。",
+          "options": [
+            {
+              "label": "rows = int(input(\"Rows: \"))",
+              "feedback": "input 返回字符串，int 将其转换为整数行数。",
+              "correct": true
+            },
+            {
+              "label": "rows = input(\"Rows: \")",
+              "feedback": "保存的仍是字符串。",
+              "correct": false
+            },
+            {
+              "label": "rows = float(input(\"Rows: \"))",
+              "feedback": "得到浮点数，不是要求的整数。",
+              "correct": false
+            },
+            {
+              "label": "rows = len(input(\"Rows: \"))",
+              "feedback": "得到输入文本长度，不是输入数值。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q3",
+          "number": 43,
+          "local": 3,
+          "prompt": "Read two space-separated numeric rows into a 2D array B.（改写：输入二维数组。）",
+          "code": "",
+          "hint": "每次 input 读取一行，外层 np.array 保留行结构。",
+          "explanation": "逐行解析数字，再用外层列表组成二维数组。",
+          "options": [
+            {
+              "label": "B = np.array([np.fromstring(input(),sep=\" \") for _ in range(3)])",
+              "feedback": "错误地读取三行，而题目只要求两行。",
+              "correct": false
+            },
+            {
+              "label": "B = np.array([np.fromstring(input(),sep=\" \") for _ in range(2)])",
+              "feedback": "逐行解析数字，再用外层列表组成二维数组。",
+              "correct": true
+            },
+            {
+              "label": "B = np.array([input() for _ in range(2)])",
+              "feedback": "保存两条字符串，未解析行内数值。",
+              "correct": false
+            },
+            {
+              "label": "B = np.concatenate([np.fromstring(input(),sep=\" \") for _ in range(2)])",
+              "feedback": "concatenate 把两行展平为一维。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q4",
+          "number": 44,
+          "local": 4,
+          "prompt": "Create C from 6.4 through 12.0 in increments of 0.8, using arange.（改写：按步长生成 C。）",
+          "code": "",
+          "hint": "arange 第三个参数是步长，停止边界不包含。",
+          "explanation": "停止边界放在 12.0 后半步，包含目标末项，下一项 12.8 被排除。",
+          "options": [
+            {
+              "label": "C = np.arange(12.0,6.4,0.8)",
+              "feedback": "正步长无法从 12 走向 6.4，结果为空。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(6.4,12.4,0.8)",
+              "feedback": "停止边界放在 12.0 后半步，包含目标末项，下一项 12.8 被排除。",
+              "correct": true
+            },
+            {
+              "label": "C = np.arange(6.4,12.4,8)",
+              "feedback": "步长写成了 8。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(6.4,12.4,0.4)",
+              "feedback": "步长为 0.4，多出采样值。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q5",
+          "number": 45,
+          "local": 5,
+          "prompt": "Create D with seven equally spaced entries from 44 to 23, including both endpoints.（改写：用 linspace 生成 D。）",
+          "code": "",
+          "hint": "七个值包括起点和终点。",
+          "explanation": "linspace 以点数为第三参数，默认保留两个端点。",
+          "options": [
+            {
+              "label": "D = np.linspace(23,44,7)",
+              "feedback": "方向相反。",
+              "correct": false
+            },
+            {
+              "label": "D = np.arange(44,23,7)",
+              "feedback": "把点数误用为步长，并且步长方向错误。",
+              "correct": false
+            },
+            {
+              "label": "D = np.linspace(44,23,7)",
+              "feedback": "linspace 以点数为第三参数，默认保留两个端点。",
+              "correct": true
+            },
+            {
+              "label": "D = np.linspace(44,23,6)",
+              "feedback": "只生成六项。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q6",
+          "number": 46,
+          "local": 6,
+          "prompt": "Create C from 2.5 through 6.0 with a step of 0.5 using arange.（数值变式：按步长生成一维数组。）",
+          "code": "",
+          "hint": "目标是步长固定的含端点序列。",
+          "explanation": "以半步余量设置 stop，保留 6.0 且不加入 6.5。",
+          "options": [
+            {
+              "label": "C = np.arange(2.5,6.0,0.5)",
+              "feedback": "停止值 6.0 不包含，漏掉末项。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(2.5,6.25,0.25)",
+              "feedback": "步长不符合 0.5。",
+              "correct": false
+            },
+            {
+              "label": "C = np.linspace(2.5,6.0,7)",
+              "feedback": "只给七个点，无法保持要求步长及八个值。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(2.5,6.25,0.5)",
+              "feedback": "以半步余量设置 stop，保留 6.0 且不加入 6.5。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q7",
+          "number": 47,
+          "local": 7,
+          "prompt": "Create D with seven equally spaced entries from 18 down to 3.（数值变式：用 linspace 生成 D。）",
+          "code": "",
+          "hint": "linspace 的第三个参数表示个数。",
+          "explanation": "从 18 递减到 3，以点数七等距采样。",
+          "options": [
+            {
+              "label": "D = np.linspace(18,3,7)",
+              "feedback": "从 18 递减到 3，以点数七等距采样。",
+              "correct": true
+            },
+            {
+              "label": "D = np.linspace(3,18,7)",
+              "feedback": "起点与终点方向反了。",
+              "correct": false
+            },
+            {
+              "label": "D = np.linspace(18,3,8)",
+              "feedback": "点数多了一项。",
+              "correct": false
+            },
+            {
+              "label": "D = np.arange(18,3,-7)",
+              "feedback": "第三参数变成 −7 的步长，不能生成所需七点。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q8",
+          "number": 48,
+          "local": 8,
+          "prompt": "Print the numeric array A with the label “A =” on the same line.（改写：显示输入的一维数组。）",
+          "code": "A = np.array([1.,2.,3.])",
+          "hint": "需要打印变量内容，而非名称或形状。",
+          "explanation": "标签是字符串，A 是已创建的数值数组。",
+          "options": [
+            {
+              "label": "print(\"A =\",A)",
+              "feedback": "标签是字符串，A 是已创建的数值数组。",
+              "correct": true
+            },
+            {
+              "label": "print(\"A =\",\"A\")",
+              "feedback": "引号中的 A 只会打印字母。",
+              "correct": false
+            },
+            {
+              "label": "print(\"A =\",A.shape)",
+              "feedback": "输出形状，不是数组数值。",
+              "correct": false
+            },
+            {
+              "label": "print(\"B =\",A)",
+              "feedback": "标签与要求不同。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q9",
+          "number": 49,
+          "local": 9,
+          "prompt": "Create C from 1 through 9 with increments of 2 using arange.（数值变式：按步长创建数组。）",
+          "code": "",
+          "hint": "同时检查 start、stop、step 三个位置。",
+          "explanation": "从 1 开始每次加 2，在 10 之前保留到 9。",
+          "options": [
+            {
+              "label": "C = np.arange(0,10,2)",
+              "feedback": "起点变成 0，得到偶数数组。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(1,10,2)",
+              "feedback": "从 1 开始每次加 2，在 10 之前保留到 9。",
+              "correct": true
+            },
+            {
+              "label": "C = np.arange(1,9,2)",
+              "feedback": "停止值 9 不包含。",
+              "correct": false
+            },
+            {
+              "label": "C = np.arange(1,10,1)",
+              "feedback": "步长变成 1。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-1-q10",
+          "number": 50,
+          "local": 10,
+          "prompt": "Read rows numeric input lines into B, using the existing rows value.（改写：由用户指定二维数组行数。）",
+          "code": "rows = 3",
+          "hint": "保留外层行列表，并让循环次数等于 rows。",
+          "explanation": "重复读取 rows 行，每行按空格拆成数值，再组合二维数组。",
+          "options": [
+            {
+              "label": "B = np.array([input() for _ in range(rows)])",
+              "feedback": "得到字符串行，不是数值矩阵。",
+              "correct": false
+            },
+            {
+              "label": "B = np.concatenate([np.fromstring(input(),sep=\" \") for _ in range(rows)])",
+              "feedback": "将行展平成一维，不再是二维数组。",
+              "correct": false
+            },
+            {
+              "label": "B = np.array([np.fromstring(input(),sep=\" \") for _ in range(rows)])",
+              "feedback": "重复读取 rows 行，每行按空格拆成数值，再组合二维数组。",
+              "correct": true
+            },
+            {
+              "label": "B = np.array([np.fromstring(input(),sep=\" \") for _ in range(rows-1)])",
+              "feedback": "少读取一行。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 ICA 2-1 | One- and two-dimensional NumPy arrays.\"\"\"\nimport numpy as np\n\nA = np.fromstring(input(\"Enter 1D values separated by spaces: \"), sep=\" \")\nrows = int(input(\"Number of rows in matrix B: \"))\nvalues = [np.fromstring(input(f\"Row {i + 1} values: \"), sep=\" \") for i in range(rows)]\nif not values or len({len(row) for row in values}) != 1:\n    raise ValueError(\"Enter at least one row and the same number of values in each row.\")\nB = np.array(values)\nC = np.arange(6.4, 12.0 + 0.8 / 2, 0.8)\nD = np.linspace(44, 23, 7)\nfor name, arr in ((\"A\", A), (\"B\", B), (\"C\", C), (\"D\", D)):\n    print(f\"{name} =\\n{arr}\")\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/ICA2/Su_Tong_ICA2_1.py"
+    },
+    {
+      "id": "ica2-2",
+      "name": "ICA2 · 程序 2_2",
+      "topic": "实现矩阵与随机数组要求",
+      "questions": [
+        {
+          "id": "impl-ica2-2-q1",
+          "number": 51,
+          "local": 1,
+          "prompt": "Generate a 4×6 integer array with values 0 through 49.（数值变式：创建随机整数矩阵 E。）",
+          "code": "rng = np.random.default_rng(103)",
+          "hint": "integers 的 high 不包含，size 按行数、列数填写。",
+          "explanation": "size 确定四行六列；high=50 不包含，因此可取整数 0–49。",
+          "options": [
+            {
+              "label": "E = rng.integers(0,49,size=(4,6))",
+              "feedback": "上界 49 不包含，会排除要求范围中的 49。",
+              "correct": false
+            },
+            {
+              "label": "E = rng.integers(0,50,size=(6,4))",
+              "feedback": "行列数写反。",
+              "correct": false
+            },
+            {
+              "label": "E = rng.random((4,6))",
+              "feedback": "生成浮点数，不是整数数组。",
+              "correct": false
+            },
+            {
+              "label": "E = rng.integers(0,50,size=(4,6))",
+              "feedback": "size 确定四行六列；high=50 不包含，因此可取整数 0–49。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q2",
+          "number": 52,
+          "local": 2,
+          "prompt": "Randomly permute [10,20,30,40,50,60] into a new 1D array F without changing A.（数值变式：随机排列数组。）",
+          "code": "A = np.array([10,20,30,40,50,60])\nrng = np.random.default_rng(103)",
+          "hint": "要新数组且原数组不变，选择返回排列的函数。",
+          "explanation": "permutation 返回新排列，保留全部原元素且不修改 A。",
+          "options": [
+            {
+              "label": "F = rng.shuffle(A)",
+              "feedback": "shuffle 原地修改 A 并返回 None。",
+              "correct": false
+            },
+            {
+              "label": "F = rng.integers(10,61,size=6)",
+              "feedback": "随机整数不保证原有六个元素各出现一次。",
+              "correct": false
+            },
+            {
+              "label": "F = rng.permutation(A).reshape(2,3)",
+              "feedback": "结果变成二维，不满足一维要求。",
+              "correct": false
+            },
+            {
+              "label": "F = rng.permutation(A)",
+              "feedback": "permutation 返回新排列，保留全部原元素且不修改 A。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q3",
+          "number": 53,
+          "local": 3,
+          "prompt": "Randomly permute the values of A and reshape the result into a 2×3 matrix G.（改写：创建 G。）",
+          "code": "A = np.array([12,8,14,2,25,60])\nrng = np.random.default_rng(103)",
+          "hint": "重排后元素总数仍是六。",
+          "explanation": "先随机排列六项，再按两行三列组织。",
+          "options": [
+            {
+              "label": "G = rng.permutation(A).reshape(2,3)",
+              "feedback": "先随机排列六项，再按两行三列组织。",
+              "correct": true
+            },
+            {
+              "label": "G = rng.permutation(A).reshape(3,2)",
+              "feedback": "形状为三行两列。",
+              "correct": false
+            },
+            {
+              "label": "G = rng.permutation(A)",
+              "feedback": "未改变形状，仍是一维。",
+              "correct": false
+            },
+            {
+              "label": "G = rng.permutation(A).reshape(2,2)",
+              "feedback": "四个位置装不下六个元素。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q4",
+          "number": 54,
+          "local": 4,
+          "prompt": "Make the first row of C from the 2nd, 4th and 6th entries of A using indexing.（改写：构造 C 的第一行。）",
+          "code": "A = np.array([12,8,14,2,25,60])\nB = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+          "hint": "题目位置先减一，再观察等差索引。",
+          "explanation": "从索引 1 起按步长 2 读取，正好是第 2、4、6 项。",
+          "options": [
+            {
+              "label": "row1 = A[[2,4,6]]",
+              "feedback": "把一基位置直接当索引，6 还越界。",
+              "correct": false
+            },
+            {
+              "label": "row1 = A[1::2]",
+              "feedback": "从索引 1 起按步长 2 读取，正好是第 2、4、6 项。",
+              "correct": true
+            },
+            {
+              "label": "row1 = A[::2]",
+              "feedback": "选择第 1、3、5 项。",
+              "correct": false
+            },
+            {
+              "label": "row1 = A[1:4]",
+              "feedback": "连续取第 2、3、4 项，而非隔项。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q5",
+          "number": 55,
+          "local": 5,
+          "prompt": "Make the second row of C from row 6 of B followed by the last entry of A.（改写：构造 C 的第二行。）",
+          "code": "A = np.array([12,8,14,2,25,60])\nB = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+          "hint": "B 第六行对应索引 5，A 最后一项可用 −1。",
+          "explanation": "第六行的两项在前，A 最后一项在后。",
+          "options": [
+            {
+              "label": "row2 = np.array([A[-1],B[5,0],B[5,1]])",
+              "feedback": "A 的值被放在前面，顺序不符。",
+              "correct": false
+            },
+            {
+              "label": "row2 = np.array([B[5,0],B[5,1],A[-2]])",
+              "feedback": "使用倒数第二项而非最后一项。",
+              "correct": false
+            },
+            {
+              "label": "row2 = np.array([B[5,0],B[5,1],A[-1]])",
+              "feedback": "第六行的两项在前，A 最后一项在后。",
+              "correct": true
+            },
+            {
+              "label": "row2 = np.array([B[4,0],B[4,1],A[-1]])",
+              "feedback": "读取了 B 的第五行。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q6",
+          "number": 56,
+          "local": 6,
+          "prompt": "Make the third row of C from the second-to-last entry of A followed by row 3 of B.（改写：构造 C 的第三行。）",
+          "code": "A = np.array([12,8,14,2,25,60])\nB = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+          "hint": "second-to-last 是 −2，第三行索引是 2。",
+          "explanation": "A 倒数第二项放在首位，接上 B 第三行。",
+          "options": [
+            {
+              "label": "row3 = np.array([A[-2],B[3,0],B[3,1]])",
+              "feedback": "读取了 B 的第四行。",
+              "correct": false
+            },
+            {
+              "label": "row3 = np.array([B[2,0],B[2,1],A[-2]])",
+              "feedback": "A 的元素应放最前。",
+              "correct": false
+            },
+            {
+              "label": "row3 = np.array([A[-2],B[2,0],B[2,1]])",
+              "feedback": "A 倒数第二项放在首位，接上 B 第三行。",
+              "correct": true
+            },
+            {
+              "label": "row3 = np.array([A[-1],B[2,0],B[2,1]])",
+              "feedback": "用了 A 最后一项。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q7",
+          "number": 57,
+          "local": 7,
+          "prompt": "Insert A between the two columns of B to create D.（改写：把 A 作为中间列插入。）",
+          "code": "A = np.array([12,8,14,2,25,60])\nB = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+          "hint": "column_stack 的每个参数依次成为输出列。",
+          "explanation": "参数次序规定 B 第一列、A、B 第二列。",
+          "options": [
+            {
+              "label": "D = np.column_stack((A,B))",
+              "feedback": "A 被放在了最左边。",
+              "correct": false
+            },
+            {
+              "label": "D = np.column_stack((B,A))",
+              "feedback": "A 被放在了最右边。",
+              "correct": false
+            },
+            {
+              "label": "D = np.vstack((B[:,0],A,B[:,1]))",
+              "feedback": "生成三行六列，方向相反。",
+              "correct": false
+            },
+            {
+              "label": "D = np.column_stack((B[:,0],A,B[:,1]))",
+              "feedback": "参数次序规定 B 第一列、A、B 第二列。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q8",
+          "number": 58,
+          "local": 8,
+          "prompt": "Generate a 5×7 integer matrix E with values 0 through 49.（改写：创建讲义中的 E。）",
+          "code": "rng = np.random.default_rng(204)",
+          "hint": "同时满足范围、整数类型和二维形状。",
+          "explanation": "五行七列并用排他的上界 50，得到所需整数范围。",
+          "options": [
+            {
+              "label": "E = rng.integers(0,50,size=(5,7))",
+              "feedback": "五行七列并用排他的上界 50，得到所需整数范围。",
+              "correct": true
+            },
+            {
+              "label": "E = rng.integers(1,50,size=(5,7))",
+              "feedback": "排除了 0。",
+              "correct": false
+            },
+            {
+              "label": "E = rng.integers(0,50,size=(7,5))",
+              "feedback": "行列数相反。",
+              "correct": false
+            },
+            {
+              "label": "E = rng.integers(0,50,size=35)",
+              "feedback": "只有一维长度，未形成 5×7。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q9",
+          "number": 59,
+          "local": 9,
+          "prompt": "Create C from its three prebuilt rows row1,row2,row3 in that order.（改写：组合三行生成 C。）",
+          "code": "row1 = np.array([8,2,60])\nrow2 = np.array([56,6,60])\nrow3 = np.array([25,3,23])",
+          "hint": "每个已有数组是一整行，使用竖直堆叠。",
+          "explanation": "vstack 依次把三个一维数组作为三行。",
+          "options": [
+            {
+              "label": "C = np.vstack((row3,row2,row1))",
+              "feedback": "上下行顺序被反转。",
+              "correct": false
+            },
+            {
+              "label": "C = np.vstack((row1,row2,row3))",
+              "feedback": "vstack 依次把三个一维数组作为三行。",
+              "correct": true
+            },
+            {
+              "label": "C = np.column_stack((row1,row2,row3))",
+              "feedback": "把输入作为列，得到转置的行列含义。",
+              "correct": false
+            },
+            {
+              "label": "C = np.concatenate((row1,row2,row3))",
+              "feedback": "生成一维九项，不是 3×3。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-2-q10",
+          "number": 60,
+          "local": 10,
+          "prompt": "Randomly permute six entries into a 3×2 matrix G.（形状变式：排列并 reshape。）",
+          "code": "A = np.array([10,20,30,40,50,60])\nrng = np.random.default_rng(103)",
+          "hint": "reshape 的第一个参数是行数。",
+          "explanation": "六项排列后按三行两列分配。",
+          "options": [
+            {
+              "label": "G = rng.permutation(A[:3]).reshape(3,1)",
+              "feedback": "遗漏后三个元素且列数不符。",
+              "correct": false
+            },
+            {
+              "label": "G = rng.permutation(A).reshape(3,2)",
+              "feedback": "六项排列后按三行两列分配。",
+              "correct": true
+            },
+            {
+              "label": "G = rng.permutation(A).reshape(2,3)",
+              "feedback": "行列顺序不符合三行两列。",
+              "correct": false
+            },
+            {
+              "label": "G = rng.permutation(A).reshape(6,1)",
+              "feedback": "这是六行一列。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 ICA 2-2 | Matrix indexing and permutations.\"\"\"\nimport numpy as np\n\nA = np.array([12, 8, 14, 2, 25, 60])\nB = np.array([[1, 67], [12, 2], [3, 23], [34, 4], [5, 45], [56, 6]])\nC = np.array([[A[1], A[3], A[5]], [B[5, 0], B[5, 1], A[-1]],\n              [A[-2], B[2, 0], B[2, 1]]])\nD = np.column_stack((B[:, 0], A, B[:, 1]))\nrng = np.random.default_rng()\nE = rng.integers(0, 50, size=(5, 7))\nF = rng.permutation(A)\nG = rng.permutation(A).reshape(2, 3)\nfor name, arr in ((\"A\", A), (\"B\", B), (\"C\", C), (\"D\", D),\n                  (\"E\", E), (\"F\", F), (\"G\", G)):\n    print(f\"{name} =\\n{arr}\")\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/ICA2/Su_Tong_ICA2_2.py"
+    },
+    {
+      "id": "ica2-3",
+      "name": "ICA2 · 程序 2_3",
+      "topic": "实现圆柱体网格要求",
+      "questions": [
+        {
+          "id": "impl-ica2-3-q1",
+          "number": 61,
+          "local": 1,
+          "prompt": "Create radius values from 0 through 12 m with a step of 3 m.（改写：生成半径范围。）",
+          "code": "",
+          "hint": "目标包括起点和 12，按固定步长排列。",
+          "explanation": "起点 0，步长 3，停止边界在 12 之后。",
+          "options": [
+            {
+              "label": "radii_m = np.arange(3,13,3)",
+              "feedback": "漏掉起点 0。",
+              "correct": false
+            },
+            {
+              "label": "radii_m = np.linspace(0,12,4)",
+              "feedback": "四个点无法形成要求的五个半径。",
+              "correct": false
+            },
+            {
+              "label": "radii_m = np.arange(0,13,3)",
+              "feedback": "起点 0，步长 3，停止边界在 12 之后。",
+              "correct": true
+            },
+            {
+              "label": "radii_m = np.arange(0,12,3)",
+              "feedback": "漏掉末项 12。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q2",
+          "number": 62,
+          "local": 2,
+          "prompt": "Create height values from 10 through 20 m with a step of 2 m.（改写：生成高度范围。）",
+          "code": "",
+          "hint": "要保留末项，应把 arange 停止边界放在末项之后。",
+          "explanation": "stop=21 排除边界本身，仍保留 20。",
+          "options": [
+            {
+              "label": "heights_m = np.arange(10,20,2)",
+              "feedback": "漏掉最后的 20。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.arange(10,21,1)",
+              "feedback": "使用了错误的步长。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.linspace(10,20,5)",
+              "feedback": "只有五项，而非所需六项。",
+              "correct": false
+            },
+            {
+              "label": "heights_m = np.arange(10,21,2)",
+              "feedback": "stop=21 排除边界本身，仍保留 20。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q3",
+          "number": 63,
+          "local": 3,
+          "prompt": "Create radius and height grids R,H with rows for heights and columns for radii.（改写：用 meshgrid 计算所有组合。）",
+          "code": "radii_m = np.array([0,3,6,9,12])\nheights_m = np.array([10,12,14,16,18,20])",
+          "hint": "把列坐标先传给 meshgrid。",
+          "explanation": "默认 xy 模式形成六行五列，R 按列变化、H 按行变化。",
+          "options": [
+            {
+              "label": "R,H = np.meshgrid(radii_m,heights_m)",
+              "feedback": "默认 xy 模式形成六行五列，R 按列变化、H 按行变化。",
+              "correct": true
+            },
+            {
+              "label": "H,R = np.meshgrid(radii_m,heights_m)",
+              "feedback": "网格变量名称和实际含义交换。",
+              "correct": false
+            },
+            {
+              "label": "R,H = np.meshgrid(heights_m,radii_m)",
+              "feedback": "输入顺序反了。",
+              "correct": false
+            },
+            {
+              "label": "R,H = np.meshgrid(radii_m,heights_m,indexing=\"ij\")",
+              "feedback": "得到五行六列，不满足题设方向。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q4",
+          "number": 64,
+          "local": 4,
+          "prompt": "Compute cylinder volume πr²h for every radius–height combination.（改写：创建体积表 V。）",
+          "code": "R,H = np.meshgrid([0,3,6,9,12],[10,12,14,16,18,20])",
+          "hint": "先计算圆形底面积，再乘一次高度。",
+          "explanation": "网格逐元素计算底面积乘高，得到二维体积数组。",
+          "options": [
+            {
+              "label": "V = np.pi * R**2 * H",
+              "feedback": "网格逐元素计算底面积乘高，得到二维体积数组。",
+              "correct": true
+            },
+            {
+              "label": "V = np.pi * R * H",
+              "feedback": "半径缺少平方。",
+              "correct": false
+            },
+            {
+              "label": "V = np.pi * R**2 + H",
+              "feedback": "高度应相乘，不是相加。",
+              "correct": false
+            },
+            {
+              "label": "V = np.pi * (R*H)**2",
+              "feedback": "将高度也平方了。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q5",
+          "number": 65,
+          "local": 5,
+          "prompt": "Print the complete volume array with a “Volume [m^3]:” heading on its own line.（改写：显示体积表。）",
+          "code": "V = np.array([[0.,1.],[0.,2.]])",
+          "hint": "题目要求的是整个数组及体积单位。",
+          "explanation": "标题换行后输出整个二维表。",
+          "options": [
+            {
+              "label": "print(\"Volume [m^3]:\")\nprint(V[0])",
+              "feedback": "只显示第一行，未显示完整表格。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Volume [m^3]:\")\nprint(V)",
+              "feedback": "标题换行后输出整个二维表。",
+              "correct": true
+            },
+            {
+              "label": "print(\"Volume [m^3]:\")\nprint(\"V\")",
+              "feedback": "打印变量名字而不是值。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Volume [m^2]:\")\nprint(V)",
+              "feedback": "体积单位应为三次方。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q6",
+          "number": 66,
+          "local": 6,
+          "prompt": "Create radii from 1 through 5 m with a step of 1 m.（数值变式：生成半径向量。）",
+          "code": "",
+          "hint": "列出需要的全部半径再决定停止边界。",
+          "explanation": "停止边界 6 保留目标末项 5。",
+          "options": [
+            {
+              "label": "r = np.arange(0,6,1)",
+              "feedback": "多出了半径 0。",
+              "correct": false
+            },
+            {
+              "label": "r = np.linspace(1,5,4)",
+              "feedback": "生成四项而非五项。",
+              "correct": false
+            },
+            {
+              "label": "r = np.arange(1,6,1)",
+              "feedback": "停止边界 6 保留目标末项 5。",
+              "correct": true
+            },
+            {
+              "label": "r = np.arange(1,5,1)",
+              "feedback": "漏掉 5。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q7",
+          "number": 67,
+          "local": 7,
+          "prompt": "Create heights from 4 through 10 m with increments of 2 m.（数值变式：生成高度向量。）",
+          "code": "",
+          "hint": "最后一个有效高度需要小于 stop。",
+          "explanation": "生成 4、6、8、10 四个高度。",
+          "options": [
+            {
+              "label": "h = np.arange(4,10,2)",
+              "feedback": "排除了 10。",
+              "correct": false
+            },
+            {
+              "label": "h = np.arange(4,11,1)",
+              "feedback": "步长写成 1。",
+              "correct": false
+            },
+            {
+              "label": "h = np.linspace(4,10,3)",
+              "feedback": "三个点不是要求的四个高度。",
+              "correct": false
+            },
+            {
+              "label": "h = np.arange(4,11,2)",
+              "feedback": "生成 4、6、8、10 四个高度。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q8",
+          "number": 68,
+          "local": 8,
+          "prompt": "Make the cylinder-volume table using broadcasting, with height rows and radius columns.（改写：计算二维体积表。）",
+          "code": "r = np.array([1,2,3])\nh = np.array([4,6,8,10])",
+          "hint": "半径作为列方向变量，应增加第一维。",
+          "explanation": "半径横向展开，高度纵向展开，广播形成四行三列。",
+          "options": [
+            {
+              "label": "V = np.pi * r[:,None]**2 * h[None,:]",
+              "feedback": "形状变成三行四列，方向相反。",
+              "correct": false
+            },
+            {
+              "label": "V = np.pi * r**2 * h",
+              "feedback": "长度三和四不能直接广播。",
+              "correct": false
+            },
+            {
+              "label": "V = np.pi * r[None,:] * h[:,None]",
+              "feedback": "遗漏了半径平方。",
+              "correct": false
+            },
+            {
+              "label": "V = np.pi * r[None,:]**2 * h[:,None]",
+              "feedback": "半径横向展开，高度纵向展开，广播形成四行三列。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q9",
+          "number": 69,
+          "local": 9,
+          "prompt": "Calculate volumes from a precomputed base-area grid and height grid.（改写：用圆柱底面积乘高度。）",
+          "code": "R,H = np.meshgrid([1,2,3],[4,6,8,10])\nbase_area = np.pi*R**2",
+          "hint": "圆柱体积等于底面积乘高。",
+          "explanation": "底面积乘一次高度得到体积。",
+          "options": [
+            {
+              "label": "V = base_area * H",
+              "feedback": "底面积乘一次高度得到体积。",
+              "correct": true
+            },
+            {
+              "label": "V = base_area + H",
+              "feedback": "面积与高度相加不是体积公式。",
+              "correct": false
+            },
+            {
+              "label": "V = base_area * H**2",
+              "feedback": "高度多平方了一次。",
+              "correct": false
+            },
+            {
+              "label": "V = base_area / H",
+              "feedback": "需要乘高度，不能相除。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-3-q10",
+          "number": 70,
+          "local": 10,
+          "prompt": "Create a volume table for r=[2,4] m and h=[5,10,15] m, with heights as rows.（数值变式：生成全部组合体积。）",
+          "code": "",
+          "hint": "先核对 meshgrid 的参数角色，再核对体积公式。",
+          "explanation": "第一行建立半径列与高度行，第二行按公式生成三行两列体积。",
+          "options": [
+            {
+              "label": "R,H = np.meshgrid([2,4],[5,10,15])\nV = np.pi*R**2+H",
+              "feedback": "应乘高度。",
+              "correct": false
+            },
+            {
+              "label": "R,H = np.meshgrid([2,4],[5,10,15])\nV = np.pi*R**2*H",
+              "feedback": "第一行建立半径列与高度行，第二行按公式生成三行两列体积。",
+              "correct": true
+            },
+            {
+              "label": "R,H = np.meshgrid([5,10,15],[2,4])\nV = np.pi*R**2*H",
+              "feedback": "半径与高度角色交换。",
+              "correct": false
+            },
+            {
+              "label": "R,H = np.meshgrid([2,4],[5,10,15])\nV = np.pi*R*H",
+              "feedback": "遗漏半径平方。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 ICA 2-3 | Meshgrid cylinder volumes in m^3.\"\"\"\nimport numpy as np\n\nradii_m = np.arange(0, 13, 3)\nheights_m = np.arange(10, 21, 2)\nR, H = np.meshgrid(radii_m, heights_m)\nvolumes_m3 = np.pi * R**2 * H\nprint(\"Columns: radii (m):\", radii_m)\nprint(\"Rows: heights (m):\", heights_m)\nprint(\"Cylinder volume table (m^3):\\n\", volumes_m3)\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/ICA2/Su_Tong_ICA2_3.py"
+    },
+    {
+      "id": "ica2-4",
+      "name": "ICA2 · 程序 2_4",
+      "topic": "实现配料方程要求",
+      "questions": [
+        {
+          "id": "impl-ica2-4-q1",
+          "number": 71,
+          "local": 1,
+          "prompt": "Create a coefficient row for peanuts using per-bag amounts [3,1,1,2,1] oz.（改写：建立花生的配料方程。）",
+          "code": "",
+          "hint": "一个配料对应五种包装的五个用量。",
+          "explanation": "五个系数按包装 1–5 的顺序保存。",
+          "options": [
+            {
+              "label": "peanuts = np.array([3,1,1,2,1,105],dtype=float)",
+              "feedback": "把库存加入系数行，多出第六项。",
+              "correct": false
+            },
+            {
+              "label": "peanuts = np.array([[3],[1],[1],[2],[1]],dtype=float)",
+              "feedback": "生成列数组，不是所要求的系数行向量。",
+              "correct": false
+            },
+            {
+              "label": "peanuts = np.array([3,1,1,2,1],dtype=float)",
+              "feedback": "五个系数按包装 1–5 的顺序保存。",
+              "correct": true
+            },
+            {
+              "label": "peanuts = np.array([1,3,1,2,1],dtype=float)",
+              "feedback": "前两个包装的系数交换。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q2",
+          "number": 72,
+          "local": 2,
+          "prompt": "Store ingredient stocks [105,74,102,118,121] lb as a 1D vector available_lb.（改写：建立库存向量。）",
+          "code": "",
+          "hint": "库存顺序必须匹配系数矩阵的配料行顺序。",
+          "explanation": "按五种配料的顺序存放五个库存数值。",
+          "options": [
+            {
+              "label": "available_lb = np.array([[105,74,102,118,121]],dtype=float)",
+              "feedback": "额外维度使它变成二维行矩阵。",
+              "correct": false
+            },
+            {
+              "label": "available_lb = np.array([105,74,102,118],dtype=float)",
+              "feedback": "遗漏第五种配料库存。",
+              "correct": false
+            },
+            {
+              "label": "available_lb = np.array([105,74,102,118,121],dtype=float)",
+              "feedback": "按五种配料的顺序存放五个库存数值。",
+              "correct": true
+            },
+            {
+              "label": "available_lb = np.array([105,102,74,118,121],dtype=float)",
+              "feedback": "第二、第三种库存交换。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q3",
+          "number": 73,
+          "local": 3,
+          "prompt": "Convert the stock vector from pounds to ounces using 1 lb=16 oz.（改写：让库存单位与系数一致。）",
+          "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)\navailable_lb = np.array([105,74,102,118,121],dtype=float)",
+          "hint": "此题明确采用 1 lb=16 oz，不把讲义冲突因子当换算。",
+          "explanation": "每袋系数以盎司计，右端库存也乘 16 转为盎司。",
+          "options": [
+            {
+              "label": "available_oz = available_lb * 2",
+              "feedback": "×2 是讲义检查数对应的因子，不是磅到盎司换算。",
+              "correct": false
+            },
+            {
+              "label": "available_oz = available_lb / 16",
+              "feedback": "方向相反。",
+              "correct": false
+            },
+            {
+              "label": "available_oz = available_lb",
+              "feedback": "未完成换算。",
+              "correct": false
+            },
+            {
+              "label": "available_oz = available_lb * 16",
+              "feedback": "每袋系数以盎司计，右端库存也乘 16 转为盎司。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q4",
+          "number": 74,
+          "local": 4,
+          "prompt": "Solve for the bag counts from M @ counts = available_oz.（改写：求每种混合包装的袋数。）",
+          "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)\navailable_lb = np.array([105,74,102,118,121],dtype=float)\navailable_oz = available_lb*16",
+          "hint": "调用 solve 时先系数、后同单位右端。",
+          "explanation": "系数矩阵为每袋配料用量，右端为盎司库存，解为袋数。",
+          "options": [
+            {
+              "label": "counts = np.linalg.solve(M,available_oz)",
+              "feedback": "系数矩阵为每袋配料用量，右端为盎司库存，解为袋数。",
+              "correct": true
+            },
+            {
+              "label": "counts = np.linalg.solve(M,available_lb)",
+              "feedback": "库存未换成与系数一致的盎司。",
+              "correct": false
+            },
+            {
+              "label": "counts = M @ available_oz",
+              "feedback": "矩阵乘法不是求解。",
+              "correct": false
+            },
+            {
+              "label": "counts = np.linalg.solve(available_oz,M)",
+              "feedback": "参数顺序反了。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q5",
+          "number": 75,
+          "local": 5,
+          "prompt": "Print each mix number 1–5 and its bag count with one decimal place.（改写：显示各包装的袋数。）",
+          "code": "counts = np.array([208.,176.,240.,224.,192.])",
+          "hint": "包装编号从 1 起，显示格式是一位小数。",
+          "explanation": "enumerate 从 1 编号，.1f 显示一位小数。",
+          "options": [
+            {
+              "label": "for i,n in enumerate(counts,start=1):\n    print(\"Mix {i}: {n:.1f} bags\")",
+              "feedback": "缺少 f 前缀，不会插入变量值。",
+              "correct": false
+            },
+            {
+              "label": "for i,n in enumerate(counts,start=1):\n    print(f\"Mix {i}: {n:.1f} bags\")",
+              "feedback": "enumerate 从 1 编号，.1f 显示一位小数。",
+              "correct": true
+            },
+            {
+              "label": "for i,n in enumerate(counts):\n    print(f\"Mix {i}: {n:.1f} bags\")",
+              "feedback": "编号从 0 开始，不符合包装 1–5。",
+              "correct": false
+            },
+            {
+              "label": "for i,n in enumerate(counts,start=1):\n    print(f\"Mix {i}: {n:.0f} bags\")",
+              "feedback": "未保留要求的一位小数。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q6",
+          "number": 76,
+          "local": 6,
+          "prompt": "Build the coefficient matrix with ingredient rows by transposing a table whose rows are mixes.（改写：从配方表建立方程系数。）",
+          "code": "mix_rows = np.array([[3,1,1,2,1],\n                     [1,2,1,3,1],\n                     [1,1,0,3,3],\n                     [2,0,3,1,2],\n                     [1,2,3,0,2]])",
+          "hint": "转置交换“行代表什么”和“列代表什么”。",
+          "explanation": "原表每行是一种包装；转置后每行成为一种配料的五个系数。",
+          "options": [
+            {
+              "label": "M = mix_rows[::-1]",
+              "feedback": "只反转行顺序，未转置。",
+              "correct": false
+            },
+            {
+              "label": "M = mix_rows.T",
+              "feedback": "原表每行是一种包装；转置后每行成为一种配料的五个系数。",
+              "correct": true
+            },
+            {
+              "label": "M = mix_rows",
+              "feedback": "没有把包装行转换为配料行。",
+              "correct": false
+            },
+            {
+              "label": "M = mix_rows.reshape(5,5)",
+              "feedback": "相同形状的 reshape 不会交换行列。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q7",
+          "number": 77,
+          "local": 7,
+          "prompt": "Display only the count for Mix 3, labeled “Mix 3:”.（改写：显示指定包装的袋数。）",
+          "code": "counts = np.array([208.,176.,240.,224.,192.])",
+          "hint": "将第几个包装转换成索引时减一。",
+          "explanation": "包装 3 对应从 0 起的索引 2。",
+          "options": [
+            {
+              "label": "print(\"Mix 3:\",counts[1])",
+              "feedback": "读取包装 2。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Mix 3:\",\"counts[2]\")",
+              "feedback": "打印文字表达式，没有取值。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Mix 3:\",counts[2])",
+              "feedback": "包装 3 对应从 0 起的索引 2。",
+              "correct": true
+            },
+            {
+              "label": "print(\"Mix 3:\",counts[3])",
+              "feedback": "读取包装 4。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q8",
+          "number": 78,
+          "local": 8,
+          "prompt": "Solve for bag counts when all five stocks are doubled, keeping the same recipes.（库存变式：求两倍库存的袋数。）",
+          "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)\navailable_lb = np.array([105,74,102,118,121],dtype=float)",
+          "hint": "变的是库存右端，配方矩阵不变。",
+          "explanation": "库存先翻倍，再以 16 换成盎司，代入同一配方矩阵。",
+          "options": [
+            {
+              "label": "counts = np.linalg.solve(M,available_lb*16) * 0.5",
+              "feedback": "解缩小到一半，方向相反。",
+              "correct": false
+            },
+            {
+              "label": "counts = np.linalg.solve(M,available_lb*2)",
+              "feedback": "翻倍后仍未换成盎司。",
+              "correct": false
+            },
+            {
+              "label": "counts = np.linalg.solve(M*2,available_lb*16)",
+              "feedback": "这是每袋用量翻倍，求出袋数会减半。",
+              "correct": false
+            },
+            {
+              "label": "counts = np.linalg.solve(M,available_lb*2*16)",
+              "feedback": "库存先翻倍，再以 16 换成盎司，代入同一配方矩阵。",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q9",
+          "number": 79,
+          "local": 9,
+          "prompt": "For an explicitly ounce-based supply vector, solve the three-mix balance.（数值变式：解同型配料系统。）",
+          "code": "M = np.array([[2,1,1],[1,3,1],[1,1,2]],dtype=float)\nsupply_oz = np.array([80,130,100],dtype=float)",
+          "hint": "先读题目给定单位，不要机械重复换算。",
+          "explanation": "库存已经是盎司，直接以此右端求解。",
+          "options": [
+            {
+              "label": "counts = np.linalg.solve(M,supply_oz)",
+              "feedback": "库存已经是盎司，直接以此右端求解。",
+              "correct": true
+            },
+            {
+              "label": "counts = np.linalg.solve(M,supply_oz*16)",
+              "feedback": "库存已是盎司，不能再乘 16。",
+              "correct": false
+            },
+            {
+              "label": "counts = np.linalg.solve(M,supply_oz/16)",
+              "feedback": "库存已经是盎司，不需要除以 16。",
+              "correct": false
+            },
+            {
+              "label": "counts = M @ supply_oz",
+              "feedback": "这不是解线性方程。",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "impl-ica2-4-q10",
+          "number": 80,
+          "local": 10,
+          "prompt": "Print all five computed bag counts with the heading “Bag counts:”.（改写：显示全部解向量。）",
+          "code": "counts = np.array([208.,176.,240.,224.,192.])",
+          "hint": "要显示整个向量，变量后面不加单个索引。",
+          "explanation": "标签之后输出整个袋数向量。",
+          "options": [
+            {
+              "label": "print(\"Bag counts:\",counts)",
+              "feedback": "标签之后输出整个袋数向量。",
+              "correct": true
+            },
+            {
+              "label": "print(\"Bag counts:\",counts[0])",
+              "feedback": "只显示了第一种包装。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Bag counts:\",\"counts\")",
+              "feedback": "打印变量名文字，不是数值。",
+              "correct": false
+            },
+            {
+              "label": "print(\"Stocks [lb]:\",counts)",
+              "feedback": "标签含义和单位错误，输出应是袋数。",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "sourceCode": "\"\"\"Tong Su | ENGR 103 ICA 2-4 | Trail-mix bag counts from ingredient mass.\"\"\"\nimport numpy as np\n\n# Ingredient amounts per bag (oz). Rows = ingredients; columns = mixes 1-5.\ningredients = np.array([[3, 1, 1, 2, 1],\n                        [1, 2, 1, 0, 2],\n                        [1, 1, 0, 3, 3],\n                        [2, 3, 3, 1, 0],\n                        [1, 1, 3, 2, 2]], dtype=float)\navailable_lb = np.array([105, 74, 102, 118, 121], dtype=float)\n# 1 pound-force denotes weight; its equivalent ounce-force count is 16.\nphysical_bags = np.linalg.solve(ingredients, available_lb * 16)\nhandout_bags = np.linalg.solve(ingredients, available_lb * 2)\nprint(\"If listed supplies really are pounds (1 lb = 16 oz):\")\nfor index, number in enumerate(physical_bags, start=1):\n    print(f\"Mix {index}: {number:.1f} bags\")\nprint(\"The handout's 26, 22, 30, 28, 24 check values require multiplying\")\nprint(\"the listed numbers by 2 instead of 16; these conflict with 'lbf'.\")\nprint(\"Handout check numbers:\", handout_bags)\n",
+      "sourceUrl": "https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/engr103-reference/ICA2/Su_Tong_ICA2_4.py"
+    }
+  ]
+}
