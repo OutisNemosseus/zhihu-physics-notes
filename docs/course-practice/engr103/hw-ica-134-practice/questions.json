@@ -4431,17 +4431,17 @@
           "choices": [
             "t = np.linspace(0,20,0.01)",
             "t = np.arange(0,20.01,100)",
-            "t = np.arange(0,20.01,0.01)",
+            "t = np.linspace(0,20,2001)",
             "t = np.arange(0,20,0.01)"
           ],
           "answer": 2,
-          "explanation": "arange第三参数为步长，终点稍增加以包含20。"
+          "explanation": "0到20秒共有2000个0.01秒间隔，因此需要2001个点；linspace包含两端点，避免浮点stop导致额外采样。"
         },
         {
           "id": "mcq-ica3-2-q3",
           "local": 3,
           "prompt": "Compute b0=sqrt(4*mass*spring_k).",
-          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.arange(0,20.01,0.01)",
+          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)",
           "choices": [
             "b0 = np.sqrt(4*spring_k/mass)",
             "b0 = np.sqrt(4*mass*spring_k)",
@@ -4455,7 +4455,7 @@
           "id": "mcq-ica3-2-q4",
           "local": 4,
           "prompt": "For b=b0/2,b0,b0/0.5, plot the prescribed y=A0 exp(−b*t/(2*mass)) cos(omega0*t).",
-          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.arange(0,20.01,0.01)\n\nb0 = np.sqrt(4*mass*spring_k)\n\nfig, ax = plt.subplots()",
+          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)\n\nb0 = np.sqrt(4*mass*spring_k)\n\nfig, ax = plt.subplots()",
           "choices": [
             "for b,label,style in ((b0/2,\"b0/2\",\"b-\"),(b0,\"b0\",\"g--\"),(b0/0.5,\"b0/0.5\",\"r:\")):\n    alpha = b/(2*mass)\n    y = A0*np.exp(-alpha*t)*np.cos(omega0*t)\n    ax.plot(t,y,style,label=label)",
             "for b in (b0/2,b0,b0/0.5):\n    y = A0*np.exp(b*t/(2*mass))*np.cos(omega0*t)\n    ax.plot(t,y)",
@@ -4469,7 +4469,7 @@
           "id": "mcq-ica3-2-q5",
           "local": 5,
           "prompt": "Add a formula annotation at axes-relative coordinates (0.52,0.82).",
-          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.arange(0,20.01,0.01)\n\nb0 = np.sqrt(4*mass*spring_k)\n\nfig, ax = plt.subplots()\n\nfor b,label,style in ((b0/2,\"b0/2\",\"b-\"),(b0,\"b0\",\"g--\"),(b0/0.5,\"b0/0.5\",\"r:\")):\n    alpha = b/(2*mass)\n    y = A0*np.exp(-alpha*t)*np.cos(omega0*t)\n    ax.plot(t,y,style,label=label)",
+          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)\n\nb0 = np.sqrt(4*mass*spring_k)\n\nfig, ax = plt.subplots()\n\nfor b,label,style in ((b0/2,\"b0/2\",\"b-\"),(b0,\"b0\",\"g--\"),(b0/0.5,\"b0/0.5\",\"r:\")):\n    alpha = b/(2*mass)\n    y = A0*np.exp(-alpha*t)*np.cos(omega0*t)\n    ax.plot(t,y,style,label=label)",
           "choices": [
             "ax.text(0.52,0.82,\"y=A0 exp(-alpha*t) cos(omega0*t)\")",
             "ax.text(0.52,0.82,\"y=A0 exp(-alpha*t) cos(omega0*t)\",transform=ax.transData)",
@@ -4519,7 +4519,7 @@
             {
               "id": "time",
               "label": "生成时间数组",
-              "code": "t = np.arange(0,20.01,0.01)",
+              "code": "t = np.linspace(0,20,2001)",
               "needs": [
                 "imports"
               ]
@@ -4579,7 +4579,7 @@
             {
               "id": "time",
               "label": "生成时间数组",
-              "code": "t = np.arange(0,20.01,0.01)",
+              "code": "t = np.linspace(0,20,2001)",
               "needs": [
                 "imports"
               ]
@@ -4651,7 +4651,7 @@
           "id": "order-ica3-2-q3",
           "local": 3,
           "title": "接着完成后半段",
-          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.arange(0,20.01,0.01)\n\nb0 = np.sqrt(4*mass*spring_k)",
+          "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)\n\nb0 = np.sqrt(4*mass*spring_k)",
           "requirements": [
             "Create one figure and one 2D axes.",
             "For b=b0/2,b0,b0/0.5, plot the prescribed y=A0 exp(−b*t/(2*mass)) cos(omega0*t).",
