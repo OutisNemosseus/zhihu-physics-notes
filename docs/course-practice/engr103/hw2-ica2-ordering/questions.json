@@ -1,0 +1,2799 @@
+{
+  "version": 1,
+  "programs": [
+    {
+      "id": "hw2-1",
+      "name": "HW2 · 程序 2_1",
+      "topic": "抛体运动",
+      "tasks": [
+        {
+          "id": "order-hw2-1-q1",
+          "number": 1,
+          "local": 1,
+          "title": "射程与峰值高度",
+          "requirements": [
+            "Create the angle array [15,25,35,45,55,65,75] in degrees.",
+            "Use v0=260 m/s and g=9.81 m/s²; convert angles to radians.",
+            "Calculate range v0²sin(2θ)/g and peak height v0²sin²θ/(2g).",
+            "Print the range array first, then the height array, both in meters."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "constants",
+              "label": "设置物理参数",
+              "code": "v0, g = 260.0, 9.81",
+              "needs": []
+            },
+            {
+              "id": "angles",
+              "label": "创建角度数组",
+              "code": "angles_deg = np.array([15,25,35,45,55,65,75])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "radians",
+              "label": "转换为弧度",
+              "code": "theta = np.deg2rad(angles_deg)",
+              "needs": [
+                "import",
+                "angles"
+              ]
+            },
+            {
+              "id": "range",
+              "label": "计算射程",
+              "code": "range_m = v0**2 / g * np.sin(2*theta)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "height",
+              "label": "计算峰值高度",
+              "code": "height_m = v0**2 * np.sin(theta)**2 / (2*g)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "printrange",
+              "label": "输出射程",
+              "code": "print(\"Ranges [m]:\",np.round(range_m,3))",
+              "needs": [
+                "range"
+              ]
+            },
+            {
+              "id": "printheight",
+              "label": "输出高度",
+              "code": "print(\"Peak heights [m]:\",np.round(height_m,3))",
+              "needs": [
+                "height",
+                "printrange"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-1-q2",
+          "number": 2,
+          "local": 2,
+          "title": "射程计算与舍入",
+          "requirements": [
+            "Create the angle array [20,35,45,55,70] in degrees.",
+            "Use v0=100 m/s and g=9.81 m/s²; convert angles to radians.",
+            "Calculate the range array v0²sin(2θ)/g.",
+            "Round ranges to 3 decimals and print them with units."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "constants",
+              "label": "设置物理参数",
+              "code": "v0, g = 100.0, 9.81",
+              "needs": []
+            },
+            {
+              "id": "angles",
+              "label": "创建角度数组",
+              "code": "angles_deg = np.array([20,35,45,55,70])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "radians",
+              "label": "转换为弧度",
+              "code": "theta = np.deg2rad(angles_deg)",
+              "needs": [
+                "import",
+                "angles"
+              ]
+            },
+            {
+              "id": "range",
+              "label": "计算射程",
+              "code": "range_m = v0**2 / g * np.sin(2*theta)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入射程数组",
+              "code": "rounded = np.round(range_m,3)",
+              "needs": [
+                "range"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出射程",
+              "code": "print(\"Ranges [m]:\",rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-1-q3",
+          "number": 3,
+          "local": 3,
+          "title": "峰值高度计算",
+          "requirements": [
+            "Create the angle array [10,30,50,70] in degrees.",
+            "Use v0=180 m/s and g=9.81 m/s²; convert angles to radians.",
+            "Calculate peak heights v0²sin²θ/(2g).",
+            "Round peak heights to 3 decimals and print with units."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "constants",
+              "label": "设置物理参数",
+              "code": "v0, g = 180.0, 9.81",
+              "needs": []
+            },
+            {
+              "id": "angles",
+              "label": "创建角度数组",
+              "code": "angles_deg = np.array([10,30,50,70])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "radians",
+              "label": "转换为弧度",
+              "code": "theta = np.deg2rad(angles_deg)",
+              "needs": [
+                "import",
+                "angles"
+              ]
+            },
+            {
+              "id": "height",
+              "label": "计算峰值高度",
+              "code": "height_m = v0**2 * np.sin(theta)**2 / (2*g)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入高度数组",
+              "code": "rounded = np.round(height_m,3)",
+              "needs": [
+                "height"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出高度",
+              "code": "print(\"Peak heights [m]:\",rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-1-q4",
+          "number": 4,
+          "local": 4,
+          "title": "竖直速度到高度",
+          "requirements": [
+            "Create the angle array [15,30,45,60,75] in degrees.",
+            "Use v0=120 m/s and g=9.81 m/s²; convert angles to radians.",
+            "Calculate the vertical launch velocity, then peak height vy²/(2g).",
+            "Print all peak heights in meters, rounded to 3 decimals."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "constants",
+              "label": "设置物理参数",
+              "code": "v0, g = 120.0, 9.81",
+              "needs": []
+            },
+            {
+              "id": "angles",
+              "label": "创建角度数组",
+              "code": "angles_deg = np.array([15,30,45,60,75])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "radians",
+              "label": "转换为弧度",
+              "code": "theta = np.deg2rad(angles_deg)",
+              "needs": [
+                "import",
+                "angles"
+              ]
+            },
+            {
+              "id": "vertical",
+              "label": "计算竖直分速度",
+              "code": "vy = v0 * np.sin(theta)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "height",
+              "label": "计算峰值高度",
+              "code": "height_m = vy**2 / (2*g)",
+              "needs": [
+                "vertical",
+                "constants"
+              ]
+            },
+            {
+              "id": "printheight",
+              "label": "输出高度",
+              "code": "print(\"Peak heights [m]:\", np.round(height_m,3))",
+              "needs": [
+                "height"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-1-q5",
+          "number": 5,
+          "local": 5,
+          "title": "整理抛体结果表",
+          "requirements": [
+            "Create the angle array [20,40,60,80] in degrees.",
+            "Use v0=200 m/s and g=9.81 m/s²; convert angles to radians.",
+            "Calculate range and peak height for every angle.",
+            "Build and print a table with columns angle, range, height."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "constants",
+              "label": "设置物理参数",
+              "code": "v0, g = 200.0, 9.81",
+              "needs": []
+            },
+            {
+              "id": "angles",
+              "label": "创建角度数组",
+              "code": "angles_deg = np.array([20,40,60,80])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "radians",
+              "label": "转换为弧度",
+              "code": "theta = np.deg2rad(angles_deg)",
+              "needs": [
+                "import",
+                "angles"
+              ]
+            },
+            {
+              "id": "range",
+              "label": "计算射程",
+              "code": "range_m = v0**2 / g * np.sin(2*theta)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "height",
+              "label": "计算峰值高度",
+              "code": "height_m = v0**2 * np.sin(theta)**2 / (2*g)",
+              "needs": [
+                "constants",
+                "radians"
+              ]
+            },
+            {
+              "id": "table",
+              "label": "按列组织结果",
+              "code": "table = np.column_stack((angles_deg,range_m,height_m))",
+              "needs": [
+                "angles",
+                "range",
+                "height"
+              ]
+            },
+            {
+              "id": "printtable",
+              "label": "输出结果表",
+              "code": "print(\"Angle [deg], range [m], height [m]:\")\nprint(np.round(table,3))",
+              "needs": [
+                "table"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "hw2-2",
+      "name": "HW2 · 程序 2_2",
+      "topic": "流体压力网格",
+      "tasks": [
+        {
+          "id": "order-hw2-2-q1",
+          "number": 6,
+          "local": 1,
+          "title": "比重到密度再到压力",
+          "requirements": [
+            "Create sg=[0.87,1,1.24] and depths=[10,12,14,16,18,20] m.",
+            "Use meshgrid with depth rows and fluid columns.",
+            "Calculate hydrostatic gauge pressure P=ρgH, using ρ=1000SG and g=9.81.",
+            "Print the complete pressure table in Pa."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "sg",
+              "label": "创建比重数组",
+              "code": "sg = np.array([0.87,1,1.24])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "depths",
+              "label": "创建深度数组",
+              "code": "depths = np.array([10,12,14,16,18,20])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "建立比重和深度网格",
+              "code": "SG,H = np.meshgrid(sg,depths)",
+              "needs": [
+                "sg",
+                "depths"
+              ]
+            },
+            {
+              "id": "density",
+              "label": "比重换成密度",
+              "code": "rho = SG * 1000.0",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "pressure",
+              "label": "计算表压",
+              "code": "pressure_pa = rho * 9.81 * H",
+              "needs": [
+                "density",
+                "grid"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出压力表",
+              "code": "print(\"Pressure [Pa]:\")\nprint(pressure_pa)",
+              "needs": [
+                "pressure"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-2-q2",
+          "number": 7,
+          "local": 2,
+          "title": "压力表转为 kPa",
+          "requirements": [
+            "Create sg=[0.8,1,1.2] and depths=[2,4,6,8] m.",
+            "Use meshgrid with depth rows and fluid columns.",
+            "Calculate hydrostatic gauge pressure P=ρgH, using ρ=1000SG and g=9.81.",
+            "Convert Pa to kPa and print the complete table."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "sg",
+              "label": "创建比重数组",
+              "code": "sg = np.array([0.8,1,1.2])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "depths",
+              "label": "创建深度数组",
+              "code": "depths = np.array([2,4,6,8])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "建立比重和深度网格",
+              "code": "SG,H = np.meshgrid(sg,depths)",
+              "needs": [
+                "sg",
+                "depths"
+              ]
+            },
+            {
+              "id": "pressure",
+              "label": "计算表压",
+              "code": "pressure_pa = SG * 1000.0 * 9.81 * H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "kpa",
+              "label": "换为千帕",
+              "code": "pressure_kpa = pressure_pa / 1000",
+              "needs": [
+                "pressure"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出压力表",
+              "code": "print(\"Pressure [kPa]:\")\nprint(pressure_kpa)",
+              "needs": [
+                "kpa"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-2-q3",
+          "number": 8,
+          "local": 3,
+          "title": "输出说明与压力表",
+          "requirements": [
+            "Create sg=[0.9,1.1] and depths=[5,7,9,11,13,15] m.",
+            "Use meshgrid with depth rows and fluid columns.",
+            "Calculate hydrostatic gauge pressure P=ρgH, using ρ=1000SG and g=9.81.",
+            "After calculating pressure, print the row/column description, then the table in Pa."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "sg",
+              "label": "创建比重数组",
+              "code": "sg = np.array([0.9,1.1])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "depths",
+              "label": "创建深度数组",
+              "code": "depths = np.array([5,7,9,11,13,15])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "建立比重和深度网格",
+              "code": "SG,H = np.meshgrid(sg,depths)",
+              "needs": [
+                "sg",
+                "depths"
+              ]
+            },
+            {
+              "id": "density",
+              "label": "比重换成密度",
+              "code": "rho = SG * 1000.0",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "pressure",
+              "label": "计算表压",
+              "code": "pressure_pa = rho * 9.81 * H",
+              "needs": [
+                "density",
+                "grid"
+              ]
+            },
+            {
+              "id": "labels",
+              "label": "输出行列说明",
+              "code": "print(\"Rows: depth [m]; columns: SG\")",
+              "needs": [
+                "pressure"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出压力表",
+              "code": "print(\"Pressure [Pa]:\")\nprint(pressure_pa)",
+              "needs": [
+                "pressure",
+                "labels"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-2-q4",
+          "number": 9,
+          "local": 4,
+          "title": "舍入后的压力表",
+          "requirements": [
+            "Create sg=[0.75,1,1.3] and depths=[1,3,5,7] m.",
+            "Use meshgrid with depth rows and fluid columns.",
+            "Calculate hydrostatic gauge pressure P=ρgH, using ρ=1000SG and g=9.81.",
+            "Round to 1 decimal and print the full table in Pa."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "sg",
+              "label": "创建比重数组",
+              "code": "sg = np.array([0.75,1,1.3])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "depths",
+              "label": "创建深度数组",
+              "code": "depths = np.array([1,3,5,7])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "建立比重和深度网格",
+              "code": "SG,H = np.meshgrid(sg,depths)",
+              "needs": [
+                "sg",
+                "depths"
+              ]
+            },
+            {
+              "id": "pressure",
+              "label": "计算表压",
+              "code": "pressure_pa = SG * 1000.0 * 9.81 * H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入压力值",
+              "code": "rounded = np.round(pressure_pa,1)",
+              "needs": [
+                "pressure"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出压力表",
+              "code": "print(\"Pressure [Pa]:\",rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-2-q5",
+          "number": 10,
+          "local": 5,
+          "title": "另一组流体与深度",
+          "requirements": [
+            "Create sg=[0.85,1.05,1.25] and depths=[4,8,12,16] m.",
+            "Use meshgrid with depth rows and fluid columns.",
+            "Calculate hydrostatic gauge pressure P=ρgH, using ρ=1000SG and g=9.81.",
+            "Print the complete pressure table in Pa."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "sg",
+              "label": "创建比重数组",
+              "code": "sg = np.array([0.85,1.05,1.25])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "depths",
+              "label": "创建深度数组",
+              "code": "depths = np.array([4,8,12,16])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "建立比重和深度网格",
+              "code": "SG,H = np.meshgrid(sg,depths)",
+              "needs": [
+                "sg",
+                "depths"
+              ]
+            },
+            {
+              "id": "pressure",
+              "label": "计算表压",
+              "code": "pressure_pa = SG * 1000.0 * 9.81 * H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出压力表",
+              "code": "print(\"Pressure [Pa]:\")\nprint(pressure_pa)",
+              "needs": [
+                "pressure"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "hw2-3",
+      "name": "HW2 · 程序 2_3",
+      "topic": "数组索引与拼接",
+      "tasks": [
+        {
+          "id": "order-hw2-3-q1",
+          "number": 11,
+          "local": 1,
+          "title": "提取 D 并创建 E",
+          "requirements": [
+            "Create the provided A and B arrays.",
+            "Extract column 3 of A as the 1D array D.",
+            "Build E with first column B and second column D.",
+            "Print D first, then E."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建矩阵 A",
+              "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建数组 B",
+              "code": "B = np.array([1,5,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "提取第三列",
+              "code": "D = A[:,2]",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "E",
+              "label": "按列拼接",
+              "code": "E = np.column_stack((B,D))",
+              "needs": [
+                "B",
+                "D"
+              ]
+            },
+            {
+              "id": "printD",
+              "label": "输出 D",
+              "code": "print(\"D =\",D)",
+              "needs": [
+                "D"
+              ]
+            },
+            {
+              "id": "printE",
+              "label": "输出 E",
+              "code": "print(\"E =\",E)",
+              "needs": [
+                "E",
+                "printD"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-3-q2",
+          "number": 12,
+          "local": 2,
+          "title": "首尾连接后创建列 F",
+          "requirements": [
+            "Create A and B, and extract D from column 3 of A.",
+            "Concatenate all of B followed by all of D.",
+            "Reshape the result into a 6×1 column F.",
+            "Print F."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建矩阵 A",
+              "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建数组 B",
+              "code": "B = np.array([1,5,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "提取第三列",
+              "code": "D = A[:,2]",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "join",
+              "label": "首尾连接",
+              "code": "joined = np.concatenate((B,D))",
+              "needs": [
+                "B",
+                "D"
+              ]
+            },
+            {
+              "id": "F",
+              "label": "形成六行一列",
+              "code": "F = joined.reshape(6,1)",
+              "needs": [
+                "join"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 F",
+              "code": "print(\"F =\",F)",
+              "needs": [
+                "F"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-3-q3",
+          "number": 13,
+          "local": 3,
+          "title": "向 A 追加一行形成 G",
+          "requirements": [
+            "Create A and C.",
+            "Take the first three entries of C as row.",
+            "Append row below A to form G.",
+            "Print G."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建矩阵 A",
+              "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "C",
+              "label": "创建数组 C",
+              "code": "C = np.array([12,18,5,2])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "row",
+              "label": "截取新行",
+              "code": "row = C[:3]",
+              "needs": [
+                "C"
+              ]
+            },
+            {
+              "id": "G",
+              "label": "追加到下方",
+              "code": "G = np.vstack((A,row))",
+              "needs": [
+                "A",
+                "row"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 G",
+              "code": "print(\"G =\",G)",
+              "needs": [
+                "G"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-3-q4",
+          "number": 14,
+          "local": 4,
+          "title": "从三个数组构造 H",
+          "requirements": [
+            "Create A, B and C.",
+            "Select A row 1 column 3, C entry 2, and B entry 2.",
+            "Build H using those three values in that order.",
+            "Print H."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建矩阵 A",
+              "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建数组 B",
+              "code": "B = np.array([1,5,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "C",
+              "label": "创建数组 C",
+              "code": "C = np.array([12,18,5,2])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "values",
+              "label": "读取指定元素",
+              "code": "first,second,third = A[0,2],C[1],B[1]",
+              "needs": [
+                "A",
+                "B",
+                "C"
+              ]
+            },
+            {
+              "id": "H",
+              "label": "构造 H",
+              "code": "H = np.array([first,second,third])",
+              "needs": [
+                "values"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 H",
+              "code": "print(\"H =\",H)",
+              "needs": [
+                "H"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-3-q5",
+          "number": 15,
+          "local": 5,
+          "title": "建立 E 和列 F 并输出",
+          "requirements": [
+            "Create A and B, then extract D from column 3 of A.",
+            "Create E by column-stacking B and D.",
+            "Create F by concatenating B then D and reshaping to one column.",
+            "Print E first, then F."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建矩阵 A",
+              "code": "A = np.array([[15,3,22],[3,8,5],[14,3,82]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建数组 B",
+              "code": "B = np.array([1,5,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "提取第三列",
+              "code": "D = A[:,2]",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "E",
+              "label": "构造 E",
+              "code": "E = np.column_stack((B,D))",
+              "needs": [
+                "B",
+                "D"
+              ]
+            },
+            {
+              "id": "F",
+              "label": "构造 F",
+              "code": "F = np.concatenate((B,D)).reshape(-1,1)",
+              "needs": [
+                "B",
+                "D"
+              ]
+            },
+            {
+              "id": "printE",
+              "label": "输出 E",
+              "code": "print(\"E =\",E)",
+              "needs": [
+                "E"
+              ]
+            },
+            {
+              "id": "printF",
+              "label": "输出 F",
+              "code": "print(\"F =\",F)",
+              "needs": [
+                "F",
+                "printE"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "hw2-4",
+      "name": "HW2 · 程序 2_4",
+      "topic": "联立方程组",
+      "tasks": [
+        {
+          "id": "order-hw2-4-q1",
+          "number": 16,
+          "local": 1,
+          "title": "解方程并按变量名输出",
+          "requirements": [
+            "Create the 6×6 coefficient matrix and the provided right-hand side vector.",
+            "Solve A @ solution = rhs.",
+            "Print a–f in order, each with 3 decimal places and unit m."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建系数矩阵",
+              "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rhs",
+              "label": "创建右端向量",
+              "code": "rhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求解方程组",
+              "code": "solution = np.linalg.solve(A,rhs)",
+              "needs": [
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "names",
+              "label": "准备变量名",
+              "code": "names = \"abcdef\"",
+              "needs": []
+            },
+            {
+              "id": "print",
+              "label": "逐项输出结果",
+              "code": "for name,value in zip(names,solution):\n    print(f\"{name} = {value:.3f} m\")",
+              "needs": [
+                "names",
+                "solve"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-4-q2",
+          "number": 17,
+          "local": 2,
+          "title": "两倍右端的列向量解",
+          "requirements": [
+            "Create the 6×6 coefficient matrix and the provided right-hand side vector.",
+            "Solve A @ solution = rhs.",
+            "Reshape the solution to a column and print it in meters."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建系数矩阵",
+              "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rhs",
+              "label": "创建右端向量",
+              "code": "rhs = np.array([105.04,-42.2,-55.2,18.32,-35.8,-32.4])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求解方程组",
+              "code": "solution = np.linalg.solve(A,rhs)",
+              "needs": [
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "column",
+              "label": "整理为列向量",
+              "code": "column = solution.reshape(-1,1)",
+              "needs": [
+                "solve"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出列向量",
+              "code": "print(\"Solution [m]:\")\nprint(column)",
+              "needs": [
+                "column"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-4-q3",
+          "number": 18,
+          "local": 3,
+          "title": "一半右端的舍入解",
+          "requirements": [
+            "Create the 6×6 coefficient matrix and the provided right-hand side vector.",
+            "Solve A @ solution = rhs.",
+            "Round the solution to 3 decimals and print the six values."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建系数矩阵",
+              "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rhs",
+              "label": "创建右端向量",
+              "code": "rhs = np.array([26.26,-10.55,-13.8,4.58,-8.95,-8.1])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求解方程组",
+              "code": "solution = np.linalg.solve(A,rhs)",
+              "needs": [
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入解",
+              "code": "rounded = np.round(solution,3)",
+              "needs": [
+                "solve"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出解",
+              "code": "print(\"a,b,c,d,e,f [m]:\",rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-4-q4",
+          "number": 19,
+          "local": 4,
+          "title": "求解后验证与输出",
+          "requirements": [
+            "Create the 6×6 coefficient matrix and the provided right-hand side vector.",
+            "Solve A @ solution = rhs.",
+            "Check the solution against the original equations, then print the solution and verification."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建系数矩阵",
+              "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rhs",
+              "label": "创建右端向量",
+              "code": "rhs = np.array([52.52,-21.1,-27.6,9.16,-17.9,-16.2])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求解方程组",
+              "code": "solution = np.linalg.solve(A,rhs)",
+              "needs": [
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "check",
+              "label": "验证原方程",
+              "code": "ok = np.allclose(A @ solution,rhs)",
+              "needs": [
+                "solve",
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出检查结果",
+              "code": "print(\"Solution [m]:\",solution)\nprint(\"Verified:\",ok)",
+              "needs": [
+                "solve",
+                "check"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-hw2-4-q5",
+          "number": 20,
+          "local": 5,
+          "title": "三倍右端的标注结果",
+          "requirements": [
+            "Create the 6×6 coefficient matrix and the provided right-hand side vector.",
+            "Solve A @ solution = rhs.",
+            "Print a–f in order, each with 3 decimal places and unit m."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建系数矩阵",
+              "code": "A = np.array([[2,-4,5,-3.5,1.8,4],\n              [-1.5,3,4,-1,-2,5],\n              [5,1,-6,3,-2,2],\n              [1.2,-2,3,4,-1,4],\n              [4,1,-2,-3,-4,1.5],\n              [3,1,-1,4,-2,-4]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rhs",
+              "label": "创建右端向量",
+              "code": "rhs = np.array([157.56,-63.3,-82.8,27.48,-53.7,-48.6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求解方程组",
+              "code": "solution = np.linalg.solve(A,rhs)",
+              "needs": [
+                "matrix",
+                "rhs"
+              ]
+            },
+            {
+              "id": "names",
+              "label": "准备变量名",
+              "code": "names = \"abcdef\"",
+              "needs": []
+            },
+            {
+              "id": "print",
+              "label": "逐项输出结果",
+              "code": "for name,value in zip(names,solution):\n    print(f\"{name} = {value:.3f} m\")",
+              "needs": [
+                "names",
+                "solve"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "ica2-1",
+      "name": "ICA2 · 程序 2_1",
+      "topic": "输入和创建数组",
+      "tasks": [
+        {
+          "id": "order-ica2-1-q1",
+          "number": 21,
+          "local": 1,
+          "title": "读取一维数组并生成 C",
+          "requirements": [
+            "Read the input line “1 4 9 16” into a 1D numeric array A.",
+            "Generate C from 6.4 through 12 with a step of 0.8.",
+            "Print A first, then C."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "text",
+              "label": "读取一行",
+              "code": "text = input(\"A values: \")",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "解析数值数组",
+              "code": "A = np.fromstring(text,sep=\" \")",
+              "needs": [
+                "import",
+                "text"
+              ]
+            },
+            {
+              "id": "C",
+              "label": "生成步进数组",
+              "code": "C = np.arange(6.4,12.4,0.8)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "printA",
+              "label": "输出 A",
+              "code": "print(\"A =\",A)",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "printC",
+              "label": "输出 C",
+              "code": "print(\"C =\",C)",
+              "needs": [
+                "C",
+                "printA"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-1-q2",
+          "number": 22,
+          "local": 2,
+          "title": "用户输入二维数组 B",
+          "requirements": [
+            "Read the integer row count 2.",
+            "Read two space-separated numeric rows: “1 2 3”, then “4 5 6”.",
+            "Combine the rows into B.",
+            "Print B."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "rows",
+              "label": "读取行数",
+              "code": "rows = int(input(\"Rows: \"))",
+              "needs": []
+            },
+            {
+              "id": "values",
+              "label": "逐行解析输入",
+              "code": "values = [np.fromstring(input(),sep=\" \") for _ in range(rows)]",
+              "needs": [
+                "import",
+                "rows"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建二维数组",
+              "code": "B = np.array(values)",
+              "needs": [
+                "values"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 B",
+              "code": "print(\"B =\",B)",
+              "needs": [
+                "B"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-1-q3",
+          "number": 23,
+          "local": 3,
+          "title": "创建 C 和 D 并顺序输出",
+          "requirements": [
+            "Generate C from 6.4 through 12 with step 0.8.",
+            "Generate D with 7 equally spaced values from 44 down to 23.",
+            "Print C before D."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "bounds",
+              "label": "设置 C 的范围",
+              "code": "start,stop,step = 6.4,12.4,0.8",
+              "needs": []
+            },
+            {
+              "id": "C",
+              "label": "创建 C",
+              "code": "C = np.arange(start,stop,step)",
+              "needs": [
+                "import",
+                "bounds"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "创建 D",
+              "code": "D = np.linspace(44,23,7)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "printC",
+              "label": "输出 C",
+              "code": "print(\"C =\",C)",
+              "needs": [
+                "C"
+              ]
+            },
+            {
+              "id": "printD",
+              "label": "输出 D",
+              "code": "print(\"D =\",D)",
+              "needs": [
+                "D",
+                "printC"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-1-q4",
+          "number": 24,
+          "local": 4,
+          "title": "输入 A 后生成递减 D",
+          "requirements": [
+            "Read “2 5 8” as the 1D numeric array A.",
+            "Generate D with 7 points from 18 down to 3.",
+            "Print A followed by D."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "读取并解析 A",
+              "code": "A = np.fromstring(input(),sep=\" \")",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "bounds",
+              "label": "设置 D 的采样参数",
+              "code": "first,last,count = 18,3,7",
+              "needs": []
+            },
+            {
+              "id": "D",
+              "label": "生成等距点",
+              "code": "D = np.linspace(first,last,count)",
+              "needs": [
+                "import",
+                "bounds"
+              ]
+            },
+            {
+              "id": "printA",
+              "label": "输出 A",
+              "code": "print(\"A =\",A)",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "printD",
+              "label": "输出 D",
+              "code": "print(\"D =\",D)",
+              "needs": [
+                "D",
+                "printA"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-1-q5",
+          "number": 25,
+          "local": 5,
+          "title": "三行输入与数组 D",
+          "requirements": [
+            "Read row count 3, followed by rows “1 2”, “3 4”, “5 6”.",
+            "Form the 2D array B.",
+            "Create D with 7 points from 44 to 23.",
+            "Print B before D."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "rows",
+              "label": "读取行数",
+              "code": "rows = int(input(\"Rows: \"))",
+              "needs": []
+            },
+            {
+              "id": "values",
+              "label": "解析各行",
+              "code": "values = [np.fromstring(input(),sep=\" \") for _ in range(rows)]",
+              "needs": [
+                "import",
+                "rows"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "组成 B",
+              "code": "B = np.array(values)",
+              "needs": [
+                "values"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "创建 D",
+              "code": "D = np.linspace(44,23,7)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "printB",
+              "label": "输出 B",
+              "code": "print(\"B =\",B)",
+              "needs": [
+                "B"
+              ]
+            },
+            {
+              "id": "printD",
+              "label": "输出 D",
+              "code": "print(\"D =\",D)",
+              "needs": [
+                "D",
+                "printB"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "ica2-2",
+      "name": "ICA2 · 程序 2_2",
+      "topic": "矩阵与随机排列",
+      "tasks": [
+        {
+          "id": "order-ica2-2-q1",
+          "number": 26,
+          "local": 1,
+          "title": "从 A、B 的指定位置建立 C",
+          "requirements": [
+            "Create A=[12,8,14,2,25,60] and the provided B.",
+            "Build row1 from A entries 2,4,6.",
+            "Build row2 from B row 6 followed by A’s last entry; build row3 from A’s second-to-last entry followed by B row 3.",
+            "Stack the three rows as C and print it."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建 A",
+              "code": "A = np.array([12,8,14,2,25,60])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建 B",
+              "code": "B = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "row1",
+              "label": "构造第一行",
+              "code": "row1 = A[1::2]",
+              "needs": [
+                "A"
+              ]
+            },
+            {
+              "id": "row2",
+              "label": "构造第二行",
+              "code": "row2 = np.array([B[5,0],B[5,1],A[-1]])",
+              "needs": [
+                "A",
+                "B"
+              ]
+            },
+            {
+              "id": "row3",
+              "label": "构造第三行",
+              "code": "row3 = np.array([A[-2],B[2,0],B[2,1]])",
+              "needs": [
+                "A",
+                "B"
+              ]
+            },
+            {
+              "id": "C",
+              "label": "合并为矩阵 C",
+              "code": "C = np.vstack((row1,row2,row3))",
+              "needs": [
+                "row1",
+                "row2",
+                "row3"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 C",
+              "code": "print(\"C =\",C)",
+              "needs": [
+                "C"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-2-q2",
+          "number": 27,
+          "local": 2,
+          "title": "把 A 插入 B 的两列之间",
+          "requirements": [
+            "Create A and B.",
+            "Extract the left and right columns of B.",
+            "Insert A between them to create a 6×3 matrix D.",
+            "Print D."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建 A",
+              "code": "A = np.array([12,8,14,2,25,60])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "B",
+              "label": "创建 B",
+              "code": "B = np.array([[1,67],[12,2],[3,23],[34,4],[5,45],[56,6]])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "left",
+              "label": "提取左列",
+              "code": "left = B[:,0]",
+              "needs": [
+                "B"
+              ]
+            },
+            {
+              "id": "right",
+              "label": "提取右列",
+              "code": "right = B[:,1]",
+              "needs": [
+                "B"
+              ]
+            },
+            {
+              "id": "D",
+              "label": "插入中间列",
+              "code": "D = np.column_stack((left,A,right))",
+              "needs": [
+                "left",
+                "A",
+                "right"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出 D",
+              "code": "print(\"D =\",D)",
+              "needs": [
+                "D"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-2-q3",
+          "number": 28,
+          "local": 3,
+          "title": "随机整数矩阵和元素排列",
+          "requirements": [
+            "Create a seeded generator with seed 103.",
+            "Generate a 4×6 integer array E with values 0 through 49.",
+            "After generating E, randomly permute A=[10,20,30,40,50,60] into F.",
+            "Print E before F."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "rng",
+              "label": "创建生成器",
+              "code": "rng = np.random.default_rng(103)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "A",
+              "label": "创建 A",
+              "code": "A = np.array([10,20,30,40,50,60])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "E",
+              "label": "生成随机整数",
+              "code": "E = rng.integers(0,50,size=(4,6))",
+              "needs": [
+                "rng"
+              ]
+            },
+            {
+              "id": "F",
+              "label": "随机排列 A",
+              "code": "F = rng.permutation(A)",
+              "needs": [
+                "rng",
+                "A",
+                "E"
+              ]
+            },
+            {
+              "id": "printE",
+              "label": "输出 E",
+              "code": "print(\"E =\",E)",
+              "needs": [
+                "E"
+              ]
+            },
+            {
+              "id": "printF",
+              "label": "输出 F",
+              "code": "print(\"F =\",F)",
+              "needs": [
+                "F",
+                "printE"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-2-q4",
+          "number": 29,
+          "local": 4,
+          "title": "排列六个值再 reshape",
+          "requirements": [
+            "Create A=[12,8,14,2,25,60].",
+            "Create a seeded generator with seed 204.",
+            "Generate one random permutation F of A.",
+            "Reshape that same F into G with shape 2×3; print F before G."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建 A",
+              "code": "A = np.array([12,8,14,2,25,60])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rng",
+              "label": "创建生成器",
+              "code": "rng = np.random.default_rng(204)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "F",
+              "label": "生成排列",
+              "code": "F = rng.permutation(A)",
+              "needs": [
+                "A",
+                "rng"
+              ]
+            },
+            {
+              "id": "G",
+              "label": "改变排列形状",
+              "code": "G = F.reshape(2,3)",
+              "needs": [
+                "F"
+              ]
+            },
+            {
+              "id": "printF",
+              "label": "输出 F",
+              "code": "print(\"F =\",F)",
+              "needs": [
+                "F"
+              ]
+            },
+            {
+              "id": "printG",
+              "label": "输出 G",
+              "code": "print(\"G =\",G)",
+              "needs": [
+                "G",
+                "printF"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-2-q5",
+          "number": 30,
+          "local": 5,
+          "title": "随机矩阵 E 与重排矩阵 G",
+          "requirements": [
+            "Create A and a generator with seed 305.",
+            "Generate E with 5 rows, 7 columns, and integers 0–49.",
+            "After generating E, randomly permute A and reshape that permutation to a 3×2 matrix G.",
+            "Print E before G."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "A",
+              "label": "创建 A",
+              "code": "A = np.array([12,8,14,2,25,60])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "rng",
+              "label": "创建生成器",
+              "code": "rng = np.random.default_rng(305)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "E",
+              "label": "生成整数矩阵",
+              "code": "E = rng.integers(0,50,size=(5,7))",
+              "needs": [
+                "rng"
+              ]
+            },
+            {
+              "id": "perm",
+              "label": "生成排列",
+              "code": "permuted = rng.permutation(A)",
+              "needs": [
+                "rng",
+                "A",
+                "E"
+              ]
+            },
+            {
+              "id": "G",
+              "label": "组成三行两列",
+              "code": "G = permuted.reshape(3,2)",
+              "needs": [
+                "perm"
+              ]
+            },
+            {
+              "id": "printE",
+              "label": "输出 E",
+              "code": "print(\"E =\",E)",
+              "needs": [
+                "E"
+              ]
+            },
+            {
+              "id": "printG",
+              "label": "输出 G",
+              "code": "print(\"G =\",G)",
+              "needs": [
+                "G",
+                "printE"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "ica2-3",
+      "name": "ICA2 · 程序 2_3",
+      "topic": "圆柱体体积表",
+      "tasks": [
+        {
+          "id": "order-ica2-3-q1",
+          "number": 31,
+          "local": 1,
+          "title": "讲义范围的体积表",
+          "requirements": [
+            "Create radii=[0,3,6,9,12] m and heights=[10,12,14,16,18,20] m.",
+            "Build R,H grids with heights as rows and radii as columns.",
+            "Calculate every cylinder volume using V=πr²h.",
+            "Print the complete volume table in m³."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "r",
+              "label": "创建半径向量",
+              "code": "radii_m = np.array([0,3,6,9,12])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "h",
+              "label": "创建高度向量",
+              "code": "heights_m = np.array([10,12,14,16,18,20])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "生成所有组合",
+              "code": "R,H = np.meshgrid(radii_m,heights_m)",
+              "needs": [
+                "r",
+                "h"
+              ]
+            },
+            {
+              "id": "V",
+              "label": "计算体积",
+              "code": "V = np.pi*R**2*H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出体积表",
+              "code": "print(\"Volumes [m^3]:\")\nprint(V)",
+              "needs": [
+                "V"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-3-q2",
+          "number": 32,
+          "local": 2,
+          "title": "先底面积，再乘高度",
+          "requirements": [
+            "Create radii=[1,2,3] m and heights=[4,6,8,10] m.",
+            "Build R,H grids with heights as rows and radii as columns.",
+            "Calculate every cylinder volume using V=πr²h.",
+            "Print the complete volume table in m³."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "r",
+              "label": "创建半径向量",
+              "code": "radii_m = np.array([1,2,3])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "h",
+              "label": "创建高度向量",
+              "code": "heights_m = np.array([4,6,8,10])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "生成所有组合",
+              "code": "R,H = np.meshgrid(radii_m,heights_m)",
+              "needs": [
+                "r",
+                "h"
+              ]
+            },
+            {
+              "id": "base",
+              "label": "计算底面积",
+              "code": "base_area = np.pi*R**2",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "V",
+              "label": "计算体积",
+              "code": "V = base_area*H",
+              "needs": [
+                "base",
+                "grid"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出体积表",
+              "code": "print(\"Volumes [m^3]:\")\nprint(V)",
+              "needs": [
+                "V"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-3-q3",
+          "number": 33,
+          "local": 3,
+          "title": "小网格与舍入输出",
+          "requirements": [
+            "Create radii=[2,4] m and heights=[5,10,15] m.",
+            "Build R,H grids with heights as rows and radii as columns.",
+            "Calculate every cylinder volume using V=πr²h.",
+            "Round volumes to 3 decimals and print the table in m³."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "r",
+              "label": "创建半径向量",
+              "code": "radii_m = np.array([2,4])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "h",
+              "label": "创建高度向量",
+              "code": "heights_m = np.array([5,10,15])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "生成所有组合",
+              "code": "R,H = np.meshgrid(radii_m,heights_m)",
+              "needs": [
+                "r",
+                "h"
+              ]
+            },
+            {
+              "id": "V",
+              "label": "计算体积",
+              "code": "V = np.pi*R**2*H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入体积表",
+              "code": "rounded = np.round(V,3)",
+              "needs": [
+                "V"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出体积表",
+              "code": "print(\"Volumes [m^3]:\")\nprint(rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-3-q4",
+          "number": 34,
+          "local": 4,
+          "title": "不同尺寸的底面积步骤",
+          "requirements": [
+            "Create radii=[1,3,5] m and heights=[2,4,6] m.",
+            "Build R,H grids with heights as rows and radii as columns.",
+            "Calculate every cylinder volume using V=πr²h.",
+            "Print the complete volume table in m³."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "r",
+              "label": "创建半径向量",
+              "code": "radii_m = np.array([1,3,5])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "h",
+              "label": "创建高度向量",
+              "code": "heights_m = np.array([2,4,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "生成所有组合",
+              "code": "R,H = np.meshgrid(radii_m,heights_m)",
+              "needs": [
+                "r",
+                "h"
+              ]
+            },
+            {
+              "id": "base",
+              "label": "计算底面积",
+              "code": "base_area = np.pi*R**2",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "V",
+              "label": "计算体积",
+              "code": "V = base_area*H",
+              "needs": [
+                "base",
+                "grid"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出体积表",
+              "code": "print(\"Volumes [m^3]:\")\nprint(V)",
+              "needs": [
+                "V"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-3-q5",
+          "number": 35,
+          "local": 5,
+          "title": "行列说明与体积表",
+          "requirements": [
+            "Create radii=[0,2,4,6] m and heights=[3,6,9] m.",
+            "Build R,H grids with heights as rows and radii as columns.",
+            "Calculate every cylinder volume using V=πr²h.",
+            "After computing V, print the row/column description followed by V in m³."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "r",
+              "label": "创建半径向量",
+              "code": "radii_m = np.array([0,2,4,6])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "h",
+              "label": "创建高度向量",
+              "code": "heights_m = np.array([3,6,9])",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "grid",
+              "label": "生成所有组合",
+              "code": "R,H = np.meshgrid(radii_m,heights_m)",
+              "needs": [
+                "r",
+                "h"
+              ]
+            },
+            {
+              "id": "V",
+              "label": "计算体积",
+              "code": "V = np.pi*R**2*H",
+              "needs": [
+                "grid"
+              ]
+            },
+            {
+              "id": "header",
+              "label": "输出表格方向说明",
+              "code": "print(\"Rows: heights [m]; columns: radii [m]\")",
+              "needs": [
+                "V"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出体积表",
+              "code": "print(\"Volumes [m^3]:\")\nprint(V)",
+              "needs": [
+                "V",
+                "header"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    },
+    {
+      "id": "ica2-4",
+      "name": "ICA2 · 程序 2_4",
+      "topic": "配料系统",
+      "tasks": [
+        {
+          "id": "order-ica2-4-q1",
+          "number": 36,
+          "local": 1,
+          "title": "磅库存到五种包装袋数",
+          "requirements": [
+            "Create M with ingredient rows and mix columns; coefficients are oz per bag.",
+            "Use stock=[105,74,102,118,121] lb in the stated ingredient order.",
+            "Convert pounds to ounces using 1 lb=16 oz, then solve M @ counts=available_oz.",
+            "Print Mix 1–5 with one decimal place for each bag count."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建配料系数矩阵",
+              "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "stock",
+              "label": "创建库存向量",
+              "code": "available_lb = np.array([105,74,102,118,121],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "oz",
+              "label": "库存换成盎司",
+              "code": "available_oz = available_lb * 16",
+              "needs": [
+                "stock"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求包装袋数",
+              "code": "counts = np.linalg.solve(M,available_oz)",
+              "needs": [
+                "matrix",
+                "oz"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "逐项显示袋数",
+              "code": "for i,n in enumerate(counts,start=1):\n    print(f\"Mix {i}: {n:.1f} bags\")",
+              "needs": [
+                "solve"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-4-q2",
+          "number": 37,
+          "local": 2,
+          "title": "两倍库存并舍入输出",
+          "requirements": [
+            "Create M with ingredient rows and mix columns; coefficients are oz per bag.",
+            "Use stock=[210,148,204,236,242] lb in the stated ingredient order.",
+            "Convert pounds to ounces using 1 lb=16 oz, then solve M @ counts=available_oz.",
+            "Round all bag counts to 1 decimal and print the vector."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建配料系数矩阵",
+              "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "stock",
+              "label": "创建库存向量",
+              "code": "available_lb = np.array([210,148,204,236,242],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "oz",
+              "label": "库存换成盎司",
+              "code": "available_oz = available_lb * 16",
+              "needs": [
+                "stock"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求包装袋数",
+              "code": "counts = np.linalg.solve(M,available_oz)",
+              "needs": [
+                "matrix",
+                "oz"
+              ]
+            },
+            {
+              "id": "rounded",
+              "label": "舍入袋数向量",
+              "code": "rounded = np.round(counts,1)",
+              "needs": [
+                "solve"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出全部袋数",
+              "code": "print(\"Bag counts:\",rounded)",
+              "needs": [
+                "rounded"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-4-q3",
+          "number": 38,
+          "local": 3,
+          "title": "从配方表转置后求解",
+          "requirements": [
+            "Create the recipe table with one mix per row, then transpose it to obtain ingredient rows.",
+            "Use stock=[105,74,102,118,121] lb in the stated ingredient order.",
+            "Convert pounds to ounces using 1 lb=16 oz, then solve M @ counts=available_oz.",
+            "Print all five bag counts."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "table",
+              "label": "创建包装行配方表",
+              "code": "mix_rows = np.array([[3,1,1,2,1],\n                     [1,2,1,3,1],\n                     [1,1,0,3,3],\n                     [2,0,3,1,2],\n                     [1,2,3,0,2]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "matrix",
+              "label": "转为配料行矩阵",
+              "code": "M = mix_rows.T",
+              "needs": [
+                "table"
+              ]
+            },
+            {
+              "id": "stock",
+              "label": "创建库存向量",
+              "code": "available_lb = np.array([105,74,102,118,121],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "oz",
+              "label": "库存换成盎司",
+              "code": "available_oz = available_lb * 16",
+              "needs": [
+                "stock"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求包装袋数",
+              "code": "counts = np.linalg.solve(M,available_oz)",
+              "needs": [
+                "matrix",
+                "oz"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出全部袋数",
+              "code": "print(\"Bag counts:\",counts)",
+              "needs": [
+                "solve"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-4-q4",
+          "number": 39,
+          "local": 4,
+          "title": "一半库存的分项输出",
+          "requirements": [
+            "Create M with ingredient rows and mix columns; coefficients are oz per bag.",
+            "Use stock=[52.5,37,51,59,60.5] lb in the stated ingredient order.",
+            "Convert pounds to ounces using 1 lb=16 oz, then solve M @ counts=available_oz.",
+            "Print Mix 1–5 with one decimal place for each bag count."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建配料系数矩阵",
+              "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "stock",
+              "label": "创建库存向量",
+              "code": "available_lb = np.array([52.5,37,51,59,60.5],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "oz",
+              "label": "库存换成盎司",
+              "code": "available_oz = available_lb * 16",
+              "needs": [
+                "stock"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求包装袋数",
+              "code": "counts = np.linalg.solve(M,available_oz)",
+              "needs": [
+                "matrix",
+                "oz"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "逐项显示袋数",
+              "code": "for i,n in enumerate(counts,start=1):\n    print(f\"Mix {i}: {n:.1f} bags\")",
+              "needs": [
+                "solve"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        },
+        {
+          "id": "order-ica2-4-q5",
+          "number": 40,
+          "local": 5,
+          "title": "求解后验证库存平衡",
+          "requirements": [
+            "Create M with ingredient rows and mix columns; coefficients are oz per bag.",
+            "Use stock=[105,74,102,118,121] lb in the stated ingredient order.",
+            "Convert pounds to ounces using 1 lb=16 oz, then solve M @ counts=available_oz.",
+            "Verify the solved counts use the given stocks, then print counts and the check result."
+          ],
+          "blocks": [
+            {
+              "id": "import",
+              "label": "导入 NumPy",
+              "code": "import numpy as np",
+              "needs": []
+            },
+            {
+              "id": "matrix",
+              "label": "创建配料系数矩阵",
+              "code": "M = np.array([[3,1,1,2,1],\n              [1,2,1,0,2],\n              [1,1,0,3,3],\n              [2,3,3,1,0],\n              [1,1,3,2,2]],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "stock",
+              "label": "创建库存向量",
+              "code": "available_lb = np.array([105,74,102,118,121],dtype=float)",
+              "needs": [
+                "import"
+              ]
+            },
+            {
+              "id": "oz",
+              "label": "库存换成盎司",
+              "code": "available_oz = available_lb * 16",
+              "needs": [
+                "stock"
+              ]
+            },
+            {
+              "id": "solve",
+              "label": "求包装袋数",
+              "code": "counts = np.linalg.solve(M,available_oz)",
+              "needs": [
+                "matrix",
+                "oz"
+              ]
+            },
+            {
+              "id": "verify",
+              "label": "验证配料用量",
+              "code": "ok = np.allclose(M @ counts,available_oz)",
+              "needs": [
+                "solve",
+                "oz",
+                "matrix"
+              ]
+            },
+            {
+              "id": "print",
+              "label": "输出袋数与验证",
+              "code": "print(\"Bag counts:\",counts)\nprint(\"Stock matched:\",ok)",
+              "needs": [
+                "solve",
+                "verify"
+              ]
+            }
+          ],
+          "hint": "先准备被使用的数据，再进行计算；题目若规定输出先后顺序，也要满足该顺序。"
+        }
+      ]
+    }
+  ]
+}
