@@ -1,0 +1,50 @@
+import {validOrder,grade,shuffled,move,codeFor} from './order-core.js';
+const $=id=>document.getElementById(id),KEY='engr103-hw-ica-134-v1';
+let data,program,current,mode='mcq',records={},dragId=null,drop=null;
+try{const r=JSON.parse(localStorage.getItem(KEY)||'{}');if(r&&typeof r==='object'&&!Array.isArray(r))records=r;}catch{}
+const all=type=>data.programs.flatMap(p=>type==='order'?p.tasks:p.mcq);
+const list=()=>mode==='order'?program.tasks:program.mcq;
+const task=()=>list().find(q=>q.id===current);
+function rec(q){if(!records[q.id])records[q.id]={};const r=records[q.id];if(q.blocks&&!validOrder(q,r.order)){r.order=shuffled(q);r.checked=false;r.solved=false;}return r;}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(records));$('save').textContent='进度已保存到当前浏览器。';}catch{$('save').textContent='自动保存失败，请导出记录。';}}
+function go(id){for(const p of data.programs){const q=[...p.mcq,...p.tasks].find(q=>q.id===id);if(q){program=p;current=id;mode=q.blocks?'order':'mcq';$('mode').value=mode;history.replaceState(null,'','#'+id);render();return;}}}
+function button(text,action){const b=document.createElement('button');b.textContent=text;b.onclick=action;return b;}
+function nav(){
+ const qs=all(mode),done=qs.filter(q=>mode==='order'?rec(q).solved:rec(q).choice!==undefined).length;
+ $('done').textContent=done;$('total').textContent=' / '+qs.length+(mode==='order'?' 已完成':' 已作答');$('progress').max=qs.length;$('progress').value=done;
+ $('summary-note').textContent=mode==='order'?'按依赖关系判分，独立步骤允许互换':'一句具体要求 → 选择对应代码实现';
+ $('groups').replaceChildren();const group=program.id.split('-')[0];for(const g of ['hw1','hw3','hw4','ica1','ica3','ica4']){const b=button(g.toUpperCase(),()=>{const p=data.programs.find(p=>p.id.startsWith(g+'-'));go((mode==='order'?p.tasks:p.mcq)[0].id);});b.classList.toggle('active',g===group);b.setAttribute('aria-pressed',String(g===group));$('groups').append(b);}
+ $('programs').replaceChildren();for(const p of data.programs.filter(p=>p.id.startsWith(group+'-'))){const b=button('',()=>go((mode==='order'?p.tasks:p.mcq)[0].id));b.className='program'+(p.id===program.id?' active':'');const name=document.createElement('strong'),topic=document.createElement('small');name.textContent=p.name;topic.textContent=p.topic;b.append(name,topic);b.setAttribute('aria-current',String(p.id===program.id));$('programs').append(b);}
+ $('numbers').replaceChildren();for(const q of list()){const b=button(q.local,()=>go(q.id));b.setAttribute('aria-label',(mode==='order'?'排序题 ':'选择题 ')+q.local);b.setAttribute('aria-current',String(q.id===current));b.classList.toggle('solved',mode==='order'?rec(q).solved:rec(q).choice===q.answer);b.classList.toggle('wrong',mode==='mcq'&&rec(q).choice!==undefined&&rec(q).choice!==q.answer);$('numbers').append(b);}
+ const n=list().filter(q=>mode==='order'?rec(q).solved:rec(q).choice!==undefined).length;$('local-progress').textContent='当前程序 '+n+' / '+list().length+(mode==='order'?' 完成':' 已答');
+}
+function feedback(){const f=$('feedback'),q=task(),r=rec(q);f.replaceChildren();f.hidden=mode==='order'?!r.checked:r.choice===undefined;if(f.hidden)return;
+ const ok=mode==='order'?grade(q,r.order).ok:r.choice===q.answer;f.classList.toggle('success',ok);const h=document.createElement('h3');h.textContent=ok?(mode==='order'?'顺序正确':'回答正确'):(mode==='order'?'还有步骤需要调整':'这段实现不符合要求');f.append(h);
+ const p=document.createElement('p');if(mode==='mcq'){p.textContent='正确答案：'+String.fromCharCode(65+q.answer)+'。'+q.explanation;f.append(p);}else{p.textContent=ok?'所有依赖和指定顺序均满足。独立步骤的不同排列也可通过。':'按以下先后关系调整，然后再检查：';f.append(p);const ul=document.createElement('ul');for(const edge of grade(q,r.order).violations.slice(0,5)){const li=document.createElement('li');li.textContent='“'+q.blocks.find(b=>b.id===edge.before).label+'”应在“'+q.blocks.find(b=>b.id===edge.after).label+'”之前。';ul.append(li);}f.append(ul);}}
+function renderChoices(){const q=task(),r=rec(q);$('choices').replaceChildren();q.choices.forEach((code,i)=>{const b=button('',()=>{if(rec(q).choice!==undefined)return;r.choice=i;if(r.first===undefined)r.first=i;persist();renderChoices();feedback();nav();});b.className='choice';b.disabled=r.choice!==undefined;b.classList.toggle('correct',r.choice!==undefined&&i===q.answer);b.classList.toggle('incorrect',r.choice===i&&i!==q.answer);b.setAttribute('aria-label','选项 '+String.fromCharCode(65+i));const mark=document.createElement('strong');mark.textContent=String.fromCharCode(65+i);const pre=document.createElement('pre');pre.textContent=code;b.append(mark,pre);$('choices').append(b);});$('retry').hidden=r.choice===undefined;}
+function clearDrop(){for(const el of $('blocks').children)el.classList.remove('drop-before','drop-after','dragging');drop=null;}
+function focus(id){Array.from($('blocks').children).find(el=>el.dataset.id===id)?.querySelector('.handle')?.focus({preventScroll:true});}
+function reorder(id,index){const r=rec(task());r.order=move(r.order,id,index);r.checked=false;r.solved=false;persist();renderBlocks();feedback();nav();}
+function renderBlocks(){const q=task(),r=rec(q);$('blocks').replaceChildren();for(const [i,id]of r.order.entries()){
+ const block=q.blocks.find(b=>b.id===id),card=document.createElement('div');card.className='block';card.dataset.id=id;
+ const handle=document.createElement('span');handle.className='handle';handle.textContent='⠿';handle.tabIndex=0;handle.setAttribute('role','button');handle.setAttribute('aria-label','拖动 '+block.label+'；Alt 加上下方向键移动');
+ handle.onkeydown=e=>{if(e.altKey&&['ArrowUp','ArrowDown'].includes(e.key)){e.preventDefault();reorder(id,i+(e.key==='ArrowUp'?-1:1));focus(id);}};
+ handle.onpointerdown=e=>{if(e.button!==0)return;e.preventDefault();dragId=id;handle.setPointerCapture(e.pointerId);card.classList.add('dragging');};
+ handle.onpointermove=e=>{if(dragId!==id)return;const target=document.elementFromPoint(e.clientX,e.clientY)?.closest('.block');if(!target||!$('blocks').contains(target))return;const rect=target.getBoundingClientRect(),after=e.clientY>rect.top+rect.height/2;for(const el of $('blocks').children)el.classList.remove('drop-before','drop-after');target.classList.add(after?'drop-after':'drop-before');drop={targetId:target.dataset.id,after};if(e.clientY<65)window.scrollBy(0,-12);else if(e.clientY>innerHeight-65)window.scrollBy(0,12);};
+ handle.onpointerup=()=>{const source=dragId,where=drop;dragId=null;clearDrop();if(source&&where&&source!==where.targetId){const other=rec(task()).order.filter(x=>x!==source);reorder(source,other.indexOf(where.targetId)+(where.after?1:0));focus(source);}};
+ handle.onpointercancel=()=>{dragId=null;clearDrop();};const body=document.createElement('div'),label=document.createElement('div'),pre=document.createElement('pre');label.className='block-label';label.textContent='位置 '+(i+1)+' · '+block.label;pre.textContent=block.code;body.append(label,pre);const arrows=document.createElement('div');arrows.className='arrows';for(const [symbol,delta]of [['↑',-1],['↓',1]]){const b=button(symbol,()=>{reorder(id,i+delta);focus(id);});b.disabled=i+delta<0||i+delta>=r.order.length;b.setAttribute('aria-label',(delta<0?'上移 ':'下移 ')+block.label);arrows.append(b);}card.append(handle,body,arrows);$('blocks').append(card);
+ }}
+function render(){const q=task(),ordering=mode==='order';nav();$('meta').textContent=program.name+' · '+program.topic+' · '+(ordering?'排序':'选择')+' '+q.local+' / '+list().length;
+ $('mcq-panel').hidden=ordering;$('order-panel').hidden=!ordering;$('hint-box').hidden=!ordering;$('reference').hidden=!ordering;$('reference').open=false;$('hint-box').open=false;
+ if(ordering){$('title').textContent=q.title;$('requirements').replaceChildren();for(const req of q.requirements){const li=document.createElement('li');li.textContent=req;$('requirements').append(li);}$('given-box').hidden=!q.context;$('given').textContent=q.context||'';$('reference-code').textContent=(q.context?q.context+'\n\n':'')+codeFor(q,q.blocks.map(b=>b.id));$('hint').textContent=q.hint;renderBlocks();}else{$('title').textContent='选择实现这句要求的代码';$('prompt').textContent=q.prompt;$('context').textContent=q.context||'本题无前置代码。';$('context-box').open=false;renderChoices();}
+ $('source').href='https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/'+program.source;$('csv').replaceChildren();if(program.csv){const a=document.createElement('a');a.href='data/'+program.csv;a.textContent='下载本程序 CSV';a.download=program.csv;$('csv').append(a);}
+ $('prev').disabled=q.local===1;$('next').disabled=q.local===list().length;feedback();persist();
+}
+function download(name,content,type){const u=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
+ $('mode').onchange=()=>{mode=$('mode').value;go(list()[0].id);};$('check').onclick=()=>{const r=rec(task());r.checked=true;r.solved=grade(task(),r.order).ok;persist();feedback();nav();};
+ $('shuffle').onclick=()=>{const r=rec(task());r.order=shuffled(task(),Date.now());r.checked=false;r.solved=false;persist();render();};
+ $('retry').onclick=()=>{delete rec(task()).choice;persist();renderChoices();feedback();nav();};
+ $('prev').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i>0)go(list()[i-1].id);};$('next').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i<list().length-1)go(list()[i+1].id);};
+ $('download').onclick=()=>download(task().id+'.py',(task().context?task().context+'\n\n':'')+codeFor(task(),rec(task()).order),'text/plain');$('export').onclick=()=>download('ENGR103_HW_ICA_134_progress.json',JSON.stringify({version:1,records},null,2),'application/json');
+ window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+ fetch('questions.json').then(r=>{if(!r.ok)throw Error('题库加载失败');return r.json();}).then(d=>{data=d;const id=location.hash.slice(1);if(data.programs.some(p=>[...p.tasks,...p.mcq].some(q=>q.id===id)))go(id);else go(data.programs[0].mcq[0].id);}).catch(e=>{$('error').textContent=e.message+'，请刷新页面。';});

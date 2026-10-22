@@ -41,6 +41,11 @@ jobs:
         run: pip install -r requirements.txt
       - name: Generate ENGR 103 reference downloads
         run: python scripts/build_engr103_reference.py
+      - name: Validate HW and ICA 1, 3, 4 practice
+        run: |
+          node --check docs/course-practice/engr103/hw-ica-134-practice/app.js
+          node scripts/check_engr103_134.mjs
+          python scripts/check_engr103_134.py
       - name: Build site
         run: python scripts/export_notebooks.py
       - name: Configure Pages
