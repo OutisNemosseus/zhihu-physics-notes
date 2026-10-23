@@ -67,4 +67,4 @@ $('copy-reference').onclick=async()=>{
 };
 
  window.addEventListener('hashchange',()=>{if(data)go(location.hash.slice(1));});
- fetch('questions.json').then(r=>{if(!r.ok)throw Error('题库加载失败');return r.json();}).then(d=>{data=d;const id=location.hash.slice(1);if(data.programs.some(p=>[...p.tasks,...p.mcq].some(q=>q.id===id)))go(id);else go(data.programs[0].mcq[0].id);}).catch(e=>{$('error').textContent=e.message+'，请刷新页面。';});
+ fetch('questions.json?v=complete-plots-1').then(r=>{if(!r.ok)throw Error('题库加载失败');return r.json();}).then(d=>{data=d;const id=location.hash.slice(1);if(data.programs.some(p=>[...p.tasks,...p.mcq].some(q=>q.id===id)))go(id);else go(data.programs[0].mcq[0].id);}).catch(e=>{$('error').textContent=e.message+'，请刷新页面。';});
