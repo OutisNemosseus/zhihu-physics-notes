@@ -173,8 +173,13 @@ for(const pr of programs){
  const candidates=pr.blocks.filter(x=>x.wrong);if(candidates.length!==5)throw Error(pr.id+' has '+candidates.length+' MCQs');
  pr.mcq=candidates.map((x,i)=>({id:'mcq-'+pr.id+'-q'+(i+1),local:i+1,prompt:x.req,context:pr.blocks.slice(0,pr.blocks.indexOf(x)).map(b=>b.code).join('\n\n'),choices:[x.code,...x.wrong],answer:0,explanation:x.why}));
  const make=(n,title,blocks,context='')=>{const numeric=/^(hw1|ica1)-/.test(pr.id);const outputs=blocks.filter(x=>x.code.startsWith('print('));const q={id:'order-'+pr.id+'-q'+n,local:n,title,context,requirements:blocks.map(x=>x.req),hint:'先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。',blocks:blocks.map(x=>({id:x.id,label:x.label,code:x.code,needs:x.needs.filter(id=>blocks.some(b=>b.id===id))}))};if(numeric&&outputs.length>1){q.requirements.push('Print the requested outputs in the order listed above.');for(let i=1;i<outputs.length;i++){const target=q.blocks.find(b=>b.id===outputs[i].id);if(!target.needs.includes(outputs[i-1].id))target.needs.push(outputs[i-1].id);}}return q;};
+ if(pr.blocks.some(x=>x.id==='save'))pr.blocks.push(b('show','显示最终图片','After saving, display the completed figure with plt.show().','plt.show()',['save']));
  const first=pr.blocks.slice(0,pr.core),tail=pr.blocks.slice(pr.core);
- pr.tasks=[make(1,'输入与计算核心',first),make(2,'完整程序实现',pr.blocks),make(3,'接着完成后半段',tail,first.map(x=>x.code).join('\n\n'))];
+ const full=make(2,'完整流程 · 逐段排序',pr.blocks);
+ const stageChunks=[];for(let i=0;i<full.blocks.length;i+=2)stageChunks.push(full.blocks.slice(i,i+2));
+ const owner=Object.fromEntries(stageChunks.flatMap((chunk,i)=>chunk.map(block=>[block.id,'stage-'+(i+1)])));
+ const stages=stageChunks.map((chunk,i)=>({id:'stage-'+(i+1),label:chunk.map(block=>block.label).join(' → '),code:chunk.map(block=>block.code).join('\n\n'),needs:[...new Set(chunk.flatMap(block=>block.needs.map(id=>owner[id])))].filter(id=>id!=='stage-'+(i+1))}));
+ pr.tasks=[{...full,id:'order-'+pr.id+'-q1',local:1,title:'完整流程 · 按阶段排序',blocks:stages},full,make(3,'补齐前置代码后的完整程序',tail,first.map(x=>x.code).join('\n\n'))];
  const csvs={'hw3-2':'bacteria.csv','hw3-3':'electrical.csv','ica3-1':'vt.csv','ica3-3':'transistors.csv'};if(csvs[pr.id])pr.csv=csvs[pr.id];
  for(const q of pr.mcq){const shift=(programs.indexOf(pr)+q.local)%4;q.choices=q.choices.slice(shift).concat(q.choices.slice(0,shift));q.answer=(4-shift)%4;}
  delete pr.blocks;delete pr.core;

@@ -82,34 +82,39 @@
         {
           "id": "order-hw1-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Read the triangle base in inches as a floating-point number.",
             "Read the triangle height in inches as a floating-point number.",
-            "Calculate the triangle area in square inches."
+            "Calculate the triangle area in square inches.",
+            "Print the area in cm² to three decimal places.",
+            "Print the area in ft² to three decimal places.",
+            "Print the area in m² to three decimal places.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "base",
-              "label": "读取底边",
-              "code": "base_in = float(input(\"Base (in): \"))",
+              "id": "stage-1",
+              "label": "读取底边 → 读取高度",
+              "code": "base_in = float(input(\"Base (in): \"))\n\nheight_in = float(input(\"Height (in): \"))",
               "needs": []
             },
             {
-              "id": "height",
-              "label": "读取高度",
-              "code": "height_in = float(input(\"Height (in): \"))",
-              "needs": []
-            },
-            {
-              "id": "area",
-              "label": "计算面积",
-              "code": "area_in2 = base_in * height_in / 2",
+              "id": "stage-2",
+              "label": "计算面积 → 输出平方厘米",
+              "code": "area_in2 = base_in * height_in / 2\n\nprint(f\"{area_in2 * 2.54**2:.3f} cm^2\")",
               "needs": [
-                "base",
-                "height"
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "输出平方英尺 → 输出平方米",
+              "code": "print(f\"{area_in2 / 12**2:.3f} ft^2\")\n\nprint(f\"{area_in2 * 0.0254**2:.3f} m^2\")",
+              "needs": [
+                "stage-2"
               ]
             }
           ]
@@ -117,7 +122,7 @@
         {
           "id": "order-hw1-1-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Read the triangle base in inches as a floating-point number.",
@@ -182,7 +187,7 @@
         {
           "id": "order-hw1-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "base_in = float(input(\"Base (in): \"))\n\nheight_in = float(input(\"Height (in): \"))\n\narea_in2 = base_in * height_in / 2",
           "requirements": [
             "Print the area in cm² to three decimal places.",
@@ -299,44 +304,50 @@
         {
           "id": "order-hw1-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
             "Read the circle radius in inches as a float.",
             "Calculate the circumference in inches.",
-            "Calculate the circle area in square inches."
+            "Calculate the circle area in square inches.",
+            "Print circumference in inches to three decimal places.",
+            "Print circumference in centimeters to three decimal places.",
+            "Print area in square inches to three decimal places.",
+            "Print area in cm² to three decimal places.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取半径",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nr_in = float(input(\"Radius (in): \"))",
               "needs": []
             },
             {
-              "id": "radius",
-              "label": "读取半径",
-              "code": "r_in = float(input(\"Radius (in): \"))",
-              "needs": []
-            },
-            {
-              "id": "perimeter",
-              "label": "计算周长",
-              "code": "perimeter_in = 2 * pi * r_in",
+              "id": "stage-2",
+              "label": "计算周长 → 计算圆面积",
+              "code": "perimeter_in = 2 * pi * r_in\n\narea_in2 = pi * r_in**2",
               "needs": [
-                "imports",
-                "radius"
+                "stage-1"
               ]
             },
             {
-              "id": "area",
-              "label": "计算圆面积",
-              "code": "area_in2 = pi * r_in**2",
+              "id": "stage-3",
+              "label": "输出英寸周长 → 输出厘米周长",
+              "code": "print(f\"{perimeter_in:.3f} in\")\n\nprint(f\"{perimeter_in * 2.54:.3f} cm\")",
               "needs": [
-                "imports",
-                "radius"
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "输出英寸面积 → 输出厘米面积",
+              "code": "print(f\"{area_in2:.3f} in^2\")\n\nprint(f\"{area_in2 * 2.54**2:.3f} cm^2\")",
+              "needs": [
+                "stage-2",
+                "stage-3"
               ]
             }
           ]
@@ -344,7 +355,7 @@
         {
           "id": "order-hw1-2-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -429,7 +440,7 @@
         {
           "id": "order-hw1-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nr_in = float(input(\"Radius (in): \"))\n\nperimeter_in = 2 * pi * r_in\n\narea_in2 = pi * r_in**2",
           "requirements": [
             "Print circumference in inches to three decimal places.",
@@ -555,44 +566,50 @@
         {
           "id": "order-hw1-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
             "Read a floating-point sphere radius in inches.",
             "Calculate the sphere surface area in in².",
-            "Calculate the sphere volume in in³."
+            "Calculate the sphere volume in in³.",
+            "Print surface area in in².",
+            "Print surface area in cm².",
+            "Print volume in in³.",
+            "Print volume in cm³.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取球半径",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nr_in = float(input(\"Sphere radius (in): \"))",
               "needs": []
             },
             {
-              "id": "radius",
-              "label": "读取球半径",
-              "code": "r_in = float(input(\"Sphere radius (in): \"))",
-              "needs": []
-            },
-            {
-              "id": "area",
-              "label": "计算球表面积",
-              "code": "area_in2 = 4 * pi * r_in**2",
+              "id": "stage-2",
+              "label": "计算球表面积 → 计算球体积",
+              "code": "area_in2 = 4 * pi * r_in**2\n\nvolume_in3 = 4 * pi * r_in**3 / 3",
               "needs": [
-                "imports",
-                "radius"
+                "stage-1"
               ]
             },
             {
-              "id": "volume",
-              "label": "计算球体积",
-              "code": "volume_in3 = 4 * pi * r_in**3 / 3",
+              "id": "stage-3",
+              "label": "输出表面积 → 换算平方厘米",
+              "code": "print(f\"{area_in2:.3f} in^2\")\n\nprint(f\"{area_in2 * 2.54**2:.3f} cm^2\")",
               "needs": [
-                "imports",
-                "radius"
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "输出体积 → 换算立方厘米",
+              "code": "print(f\"{volume_in3:.3f} in^3\")\n\nprint(f\"{volume_in3 * 2.54**3:.3f} cm^3\")",
+              "needs": [
+                "stage-2",
+                "stage-3"
               ]
             }
           ]
@@ -600,7 +617,7 @@
         {
           "id": "order-hw1-3-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -685,7 +702,7 @@
         {
           "id": "order-hw1-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nr_in = float(input(\"Sphere radius (in): \"))\n\narea_in2 = 4 * pi * r_in**2\n\nvolume_in3 = 4 * pi * r_in**3 / 3",
           "requirements": [
             "Print surface area in in².",
@@ -811,52 +828,59 @@
         {
           "id": "order-hw1-4-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
             "Read R, r and L as floats, with 0 ≤ r ≤ R and L > R−r.",
             "Reject dimensions unless 0 ≤ r ≤ R and L > R−r.",
             "Calculate theta = asin((R−r)/L) in radians, after validation.",
-            "Calculate 2L cos(theta) + π(R+r) + 2theta(R−r)."
+            "Calculate 2L cos(theta) + π(R+r) + 2theta(R−r).",
+            "Print belt length in inches.",
+            "Print belt length in feet.",
+            "Print belt length in centimeters.",
+            "Print belt length in meters.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取几何尺寸",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nR = float(input(\"R (in): \"))\nr = float(input(\"r (in): \"))\nL = float(input(\"L (in): \"))",
               "needs": []
             },
             {
-              "id": "input",
-              "label": "读取几何尺寸",
-              "code": "R = float(input(\"R (in): \"))\nr = float(input(\"r (in): \"))\nL = float(input(\"L (in): \"))",
-              "needs": []
-            },
-            {
-              "id": "valid",
-              "label": "验证输入",
-              "code": "if r < 0 or R < r or L <= R-r:\n    raise ValueError(\"Invalid geometry\")",
+              "id": "stage-2",
+              "label": "验证输入 → 计算夹角",
+              "code": "if r < 0 or R < r or L <= R-r:\n    raise ValueError(\"Invalid geometry\")\n\ntheta = asin((R-r)/L)",
               "needs": [
-                "input"
+                "stage-1"
               ]
             },
             {
-              "id": "angle",
-              "label": "计算夹角",
-              "code": "theta = asin((R-r)/L)",
+              "id": "stage-3",
+              "label": "计算皮带长度 → 输出英寸",
+              "code": "belt_in = 2*L*cos(theta) + pi*(R+r) + 2*theta*(R-r)\n\nprint(f\"{belt_in:.3f} in\")",
               "needs": [
-                "imports",
-                "valid"
+                "stage-2"
               ]
             },
             {
-              "id": "belt",
-              "label": "计算皮带长度",
-              "code": "belt_in = 2*L*cos(theta) + pi*(R+r) + 2*theta*(R-r)",
+              "id": "stage-4",
+              "label": "输出英尺 → 输出厘米",
+              "code": "print(f\"{belt_in/12:.3f} ft\")\n\nprint(f\"{belt_in*2.54:.3f} cm\")",
               "needs": [
-                "angle"
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "输出米",
+              "code": "print(f\"{belt_in*0.0254:.3f} m\")",
+              "needs": [
+                "stage-3",
+                "stage-4"
               ]
             }
           ]
@@ -864,7 +888,7 @@
         {
           "id": "order-hw1-4-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -957,7 +981,7 @@
         {
           "id": "order-hw1-4-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nR = float(input(\"R (in): \"))\nr = float(input(\"r (in): \"))\nL = float(input(\"L (in): \"))\n\nif r < 0 or R < r or L <= R-r:\n    raise ValueError(\"Invalid geometry\")\n\ntheta = asin((R-r)/L)\n\nbelt_in = 2*L*cos(theta) + pi*(R+r) + 2*theta*(R-r)",
           "requirements": [
             "Print belt length in inches.",
@@ -1083,52 +1107,7 @@
         {
           "id": "order-hw3-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create x from 0 through 22 inclusive, with step 0.5.",
-            "Calculate y1 = −0.45x² + 9.5x elementwise.",
-            "Calculate y2 = −0.52x² + 12x elementwise."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "x",
-              "label": "创建横坐标",
-              "code": "x = np.arange(0,22.01,0.5)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "y1",
-              "label": "计算第一条轨迹",
-              "code": "y1 = -0.45*x**2 + 9.5*x",
-              "needs": [
-                "x"
-              ]
-            },
-            {
-              "id": "y2",
-              "label": "计算第二条轨迹",
-              "code": "y2 = -0.52*x**2 + 12*x",
-              "needs": [
-                "x"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw3-1-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -1140,7 +1119,78 @@
             "Set title Projectiles, x label Distance [ft], and y label Height [ft].",
             "After plotting, add a legend and a green grid.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建横坐标",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.arange(0,22.01,0.5)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "计算第一条轨迹 → 计算第二条轨迹",
+              "code": "y1 = -0.45*x**2 + 9.5*x\n\ny2 = -0.52*x**2 + 12*x",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建二维坐标轴 → 绘制两条轨迹",
+              "code": "fig, ax = plt.subplots()\n\nax.plot(x,y1,\"b-\",label=\"y1\")\nax.plot(x,y2,\"r:\",label=\"y2\")",
+              "needs": [
+                "stage-1",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "设置标题与轴标签 → 添加图例与网格",
+              "code": "ax.set(title=\"Projectiles\",xlabel=\"Distance [ft]\",ylabel=\"Height [ft]\")\n\nax.legend()\nax.grid(color=\"green\",alpha=0.5)",
+              "needs": [
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "调整布局 → 保存图像",
+              "code": "fig.tight_layout()\n\nfig.savefig(\"practice.png\", dpi=160)",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw3-1-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create x from 0 through 22 inclusive, with step 0.5.",
+            "Calculate y1 = −0.45x² + 9.5x elementwise.",
+            "Calculate y2 = −0.52x² + 12x elementwise.",
+            "Create one figure and one 2D axes.",
+            "Plot y1 as a blue solid line and y2 as a red dotted line with labels.",
+            "Set title Projectiles, x label Distance [ft], and y label Height [ft].",
+            "After plotting, add a legend and a green grid.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1225,13 +1275,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw3-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx = np.arange(0,22.01,0.5)\n\ny1 = -0.45*x**2 + 9.5*x\n\ny2 = -0.52*x**2 + 12*x",
           "requirements": [
             "Create one figure and one 2D axes.",
@@ -1239,7 +1297,8 @@
             "Set title Projectiles, x label Distance [ft], and y label Height [ft].",
             "After plotting, add a legend and a green grid.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1289,6 +1348,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -1376,61 +1443,7 @@
         {
           "id": "order-hw3-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Load the two headerless CSV columns as x and y, where x is time and y is count.",
-            "Reject any nonpositive bacteria counts before taking a logarithm.",
-            "Fit ln(y)=rate*x+log_initial with a first-degree polynomial.",
-            "Generate 300 x points and predict y=exp(log_initial+rate*x)."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "load",
-              "label": "读取细菌CSV",
-              "code": "x,y = np.loadtxt(\"bacteria.csv\",delimiter=\",\",unpack=True)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "check",
-              "label": "验证正数",
-              "code": "if np.any(y<=0):\n    raise ValueError(\"Counts must be positive\")",
-              "needs": [
-                "load"
-              ]
-            },
-            {
-              "id": "fit",
-              "label": "拟合指数参数",
-              "code": "rate,log_initial = np.polyfit(x,np.log(y),1)",
-              "needs": [
-                "check"
-              ]
-            },
-            {
-              "id": "predict",
-              "label": "生成预测曲线",
-              "code": "xf = np.linspace(x.min(),x.max(),300)\nyf = np.exp(log_initial+rate*xf)",
-              "needs": [
-                "fit"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw3-2-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -1443,7 +1456,78 @@
             "Use a logarithmic y-axis, keeping x linear.",
             "After plotting, label time and bacteria count, then show the legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 读取细菌CSV",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx,y = np.loadtxt(\"bacteria.csv\",delimiter=\",\",unpack=True)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "验证正数 → 拟合指数参数",
+              "code": "if np.any(y<=0):\n    raise ValueError(\"Counts must be positive\")\n\nrate,log_initial = np.polyfit(x,np.log(y),1)",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "生成预测曲线 → 创建二维坐标轴",
+              "code": "xf = np.linspace(x.min(),x.max(),300)\nyf = np.exp(log_initial+rate*xf)\n\nfig, ax = plt.subplots()",
+              "needs": [
+                "stage-2",
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制观测与拟合 → 设置对数纵轴",
+              "code": "ax.plot(x,y,\"o\",label=\"Observations\")\nax.plot(xf,yf,\"r--\",label=\"Exponential fit\")\n\nax.set_yscale(\"log\")",
+              "needs": [
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "添加标签和图例 → 调整布局",
+              "code": "ax.set(xlabel=\"Time [sec]\",ylabel=\"Bacteria count\",title=\"Bacteria Growth\")\nax.legend()\n\nfig.tight_layout()",
+              "needs": [
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw3-2-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Load the two headerless CSV columns as x and y, where x is time and y is count.",
+            "Reject any nonpositive bacteria counts before taking a logarithm.",
+            "Fit ln(y)=rate*x+log_initial with a first-degree polynomial.",
+            "Generate 300 x points and predict y=exp(log_initial+rate*x).",
+            "Create one figure and one 2D axes.",
+            "Plot observations as circles and the exponential fit as a red dashed line.",
+            "Use a logarithmic y-axis, keeping x linear.",
+            "After plotting, label time and bacteria count, then show the legend.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1534,13 +1618,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw3-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx,y = np.loadtxt(\"bacteria.csv\",delimiter=\",\",unpack=True)\n\nif np.any(y<=0):\n    raise ValueError(\"Counts must be positive\")\n\nrate,log_initial = np.polyfit(x,np.log(y),1)\n\nxf = np.linspace(x.min(),x.max(),300)\nyf = np.exp(log_initial+rate*xf)",
           "requirements": [
             "Create one figure and one 2D axes.",
@@ -1548,7 +1640,8 @@
             "Use a logarithmic y-axis, keeping x linear.",
             "After plotting, label time and bacteria count, then show the legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1597,6 +1690,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -1685,52 +1786,7 @@
         {
           "id": "order-hw3-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Read the two headerless CSV columns as resistance R and voltage V.",
-            "Compute current I for every measured R,V pair.",
-            "Compute load power from V and R."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "load",
-              "label": "读取电阻电压",
-              "code": "R,V = np.loadtxt(\"electrical.csv\",delimiter=\",\",unpack=True)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "current",
-              "label": "计算电流",
-              "code": "I = V/R",
-              "needs": [
-                "load"
-              ]
-            },
-            {
-              "id": "power",
-              "label": "计算功率",
-              "code": "P = V**2/R",
-              "needs": [
-                "load"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw3-3-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -1741,7 +1797,68 @@
             "Plot voltage, current and power versus R in the top, middle and bottom axes.",
             "Label the bottom axis Resistance [ohm].",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 读取电阻电压",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nR,V = np.loadtxt(\"electrical.csv\",delimiter=\",\",unpack=True)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "计算电流 → 计算功率",
+              "code": "I = V/R\n\nP = V**2/R",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建三行子图 → 对应绘制三个量",
+              "code": "fig,axes = plt.subplots(3,1,sharex=True)\n\nfor ax,values,label in zip(axes,(V,I,P),(\"Voltage [V]\",\"Current [A]\",\"Power [W]\")):\n    ax.plot(R,values,\"o-\")\n    ax.set_ylabel(label)\n    ax.grid()",
+              "needs": [
+                "stage-1",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "标注电阻横轴 → 调整布局",
+              "code": "axes[-1].set_xlabel(\"Resistance [ohm]\")\n\nfig.tight_layout()",
+              "needs": [
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-4"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw3-3-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Read the two headerless CSV columns as resistance R and voltage V.",
+            "Compute current I for every measured R,V pair.",
+            "Compute load power from V and R.",
+            "Create three vertically stacked axes sharing the x-axis.",
+            "Plot voltage, current and power versus R in the top, middle and bottom axes.",
+            "Label the bottom axis Resistance [ohm].",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1817,20 +1934,29 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw3-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nR,V = np.loadtxt(\"electrical.csv\",delimiter=\",\",unpack=True)\n\nI = V/R\n\nP = V**2/R",
           "requirements": [
             "Create three vertically stacked axes sharing the x-axis.",
             "Plot voltage, current and power versus R in the top, middle and bottom axes.",
             "Label the bottom axis Resistance [ohm].",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -1871,6 +1997,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -1959,43 +2093,7 @@
         {
           "id": "order-hw4-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create 1000 evenly spaced t values from 0 to 2π inclusive.",
-            "With r=1,h=0.3,a=10, set x=r cos(t), y=r sin(t), z=h cos(a*t)."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "parameter",
-              "label": "创建参数数组",
-              "code": "t = np.linspace(0,2*np.pi,1000)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "coords",
-              "label": "计算三维坐标",
-              "code": "r,h,a = 1.,0.3,10\nx,y,z = r*np.cos(t),r*np.sin(t),h*np.cos(a*t)",
-              "needs": [
-                "parameter"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw4-1-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -2007,7 +2105,77 @@
             "Set views to (elev,azim)=(35,−130) and (65,−130).",
             "Label x,y,z in in on both views.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建参数数组",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0,2*np.pi,1000)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "计算三维坐标 → 创建图窗",
+              "code": "r,h,a = 1.,0.3,10\nx,y,z = r*np.cos(t),r*np.sin(t),h*np.cos(a*t)\n\nfig = plt.figure(figsize=(11,5))",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建两个三维坐标轴 → 绘制同一空间曲线",
+              "code": "ax1 = fig.add_subplot(121,projection=\"3d\")\nax2 = fig.add_subplot(122,projection=\"3d\")\n\nfor ax in (ax1,ax2):\n    ax.plot(x,y,z)",
+              "needs": [
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "设置两个观察方向 → 标注三维坐标轴",
+              "code": "ax1.view_init(elev=35,azim=-130)\nax2.view_init(elev=65,azim=-130)\n\nfor ax in (ax1,ax2):\n    ax.set(xlabel=\"x [in]\",ylabel=\"y [in]\",zlabel=\"z [in]\")",
+              "needs": [
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "调整布局 → 保存图像",
+              "code": "fig.tight_layout()\n\nfig.savefig(\"practice.png\", dpi=160)",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw4-1-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create 1000 evenly spaced t values from 0 to 2π inclusive.",
+            "With r=1,h=0.3,a=10, set x=r cos(t), y=r sin(t), z=h cos(a*t).",
+            "Create a figure for two 3D views.",
+            "Create a 1×2 layout of two 3D axes.",
+            "Plot the same x,y,z curve in both views.",
+            "Set views to (elev,azim)=(35,−130) and (65,−130).",
+            "Label x,y,z in in on both views.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2091,13 +2259,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw4-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0,2*np.pi,1000)\n\nr,h,a = 1.,0.3,10\nx,y,z = r*np.cos(t),r*np.sin(t),h*np.cos(a*t)",
           "requirements": [
             "Create a figure for two 3D views.",
@@ -2106,7 +2282,8 @@
             "Set views to (elev,azim)=(35,−130) and (65,−130).",
             "Label x,y,z in in on both views.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2164,6 +2341,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -2251,52 +2436,7 @@
         {
           "id": "order-hw4-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create values from −6 through 6 with step 0.1.",
-            "Create X,Y grids for every pair of v values with default xy indexing.",
-            "Compute Z=sin(sqrt(X²+Y²)) elementwise."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "v",
-              "label": "创建坐标向量",
-              "code": "v = np.arange(-6,6.01,0.1)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "grid",
-              "label": "生成二维坐标网格",
-              "code": "X,Y = np.meshgrid(v,v)",
-              "needs": [
-                "v"
-              ]
-            },
-            {
-              "id": "z",
-              "label": "计算网格函数",
-              "code": "Z = np.sin(np.hypot(X,Y))",
-              "needs": [
-                "grid"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw4-2-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -2309,7 +2449,80 @@
             "Add a separate colorbar to each axes using its own contour result.",
             "Label axes in in and distinguish line contours from filled contours.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建坐标向量",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-6,6.01,0.1)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "生成二维坐标网格 → 计算网格函数",
+              "code": "X,Y = np.meshgrid(v,v)\n\nZ = np.sin(np.hypot(X,Y))",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建并排子图 → 绘制等高线",
+              "code": "fig,(ax1,ax2) = plt.subplots(1,2,figsize=(11,5))\n\np1 = ax1.contour(X,Y,Z,24,cmap=\"jet\")",
+              "needs": [
+                "stage-1",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制填充等高线 → 添加对应色标",
+              "code": "p2 = ax2.contourf(X,Y,Z,24,cmap=\"jet\")\n\nfig.colorbar(p1,ax=ax1)\nfig.colorbar(p2,ax=ax2)",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "标注轴与标题 → 调整布局",
+              "code": "ax1.set(xlabel=\"x [in]\",ylabel=\"y [in]\",title=\"Contours\")\nax2.set(xlabel=\"x [in]\",ylabel=\"y [in]\",title=\"Filled contours\")\n\nfig.tight_layout()",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw4-2-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create values from −6 through 6 with step 0.1.",
+            "Create X,Y grids for every pair of v values with default xy indexing.",
+            "Compute Z=sin(sqrt(X²+Y²)) elementwise.",
+            "Create two 2D axes side by side.",
+            "Draw 24 contour levels using the jet colormap in ax1.",
+            "Draw 24 filled contour levels with jet in ax2.",
+            "Add a separate colorbar to each axes using its own contour result.",
+            "Label axes in in and distinguish line contours from filled contours.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2402,13 +2615,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw4-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-6,6.01,0.1)\n\nX,Y = np.meshgrid(v,v)\n\nZ = np.sin(np.hypot(X,Y))",
           "requirements": [
             "Create two 2D axes side by side.",
@@ -2417,7 +2638,8 @@
             "Add a separate colorbar to each axes using its own contour result.",
             "Label axes in in and distinguish line contours from filled contours.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2475,6 +2697,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -2562,52 +2792,7 @@
         {
           "id": "order-hw4-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create values from −6 through 6 with step 0.1.",
-            "Create X,Y grids for every pair of v values with default xy indexing.",
-            "Compute Z=sin(sqrt(X²+Y²)) elementwise."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "v",
-              "label": "创建坐标向量",
-              "code": "v = np.arange(-6,6.01,0.1)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "grid",
-              "label": "生成二维坐标网格",
-              "code": "X,Y = np.meshgrid(v,v)",
-              "needs": [
-                "v"
-              ]
-            },
-            {
-              "id": "z",
-              "label": "计算网格函数",
-              "code": "Z = np.sin(np.hypot(X,Y))",
-              "needs": [
-                "grid"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-hw4-3-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -2620,7 +2805,79 @@
             "Draw 25 3D contour levels in ax2 using jet.",
             "Label both 3D axes and add display titles.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建坐标向量",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-6,6.01,0.1)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "生成二维坐标网格 → 计算网格函数",
+              "code": "X,Y = np.meshgrid(v,v)\n\nZ = np.sin(np.hypot(X,Y))",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建图窗 → 创建三维坐标轴",
+              "code": "fig = plt.figure(figsize=(11,5))\n\nax1 = fig.add_subplot(121,projection=\"3d\")\nax2 = fig.add_subplot(122,projection=\"3d\")",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制线框 → 绘制三维等高线",
+              "code": "ax1.plot_wireframe(X,Y,Z,rstride=4,cstride=4)\n\nax2.contour3D(X,Y,Z,25,cmap=\"jet\")",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "标注三维坐标轴 → 调整布局",
+              "code": "ax1.set(xlabel=\"x [in]\",ylabel=\"y [in]\",zlabel=\"z\",title=\"Wireframe\")\nax2.set(xlabel=\"x [in]\",ylabel=\"y [in]\",zlabel=\"z\",title=\"3D contours\")\n\nfig.tight_layout()",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-hw4-3-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create values from −6 through 6 with step 0.1.",
+            "Create X,Y grids for every pair of v values with default xy indexing.",
+            "Compute Z=sin(sqrt(X²+Y²)) elementwise.",
+            "Create a figure for two 3D displays.",
+            "Create two side-by-side axes with 3D projection.",
+            "Draw a wireframe in ax1, sampling every 4 rows and columns.",
+            "Draw 25 3D contour levels in ax2 using jet.",
+            "Label both 3D axes and add display titles.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2713,13 +2970,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-hw4-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-6,6.01,0.1)\n\nX,Y = np.meshgrid(v,v)\n\nZ = np.sin(np.hypot(X,Y))",
           "requirements": [
             "Create a figure for two 3D displays.",
@@ -2728,7 +2993,8 @@
             "Draw 25 3D contour levels in ax2 using jet.",
             "Label both 3D axes and add display titles.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -2786,6 +3052,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -2873,52 +3147,51 @@
         {
           "id": "order-ica1-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
             "Read both points x1,y1,x2,y2 in centimeters as floats.",
             "Calculate the distance in feet; 1 ft = 30.48 cm.",
             "Calculate the midpoint x-coordinate in feet.",
-            "Calculate the midpoint y-coordinate in feet."
+            "Calculate the midpoint y-coordinate in feet.",
+            "Print distance to exactly three decimal places.",
+            "Print midpoint x in feet to three decimal places.",
+            "Print midpoint y in feet to three decimal places.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取两点",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nx1 = float(input(\"x1: \"))\ny1 = float(input(\"y1: \"))\nx2 = float(input(\"x2: \"))\ny2 = float(input(\"y2: \"))",
               "needs": []
             },
             {
-              "id": "input",
-              "label": "读取两点",
-              "code": "x1 = float(input(\"x1: \"))\ny1 = float(input(\"y1: \"))\nx2 = float(input(\"x2: \"))\ny2 = float(input(\"y2: \"))",
-              "needs": []
-            },
-            {
-              "id": "distance",
-              "label": "计算距离",
-              "code": "distance_ft = hypot(x2-x1, y2-y1)/30.48",
+              "id": "stage-2",
+              "label": "计算距离 → 计算中点横坐标",
+              "code": "distance_ft = hypot(x2-x1, y2-y1)/30.48\n\nx_mid_ft = (x1+x2)/2/30.48",
               "needs": [
-                "imports",
-                "input"
+                "stage-1"
               ]
             },
             {
-              "id": "mx",
-              "label": "计算中点横坐标",
-              "code": "x_mid_ft = (x1+x2)/2/30.48",
+              "id": "stage-3",
+              "label": "计算中点纵坐标 → 输出距离",
+              "code": "y_mid_ft = (y1+y2)/2/30.48\n\nprint(f\"Distance: {distance_ft:.3f} ft\")",
               "needs": [
-                "input"
+                "stage-1",
+                "stage-2"
               ]
             },
             {
-              "id": "my",
-              "label": "计算中点纵坐标",
-              "code": "y_mid_ft = (y1+y2)/2/30.48",
+              "id": "stage-4",
+              "label": "输出中点横坐标 → 输出中点纵坐标",
+              "code": "print(f\"Midpoint x: {x_mid_ft:.3f} ft\")\n\nprint(f\"Midpoint y: {y_mid_ft:.3f} ft\")",
               "needs": [
-                "input"
+                "stage-2",
+                "stage-3"
               ]
             }
           ]
@@ -2926,7 +3199,7 @@
         {
           "id": "order-ica1-1-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3009,7 +3282,7 @@
         {
           "id": "order-ica1-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nx1 = float(input(\"x1: \"))\ny1 = float(input(\"y1: \"))\nx2 = float(input(\"x2: \"))\ny2 = float(input(\"y2: \"))\n\ndistance_ft = hypot(x2-x1, y2-y1)/30.48\n\nx_mid_ft = (x1+x2)/2/30.48\n\ny_mid_ft = (y1+y2)/2/30.48",
           "requirements": [
             "Print distance to exactly three decimal places.",
@@ -3126,53 +3399,49 @@
         {
           "id": "order-ica1-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Read depth_m and specific_gravity as floats.",
             "Reject negative depth or negative specific gravity.",
             "After validation, calculate density using water density 1000 kg/m³.",
             "Calculate hydrostatic gauge pressure rho*g*h with g=9.81.",
-            "Convert Pa to psi using 101325 Pa = 14.7 psi."
+            "Convert Pa to psi using 101325 Pa = 14.7 psi.",
+            "Print pressure in Pa with thousands separators and one decimal place.",
+            "Print psi pressure to three decimal places.",
+            "After both pressure outputs, print a completion message.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "input",
-              "label": "读取深度与比重",
-              "code": "depth_m = float(input(\"Depth (m): \"))\nspecific_gravity = float(input(\"Specific gravity: \"))",
+              "id": "stage-1",
+              "label": "读取深度与比重 → 检查非负输入",
+              "code": "depth_m = float(input(\"Depth (m): \"))\nspecific_gravity = float(input(\"Specific gravity: \"))\n\nif depth_m < 0 or specific_gravity < 0:\n    raise ValueError(\"Inputs must be nonnegative\")",
               "needs": []
             },
             {
-              "id": "valid",
-              "label": "检查非负输入",
-              "code": "if depth_m < 0 or specific_gravity < 0:\n    raise ValueError(\"Inputs must be nonnegative\")",
+              "id": "stage-2",
+              "label": "计算流体密度 → 计算帕斯卡压力",
+              "code": "fluid_density = specific_gravity * 1000.0\n\npressure_pa = fluid_density * 9.81 * depth_m",
               "needs": [
-                "input"
+                "stage-1"
               ]
             },
             {
-              "id": "rho",
-              "label": "计算流体密度",
-              "code": "fluid_density = specific_gravity * 1000.0",
+              "id": "stage-3",
+              "label": "换算psi → 输出Pa",
+              "code": "pressure_psi = pressure_pa * 14.7 / 101325.0\n\nprint(f\"{pressure_pa:,.1f} Pa\")",
               "needs": [
-                "valid"
+                "stage-2"
               ]
             },
             {
-              "id": "pa",
-              "label": "计算帕斯卡压力",
-              "code": "pressure_pa = fluid_density * 9.81 * depth_m",
+              "id": "stage-4",
+              "label": "输出psi → 输出检查",
+              "code": "print(f\"{pressure_psi:.3f} psi\")\n\nprint(\"Pressure calculation complete\")",
               "needs": [
-                "rho"
-              ]
-            },
-            {
-              "id": "psi",
-              "label": "换算psi",
-              "code": "pressure_psi = pressure_pa * 14.7 / 101325.0",
-              "needs": [
-                "pa"
+                "stage-3"
               ]
             }
           ]
@@ -3180,7 +3449,7 @@
         {
           "id": "order-ica1-2-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Read depth_m and specific_gravity as floats.",
@@ -3264,7 +3533,7 @@
         {
           "id": "order-ica1-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "depth_m = float(input(\"Depth (m): \"))\nspecific_gravity = float(input(\"Specific gravity: \"))\n\nif depth_m < 0 or specific_gravity < 0:\n    raise ValueError(\"Inputs must be nonnegative\")\n\nfluid_density = specific_gravity * 1000.0\n\npressure_pa = fluid_density * 9.81 * depth_m\n\npressure_psi = pressure_pa * 14.7 / 101325.0",
           "requirements": [
             "Print pressure in Pa with thousands separators and one decimal place.",
@@ -3382,7 +3651,7 @@
         {
           "id": "order-ica1-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3390,53 +3659,52 @@
             "Calculate side c using the law of cosines.",
             "Compute cos(alpha) opposite a and cos(beta) opposite b.",
             "Clamp cosines to [−1,1], then calculate alpha and beta in degrees.",
-            "Calculate the sum of the three angles in degrees."
+            "Calculate the sum of the three angles in degrees.",
+            "Print side c.",
+            "Print alpha and beta in degrees.",
+            "Print whether the angle sum is within 1e−8 of 180 degrees.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取边长和夹角",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\na = float(input(\"a: \"))\nb = float(input(\"b: \"))\ngamma_deg = float(input(\"gamma (deg): \"))",
               "needs": []
             },
             {
-              "id": "input",
-              "label": "读取边长和夹角",
-              "code": "a = float(input(\"a: \"))\nb = float(input(\"b: \"))\ngamma_deg = float(input(\"gamma (deg): \"))",
-              "needs": []
-            },
-            {
-              "id": "c",
-              "label": "计算第三边",
-              "code": "c = sqrt(a**2+b**2-2*a*b*cos(radians(gamma_deg)))",
+              "id": "stage-2",
+              "label": "计算第三边 → 计算另两角的余弦",
+              "code": "c = sqrt(a**2+b**2-2*a*b*cos(radians(gamma_deg)))\n\ncos_alpha = (b**2+c**2-a**2)/(2*b*c)\ncos_beta = (a**2+c**2-b**2)/(2*a*c)",
               "needs": [
-                "imports",
-                "input"
+                "stage-1"
               ]
             },
             {
-              "id": "cos",
-              "label": "计算另两角的余弦",
-              "code": "cos_alpha = (b**2+c**2-a**2)/(2*b*c)\ncos_beta = (a**2+c**2-b**2)/(2*a*c)",
+              "id": "stage-3",
+              "label": "反余弦与角度转换 → 计算内角和",
+              "code": "alpha_deg = degrees(acos(max(-1.,min(1.,cos_alpha))))\nbeta_deg = degrees(acos(max(-1.,min(1.,cos_beta))))\n\nangle_sum = alpha_deg + beta_deg + gamma_deg",
               "needs": [
-                "c"
+                "stage-2"
               ]
             },
             {
-              "id": "angles",
-              "label": "反余弦与角度转换",
-              "code": "alpha_deg = degrees(acos(max(-1.,min(1.,cos_alpha))))\nbeta_deg = degrees(acos(max(-1.,min(1.,cos_beta))))",
+              "id": "stage-4",
+              "label": "输出边长 → 输出角度",
+              "code": "print(f\"c={c:.3f} in\")\n\nprint(f\"alpha={alpha_deg:.3f}, beta={beta_deg:.3f} degrees\")",
               "needs": [
-                "cos"
+                "stage-2",
+                "stage-3"
               ]
             },
             {
-              "id": "sum",
-              "label": "计算内角和",
-              "code": "angle_sum = alpha_deg + beta_deg + gamma_deg",
+              "id": "stage-5",
+              "label": "检查180度",
+              "code": "print(abs(angle_sum-180.0) < 1e-8)",
               "needs": [
-                "angles"
+                "stage-3",
+                "stage-4"
               ]
             }
           ]
@@ -3444,7 +3712,7 @@
         {
           "id": "order-ica1-3-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3536,7 +3804,7 @@
         {
           "id": "order-ica1-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\na = float(input(\"a: \"))\nb = float(input(\"b: \"))\ngamma_deg = float(input(\"gamma (deg): \"))\n\nc = sqrt(a**2+b**2-2*a*b*cos(radians(gamma_deg)))\n\ncos_alpha = (b**2+c**2-a**2)/(2*b*c)\ncos_beta = (a**2+c**2-b**2)/(2*a*c)\n\nalpha_deg = degrees(acos(max(-1.,min(1.,cos_alpha))))\nbeta_deg = degrees(acos(max(-1.,min(1.,cos_beta))))\n\nangle_sum = alpha_deg + beta_deg + gamma_deg",
           "requirements": [
             "Print side c.",
@@ -3653,7 +3921,7 @@
         {
           "id": "order-ica1-4-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3661,53 +3929,51 @@
             "Convert half of the full apex angle to radians.",
             "Calculate r=L sin(theta/2) and h=L cos(theta/2).",
             "Add the hemisphere volume and cone volume.",
-            "Calculate exposed area, excluding the common circular face."
+            "Calculate exposed area, excluding the common circular face.",
+            "Print volume in m³ and cm³.",
+            "Print area in m² and cm².",
+            "Print volume in ft³ and area in ft²; 1 ft=0.3048 m.",
+            "Print the requested outputs in the order listed above."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 读取斜长与顶角",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nlength_m = float(input(\"Slant length (m): \"))\ntheta_deg = float(input(\"Full angle (deg): \"))",
               "needs": []
             },
             {
-              "id": "input",
-              "label": "读取斜长与顶角",
-              "code": "length_m = float(input(\"Slant length (m): \"))\ntheta_deg = float(input(\"Full angle (deg): \"))",
-              "needs": []
-            },
-            {
-              "id": "half",
-              "label": "转换半顶角",
-              "code": "half_angle_rad = radians(theta_deg/2)",
+              "id": "stage-2",
+              "label": "转换半顶角 → 计算半径与高度",
+              "code": "half_angle_rad = radians(theta_deg/2)\n\nradius_m = length_m*sin(half_angle_rad)\nheight_m = length_m*cos(half_angle_rad)",
               "needs": [
-                "imports",
-                "input"
+                "stage-1"
               ]
             },
             {
-              "id": "rh",
-              "label": "计算半径与高度",
-              "code": "radius_m = length_m*sin(half_angle_rad)\nheight_m = length_m*cos(half_angle_rad)",
+              "id": "stage-3",
+              "label": "计算总体积 → 计算外露面积",
+              "code": "volume_m3 = 2*pi*radius_m**3/3 + pi*height_m*radius_m**2/3\n\narea_m2 = 2*pi*radius_m**2 + pi*radius_m*hypot(height_m,radius_m)",
               "needs": [
-                "half"
+                "stage-2"
               ]
             },
             {
-              "id": "volume",
-              "label": "计算总体积",
-              "code": "volume_m3 = 2*pi*radius_m**3/3 + pi*height_m*radius_m**2/3",
+              "id": "stage-4",
+              "label": "输出体积 → 输出面积",
+              "code": "print(f\"{volume_m3:.3f} m^3; {volume_m3*100**3:.3f} cm^3\")\n\nprint(f\"{area_m2:.3f} m^2; {area_m2*100**2:.3f} cm^2\")",
               "needs": [
-                "rh"
+                "stage-3"
               ]
             },
             {
-              "id": "area",
-              "label": "计算外露面积",
-              "code": "area_m2 = 2*pi*radius_m**2 + pi*radius_m*hypot(height_m,radius_m)",
+              "id": "stage-5",
+              "label": "输出英制单位",
+              "code": "print(f\"{volume_m3/0.3048**3:.3f} ft^3; {area_m2/0.3048**2:.3f} ft^2\")",
               "needs": [
-                "rh"
+                "stage-3",
+                "stage-4"
               ]
             }
           ]
@@ -3715,7 +3981,7 @@
         {
           "id": "order-ica1-4-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3808,7 +4074,7 @@
         {
           "id": "order-ica1-4-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\nlength_m = float(input(\"Slant length (m): \"))\ntheta_deg = float(input(\"Full angle (deg): \"))\n\nhalf_angle_rad = radians(theta_deg/2)\n\nradius_m = length_m*sin(half_angle_rad)\nheight_m = length_m*cos(half_angle_rad)\n\nvolume_m3 = 2*pi*radius_m**3/3 + pi*height_m*radius_m**2/3\n\narea_m2 = 2*pi*radius_m**2 + pi*radius_m*hypot(height_m,radius_m)",
           "requirements": [
             "Print volume in m³ and cm³.",
@@ -3925,7 +4191,7 @@
         {
           "id": "order-ica1-5-q1",
           "local": 1,
-          "title": "输入与计算核心",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -3933,53 +4199,50 @@
             "Read two times, body temperatures and ambient temperature Ts; assume Ts<T2<T1<98.6.",
             "Find elapsed minutes, allowing the second reading on the next day; assume distinct times.",
             "For T−Ts=(T0−Ts)exp(−kt), calculate positive k per minute.",
-            "Calculate minutes before the first reading when body temperature was 98.6 F."
+            "Calculate minutes before the first reading when body temperature was 98.6 F.",
+            "Subtract rounded before from t1 and wrap to a 24-hour day.",
+            "Split death minutes into hour and minute.",
+            "Print the estimated clock time as HH:MM with leading zeros."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
             {
-              "id": "imports",
-              "label": "导入数学函数",
-              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log",
+              "id": "stage-1",
+              "label": "导入数学函数 → 定义时钟转换函数",
+              "code": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\ndef clock_to_minutes(text):\n    hour, minute = map(int,text.split(\":\"))\n    return 60*hour+minute",
               "needs": []
             },
             {
-              "id": "clock",
-              "label": "定义时钟转换函数",
-              "code": "def clock_to_minutes(text):\n    hour, minute = map(int,text.split(\":\"))\n    return 60*hour+minute",
-              "needs": []
-            },
-            {
-              "id": "input",
-              "label": "读取测量数据",
-              "code": "t1 = clock_to_minutes(input(\"Time 1 HH:MM: \"))\nT1 = float(input(\"T1 (F): \"))\nt2 = clock_to_minutes(input(\"Time 2 HH:MM: \"))\nT2 = float(input(\"T2 (F): \"))\nTs = float(input(\"Ambient (F): \"))",
+              "id": "stage-2",
+              "label": "读取测量数据 → 处理跨午夜",
+              "code": "t1 = clock_to_minutes(input(\"Time 1 HH:MM: \"))\nT1 = float(input(\"T1 (F): \"))\nt2 = clock_to_minutes(input(\"Time 2 HH:MM: \"))\nT2 = float(input(\"T2 (F): \"))\nTs = float(input(\"Ambient (F): \"))\n\nelapsed = (t2-t1) % (24*60)",
               "needs": [
-                "clock"
+                "stage-1"
               ]
             },
             {
-              "id": "elapsed",
-              "label": "处理跨午夜",
-              "code": "elapsed = (t2-t1) % (24*60)",
+              "id": "stage-3",
+              "label": "求冷却常数 → 求首次测量前的分钟数",
+              "code": "k = -log((T2-Ts)/(T1-Ts))/elapsed\n\nbefore = log((98.6-Ts)/(T1-Ts))/k",
               "needs": [
-                "input"
+                "stage-1",
+                "stage-2"
               ]
             },
             {
-              "id": "k",
-              "label": "求冷却常数",
-              "code": "k = -log((T2-Ts)/(T1-Ts))/elapsed",
+              "id": "stage-4",
+              "label": "计算时钟分钟 → 拆分时分",
+              "code": "death = (t1-round(before)) % 1440\n\nhour, minute = divmod(death,60)",
               "needs": [
-                "imports",
-                "elapsed"
+                "stage-3"
               ]
             },
             {
-              "id": "before",
-              "label": "求首次测量前的分钟数",
-              "code": "before = log((98.6-Ts)/(T1-Ts))/k",
+              "id": "stage-5",
+              "label": "输出时钟",
+              "code": "print(f\"{hour:02d}:{minute:02d}\")",
               "needs": [
-                "k"
+                "stage-4"
               ]
             }
           ]
@@ -3987,7 +4250,7 @@
         {
           "id": "order-ica1-5-q2",
           "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 逐段排序",
           "context": "",
           "requirements": [
             "Import the mathematical functions used below.",
@@ -4076,7 +4339,7 @@
         {
           "id": "order-ica1-5-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "from math import pi, sin, cos, asin, acos, radians, degrees, sqrt, hypot, log\n\ndef clock_to_minutes(text):\n    hour, minute = map(int,text.split(\":\"))\n    return 60*hour+minute\n\nt1 = clock_to_minutes(input(\"Time 1 HH:MM: \"))\nT1 = float(input(\"T1 (F): \"))\nt2 = clock_to_minutes(input(\"Time 2 HH:MM: \"))\nT2 = float(input(\"T2 (F): \"))\nTs = float(input(\"Ambient (F): \"))\n\nelapsed = (t2-t1) % (24*60)\n\nk = -log((T2-Ts)/(T1-Ts))/elapsed\n\nbefore = log((98.6-Ts)/(T1-Ts))/k",
           "requirements": [
             "Subtract rounded before from t1 and wrap to a 24-hour day.",
@@ -4192,52 +4455,7 @@
         {
           "id": "order-ica3-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Load time x and voltage y from a headerless two-column CSV.",
-            "Compute slope and intercept of the least-squares straight line.",
-            "Generate 300 x points and evaluate the fitted straight line."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "load",
-              "label": "读取VT数据",
-              "code": "x,y = np.loadtxt(\"vt.csv\",delimiter=\",\",unpack=True)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "fit",
-              "label": "拟合直线",
-              "code": "slope,intercept = np.polyfit(x,y,1)",
-              "needs": [
-                "load"
-              ]
-            },
-            {
-              "id": "predict",
-              "label": "计算拟合值",
-              "code": "xf = np.linspace(x.min(),x.max(),300)\nyf = slope*xf+intercept",
-              "needs": [
-                "fit"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica3-1-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -4249,7 +4467,77 @@
             "Draw the fitted line in teal with dashed style and width 2.",
             "After drawing both datasets, label time and voltage and add a legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 读取VT数据",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx,y = np.loadtxt(\"vt.csv\",delimiter=\",\",unpack=True)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "拟合直线 → 计算拟合值",
+              "code": "slope,intercept = np.polyfit(x,y,1)\n\nxf = np.linspace(x.min(),x.max(),300)\nyf = slope*xf+intercept",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建二维坐标轴 → 绘制带边框的观测点",
+              "code": "fig, ax = plt.subplots()\n\nax.plot(x,y,\"o\",markerfacecolor=\"blue\",markeredgecolor=\"red\",markeredgewidth=2,linestyle=\"none\",label=\"Measured VT\")",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制拟合线 → 标注坐标轴",
+              "code": "ax.plot(xf,yf,\"--\",color=\"teal\",linewidth=2,label=\"Linear fit\")\n\nax.set(title=\"Threshold voltage\",xlabel=\"Time [sec]\",ylabel=\"VT [V]\")\nax.legend()",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "调整布局 → 保存图像",
+              "code": "fig.tight_layout()\n\nfig.savefig(\"practice.png\", dpi=160)",
+              "needs": [
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica3-1-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Load time x and voltage y from a headerless two-column CSV.",
+            "Compute slope and intercept of the least-squares straight line.",
+            "Generate 300 x points and evaluate the fitted straight line.",
+            "Create one figure and one 2D axes.",
+            "Plot measurements as blue circles with red edges of width 2 and no connecting line.",
+            "Draw the fitted line in teal with dashed style and width 2.",
+            "After drawing both datasets, label time and voltage and add a legend.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -4333,13 +4621,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica3-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nx,y = np.loadtxt(\"vt.csv\",delimiter=\",\",unpack=True)\n\nslope,intercept = np.polyfit(x,y,1)\n\nxf = np.linspace(x.min(),x.max(),300)\nyf = slope*xf+intercept",
           "requirements": [
             "Create one figure and one 2D axes.",
@@ -4347,7 +4643,8 @@
             "Draw the fitted line in teal with dashed style and width 2.",
             "After drawing both datasets, label time and voltage and add a legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -4397,6 +4694,14 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         }
@@ -4435,7 +4740,7 @@
             "t = np.arange(0,20,0.01)"
           ],
           "answer": 2,
-          "explanation": "0到20秒共有2000个0.01秒间隔，因此需要2001个点；linspace包含两端点，避免浮点stop导致额外采样。"
+          "explanation": "0到20秒共有2000个0.01秒间隔，需要2001个点；linspace包含两端点，避免浮点stop误差。"
         },
         {
           "id": "mcq-ica3-2-q3",
@@ -4484,61 +4789,7 @@
         {
           "id": "order-ica3-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Set A0=1, mass=12 and spring_k=3.",
-            "Compute omega0=sqrt(spring_k/mass).",
-            "Generate t from 0 through 20 s with a 0.01 s increment.",
-            "Compute b0=sqrt(4*mass*spring_k)."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "params",
-              "label": "设置物理参数",
-              "code": "A0,mass,spring_k = 1.,12.,3.",
-              "needs": []
-            },
-            {
-              "id": "omega",
-              "label": "计算角频率",
-              "code": "omega0 = np.sqrt(spring_k/mass)",
-              "needs": [
-                "imports",
-                "params"
-              ]
-            },
-            {
-              "id": "time",
-              "label": "生成时间数组",
-              "code": "t = np.linspace(0,20,2001)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "b0",
-              "label": "计算临界阻尼系数",
-              "code": "b0 = np.sqrt(4*mass*spring_k)",
-              "needs": [
-                "imports",
-                "params"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica3-2-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -4551,7 +4802,78 @@
             "Add a formula annotation at axes-relative coordinates (0.52,0.82).",
             "After plotting, label time and displacement and add a legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 设置物理参数",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "计算角频率 → 生成时间数组",
+              "code": "omega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "计算临界阻尼系数 → 创建二维坐标轴",
+              "code": "b0 = np.sqrt(4*mass*spring_k)\n\nfig, ax = plt.subplots()",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "计算并绘制三条规定曲线 → 标注公式",
+              "code": "for b,label,style in ((b0/2,\"b0/2\",\"b-\"),(b0,\"b0\",\"g--\"),(b0/0.5,\"b0/0.5\",\"r:\")):\n    alpha = b/(2*mass)\n    y = A0*np.exp(-alpha*t)*np.cos(omega0*t)\n    ax.plot(t,y,style,label=label)\n\nax.text(0.52,0.82,\"y=A0 exp(-alpha*t) cos(omega0*t)\",transform=ax.transAxes)",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "添加标签与图例 → 调整布局",
+              "code": "ax.set(xlabel=\"Time [sec]\",ylabel=\"Displacement [m]\")\nax.legend()\n\nfig.tight_layout()",
+              "needs": [
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica3-2-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Set A0=1, mass=12 and spring_k=3.",
+            "Compute omega0=sqrt(spring_k/mass).",
+            "Generate t from 0 through 20 s with a 0.01 s increment.",
+            "Compute b0=sqrt(4*mass*spring_k).",
+            "Create one figure and one 2D axes.",
+            "For b=b0/2,b0,b0/0.5, plot the prescribed y=A0 exp(−b*t/(2*mass)) cos(omega0*t).",
+            "Add a formula annotation at axes-relative coordinates (0.52,0.82).",
+            "After plotting, label time and displacement and add a legend.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -4644,13 +4966,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica3-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0,mass,spring_k = 1.,12.,3.\n\nomega0 = np.sqrt(spring_k/mass)\n\nt = np.linspace(0,20,2001)\n\nb0 = np.sqrt(4*mass*spring_k)",
           "requirements": [
             "Create one figure and one 2D axes.",
@@ -4658,7 +4988,8 @@
             "Add a formula annotation at axes-relative coordinates (0.52,0.82).",
             "After plotting, label time and displacement and add a legend.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -4707,6 +5038,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -4794,70 +5133,7 @@
         {
           "id": "order-ica3-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Load counts from column 1 and years from column 2 of the headerless CSV.",
-            "Keep only rows with positive counts, applying the same mask to years.",
-            "Fit ln(counts) against years−years.min().",
-            "Generate 400 years and evaluate exp(intercept+slope*(xs−years.min())).",
-            "Compute the doubling time in years from the fitted slope."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "load",
-              "label": "读取晶体管数据",
-              "code": "counts,years = np.loadtxt(\"transistors.csv\",delimiter=\",\",unpack=True)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "mask",
-              "label": "过滤非正数量",
-              "code": "mask = counts>0\ncounts,years = counts[mask],years[mask]",
-              "needs": [
-                "load"
-              ]
-            },
-            {
-              "id": "fit",
-              "label": "拟合指数趋势",
-              "code": "slope,intercept = np.polyfit(years-years.min(),np.log(counts),1)",
-              "needs": [
-                "mask"
-              ]
-            },
-            {
-              "id": "predict",
-              "label": "预测晶体管数量",
-              "code": "xs = np.linspace(years.min(),years.max(),400)\nfit = np.exp(intercept+slope*(xs-years.min()))",
-              "needs": [
-                "fit"
-              ]
-            },
-            {
-              "id": "double",
-              "label": "计算翻倍时间",
-              "code": "doubling_time = np.log(2)/slope",
-              "needs": [
-                "fit"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica3-3-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -4870,7 +5146,78 @@
             "Plot counts as points and the fitted exponential as a red dashed line.",
             "After plotting, use a logarithmic y-axis and label year and count.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 读取晶体管数据",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\ncounts,years = np.loadtxt(\"transistors.csv\",delimiter=\",\",unpack=True)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "过滤非正数量 → 拟合指数趋势",
+              "code": "mask = counts>0\ncounts,years = counts[mask],years[mask]\n\nslope,intercept = np.polyfit(years-years.min(),np.log(counts),1)",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "预测晶体管数量 → 计算翻倍时间",
+              "code": "xs = np.linspace(years.min(),years.max(),400)\nfit = np.exp(intercept+slope*(xs-years.min()))\n\ndoubling_time = np.log(2)/slope",
+              "needs": [
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "创建二维坐标轴 → 绘制观测与拟合",
+              "code": "fig, ax = plt.subplots()\n\nax.plot(years,counts,\"o\",label=\"Integrated circuits\")\nax.plot(xs,fit,\"r--\",label=\"Exponential fit\")",
+              "needs": [
+                "stage-1",
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "设置对数轴和图例 → 调整布局",
+              "code": "ax.set_yscale(\"log\")\nax.set(xlabel=\"Year\",ylabel=\"Transistor count\")\nax.legend()\n\nfig.tight_layout()",
+              "needs": [
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica3-3-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Load counts from column 1 and years from column 2 of the headerless CSV.",
+            "Keep only rows with positive counts, applying the same mask to years.",
+            "Fit ln(counts) against years−years.min().",
+            "Generate 400 years and evaluate exp(intercept+slope*(xs−years.min())).",
+            "Compute the doubling time in years from the fitted slope.",
+            "Create one figure and one 2D axes.",
+            "Plot counts as points and the fitted exponential as a red dashed line.",
+            "After plotting, use a logarithmic y-axis and label year and count.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -4960,20 +5307,29 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica3-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\ncounts,years = np.loadtxt(\"transistors.csv\",delimiter=\",\",unpack=True)\n\nmask = counts>0\ncounts,years = counts[mask],years[mask]\n\nslope,intercept = np.polyfit(years-years.min(),np.log(counts),1)\n\nxs = np.linspace(years.min(),years.max(),400)\nfit = np.exp(intercept+slope*(xs-years.min()))\n\ndoubling_time = np.log(2)/slope",
           "requirements": [
             "Create one figure and one 2D axes.",
             "Plot counts as points and the fitted exponential as a red dashed line.",
             "After plotting, use a logarithmic y-axis and label year and count.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5013,6 +5369,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -5101,43 +5465,7 @@
         {
           "id": "order-ica4-1-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create 800 evenly spaced z values from 0 to 8π inclusive.",
-            "Set x=cos(z), y=sin(z), using z itself as height."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "parameter",
-              "label": "创建高度参数",
-              "code": "z = np.linspace(0,8*np.pi,800)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "coords",
-              "label": "计算螺旋线坐标",
-              "code": "x,y = np.cos(z),np.sin(z)",
-              "needs": [
-                "parameter"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica4-1-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -5149,7 +5477,77 @@
             "Set views to (elev,azim)=(30,−165) and (45,−130).",
             "Label x,y,z in cm on both views.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建高度参数",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nz = np.linspace(0,8*np.pi,800)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "计算螺旋线坐标 → 创建图窗",
+              "code": "x,y = np.cos(z),np.sin(z)\n\nfig = plt.figure(figsize=(11,5))",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建两个三维坐标轴 → 绘制同一空间曲线",
+              "code": "ax1 = fig.add_subplot(121,projection=\"3d\")\nax2 = fig.add_subplot(122,projection=\"3d\")\n\nfor ax in (ax1,ax2):\n    ax.plot(x,y,z)",
+              "needs": [
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "设置观察角度 → 标注三维坐标轴",
+              "code": "ax1.view_init(elev=30,azim=-165)\nax2.view_init(elev=45,azim=-130)\n\nfor ax in (ax1,ax2):\n    ax.set(xlabel=\"x [cm]\",ylabel=\"y [cm]\",zlabel=\"z [cm]\")",
+              "needs": [
+                "stage-3"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "调整布局 → 保存图像",
+              "code": "fig.tight_layout()\n\nfig.savefig(\"practice.png\", dpi=160)",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica4-1-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create 800 evenly spaced z values from 0 to 8π inclusive.",
+            "Set x=cos(z), y=sin(z), using z itself as height.",
+            "Create a figure for two 3D views.",
+            "Create a 1×2 layout of two 3D axes.",
+            "Plot the same x,y,z curve in both views.",
+            "Set views to (elev,azim)=(30,−165) and (45,−130).",
+            "Label x,y,z in cm on both views.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5233,13 +5631,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica4-1-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nz = np.linspace(0,8*np.pi,800)\n\nx,y = np.cos(z),np.sin(z)",
           "requirements": [
             "Create a figure for two 3D views.",
@@ -5248,7 +5654,8 @@
             "Set views to (elev,azim)=(30,−165) and (45,−130).",
             "Label x,y,z in cm on both views.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5306,6 +5713,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -5393,52 +5808,7 @@
         {
           "id": "order-ica4-2-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create values from −2 through 2 with step 0.1.",
-            "Create X,Y grids for every pair of v values with default xy indexing.",
-            "Compute Z=X exp(−X²−Y²) elementwise."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "v",
-              "label": "创建坐标向量",
-              "code": "v = np.arange(-2,2.01,0.1)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "grid",
-              "label": "生成二维坐标网格",
-              "code": "X,Y = np.meshgrid(v,v)",
-              "needs": [
-                "v"
-              ]
-            },
-            {
-              "id": "z",
-              "label": "计算网格函数",
-              "code": "Z = X*np.exp(-X**2-Y**2)",
-              "needs": [
-                "grid"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica4-2-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -5451,7 +5821,80 @@
             "Add a separate colorbar to each axes using its own contour result.",
             "Label axes in cm and distinguish line contours from filled contours.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建坐标向量",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-2,2.01,0.1)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "生成二维坐标网格 → 计算网格函数",
+              "code": "X,Y = np.meshgrid(v,v)\n\nZ = X*np.exp(-X**2-Y**2)",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建并排子图 → 绘制等高线",
+              "code": "fig,(ax1,ax2) = plt.subplots(1,2,figsize=(11,5))\n\np1 = ax1.contour(X,Y,Z,20,cmap=\"jet\")",
+              "needs": [
+                "stage-1",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制填充等高线 → 添加对应色标",
+              "code": "p2 = ax2.contourf(X,Y,Z,20,cmap=\"jet\")\n\nfig.colorbar(p1,ax=ax1)\nfig.colorbar(p2,ax=ax2)",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "标注轴与标题 → 调整布局",
+              "code": "ax1.set(xlabel=\"x [cm]\",ylabel=\"y [cm]\",title=\"Contours\")\nax2.set(xlabel=\"x [cm]\",ylabel=\"y [cm]\",title=\"Filled contours\")\n\nfig.tight_layout()",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica4-2-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create values from −2 through 2 with step 0.1.",
+            "Create X,Y grids for every pair of v values with default xy indexing.",
+            "Compute Z=X exp(−X²−Y²) elementwise.",
+            "Create two 2D axes side by side.",
+            "Draw 20 contour levels using the jet colormap in ax1.",
+            "Draw 20 filled contour levels with jet in ax2.",
+            "Add a separate colorbar to each axes using its own contour result.",
+            "Label axes in cm and distinguish line contours from filled contours.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5544,13 +5987,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica4-2-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-2,2.01,0.1)\n\nX,Y = np.meshgrid(v,v)\n\nZ = X*np.exp(-X**2-Y**2)",
           "requirements": [
             "Create two 2D axes side by side.",
@@ -5559,7 +6010,8 @@
             "Add a separate colorbar to each axes using its own contour result.",
             "Label axes in cm and distinguish line contours from filled contours.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5617,6 +6069,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]
@@ -5704,52 +6164,7 @@
         {
           "id": "order-ica4-3-q1",
           "local": 1,
-          "title": "输入与计算核心",
-          "context": "",
-          "requirements": [
-            "Import NumPy and Matplotlib.",
-            "Create values from −2 through 2 with step 0.1.",
-            "Create X,Y grids for every pair of v values with default xy indexing.",
-            "Compute Z=X exp(−X²−Y²) elementwise."
-          ],
-          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
-          "blocks": [
-            {
-              "id": "imports",
-              "label": "导入绘图库",
-              "code": "import numpy as np\nimport matplotlib.pyplot as plt",
-              "needs": []
-            },
-            {
-              "id": "v",
-              "label": "创建坐标向量",
-              "code": "v = np.arange(-2,2.01,0.1)",
-              "needs": [
-                "imports"
-              ]
-            },
-            {
-              "id": "grid",
-              "label": "生成二维坐标网格",
-              "code": "X,Y = np.meshgrid(v,v)",
-              "needs": [
-                "v"
-              ]
-            },
-            {
-              "id": "z",
-              "label": "计算网格函数",
-              "code": "Z = X*np.exp(-X**2-Y**2)",
-              "needs": [
-                "grid"
-              ]
-            }
-          ]
-        },
-        {
-          "id": "order-ica4-3-q2",
-          "local": 2,
-          "title": "完整程序实现",
+          "title": "完整流程 · 按阶段排序",
           "context": "",
           "requirements": [
             "Import NumPy and Matplotlib.",
@@ -5762,7 +6177,79 @@
             "Draw 25 3D contour levels in ax2 using jet.",
             "Label both 3D axes and add display titles.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
+          ],
+          "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
+          "blocks": [
+            {
+              "id": "stage-1",
+              "label": "导入绘图库 → 创建坐标向量",
+              "code": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-2,2.01,0.1)",
+              "needs": []
+            },
+            {
+              "id": "stage-2",
+              "label": "生成二维坐标网格 → 计算网格函数",
+              "code": "X,Y = np.meshgrid(v,v)\n\nZ = X*np.exp(-X**2-Y**2)",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-3",
+              "label": "创建图窗 → 创建三维坐标轴",
+              "code": "fig = plt.figure(figsize=(11,5))\n\nax1 = fig.add_subplot(121,projection=\"3d\")\nax2 = fig.add_subplot(122,projection=\"3d\")",
+              "needs": [
+                "stage-1"
+              ]
+            },
+            {
+              "id": "stage-4",
+              "label": "绘制线框 → 绘制三维等高线",
+              "code": "ax1.plot_wireframe(X,Y,Z,rstride=2,cstride=2)\n\nax2.contour3D(X,Y,Z,25,cmap=\"jet\")",
+              "needs": [
+                "stage-3",
+                "stage-2"
+              ]
+            },
+            {
+              "id": "stage-5",
+              "label": "标注三维坐标轴 → 调整布局",
+              "code": "ax1.set(xlabel=\"x [cm]\",ylabel=\"y [cm]\",zlabel=\"z\",title=\"Wireframe\")\nax2.set(xlabel=\"x [cm]\",ylabel=\"y [cm]\",zlabel=\"z\",title=\"3D contours\")\n\nfig.tight_layout()",
+              "needs": [
+                "stage-3",
+                "stage-4"
+              ]
+            },
+            {
+              "id": "stage-6",
+              "label": "保存图像 → 显示最终图片",
+              "code": "fig.savefig(\"practice.png\", dpi=160)\n\nplt.show()",
+              "needs": [
+                "stage-5"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "order-ica4-3-q2",
+          "local": 2,
+          "title": "完整流程 · 逐段排序",
+          "context": "",
+          "requirements": [
+            "Import NumPy and Matplotlib.",
+            "Create values from −2 through 2 with step 0.1.",
+            "Create X,Y grids for every pair of v values with default xy indexing.",
+            "Compute Z=X exp(−X²−Y²) elementwise.",
+            "Create a figure for two 3D displays.",
+            "Create two side-by-side axes with 3D projection.",
+            "Draw a wireframe in ax1, sampling every 2 rows and columns.",
+            "Draw 25 3D contour levels in ax2 using jet.",
+            "Label both 3D axes and add display titles.",
+            "Adjust the layout before saving the figure.",
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5855,13 +6342,21 @@
               "needs": [
                 "layout"
               ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
+              ]
             }
           ]
         },
         {
           "id": "order-ica4-3-q3",
           "local": 3,
-          "title": "接着完成后半段",
+          "title": "补齐前置代码后的完整程序",
           "context": "import numpy as np\nimport matplotlib.pyplot as plt\n\nv = np.arange(-2,2.01,0.1)\n\nX,Y = np.meshgrid(v,v)\n\nZ = X*np.exp(-X**2-Y**2)",
           "requirements": [
             "Create a figure for two 3D displays.",
@@ -5870,7 +6365,8 @@
             "Draw 25 3D contour levels in ax2 using jet.",
             "Label both 3D axes and add display titles.",
             "Adjust the layout before saving the figure.",
-            "After adjusting the layout, save the figure as practice.png."
+            "After adjusting the layout, save the figure as practice.png.",
+            "After saving, display the completed figure with plt.show()."
           ],
           "hint": "先找变量从哪里定义，再连接到使用它的步骤。输出顺序只有题目明确指定时才受限制。",
           "blocks": [
@@ -5928,6 +6424,14 @@
               "code": "fig.savefig(\"practice.png\", dpi=160)",
               "needs": [
                 "layout"
+              ]
+            },
+            {
+              "id": "show",
+              "label": "显示最终图片",
+              "code": "plt.show()",
+              "needs": [
+                "save"
               ]
             }
           ]

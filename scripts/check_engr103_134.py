@@ -30,6 +30,9 @@ def main():
     # Plot calls still build actual Matplotlib artists; skip repeated PNG exports.
     original_savefig = Figure.savefig
     Figure.savefig = lambda *args, **kwargs: None
+    original_show = plt.show
+    shown = []
+    plt.show = lambda: shown.append(plt.gcf())
     old_cwd = Path.cwd()
     try:
         with tempfile.TemporaryDirectory() as tmp:
@@ -37,12 +40,25 @@ def main():
             for csv in (folder / "data").glob("*.csv"):
                 Path(csv.name).write_text(csv.read_text())
             for case in checks["cases"]:
+                shown.clear()
                 inputs = iter(case["inputs"])
                 env = {"input": lambda prompt="": next(inputs)}
                 try:
                     with contextlib.redirect_stdout(io.StringIO()):
                         exec(compile(case["code"], case["id"], "exec"), env)
                     assert bool(eval(case["test"], env)), "Numerical requirements failed"
+                    if case.get("plot_axes"):
+                        assert "fig" in env, "Missing completed figure"
+                        fig = env["fig"]
+                        axes = [ax for ax in fig.axes if ax.get_label() != "<colorbar>"]
+                        assert len(axes) == case["plot_axes"], "Wrong number of plot axes"
+                        assert all(ax.has_data() for ax in axes), "Empty plot axes"
+                        assert shown and shown[-1] is fig, "Missing final plt.show()"
+                        if case.get("render"):
+                            png = io.BytesIO()
+                            original_savefig(fig, png, format="png", dpi=90)
+                            assert png.getvalue().startswith(bytes([137, 80, 78, 71])), "PNG render failed"
+                            assert len(png.getvalue()) > 1000, "Empty PNG output"
                 except Exception as exc:
                     failures.append({"id": case["id"], "error": str(exc)})
                 finally:
@@ -50,6 +66,7 @@ def main():
     finally:
         os.chdir(old_cwd)
         Figure.savefig = original_savefig
+        plt.show = original_show
     print(json.dumps({"programs": 21, "execution_cases": len(checks["cases"]),
                       "syntax_cases": len(checks["syntax"]), "failures": failures}, indent=2))
     if failures:
