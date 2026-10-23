@@ -36,7 +36,7 @@ function renderBlocks(){const q=task(),r=rec(q);$('blocks').replaceChildren();fo
  handle.onpointerup=()=>{const source=dragId,where=drop;dragId=null;clearDrop();if(source&&where&&source!==where.targetId){const other=rec(task()).order.filter(x=>x!==source);reorder(source,other.indexOf(where.targetId)+(where.after?1:0));focus(source);}};
  handle.onpointercancel=()=>{dragId=null;clearDrop();};const body=document.createElement('div'),label=document.createElement('div'),pre=document.createElement('pre');label.className='block-label';label.textContent='位置 '+(i+1)+' · '+block.label;pre.textContent=block.code;body.append(label,pre);const arrows=document.createElement('div');arrows.className='arrows';for(const [symbol,delta]of [['↑',-1],['↓',1]]){const b=button(symbol,()=>{reorder(id,i+delta);focus(id);});b.disabled=i+delta<0||i+delta>=r.order.length;b.setAttribute('aria-label',(delta<0?'上移 ':'下移 ')+block.label);arrows.append(b);}card.append(handle,body,arrows);$('blocks').append(card);
  }}
-function render(){const q=task(),ordering=mode==='order';nav();$('meta').textContent=program.name+' · '+program.topic+' · '+(ordering?'排序':'选择')+' '+q.local+' / '+list().length;
+function render(){const q=task(),ordering=mode==='order';$('copy-reference').disabled=false;$('copy-status').textContent='';nav();$('meta').textContent=program.name+' · '+program.topic+' · '+(ordering?'排序':'选择')+' '+q.local+' / '+list().length;
  $('mcq-panel').hidden=ordering;$('order-panel').hidden=!ordering;$('hint-box').hidden=!ordering;$('reference').hidden=!ordering;$('reference').open=false;$('hint-box').open=false;
  if(ordering){$('title').textContent=q.title;$('requirements').replaceChildren();for(const req of q.requirements){const li=document.createElement('li');li.textContent=req;$('requirements').append(li);}$('given-box').hidden=!q.context;$('given').textContent=q.context||'';$('reference-code').textContent=(q.context?q.context+'\n\n':'')+codeFor(q,q.blocks.map(b=>b.id));$('hint').textContent=q.hint;renderBlocks();}else{$('title').textContent='选择实现这句要求的代码';$('prompt').textContent=q.prompt;$('context').textContent=q.context||'本题无前置代码。';$('context-box').open=false;renderChoices();}
  $('source').href='https://github.com/OutisNemosseus/zhihu-physics-notes/blob/main/'+program.source;$('csv').replaceChildren();if(program.csv){const a=document.createElement('a');a.href='data/'+program.csv;a.textContent='下载本程序 CSV';a.download=program.csv;$('csv').append(a);}
@@ -48,5 +48,23 @@ function download(name,content,type){const u=URL.createObjectURL(new Blob([conte
  $('retry').onclick=()=>{delete rec(task()).choice;persist();renderChoices();feedback();nav();};
  $('prev').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i>0)go(list()[i-1].id);};$('next').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i<list().length-1)go(list()[i+1].id);};
  $('download').onclick=()=>download(task().id+'.py',(task().context?task().context+'\n\n':'')+codeFor(task(),rec(task()).order),'text/plain');$('export').onclick=()=>download('ENGR103_HW_ICA_134_progress.json',JSON.stringify({version:1,records},null,2),'application/json');
+
+$('copy-reference').onclick=async()=>{
+ const code=$('reference-code').textContent,id=current,button=$('copy-reference');
+ if(!code)return;
+ button.disabled=true;$('copy-status').textContent='';
+ try{
+  if(!navigator.clipboard?.writeText)throw Error('Clipboard unavailable');
+  await navigator.clipboard.writeText(code);
+  if(current===id)$('copy-status').textContent=task().context?'已复制完整参考代码（含前置代码）。':'参考代码已复制。';
+ }catch{
+  if(current===id){
+   const selection=window.getSelection(),range=document.createRange();
+   range.selectNodeContents($('reference-code'));selection?.removeAllRanges();selection?.addRange(range);$('reference-code').focus({preventScroll:true});
+   $('copy-status').textContent='浏览器未允许自动复制，代码已选中；请按 Ctrl+C（Mac：⌘C）。';
+  }
+ }finally{if(current===id)button.disabled=false;}
+};
+
  window.addEventListener('hashchange',()=>{if(data)go(location.hash.slice(1));});
  fetch('questions.json').then(r=>{if(!r.ok)throw Error('题库加载失败');return r.json();}).then(d=>{data=d;const id=location.hash.slice(1);if(data.programs.some(p=>[...p.tasks,...p.mcq].some(q=>q.id===id)))go(id);else go(data.programs[0].mcq[0].id);}).catch(e=>{$('error').textContent=e.message+'，请刷新页面。';});
