@@ -1,0 +1,354 @@
+[
+  {
+    "id": 1,
+    "group": "HW 4",
+    "source": "HW4_1",
+    "title": "Cylinder wave — two prescribed views",
+    "prompt": "Create 1000 equally spaced t values from 0 through 2π, including endpoints. Use x=r cos(t), y=r sin(t), z=h cos(a t), with r=1 in, h=0.3 in and a=10.\nPlot the same curve in navy in both panels. Left: elevation 35°, azimuth −130°. Right: elevation 65°, azimuth −130°.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q01.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 1 类程序。t 是弧度；view_init 的视角是度。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "单一参数 t 对应一串 (x,y,z)，不使用 meshgrid。fig.add_subplot(1,2,1,projection=\"3d\") 创建左图；ax.plot(x,y,z) 画空间曲线。view_init(elev=...,azim=...) 的参数单位是度。",
+    "hint": "先算三个同长度的一维坐标数组，再创建两个3D坐标轴；在两图画同一组坐标，只改变视角。",
+    "ica": 1,
+    "check": "三个坐标数组长度1000；起终点均约(1,0,0.3)；x²+y²≈1。两幅曲线相同，视角不同。",
+    "kind": "line",
+    "parameters": {
+      "n": 1000,
+      "r": 1,
+      "h": 0.3,
+      "a": 10,
+      "color": "navy",
+      "views": [
+        [
+          35,
+          -130
+        ],
+        [
+          65,
+          -130
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1000)\nr, h, a = 1, 0.3, 10\nx = r*np.cos(t)\ny = r*np.sin(t)\nz = h*np.cos(a*t)\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\nfor ax, elev, azim, title in ((ax1, 35, -130, \"View 1\"), (ax2, 65, -130, \"View 2\")):\n    ax.plot(x, y, z, color=\"navy\", linewidth=2)\n    ax.view_init(elev=elev, azim=azim)\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z [in]\", title=title)\n    ax.grid(True)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q01.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q01.png"
+  },
+  {
+    "id": 2,
+    "group": "HW 4",
+    "source": "HW4_1",
+    "title": "Change the radius and wave count",
+    "prompt": "Use 1201 equally spaced t values from 0 through 2π. Define x=1.5 cos(t), y=1.5 sin(t), z=0.5 cos(6t).\nUse teal lines of width 2. Left view: (elev,azim)=(25°,−100°); right view: (60°,−100°). Print the largest absolute error in x²+y²−2.25.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q02.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 1 类程序。t 是弧度；view_init 的视角是度。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "单一参数 t 对应一串 (x,y,z)，不使用 meshgrid。fig.add_subplot(1,2,1,projection=\"3d\") 创建左图；ax.plot(x,y,z) 画空间曲线。view_init(elev=...,azim=...) 的参数单位是度。",
+    "hint": "先算三个同长度的一维坐标数组，再创建两个3D坐标轴；在两图画同一组坐标，只改变视角。",
+    "ica": 1,
+    "check": "坐标长度1201；x²+y²≈2.25；z范围[−0.5,0.5]；误差接近浮点精度。",
+    "kind": "line",
+    "parameters": {
+      "n": 1201,
+      "r": 1.5,
+      "h": 0.5,
+      "a": 6,
+      "color": "teal",
+      "views": [
+        [
+          25,
+          -100
+        ],
+        [
+          60,
+          -100
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 1201)\nr, h, a = 1.5, 0.5, 6\nx = r*np.cos(t)\ny = r*np.sin(t)\nz = h*np.cos(a*t)\nprint(np.max(np.abs(x**2+y**2-2.25)))\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\nfor ax, elev, azim, title in ((ax1, 25, -100, \"View 1\"), (ax2, 60, -100, \"View 2\")):\n    ax.plot(x, y, z, color=\"teal\", linewidth=2)\n    ax.view_init(elev=elev, azim=azim)\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z [in]\", title=title)\n    ax.grid(True)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q02.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q02.png"
+  },
+  {
+    "id": 3,
+    "group": "HW 4",
+    "source": "HW4_1",
+    "title": "A phase-shifted cylinder wave",
+    "prompt": "Create 801 equally spaced t values from 0 through 2π. Use x=0.8 cos(t), y=0.8 sin(t), z=0.2 cos(8t+π/4).\nUse purple lines of width 2. Keep elevation at 30° in both panels; change azimuth from −45° to +45°. Print z[0] with six decimals.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q03.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 1 类程序。t 是弧度；view_init 的视角是度。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "单一参数 t 对应一串 (x,y,z)，不使用 meshgrid。fig.add_subplot(1,2,1,projection=\"3d\") 创建左图；ax.plot(x,y,z) 画空间曲线。view_init(elev=...,azim=...) 的参数单位是度。",
+    "hint": "先算三个同长度的一维坐标数组，再创建两个3D坐标轴；在两图画同一组坐标，只改变视角。",
+    "ica": 1,
+    "check": "z[0]=0.141421…；x²+y²≈0.64；两图仰角相同，方位角不同。",
+    "kind": "line",
+    "parameters": {
+      "n": 801,
+      "r": 0.8,
+      "h": 0.2,
+      "a": 8,
+      "phase": true,
+      "color": "purple",
+      "views": [
+        [
+          30,
+          -45
+        ],
+        [
+          30,
+          45
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nt = np.linspace(0, 2*np.pi, 801)\nr, h, a = 0.8, 0.2, 8\nx = r*np.cos(t)\ny = r*np.sin(t)\nz = h*np.cos(a*t + np.pi/4)\nprint(f\"{z[0]:.6f}\")\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\nfor ax, elev, azim, title in ((ax1, 30, -45, \"View 1\"), (ax2, 30, 45, \"View 2\")):\n    ax.plot(x, y, z, color=\"purple\", linewidth=2)\n    ax.view_init(elev=elev, azim=azim)\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z [in]\", title=title)\n    ax.grid(True)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q03.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q03.png"
+  },
+  {
+    "id": 4,
+    "group": "HW 4",
+    "source": "HW4_2",
+    "title": "Radial sine — contour and filled contour",
+    "prompt": "Create x and y values from −6 through 6 inches with 0.1-inch spacing. Compute Z=sin(sqrt(X²+Y²)) on all x-y combinations.\nLeft: 2D contour lines; right: 2D filled contours. Use jet, a separate labeled colorbar for each panel, and 21 explicit boundary values from −1 through 1. Give both panels equal x/y aspect.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q04.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 2 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "meshgrid(xv,yv) 的形状是 (len(yv),len(xv))：X 每行复制 xv，Y 每列复制 yv。contour 画线；contourf 填色；这两图使用普通2D坐标轴。把返回对象传给 fig.colorbar(p,ax=ax)。明确 levels 数组可以固定等高值；整数 levels 是自动选层的目标数量，未必恰好等于线条数。",
+    "hint": "np.hypot(X,Y) 等价于 np.sqrt(X**2+Y**2)。先生成网格并计算 Z，再画图；两个色条分别绑定各自的返回对象。",
+    "ica": 2,
+    "check": "X、Y、Z均为(121,121)；Z在中心为0，Z[60,70]≈sin(1)=0.841471；两幅图应为同心的环形等高结构。",
+    "kind": "contour",
+    "parameters": {
+      "xmin": -6,
+      "xmax": 6,
+      "nx": 121,
+      "ymin": -6,
+      "ymax": 6,
+      "ny": 121,
+      "formula": "np.sin(np.hypot(X, Y))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          35,
+          -130
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-6, 6, 121)\nyv = np.linspace(-6, 6, 121)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(np.hypot(X, Y))\nlevels = np.linspace(-1, 1, 21)\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5))\n\np1 = ax1.contour(X, Y, Z, levels=levels, cmap=\"jet\")\np2 = ax2.contourf(X, Y, Z, levels=levels, cmap=\"jet\")\nfig.colorbar(p1, ax=ax1, label=\"z\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Contours\"), (ax2, \"Filled contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", title=title)\n    ax.set_aspect(\"equal\", adjustable=\"box\")\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q04.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q04.png"
+  },
+  {
+    "id": 5,
+    "group": "HW 4",
+    "source": "HW4_2",
+    "title": "Shift the center of the radial field",
+    "prompt": "Create x and y from −6 through 6 inches at 0.1-inch spacing. Evaluate Z=sin(sqrt((X−1)²+(Y+2)²)).\nShow contour lines on the left and filled contours on the right using jet. Use 21 boundary values from −1 to 1, one colorbar per panel, and equal x/y aspect. Print Z at x=1,y=−2.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q05.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 2 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "meshgrid(xv,yv) 的形状是 (len(yv),len(xv))：X 每行复制 xv，Y 每列复制 yv。contour 画线；contourf 填色；这两图使用普通2D坐标轴。把返回对象传给 fig.colorbar(p,ax=ax)。明确 levels 数组可以固定等高值；整数 levels 是自动选层的目标数量，未必恰好等于线条数。",
+    "hint": "np.hypot(X,Y) 等价于 np.sqrt(X**2+Y**2)。先生成网格并计算 Z，再画图；两个色条分别绑定各自的返回对象。",
+    "ica": 2,
+    "check": "环形中心移到(1,−2)；Z[40,70]≈0，而原点处Z≈sin(√5)。不要把Y+2写成Y−2。",
+    "kind": "contour",
+    "parameters": {
+      "xmin": -6,
+      "xmax": 6,
+      "nx": 121,
+      "ymin": -6,
+      "ymax": 6,
+      "ny": 121,
+      "formula": "np.sin(np.hypot(X-1, Y+2))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          35,
+          -130
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-6, 6, 121)\nyv = np.linspace(-6, 6, 121)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(np.hypot(X-1, Y+2))\nprint(Z[40, 70])\nlevels = np.linspace(-1, 1, 21)\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5))\n\np1 = ax1.contour(X, Y, Z, levels=levels, cmap=\"jet\")\np2 = ax2.contourf(X, Y, Z, levels=levels, cmap=\"jet\")\nfig.colorbar(p1, ax=ax1, label=\"z\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Contours\"), (ax2, \"Filled contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", title=title)\n    ax.set_aspect(\"equal\", adjustable=\"box\")\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q05.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q05.png"
+  },
+  {
+    "id": 6,
+    "group": "HW 4",
+    "source": "HW4_2",
+    "title": "Use a rectangular mesh",
+    "prompt": "Use x from −4 through 4 inches and y from −6 through 6 inches, both with 0.1-inch spacing. Compute Z=sin(sqrt(X²+Y²)).\nCreate 2D contour lines and filled contours in left/right panels, using jet, 21 boundary values from −1 to 1, separate colorbars, and equal x/y aspect. Print X.shape, Y.shape and Z.shape.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q06.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 2 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "meshgrid(xv,yv) 的形状是 (len(yv),len(xv))：X 每行复制 xv，Y 每列复制 yv。contour 画线；contourf 填色；这两图使用普通2D坐标轴。把返回对象传给 fig.colorbar(p,ax=ax)。明确 levels 数组可以固定等高值；整数 levels 是自动选层的目标数量，未必恰好等于线条数。",
+    "hint": "np.hypot(X,Y) 等价于 np.sqrt(X**2+Y**2)。先生成网格并计算 Z，再画图；两个色条分别绑定各自的返回对象。",
+    "ica": 2,
+    "check": "三个网格均为(121,81)：行对应121个y，列对应81个x；中心Z[60,40]≈0。图的坐标范围是宽8、高12。",
+    "kind": "contour",
+    "parameters": {
+      "xmin": -4,
+      "xmax": 4,
+      "nx": 81,
+      "ymin": -6,
+      "ymax": 6,
+      "ny": 121,
+      "formula": "np.sin(np.hypot(X, Y))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          35,
+          -130
+        ]
+      ]
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-4, 4, 81)\nyv = np.linspace(-6, 6, 121)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(np.hypot(X, Y))\nprint(X.shape, Y.shape, Z.shape)\nlevels = np.linspace(-1, 1, 21)\nfig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 5))\n\np1 = ax1.contour(X, Y, Z, levels=levels, cmap=\"jet\")\np2 = ax2.contourf(X, Y, Z, levels=levels, cmap=\"jet\")\nfig.colorbar(p1, ax=ax1, label=\"z\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Contours\"), (ax2, \"Filled contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", title=title)\n    ax.set_aspect(\"equal\", adjustable=\"box\")\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q06.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q06.png"
+  },
+  {
+    "id": 7,
+    "group": "HW 4",
+    "source": "HW4_3",
+    "title": "Radial sine — wireframe and 3D contours",
+    "prompt": "Use x,y from −6 through 6 inches with 0.1-inch spacing, meshgrid, and Z=sin(sqrt(X²+Y²)).\nLeft: blue wireframe with rstride=cstride=4 and linewidth=0.5. Right: 3D contours with jet, 21 levels from −1 to 1, and a colorbar. Both views: elevation 35°, azimuth −130°.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q07.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 3 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "线框图与3D等高线都需要 projection=\"3d\"。plot_wireframe(X,Y,Z,rstride=...,cstride=...) 的步幅越大线越稀；它们控制显示采样，不改变原网格。ax.contour(X,Y,Z,levels=...,cmap=...) 在3D轴上画各高度的等高线；contour3D 也可。",
+    "hint": "两张3D图共用 X,Y,Z；左图线框，右图3D等高线。不要把普通 plt.subplots(1,2) 的2D轴直接用于线框。",
+    "ica": 3,
+    "check": "左图蓝色线框、右图按高度绘制等高线；两幅均为3D坐标轴，主坐标轴数量2，另有1个色条轴。",
+    "kind": "wire",
+    "parameters": {
+      "xmin": -6,
+      "xmax": 6,
+      "nx": 121,
+      "ymin": -6,
+      "ymax": 6,
+      "ny": 121,
+      "formula": "np.sin(np.hypot(X, Y))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          35,
+          -130
+        ]
+      ],
+      "stride": 4
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-6, 6, 121)\nyv = np.linspace(-6, 6, 121)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(np.hypot(X, Y))\nlevels = np.linspace(-1, 1, 21)\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\nax1.plot_wireframe(X, Y, Z, rstride=4, cstride=4, color=\"blue\", linewidth=0.5)\np2 = ax2.contour(X, Y, Z, levels=levels, cmap=\"jet\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Wireframe\"), (ax2, \"3D contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z\", title=title)\n    ax.view_init(elev=35, azim=-130)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q07.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q07.png"
+  },
+  {
+    "id": 8,
+    "group": "HW 4",
+    "source": "HW4_3",
+    "title": "A higher-frequency radial field",
+    "prompt": "Use x,y from −4 through 4 inches at 0.1-inch spacing. Compute Z=sin(2sqrt(X²+Y²)).\nLeft: blue wireframe with rstride=cstride=2 and linewidth=0.5. Right: jet 3D contours, 21 explicit levels from −1 to 1, and a colorbar. Use elevation 50° and azimuth −115° in both panels.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q08.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 3 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "线框图与3D等高线都需要 projection=\"3d\"。plot_wireframe(X,Y,Z,rstride=...,cstride=...) 的步幅越大线越稀；它们控制显示采样，不改变原网格。ax.contour(X,Y,Z,levels=...,cmap=...) 在3D轴上画各高度的等高线；contour3D 也可。",
+    "hint": "两张3D图共用 X,Y,Z；左图线框，右图3D等高线。不要把普通 plt.subplots(1,2) 的2D轴直接用于线框。",
+    "ica": 3,
+    "check": "网格(81,81)；中心为0，Z[40,50]≈sin(2)=0.909297。与sin(r)相比，同样距离内的环更多。",
+    "kind": "wire",
+    "parameters": {
+      "xmin": -4,
+      "xmax": 4,
+      "nx": 81,
+      "ymin": -4,
+      "ymax": 4,
+      "ny": 81,
+      "formula": "np.sin(2*np.hypot(X, Y))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          50,
+          -115
+        ]
+      ],
+      "stride": 2
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-4, 4, 81)\nyv = np.linspace(-4, 4, 81)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(2*np.hypot(X, Y))\nlevels = np.linspace(-1, 1, 21)\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\nax1.plot_wireframe(X, Y, Z, rstride=2, cstride=2, color=\"blue\", linewidth=0.5)\np2 = ax2.contour(X, Y, Z, levels=levels, cmap=\"jet\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Wireframe\"), (ax2, \"3D contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z\", title=title)\n    ax.view_init(elev=50, azim=-115)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q08.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q08.png"
+  },
+  {
+    "id": 9,
+    "group": "HW 4",
+    "source": "HW4_4",
+    "title": "Surface with floor-projected contours",
+    "prompt": "Create x,y from −6 through 6 inches at 0.1-inch spacing and evaluate Z=sin(sqrt(X²+Y²)).\nLeft: a jet-colored 3D surface. Right: the same jet surface plus jet contour lines projected onto z=−1.5. Use 21 levels from −1 to 1, one colorbar per surface, and elevation 35°, azimuth −130° in both panels. Set the right z limits to [−1.5,1].\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q09.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 4 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "ax.plot_surface(X,Y,Z,cmap=\"jet\") 绘制彩色曲面。先画曲面，再用 ax.contour(X,Y,Z,levels=...,zdir=\"z\",offset=...) 将等高线投影到固定 z 平面。offset 应低于曲面最小高度，并用 set_zlim 包含它；每个色条绑定对应的 surface 返回对象。",
+    "hint": "右图既有彩色曲面，也有底部的等高线投影；只有 contour 或只有 plot_surface 都不满足题意。",
+    "ica": 4,
+    "check": "两图都有彩色曲面；右图还要在z=−1.5平面出现完整投影等高线。不是把等高线画在它们原来的z高度上。",
+    "kind": "surface",
+    "parameters": {
+      "xmin": -6,
+      "xmax": 6,
+      "nx": 121,
+      "ymin": -6,
+      "ymax": 6,
+      "ny": 121,
+      "formula": "np.sin(np.hypot(X, Y))",
+      "zmin": -1,
+      "zmax": 1,
+      "levels": 21,
+      "views": [
+        [
+          35,
+          -130
+        ]
+      ],
+      "offset": -1.5
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-6, 6, 121)\nyv = np.linspace(-6, 6, 121)\nX, Y = np.meshgrid(xv, yv)\nZ = np.sin(np.hypot(X, Y))\nlevels = np.linspace(-1, 1, 21)\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\np1 = ax1.plot_surface(X, Y, Z, cmap=\"jet\", rstride=1, cstride=1, linewidth=0)\np2 = ax2.plot_surface(X, Y, Z, cmap=\"jet\", rstride=1, cstride=1, linewidth=0)\nax2.contour(X, Y, Z, levels=levels, zdir=\"z\", offset=-1.5, cmap=\"jet\")\nfig.colorbar(p1, ax=ax1, label=\"z\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Surface\"), (ax2, \"Surface + projected contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z\", title=title)\n    ax.view_init(elev=35, azim=-130)\nax2.set_zlim(-1.5, 1)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q09.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q09.png"
+  },
+  {
+    "id": 10,
+    "group": "HW 4",
+    "source": "HW4_4",
+    "title": "A scaled surface and a lower projection plane",
+    "prompt": "Create x,y from −5 through 5 inches at 0.1-inch spacing. Evaluate Z=2sin(sqrt(X²+Y²)).\nShow a jet surface on the left; on the right show the same jet surface with jet contour lines projected to z=−2.5. Use 21 levels from −2 to 2, one colorbar per surface, and views (45°,−120°). Set right z limits to [−2.5,2]. Print Z at x=1,y=0 with six decimals.\nUse NumPy and Matplotlib. Create one figure with two side-by-side panels; include the specified plot in BOTH panels. Give each panel a title and x/y labels with inches; 3D line plots also need z [in], while scalar-field plots use the dimensionless label z. Add a grid on 3D line plots. Call fig.tight_layout(), save the whole figure as HW4_practice_Q10.png (dpi=150), and display it with plt.show().",
+    "given": "完整编程变式，依据老师 HW4 第 4 类程序。网格采用默认 xy 索引；X、Y、Z 必须形状相同。",
+    "input": "",
+    "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Write the complete program here.\n",
+    "notes": "ax.plot_surface(X,Y,Z,cmap=\"jet\") 绘制彩色曲面。先画曲面，再用 ax.contour(X,Y,Z,levels=...,zdir=\"z\",offset=...) 将等高线投影到固定 z 平面。offset 应低于曲面最小高度，并用 set_zlim 包含它；每个色条绑定对应的 surface 返回对象。",
+    "hint": "右图既有彩色曲面，也有底部的等高线投影；只有 contour 或只有 plot_surface 都不满足题意。",
+    "ica": 4,
+    "check": "网格(101,101)；Z[50,60]=2sin(1)≈1.682942；右图z轴范围包含−2.5投影平面，色条使用曲面数据−2到2。",
+    "kind": "surface",
+    "parameters": {
+      "xmin": -5,
+      "xmax": 5,
+      "nx": 101,
+      "ymin": -5,
+      "ymax": 5,
+      "ny": 101,
+      "formula": "2*np.sin(np.hypot(X, Y))",
+      "zmin": -2,
+      "zmax": 2,
+      "levels": 21,
+      "views": [
+        [
+          45,
+          -120
+        ]
+      ],
+      "offset": -2.5
+    },
+    "solution": "import numpy as np\nimport matplotlib.pyplot as plt\n\nxv = np.linspace(-5, 5, 101)\nyv = np.linspace(-5, 5, 101)\nX, Y = np.meshgrid(xv, yv)\nZ = 2*np.sin(np.hypot(X, Y))\nprint(f\"{Z[50, 60]:.6f}\")\nlevels = np.linspace(-2, 2, 21)\nfig = plt.figure(figsize=(11, 5))\nax1 = fig.add_subplot(1, 2, 1, projection=\"3d\")\nax2 = fig.add_subplot(1, 2, 2, projection=\"3d\")\n\np1 = ax1.plot_surface(X, Y, Z, cmap=\"jet\", rstride=1, cstride=1, linewidth=0)\np2 = ax2.plot_surface(X, Y, Z, cmap=\"jet\", rstride=1, cstride=1, linewidth=0)\nax2.contour(X, Y, Z, levels=levels, zdir=\"z\", offset=-2.5, cmap=\"jet\")\nfig.colorbar(p1, ax=ax1, label=\"z\")\nfig.colorbar(p2, ax=ax2, label=\"z\")\nfor ax, title in ((ax1, \"Surface\"), (ax2, \"Surface + projected contours\")):\n    ax.set(xlabel=\"x [in]\", ylabel=\"y [in]\", zlabel=\"z\", title=title)\n    ax.view_init(elev=45, azim=-120)\nax2.set_zlim(-2.5, 2)\nfig.tight_layout()\nfig.savefig(\"HW4_practice_Q10.png\", dpi=150)\nplt.show()\n",
+    "preview": "expected/q10.png"
+  }
+]

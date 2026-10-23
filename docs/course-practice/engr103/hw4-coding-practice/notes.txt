@@ -1,0 +1,6 @@
+ENGR103 HW4 Practice Notes (self-authored; based on L04 and ICA4)
+
+ 必要 notes · 函数速查与完整绘图流程 下载本页配套 notes 需求 用法 均匀采样（含两端） np.linspace(start, stop, num) ；num 是点数。 二维函数网格 X,Y=np.meshgrid(x,y) ；默认形状(len(y),len(x))，行对应 y、列对应 x。 一个空间曲线参数 x(t),y(t),z(t) 是同长度1D数组；不需要 meshgrid。 左右两个3D坐标轴 fig=plt.figure(); ax1=fig.add_subplot(121,projection="3d"); ax2=fig.add_subplot(122,projection="3d") 空间曲线／视角 ax.plot(x,y,z); ax.view_init(elev=35,azim=-130) ；视角单位是度。 普通2D等高线 p=ax.contour(X,Y,Z,levels=levels,cmap="jet") ；填色用 contourf。 明确的等高值 levels=np.linspace(-1,1,21) 给21个边界值、20个填色区间；整数levels由自动定位器选层，线条数可能不同。 色条 fig.colorbar(p,ax=ax) ；p 是对应绘图返回对象，ax 指定它属于哪个子图。 线框／曲面 ax.plot_wireframe(X,Y,Z,rstride=4,cstride=4) ／ ax.plot_surface(X,Y,Z,cmap="jet") 。 3D等高线／底面投影 在3D轴上用 contour；投影再加 zdir="z",offset=-1.5 ，并设置包含该平面的z轴范围。 标签和最终输出 ax.set(xlabel="x [in]",ylabel="y [in]",zlabel="z"); fig.tight_layout(); fig.savefig("plot.png",dpi=150); plt.show() tight_layout 自动调整子图间距，尽量避免标题、轴标签重叠。savefig 保存图片，show 显示图片。两个动作都有自己的用途。** 表示幂，^ 不是幂。 
+
+Teacher L04: https://drive.google.com/file/d/1IGO9-gHMuyQuyzB6pfeFcqad_2ABsQpG/view
+Teacher ICA4: https://drive.google.com/file/d/1ILoDYjTLfWj4juIKUDwMfEouv3DLrJ_U/view

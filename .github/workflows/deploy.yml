@@ -46,6 +46,12 @@ jobs:
           node --check docs/course-practice/engr103/hw-ica-134-practice/app.js
           node scripts/check_engr103_134.mjs
           python scripts/check_engr103_134.py
+      - name: Validate snippet and HW4 coding practice
+        run: |
+          node --check docs/course-practice/engr103/snippet-fill-practice/app.js
+          node --check docs/course-practice/engr103/hw4-coding-practice/app.js
+          node --check docs/course-practice/engr103/snippet-fill-practice/runner-worker.js
+          python scripts/check_engr103_coding_practice.py
       - name: Build site
         run: python scripts/export_notebooks.py
       - name: Configure Pages
