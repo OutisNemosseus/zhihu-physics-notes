@@ -7,9 +7,11 @@ const list=()=>mode==='order'?program.tasks:program.mcq;
 const task=()=>list().find(q=>q.id===current);
 function rec(q){if(!records[q.id])records[q.id]={};const r=records[q.id];if(q.blocks&&!validOrder(q,r.order)){r.order=shuffled(q);r.checked=false;r.solved=false;}return r;}
 function persist(){try{localStorage.setItem(KEY,JSON.stringify(records));$('save').textContent='进度已保存到当前浏览器。';}catch{$('save').textContent='自动保存失败，请导出记录。';}}
-function go(id){for(const p of data.programs){const q=[...p.mcq,...p.tasks].find(q=>q.id===id);if(q){program=p;current=id;mode=q.blocks?'order':'mcq';$('mode').value=mode;history.replaceState(null,'','#'+id);render();return;}}}
+function go(id){for(const p of data.programs){const q=[...p.mcq,...p.tasks].find(q=>q.id===id);if(q){program=p;current=id;mode=q.blocks?'order':'mcq';history.replaceState(null,'','#'+id);render();return;}}}
 function button(text,action){const b=document.createElement('button');b.textContent=text;b.onclick=action;return b;}
 function nav(){
+ $('mode-mcq').setAttribute('aria-pressed',String(mode==='mcq'));$('mode-order').setAttribute('aria-pressed',String(mode==='order'));$('mode-label').textContent=mode==='order'?'拖动代码排序题':'代码实现选择题';
+ $('mode-jump').href='#'+(mode==='order'?program.mcq:program.tasks)[0].id;$('mode-jump').textContent=mode==='order'?'返回本程序的5道选择题 →':'去做本程序的3道排序题 →';
  const qs=all(mode),done=qs.filter(q=>mode==='order'?rec(q).solved:rec(q).choice!==undefined).length;
  $('done').textContent=done;$('total').textContent=' / '+qs.length+(mode==='order'?' 已完成':' 已作答');$('progress').max=qs.length;$('progress').value=done;
  $('summary-note').textContent=mode==='order'?'按依赖关系判分，独立步骤允许互换':'一句具体要求 → 选择对应代码实现';
@@ -41,10 +43,10 @@ function render(){const q=task(),ordering=mode==='order';nav();$('meta').textCon
  $('prev').disabled=q.local===1;$('next').disabled=q.local===list().length;feedback();persist();
 }
 function download(name,content,type){const u=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);}
- $('mode').onchange=()=>{mode=$('mode').value;go(list()[0].id);};$('check').onclick=()=>{const r=rec(task());r.checked=true;r.solved=grade(task(),r.order).ok;persist();feedback();nav();};
+ $('mode-mcq').onclick=()=>{if(program)go(program.mcq[0].id);};$('mode-order').onclick=()=>{if(program)go(program.tasks[0].id);};$('check').onclick=()=>{const r=rec(task());r.checked=true;r.solved=grade(task(),r.order).ok;persist();feedback();nav();};
  $('shuffle').onclick=()=>{const r=rec(task());r.order=shuffled(task(),Date.now());r.checked=false;r.solved=false;persist();render();};
  $('retry').onclick=()=>{delete rec(task()).choice;persist();renderChoices();feedback();nav();};
  $('prev').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i>0)go(list()[i-1].id);};$('next').onclick=()=>{const i=list().findIndex(q=>q.id===current);if(i<list().length-1)go(list()[i+1].id);};
  $('download').onclick=()=>download(task().id+'.py',(task().context?task().context+'\n\n':'')+codeFor(task(),rec(task()).order),'text/plain');$('export').onclick=()=>download('ENGR103_HW_ICA_134_progress.json',JSON.stringify({version:1,records},null,2),'application/json');
- window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+ window.addEventListener('hashchange',()=>{if(data)go(location.hash.slice(1));});
  fetch('questions.json').then(r=>{if(!r.ok)throw Error('题库加载失败');return r.json();}).then(d=>{data=d;const id=location.hash.slice(1);if(data.programs.some(p=>[...p.tasks,...p.mcq].some(q=>q.id===id)))go(id);else go(data.programs[0].mcq[0].id);}).catch(e=>{$('error').textContent=e.message+'，请刷新页面。';});
