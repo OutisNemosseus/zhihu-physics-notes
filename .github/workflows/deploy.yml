@@ -49,6 +49,7 @@ jobs:
       - name: Validate snippet and HW4 coding practice
         run: |
           node --check docs/course-practice/engr103/snippet-fill-practice/app.js
+          node --check docs/course-practice/engr103/snippet-fill-practice/slides.js
           node --check docs/course-practice/engr103/hw4-coding-practice/app.js
           node --check docs/course-practice/engr103/snippet-fill-practice/runner-worker.js
           python scripts/check_engr103_coding_practice.py
