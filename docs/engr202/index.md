@@ -5,6 +5,12 @@ description: ENGR 202 电路作业：三道原题截图、串并联与节点/网
 
 # ENGR 202
 
+[第 4 周：瞬时功率、平均功率与 RMS 原书 10 题](../course-practice/engr202/power-rms-10/)
+
+
+[戴维南／诺顿原书 10 题：截图、选择题与分步解析](../course-practice/engr202/thevenin-norton-10/)
+
+
 **Electrical Fundamentals II · Fall 2026**
 
 三道电路复习题：串并联化简、节点电压法和网孔电流法。每题保留原题截图，并附计算结果及可直接运行的 LTspice 文件。
