@@ -1,0 +1,890 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ENGR 202 · Midterm 1 原题与变式练习</title><style>
+:root{--ink:#173c3c;--muted:#657b79;--green:#0c6b59;--pale:#eaf3ee;--line:#d9e3dd;--orange:#b65a2c}*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}button,select,textarea{font:inherit}button,select{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d89830;outline-offset:3px}a{color:var(--green)}header{border-bottom:1px solid var(--line);padding:16px 4vw;display:flex;justify-content:space-between;align-items:center;background:#fff}header strong{letter-spacing:.12em;font-size:14px}.edition{font-size:12px;color:var(--muted)}.wrap{max-width:1360px;margin:auto;padding:40px 4vw}.hero{display:grid;grid-template-columns:1fr auto;gap:25px;margin-bottom:26px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--green);font-weight:750}h1{font-size:clamp(26px,3.5vw,42px);line-height:1.2;margin:10px 0 14px;letter-spacing:-.04em}p{margin:8px 0}.intro{max-width:760px;color:var(--muted);font-size:14px}.stat{display:flex;align-items:center;gap:16px}.stat b{font-size:44px;line-height:1}.stat span{font-size:13px;color:var(--muted)}.source-note{background:#eef2e7;border:1px solid #dce3d0;border-radius:12px;padding:14px 18px;font-size:13px;margin-bottom:26px}.layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:28px}aside{align-self:start;position:sticky;top:15px}.panel{border:1px solid var(--line);border-radius:15px;background:white;padding:18px}.small{font-size:12px;color:var(--muted)}label{display:block;font-size:13px;font-weight:650;margin-bottom:7px}select{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px;margin-bottom:12px}.toggle{width:100%;background:var(--pale);color:var(--green);border:0;border-radius:8px;padding:9px;margin:5px 0}.progress{height:5px;background:var(--pale);border-radius:4px;margin:14px 0}.progress div{height:100%;background:var(--green);border-radius:4px;transition:width .2s}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}.qnum{border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font-size:12px;padding:7px 0}.qnum.active{outline:2px solid var(--green);outline-offset:1px}.qnum.correct{background:#d9eddf;color:#165839}.qnum.wrong{background:#fde7df;color:#94391e}.qnum.answered{background:#e4eaf6}.legend{margin:12px 0;font-size:11px;color:var(--muted)}.side-tools{margin-top:14px;display:grid;gap:7px}.plain{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:8px;font-size:13px}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}.crumb{color:var(--muted);font-size:13px}.mode{font-size:12px;padding:4px 10px;border:1px solid #d3ded7;border-radius:20px}.card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:30px;min-height:560px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tag{font-size:11px;letter-spacing:.02em;background:var(--pale);color:var(--green);padding:3px 9px;border-radius:4px}.tag.variant{background:#faf0e7;color:#9a542a}h2{margin:0 0 14px;font-size:25px;line-height:1.4}.prompt{font-size:16px;line-height:1.9;white-space:pre-line}.diagram{margin:18px 0;background:#f8faf7;border:1px solid #e7ede7;border-radius:10px;overflow:auto}.diagram svg{width:100%;min-width:460px;display:block;max-height:290px}.work{font-size:12px;color:var(--muted);border-left:3px solid #bfcebd;margin:17px 0;padding-left:12px}.choices{display:grid;gap:10px;margin-top:20px}.choice{text-align:left;display:flex;gap:14px;align-items:baseline;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;color:var(--ink);font-size:14px;line-height:1.6}.choice:hover{background:#f3f7f2}.choice b{font-size:12px;color:var(--muted)}.choice.selected{border-color:var(--green);background:#eef7f1}.choice.good{border-color:#2e8c59;background:#eaf6ec}.choice.bad{border-color:#cc6e52;background:#fff0e9}.answer{margin-top:20px;border-radius:10px;padding:18px;background:#edf5ef}.answer.bad{background:#fff1e9}.answer ol{padding-left:22px;margin-bottom:0;font-size:14px}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}.primary{background:var(--green);color:white;border:0;padding:10px 20px;border-radius:8px}.primary:disabled,.plain:disabled{opacity:.4;cursor:default}.source{font-size:12px;color:var(--muted);margin-top:18px}.notes{margin-top:18px}.notes summary{cursor:pointer;font-size:13px}.notes textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:8px}.refpanel{margin-top:22px}.refpanel summary{cursor:pointer;font-size:14px;font-weight:650}.refpanel table{border-collapse:collapse;width:100%;font-size:12px;margin-top:14px}.refpanel td,.refpanel th{border-bottom:1px solid var(--line);padding:8px;text-align:left}.formula{font-size:13px;line-height:2}.footer{color:var(--muted);font-size:12px;margin-top:30px}.empty{padding:30px;text-align:center}.printquestion{break-inside:avoid;margin:25px 0;padding:18px;border:1px solid #ddd}#printarea{display:none}@media(max-width:850px){.wrap{padding:25px 18px}.layout{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.stat{display:none}aside{position:static}.grid{grid-template-columns:repeat(12,1fr)}.panel{padding:14px}.filters{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-tools{grid-template-columns:1fr 1fr 1fr}.card{padding:22px}.edition{display:none}}@media(max-width:520px){.grid{grid-template-columns:repeat(9,1fr)}.side-tools{grid-template-columns:1fr 1fr}.card{padding:19px}h2{font-size:22px}.hero{gap:5px}}@media print{body{background:#fff;color:#000}header,.wrap{display:none}#printarea{display:block}.printquestion h2{font-size:18px}.printquestion p{font-size:13px}.printquestion .diagram{max-width:650px}.printquestion svg{max-height:220px}.printanswer{display:none}body.printanswers .printanswer{display:block}a{color:#000;text-decoration:none}}
+</style></head><body><header><a href="../../" style="text-decoration:none"><strong>ENGR 202 / STUDY ROOM · 返回题集首页</strong></a><span class="edition">FALL 2026 · MIDTERM 01 · WEEK 0–4</span></header><div class="wrap"><section class="hero"><div><div class="eyebrow">FOLLOW THE GUIDE. SHOW YOUR WORK.</div><h1>Midterm 1 原题与变式练习</h1><p class="intro">沿着老师的复习清单，把每一步算清楚。先在纸上列式，再用选择题核对；每题都有来源、解题过程与易错提示。</p></div><div class="stat"><b id="total"></b><span>道练习<br>覆盖 11 个专题</span></div></section><div class="source-note"><b>题源说明：</b>已核对 Canvas HW1–4 与 HW3 官方解答。“原题拆分”保留已读到的原题数据，拆成可单独练习的小问；“同类改编”不冒充原题。HW1 P3、HW2 P4 采用对应题型变式。指南与 HW4 作业题号不一致，已同时覆盖平均功率与 RMS；HW4 官方解答在读取时仍被课程锁定。</div><div class="layout"><aside><div class="panel"><div class="filters"><div><label for="topic">考点筛选</label><select id="topic"></select></div><div><label for="kind">题源筛选</label><select id="kind"><option value="all">全部题目</option><option value="original">原题 / 指南拆分</option><option value="variant">同类改编 / 数据扩展</option></select></div></div><button class="toggle" id="wrong">只练错题</button><div class="progress"><div id="bar"></div></div><div id="score" class="small" aria-live="polite"></div><nav class="grid" id="nav" aria-label="题号导航"></nav><div class="legend">绿色：答对 · 橙色：答错 · 描边：当前题</div><div class="side-tools"><button class="plain" id="exam">切换自测模式</button><button class="plain" id="shuffle">打乱题目顺序</button><button class="plain" id="print">打印空白题集</button><button class="plain" id="printkey">打印题集与解析</button><button class="plain" id="reset">重置答题记录</button></div></div><details class="panel refpanel"><summary>考试要求与公式</summary><div class="formula"><p>默认相量使用<b>峰值 + 余弦</b>。RMS 必须标下标，不能混用。</p><p>ZL=jωL<br>ZC=1/(jωC)<br>f=ω/(2π)，T=1/f<br>P=½VmIm cos(θv−θi)<br>P=VrmsIrms cos(θv−θi)<br>Vrms=Vm/√2（零偏置正弦）<br>φ=−360°Δt/T（输出晚 Δt）</p><p>相量电路 → 标节点与电流 → 电流关系 → 未化简方程 → 按题目要求手算或列矩阵。</p><p>允许一张 8×11 英寸笔记纸；最终写小数与单位。以正式考试说明为准。</p></div></details></aside><main><div class="toolbar"><span class="crumb" id="crumb"></span><span class="mode" id="mode"></span></div><article class="card" id="card"></article><div class="bottom"><button class="plain" id="prev">← 上一题</button><button class="primary" id="finish" hidden>提交自测并看解析</button><button class="primary" id="next">下一题 →</button></div><details class="panel refpanel"><summary>Study guide 与本题集的对应关系</summary><table><thead><tr><th>指南指定</th><th>网页练习内容</th></tr></thead><tbody><tr><td>HW1 P3</td><td>正弦 / 余弦相量、加减与还原时域；补充 HW1 P1 原题</td></tr><tr><td>HW2 P4</td><td>串联分压变式；补充 HW2 P1 原题阻抗与电流</td></tr><tr><td>HW3 P1、P2</td><td>原题源相量、KCL、手算化简、2×2 网孔矩阵与支路电压；另补两节点消元变式</td></tr><tr><td>HW3 P4</td><td>原题三网孔列矩阵、用网孔变量表达 Vₒ 与 I_L</td></tr><tr><td>HW3 P5</td><td>原题 Zth、Vth 与接负载变式</td></tr><tr><td>HW4 P1 / P3</td><td>元件和电源平均功率、RMS；作业页将元件功率列为 P2</td></tr><tr><td>Week 4 Lab / LTspice</td><td>Vpp 转相量、延时转相位、超前滞后、节点电压相减</td></tr></tbody></table></details><p class="footer">学习用题集 · 答题记录与草稿保存在当前浏览器 · 自测只作练习，不是正式考试。<br>原题部分为中文转述及小问拆分；官方解答中的中间舍入数已独立复核。</p></main></div></div><section id="printarea"></section>
+<script>
+const questions=[
+  {
+    "id": 1,
+    "cat": "相量",
+    "title": "频率与周期",
+    "prompt": "HW1 P1：v(t)=40 cos(100πt+60°) V。求频率 f 与周期 T。",
+    "choices": [
+      "100 Hz；10 ms",
+      "50 Hz；20 ms",
+      "314.16 Hz；3.18 ms",
+      "50 Hz；2 ms"
+    ],
+    "answer": 1,
+    "steps": [
+      "ω=100π rad/s。",
+      "f=ω/(2π)=50 Hz；T=1/f=0.020 s=20 ms。"
+    ],
+    "ref": [
+      "HW1 · P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057991"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 2,
+    "cat": "相量",
+    "title": "第一次到达负峰值",
+    "prompt": "同一原题：v(t)=40 cos(100πt+60°) V。t>0 时，首次 v=−40 V 的时间？",
+    "choices": [
+      "3.33 ms",
+      "10 ms",
+      "6.67 ms",
+      "13.33 ms"
+    ],
+    "answer": 2,
+    "steps": [
+      "负峰对应角度 π：100πt+π/3=π。",
+      "t=1/150 s=6.67 ms。角度必须统一为弧度。"
+    ],
+    "ref": [
+      "HW1 · P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057991"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 3,
+    "cat": "相量",
+    "title": "向右平移",
+    "prompt": "同一原题：将 v(t)=40 cos(100πt+60°) V 向右平移 10/3 ms，新的表达式？",
+    "choices": [
+      "40 cos(100πt) V",
+      "40 cos(100πt+120°) V",
+      "40 cos(100πt−60°) V",
+      "40 sin(100πt) V"
+    ],
+    "answer": 0,
+    "steps": [
+      "右移 τ：v₁(t)=v(t−τ)。",
+      "100πτ=π/3=60°，新相位为 60°−60°=0°。"
+    ],
+    "ref": [
+      "HW1 · P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057991"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 4,
+    "cat": "相量",
+    "title": "正弦变成余弦相量",
+    "prompt": "v(t)=−20 sin(400t−30°) V。按本课峰值、余弦约定，相量为？",
+    "choices": [
+      "20∠−120° V",
+      "20∠60° V",
+      "14.14∠60° V",
+      "20∠−60° V"
+    ],
+    "answer": 1,
+    "steps": [
+      "−sin θ=cos(θ+90°)。",
+      "v(t)=20 cos(400t+60°) V，因此 V=20∠60° V。"
+    ],
+    "ref": [
+      "对应 HW1 P3 · 相量转换",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057991"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 5,
+    "cat": "相量",
+    "title": "相量加法回到时域",
+    "prompt": "v₁=10 cos(100t) V，v₂=10 sin(100t) V。求 v₁+v₂。",
+    "choices": [
+      "20 cos(100t−45°) V",
+      "14.14 cos(200t−45°) V",
+      "14.14 cos(100t+45°) V",
+      "14.14 cos(100t−45°) V"
+    ],
+    "answer": 3,
+    "steps": [
+      "V₁=10，V₂=−j10。",
+      "V=10−j10=14.14∠−45° V。频率保持不变。"
+    ],
+    "ref": [
+      "对应 HW1 P3 · 相量运算",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057991"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 6,
+    "cat": "单回路",
+    "title": "串联 RLC 阻抗",
+    "prompt": "HW2 P1：R=40 Ω，L=5 mH，C=1.25 μF，vₛ(t)=600 cos(8000t+20°) V。求总阻抗。",
+    "choices": [
+      "40+j60 Ω",
+      "40−j60 Ω",
+      "40−j100 Ω",
+      "40+j140 Ω"
+    ],
+    "answer": 1,
+    "steps": [
+      "ZL=jωL=j40 Ω。",
+      "ZC=1/(jωC)=−j100 Ω。",
+      "Z=R+ZL+ZC=40−j60 Ω。"
+    ],
+    "ref": [
+      "HW2 · P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057998"
+    ],
+    "kind": "原题拆分",
+    "diagram": "series",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 7,
+    "cat": "单回路",
+    "title": "原题电流相量",
+    "prompt": "沿用 HW2 P1 的串联电路，求电流峰值相量。",
+    "choices": [
+      "8.32∠−36.31° A",
+      "11.77∠76.31° A",
+      "8.32∠76.31° A",
+      "8.32∠−76.31° A"
+    ],
+    "answer": 2,
+    "steps": [
+      "Z=40−j60=72.11∠−56.31° Ω。",
+      "I=600∠20° / (72.11∠−56.31°)=8.32∠76.31° A。",
+      "i(t)=8.32 cos(8000t+76.31°) A。"
+    ],
+    "ref": [
+      "HW2 · P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057998"
+    ],
+    "kind": "原题拆分",
+    "diagram": "series",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 8,
+    "cat": "单回路",
+    "title": "分压计算",
+    "prompt": "改编自指南指定的 HW2 P4 分压题：Vₛ=100∠0° V，串联 R=30 Ω、ZC=−j40 Ω；Vₒ 是电容上端对下端的电压。Vₒ 为？",
+    "choices": [
+      "80∠−36.87° V",
+      "60∠53.13° V",
+      "80∠36.87° V",
+      "100∠−90° V"
+    ],
+    "answer": 0,
+    "steps": [
+      "I=100/(30−j40)=2∠53.13° A。",
+      "Vₒ=I(−j40)=80∠−36.87° V。",
+      "也可直接用 Vₒ=Vₛ ZC/(R+ZC)。"
+    ],
+    "ref": [
+      "对应 HW2 P4 · 分压",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27057998"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 9,
+    "cat": "节点分析",
+    "title": "两电源的相量",
+    "prompt": "HW3 P1：v_g1=25 sin(400t+143.13°) V，v_g2=18.03 cos(400t+33.69°) V。其直角坐标相量约为？",
+    "choices": [
+      "−15+j20；15+j10 V",
+      "15+j20；15+j10 V",
+      "15−j20；15−j10 V",
+      "20+j15；10+j15 V"
+    ],
+    "answer": 1,
+    "steps": [
+      "sin θ=cos(θ−90°)，故 Vg1=25∠53.13°≈15+j20 V。",
+      "Vg2=18.03∠33.69°≈15+j10 V。",
+      "按原题有效数字取近似直角坐标。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 10,
+    "cat": "节点分析",
+    "title": "写原始 KCL 方程",
+    "prompt": "HW3 P1：已知 Vg1≈15+j20 V、Vg2≈15+j10 V；左源经 −j50 Ω 到 Va，Va 经 150 Ω 接地，Va 经 j20 Ω 接右源。选出未化简的节点方程。",
+    "choices": [
+      "(Vg1−Va)/(−j50)=Va/150+(Va−Vg2)/(j20)",
+      "(Vg1−Va)/(j50)=Va/150+(Va−Vg2)/(j20)",
+      "(Vg1−Va)/(−j50)=Va/150+(Va+Vg2)/(j20)",
+      "(Vg1−Va)/(−j50)=150Va+j20(Va−Vg2)"
+    ],
+    "answer": 0,
+    "steps": [
+      "选左支路流入，电阻、右支路流出：i₁=i₂+i₃。",
+      "原始式应把源数值写进去：(15+j20−Va)/(−j50)=Va/150+(Va−15−j10)/(j20)。",
+      "先标 Va、电流箭头和阻抗，再写 KCL，不要跳步。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "node",
+    "work": "画相量电路 → 标 Va 与支路电流方向 → 写 i₁=i₂+i₃ → 写未化简节点方程。"
+  },
+  {
+    "id": 11,
+    "cat": "节点分析",
+    "title": "手算得到节点电压",
+    "prompt": "HW3 P1：已知 Vg1≈15+j20 V、Vg2≈15+j10 V；左源经 −j50 Ω 到 Va，Va 经 150 Ω 接地，Va 经 j20 Ω 接右源。利用上一题方程，求 Va。",
+    "choices": [
+      "15+j10 V",
+      "15−j20 V",
+      "15+j0 V",
+      "20+j15 V"
+    ],
+    "answer": 2,
+    "steps": [
+      "乘以 j10：(15+j20−Va)/(−5)=jVa/15+(Va−15−j10)/2。",
+      "再乘 30：−6(15+j20−Va)=2jVa+15(Va−15−j10)。",
+      "整理：(9+2j)Va=135+j30。",
+      "Va=(135+j30)/(9+2j)=15+j0 V；vₒ(t)=15 cos(400t) V。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "node",
+    "work": "只用计算器做实数四则运算；展开复数、移项、乘共轭，完整写出过程。"
+  },
+  {
+    "id": 12,
+    "cat": "节点分析",
+    "title": "两节点手算消元",
+    "prompt": "同类变式：节点方程为 (2−j)Va−Vb=2−5j，−Va+(2+j)Vb=−1+4j。求 Va、Vb。",
+    "choices": [
+      "Va=3−j，Vb=1+j V",
+      "Va=2−j，Vb=1+j V",
+      "Va=2+j，Vb=1−j V",
+      "Va=1+j，Vb=2−j V"
+    ],
+    "answer": 1,
+    "steps": [
+      "第一式给 Vb=(2−j)Va−2+5j。",
+      "代入第二式：[−1+(2+j)(2−j)]Va=(−1+4j)+(2+j)(2−5j)。",
+      "4Va=8−4j，Va=2−j V。",
+      "回代 Vb=1+j V。"
+    ],
+    "ref": [
+      "对应 HW3 P1 · 2×2 消元",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "用代入或消元手算，不能以矩阵求解器输出代替过程。"
+  },
+  {
+    "id": 13,
+    "cat": "网孔分析",
+    "title": "两个网孔的原始方程",
+    "prompt": "HW3 P2：峰值电源 6∠0° V；左网孔独占 2 kΩ，右网孔独占 (2+j4) kΩ，共享支路为 (4−j2) kΩ。两网孔电流均顺时针。左网孔 KVL 为？",
+    "choices": [
+      "−6+2I₁+(4−j2)(I₁−I₂)=0",
+      "−6+2I₁+(4−j2)(I₁+I₂)=0",
+      "6+2I₁+(4−j2)(I₁−I₂)=0",
+      "−6+(6−j2)I₂=0"
+    ],
+    "answer": 0,
+    "steps": [
+      "共享支路中两网孔电流方向相反，沿左网孔取 I₁−I₂。",
+      "单位取 kΩ 与 mA，则乘积为 V。",
+      "左式展开：(6−j2)I₁+(−4+j2)I₂=6。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "mesh",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 14,
+    "cat": "网孔分析",
+    "title": "2×2 矩阵列式",
+    "prompt": "HW3 P2：选择正确的矩阵系数。阻抗单位 kΩ、电流单位 mA，右侧为 [6, 0]ᵀ V。",
+    "choices": [
+      "[[6−j2, 4−j2], [4−j2, 6+j2]]",
+      "[[6−j2, −4+j2], [−4+j2, 6+j2]]",
+      "[[2, −4+j2], [−4+j2, 2+j4]]",
+      "[[6+j2, −4−j2], [−4−j2, 6−j2]]"
+    ],
+    "answer": 1,
+    "steps": [
+      "对角元：本网孔各阻抗相加。",
+      "非对角元：共享阻抗取负。",
+      "右网孔：(4−j2)(I₂−I₁)+(2+j4)I₂=0。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "mesh",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 15,
+    "cat": "网孔分析",
+    "title": "手算两网孔电流",
+    "prompt": "HW3 P2：方程 (6−j2)I₁+(−4+j2)I₂=6，(−4+j2)I₁+(6+j2)I₂=0；电流单位 mA。求 I₂。",
+    "choices": [
+      "0.6923−j0.4615 mA",
+      "0.4615+j0.6923 mA",
+      "0.4615−j0.6923 mA",
+      "1.1538−j0.2308 mA"
+    ],
+    "answer": 2,
+    "steps": [
+      "第二式得到 I₁=(6+j2)/(4−j2)·I₂=(1+j)I₂。",
+      "代入第一式：(4+j6)I₂=6。",
+      "I₂=6(4−j6)/(4²+6²)=0.461538−j0.692308 mA。",
+      "I₁=(1+j)I₂=1.153846−j0.230769 mA。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "按指南要求手动消元、回代并列出实部与虚部。"
+  },
+  {
+    "id": 16,
+    "cat": "网孔分析",
+    "title": "共享支路电容电压",
+    "prompt": "HW3 P2：I₁=1.153846−j0.230769 mA、I₂=0.461538−j0.692308 mA。共享支路的电容阻抗 −j2 kΩ，正向取 I₁−I₂。Vcap 为？",
+    "choices": [
+      "0.9231−j1.3846 V",
+      "−0.9231+j1.3846 V",
+      "1.3846+j0.9231 V",
+      "0.4615−j0.6923 V"
+    ],
+    "answer": 0,
+    "steps": [
+      "Icap=I₁−I₂=0.692308+j0.461539 mA。",
+      "Vcap=(−j2)Icap=0.923078−j1.384616 V。",
+      "约 1.6641∠−56.31° V。此处重新核算以减少官方解答中间舍入带来的差异。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "mesh",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 17,
+    "cat": "复杂矩阵",
+    "title": "三网孔：只列式",
+    "prompt": "HW3 P4：给定原始网孔方程 50j−10j(I₁−I₂)+10(I₁−I₃)=0； −10j(I₂−I₁)+10jI₂+10(I₂−I₃)=0； 10(I₃−I₁)+10(I₃−I₂)+25=0。第一行的矩阵系数与右端项为？",
+    "choices": [
+      "[10−j10, j10, −10]；−j50",
+      "[10+j10, −j10, −10]；j50",
+      "[10−j10, j10, −10]；j50",
+      "[10−j10, −j10, 10]；−j50"
+    ],
+    "answer": 0,
+    "steps": [
+      "展开第一式：50j−10jI₁+10jI₂+10I₁−10I₃=0。",
+      "所以 (10−j10)I₁+j10I₂−10I₃=−j50。",
+      "指南说此类复杂矩阵只需正确列式，不要求手算解矩阵。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "写出 AI=V 的完整 3×3 直角坐标矩阵，不必求解电流。"
+  },
+  {
+    "id": 18,
+    "cat": "复杂矩阵",
+    "title": "不求电流也能表达输出",
+    "prompt": "HW3 P4：10 Ω 电阻由网孔 1 与 3 共享，Vₒ 正方向与 I₁ 流过该支路的方向一致。Vₒ 为？",
+    "choices": [
+      "10(I₁+I₃)",
+      "10(I₃−I₁)",
+      "10(I₁−I₃)",
+      "10I₁"
+    ],
+    "answer": 2,
+    "steps": [
+      "共享支路沿指定正方向的电流为 I₁−I₃。",
+      "Vₒ=R(I₁−I₃)=10(I₁−I₃) V（电流以 A 计）。",
+      "不需要先求出 I₁ 和 I₃。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 19,
+    "cat": "复杂矩阵",
+    "title": "电感参考方向",
+    "prompt": "HW3 P4：官方图中电感参考电流 I_L 的箭头与右侧网孔电流 I₂ 在该支路的方向相反。I_L 的表达式？",
+    "choices": [
+      "I₂",
+      "−I₂",
+      "I₁−I₂",
+      "I₂−I₃"
+    ],
+    "answer": 1,
+    "steps": [
+      "支路只有 I₂ 通过，但给定参考箭头与它相反。",
+      "因此 I_L=−I₂。符号由箭头决定。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 20,
+    "cat": "戴维南",
+    "title": "独立源置零",
+    "prompt": "HW3 P5：求 Zth 时，理想独立电压源与理想独立电流源分别如何处理？",
+    "choices": [
+      "电压源开路；电流源短路",
+      "两者短路",
+      "电压源短路；电流源开路",
+      "两者开路"
+    ],
+    "answer": 2,
+    "steps": [
+      "独立电压源置零：两端电压为 0，等效短路。",
+      "独立电流源置零：支路电流为 0，等效开路。",
+      "若有受控源必须保留；本原题没有受控源。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 21,
+    "cat": "戴维南",
+    "title": "原题等效阻抗",
+    "prompt": "HW3 P5：独立源置零后，端口看到 36 Ω 与 (j60−j48) Ω 并联。求 Zth。",
+    "choices": [
+      "36+j12 Ω",
+      "3.6+j10.8 Ω",
+      "3.6−j10.8 Ω",
+      "10.8+j3.6 Ω"
+    ],
+    "answer": 1,
+    "steps": [
+      "j60−j48=j12 Ω。",
+      "Zth=36(j12)/(36+j12)。",
+      "乘共轭：(j432)(36−j12)/(36²+12²)=3.6+j10.8 Ω。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "thevenin",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 22,
+    "cat": "戴维南",
+    "title": "原题开路电压",
+    "prompt": "HW3 P5：Vₛ=240∠0° V，串联阻抗为 j60、−j48、36 Ω；输出端口跨在 36 Ω 两端。求 Vth。",
+    "choices": [
+      "240+j0 V",
+      "72−j216 V",
+      "216+j72 V",
+      "216−j72 V"
+    ],
+    "answer": 3,
+    "steps": [
+      "I=240/(36+j12)=6−j2 A。",
+      "开路端口跨在 36 Ω 上：Vth=36I=216−j72 V。",
+      "注意开路仅表示外接负载断开，原电路 36 Ω 仍存在。"
+    ],
+    "ref": [
+      "HW3 · 官方解答",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "原题拆分",
+    "diagram": "thevenin",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 23,
+    "cat": "戴维南",
+    "title": "接负载后的端口",
+    "prompt": "把上一原题的戴维南等效接上 ZL=32.4−j10.8 Ω。已知 Vth=216−j72 V，Zth=3.6+j10.8 Ω。求负载电流。",
+    "choices": [
+      "6−j2 A",
+      "6+j2 A",
+      "3−j1 A",
+      "8−j2 A"
+    ],
+    "answer": 0,
+    "steps": [
+      "Zth+ZL=36+j0 Ω。",
+      "IL=Vth/(Zth+ZL)=(216−j72)/36=6−j2 A。"
+    ],
+    "ref": [
+      "HW3 P5 · 接负载变式",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27075408"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 24,
+    "cat": "平均功率",
+    "title": "串联电路：各元件功率",
+    "prompt": "沿用 HW2 P1 的原电路数据作功率扩展：R=40 Ω、ZL=j40 Ω、ZC=−j100 Ω，电流峰值 8.3205 A。各元件平均吸收功率为？",
+    "choices": [
+      "R：2769.23 W；L、C：0 W",
+      "R：1384.62 W；L、C：0 W",
+      "R、L、C 都为 1384.62 W",
+      "R：1384.62 W；C：−1384.62 W"
+    ],
+    "answer": 1,
+    "steps": [
+      "峰值表示时 PR=½Im²R=½×8.3205²×40=1384.62 W。",
+      "理想电感、电容在周期稳态下平均功率都为 0。",
+      "它们仍有能量往返交换和非零瞬时功率。"
+    ],
+    "ref": [
+      "对应 HW4 功率 · 沿用 HW2 P1",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27058017"
+    ],
+    "kind": "原题数据扩展",
+    "diagram": "series",
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 25,
+    "cat": "平均功率",
+    "title": "电源吸收与提供",
+    "prompt": "上一题电路只有 R 消耗平均功率 1384.62 W。以被动符号约定计算电源的平均吸收功率，它应为？",
+    "choices": [
+      "+1384.62 W",
+      "0 W",
+      "−1384.62 W",
+      "−2769.23 W"
+    ],
+    "answer": 2,
+    "steps": [
+      "周期稳态下，各元件平均吸收功率之和为 0。",
+      "Psource,abs=−1384.62 W。",
+      "因此电源平均提供功率为 +1384.62 W。不要混淆“提供”与“吸收”的符号。"
+    ],
+    "ref": [
+      "对应 HW4 · 电源功率",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27058017"
+    ],
+    "kind": "原题数据扩展",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 26,
+    "cat": "平均功率",
+    "title": "瞬时功率与平均值",
+    "prompt": "v(t)=160 cos(50t) V，i(t)=−33 sin(50t−30°) A。按被动符号约定，p(t)、P 为？",
+    "choices": [
+      "1320+2640 cos(100t+60°) W；1320 W",
+      "2640+2640 cos(100t+60°) W；2640 W",
+      "1320+2640 cos(50t+60°) W；1320 W",
+      "−1320+2640 cos(100t−60°) W；−1320 W"
+    ],
+    "answer": 0,
+    "steps": [
+      "i(t)=33 cos(50t+60°) A。",
+      "p=160×33 cos(50t)cos(50t+60°)。",
+      "用积化和差：p=2640[cos60°+cos(100t+60°)]。",
+      "P=1320 W，余弦项的周期平均为 0。"
+    ],
+    "ref": [
+      "你提供的教材截图 · 11.1",
+      null
+    ],
+    "kind": "已提供原题",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 27,
+    "cat": "RMS",
+    "title": "正弦峰峰值转 RMS",
+    "prompt": "对应 HW4 P3：零偏置正弦源为 20 Vpp，其有效值是多少？",
+    "choices": [
+      "20 V RMS",
+      "14.14 V RMS",
+      "10 V RMS",
+      "7.071 V RMS"
+    ],
+    "answer": 3,
+    "steps": [
+      "峰值 Vm=Vpp/2=10 V。",
+      "Vrms=Vm/√2=7.071 V。",
+      "这个换算只适用于这里指定的零偏置正弦波。"
+    ],
+    "ref": [
+      "对应 HW4 P3",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27058017"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 28,
+    "cat": "RMS",
+    "title": "RMS 电流与功率",
+    "prompt": "正弦源 Vrms=120 V，串联 Z=30+j40 Ω。求 Irms 的大小与电阻平均功率。",
+    "choices": [
+      "2.4 A RMS；86.4 W",
+      "2.4 A RMS；172.8 W",
+      "4 A RMS；480 W",
+      "1.697 A RMS；86.4 W"
+    ],
+    "answer": 1,
+    "steps": [
+      "|Z|=50 Ω，Irms=120/50=2.4 A RMS。",
+      "P=Irms²R=2.4²×30=172.8 W。",
+      "使用 RMS 电流时不再乘 ½。"
+    ],
+    "ref": [
+      "对应 HW4 P3",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27058017"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 29,
+    "cat": "RMS",
+    "title": "带直流偏置的正弦",
+    "prompt": "v(t)=3+4 cos(ωt) V，其 Vrms 为？",
+    "choices": [
+      "5 V RMS",
+      "3.536 V RMS",
+      "4.123 V RMS",
+      "7 V RMS"
+    ],
+    "answer": 2,
+    "steps": [
+      "Vrms²=平均[9+24cos(ωt)+16cos²(ωt)]。",
+      "余弦平均 0，余弦平方平均 ½。",
+      "Vrms=√(9+8)=√17≈4.123 V RMS。"
+    ],
+    "ref": [
+      "对应 HW4 P1 · RMS",
+      "https://canvas.oregonstate.edu/courses/2061800/modules/items/27058017"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 30,
+    "cat": "Scopy 实验",
+    "title": "时间差转换相位",
+    "prompt": "f=1 kHz；以 CH1 为零相位参考，CH2 同一周期内的峰值比 CH1 晚 125 μs。CH2 的相位为？",
+    "choices": [
+      "+45°",
+      "−45°",
+      "−125°",
+      "+90°"
+    ],
+    "answer": 1,
+    "steps": [
+      "T=1/f=1 ms。",
+      "CH2 晚出现，表示滞后。φ=−360°Δt/T=−45°。"
+    ],
+    "ref": [
+      "指南 · Week 4 Lab",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 31,
+    "cat": "Scopy 实验",
+    "title": "从读数写峰值相量",
+    "prompt": "同一测量：CH2 是零偏置正弦，Vpp=2 V，相对 CH1 滞后 45°。按本课默认峰值相量约定，CH2 为？",
+    "choices": [
+      "2∠−45° V",
+      "0.7071∠−45° V",
+      "1∠−45° V",
+      "1∠45° V"
+    ],
+    "answer": 2,
+    "steps": [
+      "Vm=Vpp/2=1 V。",
+      "本课默认峰值相量，因此 V₂=1∠−45° V。",
+      "若题目明确要求 RMS，才写 V₂,rms=0.7071∠−45° V。"
+    ],
+    "ref": [
+      "指南 · Scopy → phasor",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 32,
+    "cat": "Scopy 实验",
+    "title": "电容与电感的超前滞后",
+    "prompt": "按被动符号约定，理想电容和电感的端电压相对各自电流如何？",
+    "choices": [
+      "电容超前90°；电感滞后90°",
+      "两者均同相",
+      "电容滞后90°；电感超前90°",
+      "电容滞后45°；电感超前45°"
+    ],
+    "answer": 2,
+    "steps": [
+      "电容：V=IZC=I/(jωC)，电压比电流少 90°。",
+      "电感：V=IZL=IjωL，电压比电流多 90°。",
+      "电阻电压与它自身电流同相。"
+    ],
+    "ref": [
+      "指南 · leading / lagging",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 33,
+    "cat": "LTspice",
+    "title": "节点电压变元件电压",
+    "prompt": "LTspice 显示 Va=3+j4 V、Vb=1−j2 V。元件正端在 a、负端在 b，求 Vab。",
+    "choices": [
+      "4+j2 V",
+      "2−j6 V",
+      "−2−j6 V",
+      "2+j6 V"
+    ],
+    "answer": 3,
+    "steps": [
+      "Vab=Va−Vb。",
+      "(3+j4)−(1−j2)=2+j6 V。",
+      "LTspice 的节点电压以地为参考；跨元件电压需按极性做差。"
+    ],
+    "ref": [
+      "指南 · LTspice 输出读数",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 34,
+    "cat": "LTspice",
+    "title": "用两条波形读跨元件电压",
+    "prompt": "某一时刻 LTspice 显示 V(a)=1.2 V，V(b)=−0.8 V。电容正端在 a、负端在 b，此刻电容电压为？",
+    "choices": [
+      "0.4 V",
+      "2.0 V",
+      "−2.0 V",
+      "−0.4 V"
+    ],
+    "answer": 1,
+    "steps": [
+      "vab(t)=va(t)−vb(t)。",
+      "1.2−(−0.8)=2.0 V。",
+      "要在相同时间读两条曲线，不能直接相减峰值大小。"
+    ],
+    "ref": [
+      "指南 · LTspice 输出读数",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "同类改编",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  },
+  {
+    "id": 35,
+    "cat": "考试要求",
+    "title": "节点题必须展示什么",
+    "prompt": "按 study guide，节点电压题的完整起步步骤是哪一项？",
+    "choices": [
+      "只报最终数值",
+      "直接给计算器求解结果",
+      "画阻抗与源相量、标节点和电流箭头；写电流关系；写未化简节点方程",
+      "只画相量向量的箭头图"
+    ],
+    "answer": 2,
+    "steps": [
+      "这里老师说的 phasor diagram 指将电路元件替换为阻抗、源替换为相量后的电路图。",
+      "节点题需要节点标记、支路电流箭头、KCL 电流关系和原始节点方程。",
+      "指南要求最终数值化为小数、带单位，并清楚展示步骤。"
+    ],
+    "ref": [
+      "Midterm 1 Study Guide",
+      "https://canvas.oregonstate.edu/courses/2061800/files/121020457?wrap=1"
+    ],
+    "kind": "指南原文要求",
+    "diagram": null,
+    "work": "先在纸上写出公式、代入过程和单位，再选答案。"
+  }
+];
+const KEY='engr202-midterm1-v1';let saved;try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{saved={}}let answers=saved.answers||{},notes=saved.notes||{},idx=0,exam=false,submitted=false,wrongOnly=false,order=questions.map(q=>q.id);const $=s=>document.querySelector(s);const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function persist(){try{localStorage.setItem(KEY,JSON.stringify({answers,notes}))}catch{}}
+function svgBase(content){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 255" role="img" aria-label="相量电路拓扑图"><g fill="none" stroke="#2d6a5c" stroke-width="2">${content}</g></svg>`}
+const line=(x,y,a,b)=>`<path d="M${x} ${y}L${a} ${b}"/>`;const text=(x,y,t)=>`<text x="${x}" y="${y}" fill="#173c3c" stroke="none" font-size="14" text-anchor="middle" font-family="system-ui,sans-serif">${t}</text>`;const box=(x,y,w,h,t)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="#fff"/>${text(x+w/2,y+h/2+5,t)}`;const source=(x,y,t)=>`<circle cx="${x}" cy="${y}" r="24" fill="#fff"/>${text(x,y-4,'+')}${text(x,y+15,'−')}${text(x,y+48,t)}`;
+function diagram(q){let s='';if(q.diagram==='series'){s=line(70,60,550,60)+line(550,60,550,210)+line(550,210,70,210)+line(70,210,70,149)+line(70,101,70,60)+source(70,125,'600∠20° V')+box(170,41,90,38,'40 Ω')+box(310,41,90,38,'j40 Ω')+box(450,41,90,38,'−j100 Ω')+text(300,245,'ω = 8000 rad/s · 峰值相量 · 电流沿上边从左到右');}
+if(q.diagram==='node'){s=line(70,60,570,60)+line(70,60,70,101)+source(70,125,'Vg1')+line(70,149,70,210)+line(70,210,570,210)+line(570,210,570,149)+source(570,125,'Vg2')+line(570,101,570,60)+box(160,41,100,38,'−j50 Ω')+box(390,41,100,38,'j20 Ω')+line(325,60,325,210)+box(284,113,82,38,'150 Ω')+text(325,38,'Va')+text(325,244,'底部共地；两电源正端在上方');}
+if(q.diagram==='mesh'){s=line(70,60,570,60)+line(70,60,70,101)+source(70,125,'6∠0° V')+line(70,149,70,210)+line(70,210,570,210)+line(570,210,570,60)+box(165,41,95,38,'2 kΩ')+line(350,60,350,210)+box(297,93,106,34,'4 kΩ')+box(297,149,106,34,'−j2 kΩ')+box(520,92,100,35,'2 kΩ')+box(520,150,100,35,'j4 kΩ')+text(210,147,'I₁ ↻')+text(450,147,'I₂ ↻')+text(325,244,'Vcap：沿共享支路向下取正向压降');}
+if(q.diagram==='thevenin'){s=line(70,60,550,60)+line(70,60,70,101)+source(70,125,'240∠0° V')+line(70,149,70,210)+line(70,210,550,210)+box(180,41,90,38,'j60 Ω')+box(320,41,100,38,'−j48 Ω')+line(480,60,480,210)+box(437,113,86,38,'36 Ω')+text(555,55,'a (+)')+text(555,232,'b (−)')+text(300,244,'端口 a–b 开路；36 Ω 为原网络的一部分');}return s?`<div class="diagram">${svgBase(s)}</div>`:'';}
+function filtered(){return order.map(id=>questions.find(q=>q.id===id)).filter(q=>($('#topic').value==='all'||q.cat===$('#topic').value)&&($('#kind').value==='all'||($('#kind').value==='original'?!['同类改编','原题数据扩展'].includes(q.kind):['同类改编','原题数据扩展'].includes(q.kind)))&&(!wrongOnly||(answers[q.id]!==undefined&&answers[q.id]!==q.answer)));}
+function render(){let qs=filtered();idx=Math.max(0,Math.min(idx,qs.length-1));let q=qs[idx],done=questions.filter(q=>answers[q.id]!==undefined).length,good=questions.filter(q=>answers[q.id]===q.answer).length;$('#bar').style.width=done/questions.length*100+'%';$('#score').textContent=`已答 ${done}/${questions.length}`+(!exam||submitted?` · 答对 ${good} 题`:' · 提交后显示结果');$('#mode').textContent=exam?(submitted?'自测已提交':'自测模式 · 暂不显示答案'):'练习模式 · 即时解析';$('#exam').textContent=exam?'返回练习模式':'切换自测模式';$('#finish').hidden=!exam||submitted;$('#wrong').textContent=wrongOnly?'显示全部题目':'只练错题';$('#prev').disabled=!qs.length||idx===0;$('#next').disabled=!qs.length||idx===qs.length-1;$('#nav').innerHTML=qs.map((x,n)=>{let a=answers[x.id],state=a===undefined?'':exam&&!submitted?'answered':a===x.answer?'correct':'wrong';return `<button class="qnum ${n===idx?'active':''} ${state}" data-n="${n}" aria-label="第 ${x.id} 题">${String(x.id).padStart(2,'0')}</button>`}).join('');$('#nav').querySelectorAll('button').forEach(b=>b.onclick=()=>{idx=+b.dataset.n;render()});if(!q){$('#card').innerHTML='<div class="empty"><h2>当前筛选下没有题目</h2><p>可调整筛选；答对的错题会移出错题列表。</p></div>';$('#crumb').textContent='无匹配题目';return;}$('#crumb').textContent=`${q.cat} / 第 ${idx+1} 道，共 ${qs.length} 道`;let a=answers[q.id],show=(!exam||submitted)&&a!==undefined;$('#card').innerHTML=`<div class="tags"><span class="tag">${String(q.id).padStart(2,'0')} / ${questions.length}</span><span class="tag">${escapeHtml(q.cat)}</span><span class="tag ${['同类改编','原题数据扩展'].includes(q.kind)?'variant':''}">${escapeHtml(q.kind)}</span></div><h2>${escapeHtml(q.title)}</h2><p class="prompt">${escapeHtml(q.prompt)}</p>${diagram(q)}<p class="work">手写练习：${escapeHtml(q.work)}</p><div class="choices">${q.choices.map((c,n)=>`<button class="choice ${a===n?'selected':''} ${show&&n===q.answer?'good':''} ${show&&a===n&&a!==q.answer?'bad':''}" data-answer="${n}" aria-pressed="${a===n}"><b>${'ABCD'[n]}.</b><span>${escapeHtml(c)}</span></button>`).join('')}</div>${show?`<section class="answer ${a===q.answer?'':'bad'}" aria-live="polite"><b>${a===q.answer?'✓ 回答正确':'再检查一下'} · 正确答案 ${'ABCD'[q.answer]}</b><ol>${q.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ol></section>`:''}<details class="notes"><summary>我的草稿 / 易错记录</summary><textarea aria-label="本题草稿" placeholder="记录列式、复数展开与容易出错的符号……">${escapeHtml(notes[q.id]||'')}</textarea><span class="small">自动保存在本浏览器。</span></details><div class="source">来源：${q.ref[1]?`<a href="${escapeHtml(q.ref[1])}" target="_blank" rel="noopener">${escapeHtml(q.ref[0])} ↗</a>`:escapeHtml(q.ref[0])} · 原题以 Canvas 页面为准</div>`;$('#card').querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{answers[q.id]=+b.dataset.answer;persist();render()});$('#card textarea').oninput=e=>{notes[q.id]=e.target.value;persist()};}
+$('#total').textContent=questions.length;$('#topic').innerHTML='<option value="all">全部考点</option>'+[...new Set(questions.map(q=>q.cat))].map(c=>`<option>${c}</option>`).join('');$('#topic').onchange=$('#kind').onchange=()=>{idx=0;render()};$('#wrong').onclick=()=>{if(exam&&!submitted){alert('请先提交自测，或返回练习模式，再查看错题。');return}wrongOnly=!wrongOnly;idx=0;render()};$('#prev').onclick=()=>{idx--;render()};$('#next').onclick=()=>{idx++;render()};$('#exam').onclick=()=>{exam=!exam;submitted=false;wrongOnly=false;render()};$('#finish').onclick=()=>{submitted=true;render()};$('#shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}idx=0;render()};$('#reset').onclick=()=>{if(confirm('清除所有答题记录？你的文字草稿会保留。')){answers={};submitted=false;wrongOnly=false;persist();render()}};
+function printSet(withAnswers){document.body.classList.toggle('printanswers',withAnswers);$('#printarea').innerHTML='<h1>ENGR 202 · Midterm 1 原题与变式练习</h1><p>默认峰值相量。先画电路、标参考方向，再完整列式。考试范围 Week 0–4。</p>'+filtered().map(q=>`<section class="printquestion"><h2>${q.id}. ${escapeHtml(q.title)} · ${escapeHtml(q.kind)}</h2><p>${escapeHtml(q.prompt)}</p>${diagram(q)}${q.choices.map((s,n)=>`<p>${'ABCD'[n]}. ${escapeHtml(s)}</p>`).join('')}<p>手写区：________________________________________________________</p><div class="printanswer"><p><b>答案：${'ABCD'[q.answer]}</b></p><ol>${q.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ol></div></section>`).join('');window.print();}$('#print').onclick=()=>printSet(false);$('#printkey').onclick=()=>printSet(true);render();
+</script></body></html>
