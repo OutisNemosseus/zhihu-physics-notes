@@ -1,0 +1,539 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ENGR 202 · Lab 实际截图 20 题</title><style>
+:root{--ink:#173c3c;--muted:#657b79;--green:#0c6b59;--pale:#eaf3ee;--line:#d9e3dd;--orange:#b65a2c}*{box-sizing:border-box}body{margin:0;background:#f6f7f2;color:var(--ink);font:16px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}button,select,textarea{font:inherit}button,select{cursor:pointer}button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #d89830;outline-offset:3px}a{color:var(--green)}header{border-bottom:1px solid var(--line);padding:16px 4vw;display:flex;justify-content:space-between;align-items:center;background:#fff}header strong{letter-spacing:.12em;font-size:14px}.edition{font-size:12px;color:var(--muted)}.wrap{max-width:1360px;margin:auto;padding:40px 4vw}.hero{display:grid;grid-template-columns:1fr auto;gap:25px;margin-bottom:26px}.eyebrow{font-size:12px;letter-spacing:.18em;color:var(--green);font-weight:750}h1{font-size:clamp(26px,3.5vw,42px);line-height:1.2;margin:10px 0 14px;letter-spacing:-.04em}p{margin:8px 0}.intro{max-width:760px;color:var(--muted);font-size:14px}.stat{display:flex;align-items:center;gap:16px}.stat b{font-size:44px;line-height:1}.stat span{font-size:13px;color:var(--muted)}.source-note{background:#eef2e7;border:1px solid #dce3d0;border-radius:12px;padding:14px 18px;font-size:13px;margin-bottom:26px}.layout{display:grid;grid-template-columns:255px minmax(0,1fr);gap:28px}aside{align-self:start;position:sticky;top:15px}.panel{border:1px solid var(--line);border-radius:15px;background:white;padding:18px}.small{font-size:12px;color:var(--muted)}label{display:block;font-size:13px;font-weight:650;margin-bottom:7px}select{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:9px;margin-bottom:12px}.toggle{width:100%;background:var(--pale);color:var(--green);border:0;border-radius:8px;padding:9px;margin:5px 0}.progress{height:5px;background:var(--pale);border-radius:4px;margin:14px 0}.progress div{height:100%;background:var(--green);border-radius:4px;transition:width .2s}.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-top:12px}.qnum{border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--ink);font-size:12px;padding:7px 0}.qnum.active{outline:2px solid var(--green);outline-offset:1px}.qnum.correct{background:#d9eddf;color:#165839}.qnum.wrong{background:#fde7df;color:#94391e}.qnum.answered{background:#e4eaf6}.legend{margin:12px 0;font-size:11px;color:var(--muted)}.side-tools{margin-top:14px;display:grid;gap:7px}.plain{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:8px;font-size:13px}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:10px}.crumb{color:var(--muted);font-size:13px}.mode{font-size:12px;padding:4px 10px;border:1px solid #d3ded7;border-radius:20px}.card{border:1px solid var(--line);background:#fff;border-radius:16px;padding:30px;min-height:560px}.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}.tag{font-size:11px;letter-spacing:.02em;background:var(--pale);color:var(--green);padding:3px 9px;border-radius:4px}.tag.variant{background:#faf0e7;color:#9a542a}h2{margin:0 0 14px;font-size:25px;line-height:1.4}.prompt{font-size:16px;line-height:1.9;white-space:pre-line}.diagram{margin:18px 0;background:#f8faf7;border:1px solid #e7ede7;border-radius:10px;overflow:auto}.diagram svg{width:100%;min-width:460px;display:block;max-height:290px}.work{font-size:12px;color:var(--muted);border-left:3px solid #bfcebd;margin:17px 0;padding-left:12px}.choices{display:grid;gap:10px;margin-top:20px}.choice{text-align:left;display:flex;gap:14px;align-items:baseline;background:#fff;border:1px solid var(--line);border-radius:9px;padding:13px 16px;color:var(--ink);font-size:14px;line-height:1.6}.choice:hover{background:#f3f7f2}.choice b{font-size:12px;color:var(--muted)}.choice.selected{border-color:var(--green);background:#eef7f1}.choice.good{border-color:#2e8c59;background:#eaf6ec}.choice.bad{border-color:#cc6e52;background:#fff0e9}.answer{margin-top:20px;border-radius:10px;padding:18px;background:#edf5ef}.answer.bad{background:#fff1e9}.answer ol{padding-left:22px;margin-bottom:0;font-size:14px}.bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:20px}.primary{background:var(--green);color:white;border:0;padding:10px 20px;border-radius:8px}.primary:disabled,.plain:disabled{opacity:.4;cursor:default}.source{font-size:12px;color:var(--muted);margin-top:18px}.notes{margin-top:18px}.notes summary{cursor:pointer;font-size:13px}.notes textarea{width:100%;min-height:110px;border:1px solid var(--line);border-radius:8px;padding:10px;margin-top:8px}.refpanel{margin-top:22px}.refpanel summary{cursor:pointer;font-size:14px;font-weight:650}.refpanel table{border-collapse:collapse;width:100%;font-size:12px;margin-top:14px}.refpanel td,.refpanel th{border-bottom:1px solid var(--line);padding:8px;text-align:left}.formula{font-size:13px;line-height:2}.footer{color:var(--muted);font-size:12px;margin-top:30px}.empty{padding:30px;text-align:center}.printquestion{break-inside:avoid;margin:25px 0;padding:18px;border:1px solid #ddd}#printarea{display:none}@media(max-width:850px){.wrap{padding:25px 18px}.layout{grid-template-columns:1fr}.hero{grid-template-columns:1fr}.stat{display:none}aside{position:static}.grid{grid-template-columns:repeat(12,1fr)}.panel{padding:14px}.filters{display:grid;grid-template-columns:1fr 1fr;gap:12px}.side-tools{grid-template-columns:1fr 1fr 1fr}.card{padding:22px}.edition{display:none}}@media(max-width:520px){.grid{grid-template-columns:repeat(9,1fr)}.side-tools{grid-template-columns:1fr 1fr}.card{padding:19px}h2{font-size:22px}.hero{gap:5px}}@media print{body{background:#fff;color:#000}header,.wrap{display:none}#printarea{display:block}.printquestion h2{font-size:18px}.printquestion p{font-size:13px}.printquestion .diagram{max-width:650px}.printquestion svg{max-height:220px}.printanswer{display:none}body.printanswers .printanswer{display:block}a{color:#000;text-decoration:none}}
+.shot{margin:20px 0}.shot img{width:100%;display:block;border-radius:9px;border:1px solid var(--line);cursor:zoom-in}.shot figcaption{font-size:12px;color:var(--muted);margin-top:8px}.printquestion .shot{max-width:680px}@media print{.shot{break-inside:avoid}.shot img{max-height:330px;object-fit:contain}}
+</style></head><body><header><a href="../../" style="text-decoration:none"><strong>ENGR 202 / 返回练习首页</strong></a><span class="edition">FALL 2026 · MIDTERM 01 · WEEK 0–4</span></header><div class="wrap"><section class="hero"><div><div class="eyebrow">FOLLOW THE GUIDE. SHOW YOUR WORK.</div><h1>Midterm 1 · 实验截图专项</h1><p class="intro">用你做过的 Lab 2、Lab 3 真实截图练读数。先辨认波形，再把时间差、幅值与参考方向转成相量。20 道题都有答案和逐步解析。</p></div><div class="stat"><b id="total"></b><span>道练习<br>来自 2 次实验</span></div></section><div class="source-note"><b>真实截图，保留测量误差：</b>Lab 2 截图来自已完成报告的 Scopy 画面；Lab 3 来自报告附录的波形导出。Lab 3 导出不含游标／测量面板，涉及精确数值的题目会明确引用正文记录。图片只截取原始实验画面，没有重画波形或补造面板。<br><b>复习重点：</b>Vpp → 峰值相量、延时 → 相位、超前／滞后、感测电阻确定电流相位，以及正端减负端的差分电压。<a href="../midterm1-study-guide-35/">返回 35 题综合复习 →</a></div><div class="layout"><aside><div class="panel"><div class="filters"><div><label for="topic">考点筛选</label><select id="topic"></select></div><div><label for="kind">题源筛选</label><select id="kind"><option value="all">全部题目</option><option value="original">实际截图 · 原测量数据</option></select></div></div><button class="toggle" id="wrong">只练错题</button><div class="progress"><div id="bar"></div></div><div id="score" class="small" aria-live="polite"></div><nav class="grid" id="nav" aria-label="题号导航"></nav><div class="legend">绿色：答对 · 橙色：答错 · 描边：当前题</div><div class="side-tools"><button class="plain" id="exam">切换自测模式</button><button class="plain" id="shuffle">打乱题目顺序</button><button class="plain" id="print">打印空白题集</button><button class="plain" id="printkey">打印题集与解析</button><button class="plain" id="reset">重置答题记录</button></div></div><details class="panel refpanel"><summary>考试要求与公式</summary><div class="formula"><p>默认相量使用<b>峰值 + 余弦</b>。RMS 必须标下标，不能混用。</p><p>ZL=jωL<br>ZC=1/(jωC)<br>f=ω/(2π)，T=1/f<br>P=½VmIm cos(θv−θi)<br>P=VrmsIrms cos(θv−θi)<br>Vrms=Vm/√2（零偏置正弦）<br>φ=−360°Δt/T（输出晚 Δt）</p><p>相量电路 → 标节点与电流 → 电流关系 → 未化简方程 → 按题目要求手算或列矩阵。</p><p>允许一张 8×11 英寸笔记纸；最终写小数与单位。以正式考试说明为准。</p></div></details></aside><main><div class="toolbar"><span class="crumb" id="crumb"></span><span class="mode" id="mode"></span></div><article class="card" id="card"></article><div class="bottom"><button class="plain" id="prev">← 上一题</button><button class="primary" id="finish" hidden>提交自测并看解析</button><button class="primary" id="next">下一题 →</button></div><details class="panel refpanel"><summary>Study guide 对应与题源</summary><table><tr><th>考点</th><th>本套内容</th></tr><tr><td>Scopy measurement → phasor</td><td>第 1–4、7–8、10–11、17–18 题：周期、峰峰值、极坐标／直角坐标、时域表达。</td></tr><tr><td>Time delay → phase</td><td>第 5–6、9、12–15 题：同向过零点、游标顺序、窗口范围与相位正负。</td></tr><tr><td>R、L、C 的 leading / lagging</td><td>第 16–19 题：以输入为参考；区分元件电压相对输入与相对电流。</td></tr><tr><td>LTspice 节点 → 跨元件电压</td><td>第 20 题：用实际 Scopy 数学通道练同一个正端减负端规则；没有冒充 LTspice 实测截图。</td></tr></table><p class="small">题源：ENGR202_Lab2_Tong_Su.pdf（2026-10-17 实验）；ENGR202_Lab3_Report(2).pdf（2026-10-24 实验）。完整报告未公开上传，仅发布必要的仪器画面截取。</p></details><p class="footer">学习用题集 · 答题记录与草稿保存在当前浏览器 · 自测只作练习，不是正式考试。<br>截图保留原始仪器数据。理论值、实测值与报告中的转录读数在题干和解析中明确区分。</p></main></div></div><section id="printarea"></section>
+<script>
+const questions=[
+  {
+    "id": 1,
+    "cat": "Lab 2 · 游标与幅度",
+    "title": "周期游标 → 频率",
+    "prompt": "截图中，两个时间游标放在相邻正峰，周期读数约为 1.009 ms。由这个四舍五入后的周期计算，频率约为多少？",
+    "choices": [
+      "991 Hz",
+      "1.009 Hz",
+      "9.91 kHz",
+      "990.8 kHz"
+    ],
+    "answer": 0,
+    "steps": [
+      "T=1.009×10⁻³ s。",
+      "f=1/T≈991.08 Hz，约 991 Hz。",
+      "截图的 1/Δt 约 990.809 Hz 使用未舍入游标值；与 1.009 ms 的倒数有小差别。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 3 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p03.webp",
+    "caption": "原始测量截图：Lab 2 报告第 3 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 2,
+    "cat": "Lab 2 · 游标与幅度",
+    "title": "峰峰值与峰值不要混淆",
+    "prompt": "截图中，CH1 的两个水平游标跨在波形最高点与最低点，|ΔV|≈1.225 V。CH1 的交流正弦峰值幅度约为多少？",
+    "choices": [
+      "1.225 V",
+      "2.450 V",
+      "0.6125 V",
+      "0.8662 V"
+    ],
+    "answer": 2,
+    "steps": [
+      "游标跨最高到最低，对应 Vpp。",
+      "Vm=Vpp/2=1.225/2=0.6125 V。",
+      "Vm 不是 RMS；零偏置正弦 Vrms=Vm/√2。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 9 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p09.webp",
+    "caption": "原始测量截图：Lab 2 报告第 9 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 3,
+    "cat": "Lab 2 · 游标与幅度",
+    "title": "第二通道的峰值相量大小",
+    "prompt": "截图中 CH2 的 Vpp≈1.379 V。按本课默认峰值约定，CH2 相量的大小应取多少？",
+    "choices": [
+      "0.6895 V",
+      "1.379 V",
+      "0.9751 V",
+      "2.758 V"
+    ],
+    "answer": 0,
+    "steps": [
+      "|V₂|=1.379/2=0.6895 V。",
+      "相量还需要一个相对参考信号的相位；这张幅度截图本身不能单独决定该相位。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 10 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p10.webp",
+    "caption": "原始测量截图：Lab 2 报告第 10 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 4,
+    "cat": "Lab 2 · 游标与幅度",
+    "title": "从周期到角频率",
+    "prompt": "这张截图的时间游标跨 CH1 连续的同向过零点，T≈1.998 ms。角频率 ω 约为多少？",
+    "choices": [
+      "500.50 rad/s",
+      "3144.74 rad/s",
+      "1998 rad/s",
+      "6289.47 rad/s"
+    ],
+    "answer": 1,
+    "steps": [
+      "f=1/(1.998×10⁻³)=500.5005 Hz。",
+      "ω=2πf≈3144.74 rad/s。",
+      "相邻同向过零点隔一个周期；相邻异向过零点通常隔半周期。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 11 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p11.webp",
+    "caption": "原始测量截图：Lab 2 报告第 11 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 5,
+    "cat": "Lab 2 · 超前与滞后",
+    "title": "负的 Δt 代表谁先到？",
+    "prompt": "截图标明 CurT1 在紫色 CH2 的向上过零点，CurT2 在橙色 CH1 的向上过零点。CurT1=−273.098 μs，CurT2=−2.968 μs。以 CH1 为参考，哪项正确？",
+    "choices": [
+      "CH2 滞后 CH1，因为 Δt 为负",
+      "CH2 超前 CH1，因为它的同向过零点更早",
+      "CH2 与 CH1 反相",
+      "只要游标为负，就不能判断先后"
+    ],
+    "answer": 1,
+    "steps": [
+      "时间轴向右增大：−273.098 μs 比 −2.968 μs 更早。",
+      "紫色 CH2 的同向过零点在橙色 CH1 左侧，因此 CH2 超前。",
+      "Scopy 此处显示 CurT1−CurT2=−270.130 μs；软件的 Δt 符号不直接等于余弦相位的符号。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p13.webp",
+    "caption": "原始测量截图：Lab 2 报告第 13 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 6,
+    "cat": "Lab 2 · 超前与滞后",
+    "title": "原测量时间差 → 相位",
+    "prompt": "沿用截图：CH2 比 CH1 提前 270.130 μs；使用另一张周期游标截图记录的 T=1.998 ms。令 CH1 相位为 0°，CH2 的相位约为多少？",
+    "choices": [
+      "−48.672°",
+      "+97.344°",
+      "+48.672°",
+      "−270.130°"
+    ],
+    "answer": 2,
+    "steps": [
+      "|φ|=360°×270.130/1998=48.672°。",
+      "CH2 超前 CH1，所以 φ₂−φ₁=+48.672°。",
+      "本题明确用 T=1.998 ms，不要把当前截图的自动周期显示值与题目约定混用。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p13.webp",
+    "caption": "原始测量截图：Lab 2 报告第 13 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 7,
+    "cat": "Lab 2 · 相量与时域",
+    "title": "结合两次读数写相量",
+    "prompt": "你的 Lab 2 记录：CH2 Vpp=1.379 V，CH2 超前 CH1 48.672°。以 CH1 为 0°，选择 CH2 的峰值余弦相量。",
+    "choices": [
+      "1.379∠48.672° V",
+      "0.6895∠−48.672° V",
+      "0.4876∠48.672° V RMS",
+      "0.6895∠48.672° V"
+    ],
+    "answer": 3,
+    "steps": [
+      "幅值：1.379/2=0.6895 V。",
+      "相位：超前取正，φ₂=+48.672°。",
+      "V₂=0.6895∠48.672° V。C 选项是 RMS 表示，题目明确要求峰值。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p13.webp",
+    "caption": "原始测量截图：Lab 2 报告第 13 页。幅度 1.379 Vpp 来自同一报告第 10 页，不是本帧自动幅度读数。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 8,
+    "cat": "Lab 2 · 相量与时域",
+    "title": "极坐标 → 直角坐标",
+    "prompt": "已由实际数据求得 V₂=0.6895∠48.672° V。其直角坐标近似值为？",
+    "choices": [
+      "0.4553+j0.5178 V",
+      "0.4553−j0.5178 V",
+      "0.5178+j0.4553 V",
+      "0.6895+j0.6895 V"
+    ],
+    "answer": 0,
+    "steps": [
+      "V₂=0.6895[cos48.672°+j sin48.672°]。",
+      "实部约 0.4553 V，虚部约 +0.5178 V。",
+      "正相位在第一象限，实部、虚部均为正。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p13.webp",
+    "caption": "原始测量截图：Lab 2 报告第 13 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 9,
+    "cat": "Lab 2 · 超前与滞后",
+    "title": "交换游标会改变物理相位吗？",
+    "prompt": "交换游标身份后，Scopy 显示 Δt≈+261.224 μs；此前读到 −270.130 μs。最合理的解释是哪项？",
+    "choices": [
+      "CH2 从超前变成滞后",
+      "输入信号频率翻倍了",
+      "游标编号顺序改变；实际超前关系不变，小幅差别来自手动放置",
+      "物理相位只能为正，旧数据应丢弃"
+    ],
+    "answer": 2,
+    "steps": [
+      "交换 CurT1、CurT2 会改变差值的符号。",
+      "信号的相位关系不因交换游标编号而改变。",
+      "两次读数绝对值相差约 8.906 μs，说明手动重新定位存在差异，不是精确互换。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 14 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p14.webp",
+    "caption": "原始测量截图：Lab 2 报告第 14 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 10,
+    "cat": "Lab 2 · 相量与时域",
+    "title": "实际两通道信号的时域表达式",
+    "prompt": "以 CH1 的正峰为时间原点：T=1.998 ms，CH2 Vpp=1.379 V，CH2 超前 CH1 48.672°。CH2 的交流余弦表达式为？",
+    "choices": [
+      "0.6895 cos(500.50t+48.672°) V",
+      "1.379 cos(3144.74t+48.672°) V",
+      "0.6895 cos(3144.74t−48.672°) V",
+      "0.6895 cos(3144.74t+48.672°) V"
+    ],
+    "answer": 3,
+    "steps": [
+      "ω=2π/T≈3144.74 rad/s，t 以秒计。",
+      "峰值为 0.6895 V，超前相位 +48.672°。",
+      "这是交流正弦近似表达；原采样信号中存在的小直流偏置不包含在该相量中。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p13.webp",
+    "caption": "原始测量截图：Lab 2 报告第 13 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 11,
+    "cat": "Lab 2 · 第二组信号",
+    "title": "自动测量窗口 → 峰值",
+    "prompt": "第二组信号完整周期窗口中，CH1 Vpp=2.678 V、CH2 Vpp=1.284 V。两个通道的峰值幅度分别为？",
+    "choices": [
+      "2.678 V；1.284 V",
+      "1.339 V；0.642 V",
+      "1.894 V；0.908 V",
+      "0.6695 V；0.321 V"
+    ],
+    "answer": 1,
+    "steps": [
+      "Vm,1=2.678/2=1.339 V。",
+      "Vm,2=1.284/2=0.642 V。",
+      "这帧包含多个周期，用它读取完整波形的 Vpp。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 16 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p16.webp",
+    "caption": "原始测量截图：Lab 2 报告第 16 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 12,
+    "cat": "Lab 2 · 第二组信号",
+    "title": "纳秒和微秒统一单位",
+    "prompt": "放大图显示 CurT1（CH2）=2.019 μs，CurT2（CH1）=−979.592 ns。两个同向过零点相差约多少？",
+    "choices": [
+      "1.039 μs",
+      "981.611 μs",
+      "2.998 μs",
+      "2.998 ms"
+    ],
+    "answer": 2,
+    "steps": [
+      "−979.592 ns=−0.979592 μs。",
+      "Δt=2.019−(−0.979592)=2.998592 μs，约 2.998 μs。",
+      "紫色 CH2 在右侧，向上过零更晚，因此 CH2 滞后。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 17 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p17.webp",
+    "caption": "原始测量截图：Lab 2 报告第 17 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 13,
+    "cat": "Lab 2 · 第二组信号",
+    "title": "小时间差也有相位",
+    "prompt": "第二组记录的周期 T=222.000 μs，CH2 同向过零比 CH1 晚 2.998 μs。以 CH1 为 0°，φ₂ 为？",
+    "choices": [
+      "+4.862°",
+      "−4.862°",
+      "−48.62°",
+      "+85.138°"
+    ],
+    "answer": 1,
+    "steps": [
+      "|φ|=360°×2.998/222=4.862°。",
+      "CH2 晚到，即滞后，所以 φ₂≈−4.862°。",
+      "它是按实际过零点读数估计的相位；采样阶梯、偏置和游标放置都会影响估计。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 17 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p17.webp",
+    "caption": "原始测量截图：Lab 2 报告第 17 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 14,
+    "cat": "Lab 2 · 第二组信号",
+    "title": "1/Δt 不一定是信号频率",
+    "prompt": "这张放大图的 Scopy 游标面板显示 1/Δt≈333.540 kHz。完整波形的周期为 222 μs。哪种理解正确？",
+    "choices": [
+      "波形频率就是 333.540 kHz",
+      "波形频率约 4.505 kHz，333.540 kHz 是两个通道过零延时的倒数",
+      "波形频率为两者的平均值",
+      "两个通道频率一定不同"
+    ],
+    "answer": 1,
+    "steps": [
+      "游标跨的是不同通道的相位时间差，不是一个周期。",
+      "因此 1/Δt 不能当作波形频率。",
+      "信号频率应由完整周期求出：1/(222×10⁻⁶)≈4504.5 Hz。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 17 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p17.webp",
+    "caption": "原始测量截图：Lab 2 报告第 17 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 15,
+    "cat": "Lab 2 · 第二组信号",
+    "title": "放大窗口为什么不适合读 Vpp？",
+    "prompt": "这张 2 μs/div 截图的自动测量显示 CH1 Peak-peak≈1.183 V、CH2≈596.177 mV，与你之前记录的 2.678 V、1.284 V 不同。写完整波形相量时应该怎样处理？",
+    "choices": [
+      "改用当前小窗口的 Vpp，因图放大更准确",
+      "把两次 Vpp 相加",
+      "使用完整周期窗口的 Vpp；当前窗口只包含过零附近一小段",
+      "全部忽略，因为 Scopy 的 Vpp 一定不可靠"
+    ],
+    "answer": 2,
+    "steps": [
+      "放大的时间窗口只显示过零附近一小段，并没有包含完整最高、最低点。",
+      "小窗口自动 Vpp 不代表整条周期波形的 Vpp。",
+      "相量幅值使用第 16 页完整周期窗口的 2.678 V 和 1.284 V。"
+    ],
+    "ref": [
+      "已完成 Lab 2 报告 · 第 17 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab2-p17.webp",
+    "caption": "原始测量截图：Lab 2 报告第 17 页。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 16,
+    "cat": "Lab 3 · RC",
+    "title": "实际 RC 波形：先辨认参考",
+    "prompt": "Lab 3：CH2 紫色测总输入 Vs；CH1 橙色测电容 VC；绿色 M1=CH2−CH1 测串联 1 kΩ 电阻电压。观察同一周期的正峰，以 Vs 为参考，哪项正确？",
+    "choices": [
+      "VC 超前 Vs；VR 滞后 Vs",
+      "VC 与 Vs 同相",
+      "VC 滞后 Vs；VR 超前 Vs",
+      "绿色波形幅度较小，所以一定滞后"
+    ],
+    "answer": 2,
+    "steps": [
+      "同一周期内，绿色正峰在紫色左侧，橙色正峰在紫色右侧。",
+      "向左表示更早，向右表示更晚。",
+      "所以 VR 超前 Vs，VC 滞后 Vs。"
+    ],
+    "ref": [
+      "已完成 Lab 3 报告 · 第 11 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab3-p11.webp",
+    "caption": "原始测量截图：Lab 3 报告第 11 页。这是 Scopy 波形导出；游标和数值测量面板未保留。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 17,
+    "cat": "Lab 3 · RC",
+    "title": "电容读数 → 峰值相量",
+    "prompt": "沿用实际 RC 波形。报告记录 f=1000 Hz，VC=1.750 Vpp，电容同向特征比输入晚 94.915 μs。以输入为 0°，VC 峰值相量为？",
+    "choices": [
+      "1.750∠−34.169° V",
+      "0.8750∠−34.169° V",
+      "0.8750∠34.169° V",
+      "0.6187∠−34.169° V"
+    ],
+    "answer": 1,
+    "steps": [
+      "Vm=1.750/2=0.8750 V。",
+      "φC=−360°×1000×94.915×10⁻⁶=−34.1694°。",
+      "VC=0.8750∠−34.1694° V。相位相对于总输入，并不要求是 −90°。"
+    ],
+    "ref": [
+      "已完成 Lab 3 报告 · 第 11 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab3-p11.webp",
+    "caption": "原始测量截图：Lab 3 报告第 11 页。Vpp、游标延时由报告第 3 页记录补充，不是截图上可见的面板。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 18,
+    "cat": "Lab 3 · RC",
+    "title": "用感测电阻确定电流相位",
+    "prompt": "RC 实际记录：串联感测电阻 R1=1 kΩ，VR1=1.088 Vpp，相对输入超前 57.4916°。按被动符号约定，电流峰值相量为？",
+    "choices": [
+      "1.088∠57.4916° mA",
+      "0.544∠−32.5084° mA",
+      "0.544∠−57.4916° mA",
+      "0.544∠57.4916° mA"
+    ],
+    "answer": 3,
+    "steps": [
+      "VR1 峰值=1.088/2=0.544 V。",
+      "I=VR1/R1=0.544/1000 A=0.544 mA。",
+      "电阻的电压与它自身电流同相，电流相位也是 +57.4916°。"
+    ],
+    "ref": [
+      "已完成 Lab 3 报告 · 第 11 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab3-p11.webp",
+    "caption": "原始测量截图：Lab 3 报告第 11 页。数值来自报告第 3 页；此图用于辨认波形关系。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 19,
+    "cat": "Lab 3 · RL",
+    "title": "电感的 90° 是相对谁？",
+    "prompt": "实际 RL 记录：VL 相对输入约 +48.3505°，电流由感测电阻得到，约 −37.8392°。关于理想电感的说法哪项正确？",
+    "choices": [
+      "电感电压必须比总输入超前 90°，所以本图不可能是 RL",
+      "电感电压相对电流超前 90°；本次实测两者相差约 86.19°",
+      "电感电压必须与电流同相",
+      "只要电感电压不是 +90°，KVL 就不成立"
+    ],
+    "answer": 1,
+    "steps": [
+      "相对相位：48.3505−(−37.8392)=86.1897°。",
+      "理想关系 VL=jωLI 表示 VL 超前它自身电流 90°。",
+      "VL 与总输入之间的相位由整个串联电路决定；实际测量偏差也要保留。"
+    ],
+    "ref": [
+      "已完成 Lab 3 报告 · 第 13 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab3-p13.webp",
+    "caption": "原始测量截图：Lab 3 报告第 13 页。报告明确将此波形归为 RL；某些旧文件名仍带 RC。相位数值来自正文记录。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  },
+  {
+    "id": 20,
+    "cat": "Lab 3 · RR 与差分",
+    "title": "实验数学通道与 LTspice 的共同规则",
+    "prompt": "RR 实验中 CH2=Vs，CH1=100 Ω 电阻的电压 VZ；感测电阻连接在输入节点与 CH1 节点之间，正端在输入侧。其电压应怎样求？（同样适用于 LTspice 的两个节点。）",
+    "choices": [
+      "VR1=CH1−CH2",
+      "VR1=CH1+CH2",
+      "VR1=CH2−CH1",
+      "VR1=|CH2|−|CH1|，只减幅值即可"
+    ],
+    "answer": 2,
+    "steps": [
+      "按正端减负端：VR1(t)=Vs(t)−VZ(t)=CH2(t)−CH1(t)。",
+      "相量也要作复数相减，不能一般地用幅值相减代替。",
+      "LTspice 跨元件电压同理：V(a,b)=V(a)−V(b)。此图是实际 Scopy 导出，不是 LTspice 截图。"
+    ],
+    "ref": [
+      "已完成 Lab 3 报告 · 第 17 页",
+      null
+    ],
+    "kind": "实际截图 · 原数据",
+    "image": "assets/lab3-p17.webp",
+    "caption": "原始测量截图：Lab 3 报告第 17 页。Scopy 波形导出未保留测量面板；本题由报告接线及数学通道定义出题。",
+    "work": "先辨认通道、时间／电压单位和参考信号，再列公式；默认使用峰值余弦相量。"
+  }
+];
+const KEY='engr202-midterm1-lab-screenshots-v1';let saved;try{saved=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{saved={}}let answers=saved.answers||{},notes=saved.notes||{},idx=0,exam=false,submitted=false,wrongOnly=false,order=questions.map(q=>q.id);const $=s=>document.querySelector(s);const escapeHtml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function persist(){try{localStorage.setItem(KEY,JSON.stringify({answers,notes}))}catch{}}
+function svgBase(content){return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 255" role="img" aria-label="相量电路拓扑图"><g fill="none" stroke="#2d6a5c" stroke-width="2">${content}</g></svg>`}
+const line=(x,y,a,b)=>`<path d="M${x} ${y}L${a} ${b}"/>`;const text=(x,y,t)=>`<text x="${x}" y="${y}" fill="#173c3c" stroke="none" font-size="14" text-anchor="middle" font-family="system-ui,sans-serif">${t}</text>`;const box=(x,y,w,h,t)=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="4" fill="#fff"/>${text(x+w/2,y+h/2+5,t)}`;const source=(x,y,t)=>`<circle cx="${x}" cy="${y}" r="24" fill="#fff"/>${text(x,y-4,'+')}${text(x,y+15,'−')}${text(x,y+48,t)}`;
+function diagram(q){if(q.image)return `<figure class="shot"><a href="${escapeHtml(q.image)}" target="_blank" rel="noopener" aria-label="打开原始截图大图"><img src="${escapeHtml(q.image)}" alt="${escapeHtml(q.title)}的原始 Scopy 截图" loading="lazy"></a><figcaption>${escapeHtml(q.caption)} <a href="${escapeHtml(q.image)}" target="_blank" rel="noopener">点击查看大图 ↗</a></figcaption></figure>`;let s='';if(q.diagram==='series'){s=line(70,60,550,60)+line(550,60,550,210)+line(550,210,70,210)+line(70,210,70,149)+line(70,101,70,60)+source(70,125,'600∠20° V')+box(170,41,90,38,'40 Ω')+box(310,41,90,38,'j40 Ω')+box(450,41,90,38,'−j100 Ω')+text(300,245,'ω = 8000 rad/s · 峰值相量 · 电流沿上边从左到右');}
+if(q.diagram==='node'){s=line(70,60,570,60)+line(70,60,70,101)+source(70,125,'Vg1')+line(70,149,70,210)+line(70,210,570,210)+line(570,210,570,149)+source(570,125,'Vg2')+line(570,101,570,60)+box(160,41,100,38,'−j50 Ω')+box(390,41,100,38,'j20 Ω')+line(325,60,325,210)+box(284,113,82,38,'150 Ω')+text(325,38,'Va')+text(325,244,'底部共地；两电源正端在上方');}
+if(q.diagram==='mesh'){s=line(70,60,570,60)+line(70,60,70,101)+source(70,125,'6∠0° V')+line(70,149,70,210)+line(70,210,570,210)+line(570,210,570,60)+box(165,41,95,38,'2 kΩ')+line(350,60,350,210)+box(297,93,106,34,'4 kΩ')+box(297,149,106,34,'−j2 kΩ')+box(520,92,100,35,'2 kΩ')+box(520,150,100,35,'j4 kΩ')+text(210,147,'I₁ ↻')+text(450,147,'I₂ ↻')+text(325,244,'Vcap：沿共享支路向下取正向压降');}
+if(q.diagram==='thevenin'){s=line(70,60,550,60)+line(70,60,70,101)+source(70,125,'240∠0° V')+line(70,149,70,210)+line(70,210,550,210)+box(180,41,90,38,'j60 Ω')+box(320,41,100,38,'−j48 Ω')+line(480,60,480,210)+box(437,113,86,38,'36 Ω')+text(555,55,'a (+)')+text(555,232,'b (−)')+text(300,244,'端口 a–b 开路；36 Ω 为原网络的一部分');}return s?`<div class="diagram">${svgBase(s)}</div>`:'';}
+function filtered(){return order.map(id=>questions.find(q=>q.id===id)).filter(q=>($('#topic').value==='all'||q.cat===$('#topic').value)&&($('#kind').value==='all'||($('#kind').value==='original'?!['同类改编','原题数据扩展'].includes(q.kind):['同类改编','原题数据扩展'].includes(q.kind)))&&(!wrongOnly||(answers[q.id]!==undefined&&answers[q.id]!==q.answer)));}
+function render(){let qs=filtered();idx=Math.max(0,Math.min(idx,qs.length-1));let q=qs[idx],done=questions.filter(q=>answers[q.id]!==undefined).length,good=questions.filter(q=>answers[q.id]===q.answer).length;$('#bar').style.width=done/questions.length*100+'%';$('#score').textContent=`已答 ${done}/${questions.length}`+(!exam||submitted?` · 答对 ${good} 题`:' · 提交后显示结果');$('#mode').textContent=exam?(submitted?'自测已提交':'自测模式 · 暂不显示答案'):'练习模式 · 即时解析';$('#exam').textContent=exam?'返回练习模式':'切换自测模式';$('#finish').hidden=!exam||submitted;$('#wrong').textContent=wrongOnly?'显示全部题目':'只练错题';$('#prev').disabled=!qs.length||idx===0;$('#next').disabled=!qs.length||idx===qs.length-1;$('#nav').innerHTML=qs.map((x,n)=>{let a=answers[x.id],state=a===undefined?'':exam&&!submitted?'answered':a===x.answer?'correct':'wrong';return `<button class="qnum ${n===idx?'active':''} ${state}" data-n="${n}" aria-label="第 ${x.id} 题">${String(x.id).padStart(2,'0')}</button>`}).join('');$('#nav').querySelectorAll('button').forEach(b=>b.onclick=()=>{idx=+b.dataset.n;render()});if(!q){$('#card').innerHTML='<div class="empty"><h2>当前筛选下没有题目</h2><p>可调整筛选；答对的错题会移出错题列表。</p></div>';$('#crumb').textContent='无匹配题目';return;}$('#crumb').textContent=`${q.cat} / 第 ${idx+1} 道，共 ${qs.length} 道`;let a=answers[q.id],show=(!exam||submitted)&&a!==undefined;$('#card').innerHTML=`<div class="tags"><span class="tag">${String(q.id).padStart(2,'0')} / ${questions.length}</span><span class="tag">${escapeHtml(q.cat)}</span><span class="tag ${['同类改编','原题数据扩展'].includes(q.kind)?'variant':''}">${escapeHtml(q.kind)}</span></div><h2>${escapeHtml(q.title)}</h2><p class="prompt">${escapeHtml(q.prompt)}</p>${diagram(q)}<p class="work">手写练习：${escapeHtml(q.work)}</p><div class="choices">${q.choices.map((c,n)=>`<button class="choice ${a===n?'selected':''} ${show&&n===q.answer?'good':''} ${show&&a===n&&a!==q.answer?'bad':''}" data-answer="${n}" aria-pressed="${a===n}"><b>${'ABCD'[n]}.</b><span>${escapeHtml(c)}</span></button>`).join('')}</div>${show?`<section class="answer ${a===q.answer?'':'bad'}" aria-live="polite"><b>${a===q.answer?'✓ 回答正确':'再检查一下'} · 正确答案 ${'ABCD'[q.answer]}</b><ol>${q.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ol></section>`:''}<details class="notes"><summary>我的草稿 / 易错记录</summary><textarea aria-label="本题草稿" placeholder="记录列式、复数展开与容易出错的符号……">${escapeHtml(notes[q.id]||'')}</textarea><span class="small">自动保存在本浏览器。</span></details><div class="source">来源：${q.ref[1]?`<a href="${escapeHtml(q.ref[1])}" target="_blank" rel="noopener">${escapeHtml(q.ref[0])} ↗</a>`:escapeHtml(q.ref[0])} · 按 study guide 考点编写的小问</div>`;$('#card').querySelectorAll('[data-answer]').forEach(b=>b.onclick=()=>{answers[q.id]=+b.dataset.answer;persist();render()});$('#card textarea').oninput=e=>{notes[q.id]=e.target.value;persist()};}
+$('#total').textContent=questions.length;$('#topic').innerHTML='<option value="all">全部考点</option>'+[...new Set(questions.map(q=>q.cat))].map(c=>`<option>${c}</option>`).join('');$('#topic').onchange=$('#kind').onchange=()=>{idx=0;render()};$('#wrong').onclick=()=>{if(exam&&!submitted){alert('请先提交自测，或返回练习模式，再查看错题。');return}wrongOnly=!wrongOnly;idx=0;render()};$('#prev').onclick=()=>{idx--;render()};$('#next').onclick=()=>{idx++;render()};$('#exam').onclick=()=>{exam=!exam;submitted=false;wrongOnly=false;render()};$('#finish').onclick=()=>{submitted=true;render()};$('#shuffle').onclick=()=>{for(let i=order.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[order[i],order[j]]=[order[j],order[i]]}idx=0;render()};$('#reset').onclick=()=>{if(confirm('清除所有答题记录？你的文字草稿会保留。')){answers={};submitted=false;wrongOnly=false;persist();render()}};
+function printSet(withAnswers){document.body.classList.toggle('printanswers',withAnswers);$('#printarea').innerHTML='<h1>ENGR 202 · Midterm 1 · 实验截图专项</h1><p>默认峰值相量。先画电路、标参考方向，再完整列式。考试范围 Week 0–4。</p>'+filtered().map(q=>`<section class="printquestion"><h2>${q.id}. ${escapeHtml(q.title)} · ${escapeHtml(q.kind)}</h2><p>${escapeHtml(q.prompt)}</p>${diagram(q)}${q.choices.map((s,n)=>`<p>${'ABCD'[n]}. ${escapeHtml(s)}</p>`).join('')}<p>手写区：________________________________________________________</p><div class="printanswer"><p><b>答案：${'ABCD'[q.answer]}</b></p><ol>${q.steps.map(s=>`<li>${escapeHtml(s)}</li>`).join('')}</ol></div></section>`).join('');window.print();}$('#print').onclick=()=>printSet(false);$('#printkey').onclick=()=>printSet(true);render();
+</script></body></html>
