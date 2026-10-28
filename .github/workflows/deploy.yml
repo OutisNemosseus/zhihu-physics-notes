@@ -53,6 +53,12 @@ jobs:
           node --check docs/course-practice/engr103/hw4-coding-practice/app.js
           node --check docs/course-practice/engr103/snippet-fill-practice/runner-worker.js
           python scripts/check_engr103_coding_practice.py
+      - name: Validate ENGR 202 Python calculators
+        run: |
+          node --check docs/course-practice/engr202/midterm1-python-tools/app.js
+          node --check docs/course-practice/engr202/midterm1-python-tools/programs.js
+          node --check docs/course-practice/engr202/midterm1-python-tools/worker.js
+          python tests/test_engr202_tools.py
       - name: Build site
         run: python scripts/export_notebooks.py
       - name: Configure Pages
