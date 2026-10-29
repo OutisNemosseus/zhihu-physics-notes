@@ -2,19 +2,7 @@
 A = 1625.803 cm²
 A = 1.750 ft²
 A = 0.163 m²
-未四舍五入的 m² 数值：0.16258032。</pre></details><div class="sources"><a href="https://drive.google.com/file/d/1Caf5JvLlKLhornaX398x7u5XkAhEPG5a/view" target="_blank" rel="noopener">HW1原文件 ↗</a> · <a href="https://drive.google.com/file/d/172lhalBy1--8jknd9AQZ61XFpwxnWKJY/view" target="_blank" rel="noopener">ICA1原文件 ↗</a></div><label class="done"><input type="checkbox" data-q="1"> 我已独立写出并核对结果</label><section id="my-code-draft" class="sample"><h3>我的代码草稿 · 2026-10-29</h3><p class="note">Tong Su · 当前进度，尚未完成；保留原来的变量、公式与返回值。</p><button class="pill" type="button" id="copy-my-draft">一键复制代码</button> <span id="draft-copy-status" role="status" aria-live="polite"></span><pre><code id="my-draft-code">Base = float(input("plz type base"))
-height = float(input("plz type height"))
-
-def inch_to_cm(inch):
-    cm = 2.54 * inch
-    return cm
-def inch_to_ft(inch):
-    ft = 12 * inch
-    return cm
-def inch_to_m(inch):
-    m = 1/ 0.0254 * inch
-    return m
-</code></pre></section></article><article id="q02" class="question"><div class="eyebrow">HW1 · 乘方与圆周率</div><h2><span>02</span> 球的表面积与体积</h2><p class="origin">改编自 HW1_3；可参考 ICA1_4 的面积、体积换算。</p><section class="function-guide"><h3>本题函数与课件对应</h3><div class="function-scroll"><table class="function-table"><thead><tr><th>函数 / 参数 / 语法</th><th>用来做什么</th><th>教师课件位置</th></tr></thead><tbody><tr><td><code>input() / float()</code></td><td>输入数值并转换为小数</td><td><a data-slide="L01" data-page="43" target="_blank" rel="noopener">L01 第43页 ↗</a> · <a data-slide="L01" data-page="46" target="_blank" rel="noopener">L01 第46页 ↗</a></td></tr><tr><td><code>import numpy as np</code></td><td>导入 NumPy；后面用 np. 调用</td><td><a data-slide="L01" data-page="58" target="_blank" rel="noopener">L01 第58页 ↗</a></td></tr><tr><td><code>np.pi</code></td><td>圆周率常量，不需要括号</td><td><a data-slide="L01" data-page="59" target="_blank" rel="noopener">L01 第59页 ↗</a></td></tr><tr><td><code>* / / / **</code></td><td>乘、除、乘方；面积和体积换算</td><td><a data-slide="L01" data-page="15" target="_blank" rel="noopener">L01 第15页 ↗</a> · <a data-slide="L01" data-page="16" target="_blank" rel="noopener">L01 第16页 ↗</a></td></tr><tr><td><code>print() / f&quot;{value:.3f}&quot;</code></td><td>输出名称、单位，并保留三位小数</td><td><a data-slide="L01" data-page="50" target="_blank" rel="noopener">L01 第50页 ↗</a> · <a data-slide="L01" data-page="54" target="_blank" rel="noopener">L01 第54页 ↗</a></td></tr></tbody></table></div></section><p class="task">用户输入球半径 r（in）。用 S=4πr²、V=(4/3)πr³ 计算表面积与体积，分别输出 in²、cm²、in³、cm³。使用 NumPy 的 π，结果保留三位小数。</p><div class="sample"><b>具体测试例子</b><pre>输入：r=6 in。</pre></div><details><summary>提示：卡住时再展开</summary><p>** 是乘方。面积用 2.54² 换算，体积用 2.54³；两者不能用同一个系数。</p></details><details class="answer"><summary>正确结果 · 已实际核算 ✓</summary><pre>S = 452.389 in²
+未四舍五入的 m² 数值：0.16258032。</pre></details><div class="sources"><a href="https://drive.google.com/file/d/1Caf5JvLlKLhornaX398x7u5XkAhEPG5a/view" target="_blank" rel="noopener">HW1原文件 ↗</a> · <a href="https://drive.google.com/file/d/172lhalBy1--8jknd9AQZ61XFpwxnWKJY/view" target="_blank" rel="noopener">ICA1原文件 ↗</a></div><label class="done"><input type="checkbox" data-q="1"> 我已独立写出并核对结果</label><p id="my-code-draft"><a class="pill" href="../drafts/#engr103-q01">打开我的代码草稿 →</a></p></article><article id="q02" class="question"><div class="eyebrow">HW1 · 乘方与圆周率</div><h2><span>02</span> 球的表面积与体积</h2><p class="origin">改编自 HW1_3；可参考 ICA1_4 的面积、体积换算。</p><section class="function-guide"><h3>本题函数与课件对应</h3><div class="function-scroll"><table class="function-table"><thead><tr><th>函数 / 参数 / 语法</th><th>用来做什么</th><th>教师课件位置</th></tr></thead><tbody><tr><td><code>input() / float()</code></td><td>输入数值并转换为小数</td><td><a data-slide="L01" data-page="43" target="_blank" rel="noopener">L01 第43页 ↗</a> · <a data-slide="L01" data-page="46" target="_blank" rel="noopener">L01 第46页 ↗</a></td></tr><tr><td><code>import numpy as np</code></td><td>导入 NumPy；后面用 np. 调用</td><td><a data-slide="L01" data-page="58" target="_blank" rel="noopener">L01 第58页 ↗</a></td></tr><tr><td><code>np.pi</code></td><td>圆周率常量，不需要括号</td><td><a data-slide="L01" data-page="59" target="_blank" rel="noopener">L01 第59页 ↗</a></td></tr><tr><td><code>* / / / **</code></td><td>乘、除、乘方；面积和体积换算</td><td><a data-slide="L01" data-page="15" target="_blank" rel="noopener">L01 第15页 ↗</a> · <a data-slide="L01" data-page="16" target="_blank" rel="noopener">L01 第16页 ↗</a></td></tr><tr><td><code>print() / f&quot;{value:.3f}&quot;</code></td><td>输出名称、单位，并保留三位小数</td><td><a data-slide="L01" data-page="50" target="_blank" rel="noopener">L01 第50页 ↗</a> · <a data-slide="L01" data-page="54" target="_blank" rel="noopener">L01 第54页 ↗</a></td></tr></tbody></table></div></section><p class="task">用户输入球半径 r（in）。用 S=4πr²、V=(4/3)πr³ 计算表面积与体积，分别输出 in²、cm²、in³、cm³。使用 NumPy 的 π，结果保留三位小数。</p><div class="sample"><b>具体测试例子</b><pre>输入：r=6 in。</pre></div><details><summary>提示：卡住时再展开</summary><p>** 是乘方。面积用 2.54² 换算，体积用 2.54³；两者不能用同一个系数。</p></details><details class="answer"><summary>正确结果 · 已实际核算 ✓</summary><pre>S = 452.389 in²
 S = 2918.635 cm²
 V = 904.779 in³
 V = 14826.666 cm³</pre></details><div class="sources"><a href="https://drive.google.com/file/d/1Caf5JvLlKLhornaX398x7u5XkAhEPG5a/view" target="_blank" rel="noopener">HW1原文件 ↗</a> · <a href="https://drive.google.com/file/d/172lhalBy1--8jknd9AQZ61XFpwxnWKJY/view" target="_blank" rel="noopener">ICA1原文件 ↗</a></div><label class="done"><input type="checkbox" data-q="2"> 我已独立写出并核对结果</label></article><article id="q03" class="question"><div class="eyebrow">HW1 · 反三角函数</div><h2><span>03</span> 两滑轮的皮带长度</h2><p class="origin">改编自 HW1_4；可参考 ICA1_3 的三角函数与弧度。</p><section class="function-guide"><h3>本题函数与课件对应</h3><div class="function-scroll"><table class="function-table"><thead><tr><th>函数 / 参数 / 语法</th><th>用来做什么</th><th>教师课件位置</th></tr></thead><tbody><tr><td><code>input() / float()</code></td><td>输入数值并转换为小数</td><td><a data-slide="L01" data-page="43" target="_blank" rel="noopener">L01 第43页 ↗</a> · <a data-slide="L01" data-page="46" target="_blank" rel="noopener">L01 第46页 ↗</a></td></tr><tr><td><code>import numpy as np</code></td><td>导入 NumPy；后面用 np. 调用</td><td><a data-slide="L01" data-page="58" target="_blank" rel="noopener">L01 第58页 ↗</a></td></tr><tr><td><code>np.sin() / np.cos() / np.arcsin()</code></td><td>三角与反三角函数；角度使用弧度</td><td><a data-slide="L01" data-page="60" target="_blank" rel="noopener">L01 第60页 ↗</a></td></tr><tr><td><code>np.pi</code></td><td>圆周率常量，不需要括号</td><td><a data-slide="L01" data-page="59" target="_blank" rel="noopener">L01 第59页 ↗</a></td></tr><tr><td><code>print() / f&quot;{value:.3f}&quot;</code></td><td>输出名称、单位，并保留三位小数</td><td><a data-slide="L01" data-page="50" target="_blank" rel="noopener">L01 第50页 ↗</a> · <a data-slide="L01" data-page="54" target="_blank" rel="noopener">L01 第54页 ↗</a></td></tr></tbody></table></div></section><p class="task">输入大半径 R、小半径 r 和中心距 L（均为 in，且 L&gt;|R−r|）。按 θ=arcsin((R−r)/L)，BL=2L cosθ+π(R+r)+2θ(R−r) 计算皮带长度。输出 in、ft、cm、m，保留三位小数。</p><div class="sample"><b>具体测试例子</b><pre>输入：R=24 in，r=10 in，L=45 in。</pre></div><details><summary>提示：卡住时再展开</summary><p>np.arcsin() 返回弧度；这里 θ 应保持弧度，不能转换成度数后直接代回公式。</p></details><details class="answer"><summary>正确结果 · 已实际核算 ✓</summary><pre>θ = 0.316361940 rad
@@ -79,23 +67,4 @@ const checkText='Actual NumPy calculation results\nNumPy 2.3.5\nGenerated practi
 document.getElementById('checklog').href=URL.createObjectURL(new Blob([checkText],{type:'text/plain;charset=utf-8'}));document.getElementById('checklog').download='actual_numeric_checks.txt';
 const boxes=[...document.querySelectorAll('[data-q]')];function progress(){document.getElementById('progress').textContent='已完成 '+boxes.filter(b=>b.checked).length+' / 10';}
 boxes.forEach(b=>{try{b.checked=localStorage.getItem('engr103-review-q'+b.dataset.q)==='1';}catch(e){}b.addEventListener('change',()=>{try{localStorage.setItem('engr103-review-q'+b.dataset.q,b.checked?'1':'0');}catch(e){}progress();});});progress();
-</script><script>
-document.getElementById('copy-my-draft').addEventListener('click', async function () {
-  const code = document.getElementById('my-draft-code').textContent;
-  const status = document.getElementById('draft-copy-status');
-  try {
-    await navigator.clipboard.writeText(code);
-    status.textContent = '已复制 ✓';
-  } catch (error) {
-    const field = document.createElement('textarea');
-    field.value = code;
-    field.style.position = 'fixed';
-    field.style.opacity = '0';
-    document.body.appendChild(field);
-    field.select();
-    const copied = document.execCommand('copy');
-    field.remove();
-    status.textContent = copied ? '已复制 ✓' : '复制未成功，请选中下方代码复制。';
-  }
-});
 </script></body></html>
