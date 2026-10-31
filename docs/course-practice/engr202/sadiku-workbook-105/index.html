@@ -1,1289 +1,2553 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sadiku · ENGR 202 同型题工作簿</title><style>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Sadiku · ENGR 202 选择题工作簿</title><style>.choices{display:grid;gap:10px;margin:18px 0}.choice{text-align:left;padding:14px}.choice.selected{outline:2px solid #086851}.choice.hit{background:#e4f2e7}.choice.miss{background:#fff0e4}.feedback{padding:15px;background:#f2f6ee;border-radius:10px;margin:14px 0}.feedback p{margin:8px 0}
 :root{--ink:#193e3a;--muted:#647b75;--line:#d9e4da;--green:#086851;--paper:#f5f6ef}*{box-sizing:border-box}body{margin:0;font:16px/1.65 system-ui,sans-serif;background:var(--paper);color:var(--ink)}a{color:var(--green)}button,select,textarea{font:inherit}button{cursor:pointer;border:1px solid var(--line);background:white;color:var(--ink);border-radius:9px;padding:9px 13px}button:hover{border-color:var(--green)}button:focus-visible,a:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #e9a33e;outline-offset:3px}button:disabled{opacity:.4;cursor:default}header{padding:20px 4vw;background:white;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}header strong{letter-spacing:.1em;font-size:14px}.wrap{max-width:1500px;margin:auto;padding:32px 4vw}.eyebrow{letter-spacing:.16em;font-size:12px;color:var(--green);font-weight:700}h1{font-size:clamp(28px,3vw,44px);letter-spacing:-.035em;line-height:1.25;margin:12px 0}h2{margin:8px 0;font-size:26px}.muted{color:var(--muted);font-size:14px}.note{background:#eaf0df;border:1px solid #dae4cc;border-radius:12px;padding:14px 18px;margin:22px 0;font-size:14px}.layout{display:grid;grid-template-columns:285px minmax(0,1fr);gap:25px}aside{align-self:start;position:sticky;top:12px;max-height:94vh;overflow:auto}.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:20px}.cats{display:grid;gap:7px}.cats button{text-align:left;font-size:14px;display:flex;justify-content:space-between;gap:8px}.cats button.active,.primary{background:var(--green);color:white}.cats small{white-space:nowrap}.tools{display:grid;gap:8px;margin-top:17px}.tools label{font-size:13px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:240px;overflow:auto;margin-top:14px}.grid button{font-size:13px;padding:6px}.wrong{background:#fff0e4!important;color:#a3451b!important}.correct{background:#e4f2e7!important;color:#21653a!important}.current{outline:2px solid var(--green);outline-offset:-2px}.tag{display:inline-block;background:#edf3ee;border-radius:5px;padding:3px 8px;font-size:12px;margin-right:6px}.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.topline{display:flex;justify-content:space-between;gap:12px}.task{font-size:18px;margin:20px 0}.source{padding:16px;background:#f4f7f2;border-radius:10px;margin:16px 0}.source a{display:inline-block;margin-right:14px}.viewer{width:100%;height:650px;border:1px solid var(--line);border-radius:10px;background:#eee}.work{margin-top:20px}textarea{width:100%;min-height:150px;border:1px solid var(--line);border-radius:10px;padding:14px;color:var(--ink);background:#fcfdf9;resize:vertical}details{border:1px solid var(--line);border-radius:9px;padding:12px;margin:14px 0}summary{cursor:pointer;font-weight:600}.nav{justify-content:space-between;margin-top:18px}footer{padding:28px 0;font-size:12px;color:var(--muted)}#toast{min-height:26px;color:#a3451b;font-size:13px}.empty{padding:50px;text-align:center}@media(max-width:850px){.layout{grid-template-columns:1fr}aside{position:static;max-height:none}.cats{grid-template-columns:1fr 1fr}.grid{max-height:130px}.viewer{height:500px}.wrap{padding:22px 16px}.tools{grid-template-columns:1fr 1fr}}@media print{header,aside,.nav,.viewer,.actions,.noPrint{display:none!important}.layout{display:block}.wrap{padding:0}.panel{border:0}body{background:white}textarea{min-height:160px}}
-</style></head><body><header><strong>ENGR 202 / SADIKU WORKBOOK</strong><a href="../midterm1-study-guide-35/">返回原 35 题练习 ↗</a></header><div class="wrap"><div class="eyebrow">FUNDAMENTALS OF ELECTRIC CIRCUITS · FIFTH EDITION</div><h1>按方法练电路。</h1><p class="muted">原练习 35 题 × 每题 3 个教材对应项 · 105 个练习入口 · 56 道不同教材题</p><div class="note">已核对教材第 9–11 章题号与页码。相同教材题会用于不同训练步骤；部分项目是相关理论或原创延伸，非教材原小问。原题及电路图通过原 PDF 阅读，不在本站复制。这里使用手动核对与标记，不会自动判分；“方法提示”不是逐题数值答案。</div><div class="layout"><aside class="panel"><b>题型导航</b><div id="stats" class="muted"></div><div id="cats" class="cats"></div><div class="tools"><button id="wrongOnly">只练错题</button><label><input id="includeHints" type="checkbox" checked> 导出附方法提示与草稿</label><button id="exportWrong" class="primary">↓ 一键导出错题 HTML</button><button id="printWrong">打印错题 / 保存 PDF</button><button id="backup">导出全部答题记录</button><label>恢复记录 <input id="restore" type="file" accept="application/json,.json" style="max-width:100%"></label><button id="printAll">打印全部练习索引</button></div><div id="toast" role="status" aria-live="polite"></div><div id="numbers" class="grid" aria-label="题号导航"></div><p class="muted">橙色：错题 · 绿色：已掌握<br>记录仅保存在此浏览器，可备份。</p></aside><main><div id="card" class="panel"></div><div class="row nav"><button id="prev">← 上一题</button><span id="position" class="muted"></span><button id="next">下一题 →</button></div></main></div><footer>题号格式：13A / 13B / 13C 对应原练习第 13 题的三个入口。书页与 PDF 页不同（本文件正文偏移 24 页）。奇数题可到书末 Appendix D 核对；偶数题不保证附有书后答案。此页不代表课程官方答案。</footer></div><script>
+</style></head><body><header><strong>ENGR 202 / SADIKU WORKBOOK</strong><a href="../midterm1-study-guide-35/">返回原 35 题练习 ↗</a></header><div class="wrap"><div class="eyebrow">FUNDAMENTALS OF ELECTRIC CIRCUITS · FIFTH EDITION</div><h1>先列式，再选答案。</h1><p class="muted">原练习 35 题 × 3 个对应入口 · 56 道教材对应选择题 · 自动判分与错题导出</p><div class="note">原有105个对应入口已改为四选一，涉及56道不同教材题（同一教材题在不同原练习组可能重复）。选项与简要解析参考你上传的第5版解答手册，并纠正核对中发现的数据差异或笔误。电路图仍通过原教材链接或页面内PDF查看。手册只用于核对，未公开上传。每题解析注明手册PDF页码；“原练习考点”保留对应关系，不代表本选择题覆盖原练习的全部步骤。</div><div class="layout"><aside class="panel"><b>题型导航</b><div id="stats" class="muted"></div><div id="cats" class="cats"></div><div class="tools"><button id="wrongOnly">只练错题</button><label><input id="includeHints" type="checkbox" checked> 导出附正确答案、解析与草稿</label><button id="exportWrong" class="primary">↓ 一键导出错题 HTML</button><button id="printWrong">打印错题 / 保存 PDF</button><button id="backup">导出全部答题记录</button><label>恢复记录 <input id="restore" type="file" accept="application/json,.json" style="max-width:100%"></label><button id="printAll">打印全部练习索引</button></div><div id="toast" role="status" aria-live="polite"></div><div id="numbers" class="grid" aria-label="题号导航"></div><p class="muted">橙色：错题 · 绿色：已掌握<br>记录仅保存在此浏览器，可备份。</p></aside><main><div id="card" class="panel"></div><div class="row nav"><button id="prev">← 上一题</button><span id="position" class="muted"></span><button id="next">下一题 →</button></div></main></div><footer>题号格式：13A / 13B / 13C 对应原练习第 13 题的三个入口。书页与 PDF 页不同（本文件正文偏移 24 页）。本页56道教材对应选择题会在105个对应入口中重复出现。数据差异已在相应题目解析注明。本页解析为学习辅助，不代表课程官方答案。</footer></div><script>
 const DATA=[
   {
     "id": "01A",
     "origin": 1,
-    "title": "频率与周期",
+    "title": "Problem 9.1",
     "category": "Phasors · 相量",
     "ref": "9.1",
     "page": 427,
     "printed": 403,
     "task": "从所选题的正弦表达式提取角频率，计算频率和周期。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.1：角频率为 30 rad/s，频率与周期为？",
+    "choices": [
+      "188.5 Hz；5.305 ms",
+      "4.775 Hz；20.94 ms",
+      "4.775 Hz；209.4 ms",
+      "30 Hz；33.33 ms"
+    ],
+    "answer": 2,
+    "explanation": "f=30/(2π)，T=2π/30。注意角频率和频率单位不同。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 731,
+    "oldTitle": "频率与周期"
   },
   {
     "id": "01B",
     "origin": 1,
-    "title": "频率与周期",
+    "title": "Problem 9.2",
     "category": "Phasors · 相量",
     "ref": "9.2",
     "page": 427,
     "printed": 403,
     "task": "从所选题的正弦表达式提取角频率，计算频率和周期。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.2：ω=25π rad/s，频率为？",
+    "choices": [
+      "25 Hz",
+      "78.54 Hz",
+      "50 Hz",
+      "12.5 Hz"
+    ],
+    "answer": 3,
+    "explanation": "f=ω/(2π)=12.5 Hz。只核对本题频率小问；手册时间代入小问存在不同的角频率。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 732,
+    "oldTitle": "频率与周期"
   },
   {
     "id": "01C",
     "origin": 1,
-    "title": "频率与周期",
+    "title": "Problem 9.18",
     "category": "Phasors · 相量",
     "ref": "9.18",
     "page": 428,
     "printed": 404,
     "task": "从所选题的正弦表达式提取角频率，计算频率和周期。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.18(b)：V=6+j8 V，ω=40 rad/s，对应时域电压？",
+    "choices": [
+      "10cos(40t+53.13°) V",
+      "10cos(40t−53.13°) V",
+      "14cos(40t+53.13°) V",
+      "10cos(40t+36.87°) V"
+    ],
+    "answer": 0,
+    "explanation": "幅值√(6²+8²)=10；相位atan2(8,6)=53.13°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 748,
+    "oldTitle": "频率与周期"
   },
   {
     "id": "02A",
     "origin": 2,
-    "title": "第一次到达负峰值",
+    "title": "Problem 9.1",
     "category": "Phasors · 相量",
     "ref": "9.1",
     "page": 427,
     "printed": 403,
     "task": "取所选题中一个正弦量，额外计算 t>0 后首次达到负峰值的时间。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.1：角频率为 30 rad/s，频率与周期为？",
+    "choices": [
+      "4.775 Hz；20.94 ms",
+      "4.775 Hz；209.4 ms",
+      "30 Hz；33.33 ms",
+      "188.5 Hz；5.305 ms"
+    ],
+    "answer": 1,
+    "explanation": "f=30/(2π)，T=2π/30。注意角频率和频率单位不同。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 731,
+    "oldTitle": "第一次到达负峰值"
   },
   {
     "id": "02B",
     "origin": 2,
-    "title": "第一次到达负峰值",
+    "title": "Problem 9.2",
     "category": "Phasors · 相量",
     "ref": "9.2",
     "page": 427,
     "printed": 403,
     "task": "取所选题中一个正弦量，额外计算 t>0 后首次达到负峰值的时间。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.2：ω=25π rad/s，频率为？",
+    "choices": [
+      "78.54 Hz",
+      "50 Hz",
+      "12.5 Hz",
+      "25 Hz"
+    ],
+    "answer": 2,
+    "explanation": "f=ω/(2π)=12.5 Hz。只核对本题频率小问；手册时间代入小问存在不同的角频率。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 732,
+    "oldTitle": "第一次到达负峰值"
   },
   {
     "id": "02C",
     "origin": 2,
-    "title": "第一次到达负峰值",
+    "title": "Problem 9.18",
     "category": "Phasors · 相量",
     "ref": "9.18",
     "page": 428,
     "printed": 404,
     "task": "取所选题中一个正弦量，额外计算 t>0 后首次达到负峰值的时间。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.18(b)：V=6+j8 V，ω=40 rad/s，对应时域电压？",
+    "choices": [
+      "10cos(40t−53.13°) V",
+      "14cos(40t+53.13°) V",
+      "10cos(40t+36.87°) V",
+      "10cos(40t+53.13°) V"
+    ],
+    "answer": 3,
+    "explanation": "幅值√(6²+8²)=10；相位atan2(8,6)=53.13°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 748,
+    "oldTitle": "第一次到达负峰值"
   },
   {
     "id": "03A",
     "origin": 3,
-    "title": "向右平移",
+    "title": "Problem 9.5",
     "category": "Phasors · 相量",
     "ref": "9.5",
     "page": 428,
     "printed": 404,
     "task": "从所选题取一个波形，额外将其向右平移 T/6，写出新表达式。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.5：比较 v₁=45sin(ωt+30°) 与 v₂=50cos(ωt−30°)。",
+    "choices": [
+      "v₁ 滞后 v₂ 30°",
+      "v₁ 超前 v₂ 30°",
+      "v₁ 超前 v₂ 60°",
+      "二者同相"
+    ],
+    "answer": 0,
+    "explanation": "v₁的余弦相位为−60°，v₂为−30°；前者相位更小，滞后30°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 735,
+    "oldTitle": "向右平移"
   },
   {
     "id": "03B",
     "origin": 3,
-    "title": "向右平移",
+    "title": "Problem 9.6",
     "category": "Phasors · 相量",
     "ref": "9.6",
     "page": 428,
     "printed": 404,
     "task": "从所选题取一个波形，额外将其向右平移 T/6，写出新表达式。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.6(a)：v=10cos(4t−60°)，i=4sin(4t+50°)，相位关系？",
+    "choices": [
+      "i 滞后 v 110°",
+      "i 超前 v 20°",
+      "i 滞后 v 20°",
+      "i 超前 v 110°"
+    ],
+    "answer": 1,
+    "explanation": "i的余弦相位是−40°，比v的−60°大20°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 736,
+    "oldTitle": "向右平移"
   },
   {
     "id": "03C",
     "origin": 3,
-    "title": "向右平移",
+    "title": "Problem 9.18",
     "category": "Phasors · 相量",
     "ref": "9.18",
     "page": 428,
     "printed": 404,
     "task": "从所选题取一个波形，额外将其向右平移 T/6，写出新表达式。此问为原创延伸。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.18(b)：V=6+j8 V，ω=40 rad/s，对应时域电压？",
+    "choices": [
+      "14cos(40t+53.13°) V",
+      "10cos(40t+36.87°) V",
+      "10cos(40t+53.13°) V",
+      "10cos(40t−53.13°) V"
+    ],
+    "answer": 2,
+    "explanation": "幅值√(6²+8²)=10；相位atan2(8,6)=53.13°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 748,
+    "oldTitle": "向右平移"
   },
   {
     "id": "04A",
     "origin": 4,
-    "title": "正弦变成余弦相量",
+    "title": "Problem 9.3",
     "category": "Phasors · 相量",
     "ref": "9.3",
     "page": 427,
     "printed": 403,
     "task": "将所选题的时域表达式统一转换成峰值、余弦参考相量。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.3(a)：10 sin(ωt+30°) 的余弦形式？",
+    "choices": [
+      "10 cos(ωt+60°)",
+      "10 cos(ωt+120°)",
+      "10 cos(ωt−30°)",
+      "10 cos(ωt−60°)"
+    ],
+    "answer": 3,
+    "explanation": "sin θ=cos(θ−90°)，所以相位是30°−90°=−60°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 733,
+    "oldTitle": "正弦变成余弦相量"
   },
   {
     "id": "04B",
     "origin": 4,
-    "title": "正弦变成余弦相量",
+    "title": "Problem 9.11",
     "category": "Phasors · 相量",
     "ref": "9.11",
     "page": 428,
     "printed": 404,
     "task": "将所选题的时域表达式统一转换成峰值、余弦参考相量。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.11(b)：i(t)=−8sin(10t+70°) mA，峰值余弦相量为？",
+    "choices": [
+      "8∠160° mA",
+      "8∠−20° mA",
+      "8∠70° mA",
+      "8∠−160° mA"
+    ],
+    "answer": 0,
+    "explanation": "负号增加180°；正弦变余弦减90°：70°+180°−90°=160°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 741,
+    "oldTitle": "正弦变成余弦相量"
   },
   {
     "id": "04C",
     "origin": 4,
-    "title": "正弦变成余弦相量",
+    "title": "Problem 9.16",
     "category": "Phasors · 相量",
     "ref": "9.16",
     "page": 428,
     "printed": 404,
     "task": "将所选题的时域表达式统一转换成峰值、余弦参考相量。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.16(c)：20cos(2t)+15sin(2t) 的余弦相量为？",
+    "choices": [
+      "35+j0",
+      "20−j15",
+      "20+j15",
+      "15−j20"
+    ],
+    "answer": 1,
+    "explanation": "cos项对应实部，sin项对应−j方向；模为25，相位−36.87°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 746,
+    "oldTitle": "正弦变成余弦相量"
   },
   {
     "id": "05A",
     "origin": 5,
-    "title": "相量加法回到时域",
+    "title": "Problem 9.17",
     "category": "Phasors · 相量",
     "ref": "9.17",
     "page": 428,
     "printed": 404,
     "task": "用直角坐标完成相量叠加，再写回时域。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.17：两个串联电压相加后的峰值相量为？（数据见教材）",
+    "choices": [
+      "15.62∠9.80° V",
+      "2∠90° V",
+      "15.62∠−9.80° V",
+      "22∠−30° V"
+    ],
+    "answer": 2,
+    "explanation": "10∠−60°+12∠30°=(5−j8.660)+(10.392+j6)=15.392−j2.660 V。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 747,
+    "oldTitle": "相量加法回到时域"
   },
   {
     "id": "05B",
     "origin": 5,
-    "title": "相量加法回到时域",
+    "title": "Problem 9.19",
     "category": "Phasors · 相量",
     "ref": "9.19",
     "page": 428,
     "printed": 404,
     "task": "用直角坐标完成相量叠加，再写回时域。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.19(a)：3cos(20t+10°)−5cos(20t−30°) 的结果？",
+    "choices": [
+      "3.32cos(20t−65.51°)",
+      "8cos(20t−20°)",
+      "2cos(20t+40°)",
+      "3.32cos(20t+114.49°)"
+    ],
+    "answer": 3,
+    "explanation": "相量相减得到−1.376+j3.021，位于第二象限；不能只取反正切的主值。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 749,
+    "oldTitle": "相量加法回到时域"
   },
   {
     "id": "05C",
     "origin": 5,
-    "title": "相量加法回到时域",
+    "title": "Problem 9.23",
     "category": "Phasors · 相量",
     "ref": "9.23",
     "page": 429,
     "printed": 405,
     "task": "用直角坐标完成相量叠加，再写回时域。",
     "hint": "ω=2πf，T=1/f。sin θ=cos(θ−90°)。同频相量相加时先转直角坐标。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.23(b)：30cos(5t+60°)−20sin(5t+60°) 的结果？",
+    "choices": [
+      "36.05cos(5t+93.69°) A",
+      "36.05cos(5t+26.31°) A",
+      "10cos(5t+60°) A",
+      "50cos(5t+60°) A"
+    ],
+    "answer": 0,
+    "explanation": "I=30∠60°−20∠−30°=−2.321+j35.981 A，转换为极坐标。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 753,
+    "oldTitle": "相量加法回到时域"
   },
   {
     "id": "06A",
     "origin": 6,
-    "title": "串联 RLC 阻抗",
+    "title": "Problem 9.31",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.31",
     "page": 429,
     "printed": 405,
     "task": "先算各元件阻抗，再求电路总阻抗；含并联时先化简并联部分。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.31：串联RLC，R=80 Ω、L=240 mH、C=5 mF、ω=2。总阻抗？",
+    "choices": [
+      "80+j0.48 Ω",
+      "80−j99.52 Ω",
+      "80+j100.48 Ω",
+      "80−j100.48 Ω"
+    ],
+    "answer": 1,
+    "explanation": "ZL=j0.48，ZC=−j100；串联相加。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 761,
+    "oldTitle": "串联 RLC 阻抗"
   },
   {
     "id": "06B",
     "origin": 6,
-    "title": "串联 RLC 阻抗",
+    "title": "Problem 9.35",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.35",
     "page": 429,
     "printed": 405,
     "task": "先算各元件阻抗，再求电路总阻抗；含并联时先化简并联部分。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.35：电源50cos(200t) V，串联10 Ω、20 mH、5 mF。电流？",
+    "choices": [
+      "5∠0° A",
+      "4.472∠−26.57° A",
+      "4.789∠−16.70° A",
+      "4.789∠16.70° A"
+    ],
+    "answer": 2,
+    "explanation": "Z=10+j4−j1=10+j3；I=50/Z。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 765,
+    "oldTitle": "串联 RLC 阻抗"
   },
   {
     "id": "06C",
     "origin": 6,
-    "title": "串联 RLC 阻抗",
+    "title": "Problem 9.56",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.56",
     "page": 432,
     "printed": 408,
     "task": "先算各元件阻抗，再求电路总阻抗；含并联时先化简并联部分。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.56：图9.63在ω=377 rad/s的输入阻抗为？",
+    "choices": [
+      "21.69+j35.91 Ω",
+      "52−j30.43 Ω",
+      "12−j53.05 Ω",
+      "21.69−j35.91 Ω"
+    ],
+    "answer": 3,
+    "explanation": "Zin=12−j53.05+(j22.62||40)。并联部分约9.69+j17.14 Ω。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 787,
+    "oldTitle": "串联 RLC 阻抗"
   },
   {
     "id": "07A",
     "origin": 7,
-    "title": "原题电流相量",
+    "title": "Problem 9.28",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.28",
     "page": 429,
     "printed": 405,
     "task": "由电压相量和阻抗求电流相量，最后转换回时域。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "按教材 Problem 9.28：8 Ω 电阻接110cos(377t) V，电流为？",
+    "choices": [
+      "13.75cos(377t) A",
+      "7.333cos(377t) A",
+      "10.4cos(377t+45°) A",
+      "13.75cos(377t−90°) A"
+    ],
+    "answer": 0,
+    "explanation": "纯电阻i=v/R=110cos(377t)/8。",
+    "verification": "教材数据独立复算：手册9.28使用156 V、15 Ω，与本教材题干不一致。",
+    "manualPage": 758,
+    "oldTitle": "原题电流相量"
   },
   {
     "id": "07B",
     "origin": 7,
-    "title": "原题电流相量",
+    "title": "Problem 9.31",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.31",
     "page": 429,
     "printed": 405,
     "task": "由电压相量和阻抗求电流相量，最后转换回时域。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.31：串联RLC，R=80 Ω、L=240 mH、C=5 mF、ω=2。总阻抗？",
+    "choices": [
+      "80+j0.48 Ω",
+      "80−j99.52 Ω",
+      "80+j100.48 Ω",
+      "80−j100.48 Ω"
+    ],
+    "answer": 1,
+    "explanation": "ZL=j0.48，ZC=−j100；串联相加。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 761,
+    "oldTitle": "原题电流相量"
   },
   {
     "id": "07C",
     "origin": 7,
-    "title": "原题电流相量",
+    "title": "Problem 9.35",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.35",
     "page": 429,
     "printed": 405,
     "task": "由电压相量和阻抗求电流相量，最后转换回时域。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.35：电源50cos(200t) V，串联10 Ω、20 mH、5 mF。电流？",
+    "choices": [
+      "5∠0° A",
+      "4.472∠−26.57° A",
+      "4.789∠−16.70° A",
+      "4.789∠16.70° A"
+    ],
+    "answer": 2,
+    "explanation": "Z=10+j4−j1=10+j3；I=50/Z。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 765,
+    "oldTitle": "原题电流相量"
   },
   {
     "id": "08A",
     "origin": 8,
-    "title": "分压计算",
+    "title": "Problem 9.33",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.33",
     "page": 429,
     "printed": 405,
     "task": "练习电压相量关系；只有纯串联支路才能直接使用串联分压。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.33：串联RL，电源电压幅值110 V，电阻电压幅值85 V。电感电压幅值？",
+    "choices": [
+      "25 V",
+      "195 V",
+      "139.01 V",
+      "69.82 V"
+    ],
+    "answer": 3,
+    "explanation": "电阻、电感电压相差90°，VL=√(110²−85²)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 763,
+    "oldTitle": "分压计算"
   },
   {
     "id": "08B",
     "origin": 8,
-    "title": "分压计算",
+    "title": "Problem 9.41",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.41",
     "page": 430,
     "printed": 406,
     "task": "练习电压相量关系；只有纯串联支路才能直接使用串联分压。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.41：图9.48的输出电压相量为？",
+    "choices": [
+      "6−j2 V",
+      "6+j2 V",
+      "4+j2 V",
+      "10−j10 V"
+    ],
+    "answer": 0,
+    "explanation": "总阻抗2−j；输出V=10(1−j)/(2−j)=6−j2 V。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 772,
+    "oldTitle": "分压计算"
   },
   {
     "id": "08C",
     "origin": 8,
-    "title": "分压计算",
+    "title": "Problem 9.42",
     "category": "Impedance · 阻抗与单回路",
     "ref": "9.42",
     "page": 430,
     "printed": 406,
     "task": "练习电压相量关系；只有纯串联支路才能直接使用串联分压。",
     "hint": "ZR=R，ZL=jωL，ZC=1/(jωC)。串联阻抗相加，并联先加导纳。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.42：图9.49输出电压的余弦形式为？",
+    "choices": [
+      "17.14cos(200t−90°) V",
+      "17.14cos(200t) V",
+      "17.14cos(200t+90°) V",
+      "60cos(200t−90°) V"
+    ],
+    "answer": 1,
+    "explanation": "50||(−j100)=40−j20；总阻抗70 Ω。源的余弦相量为−j60，乘j20/70得到17.14 V。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 773,
+    "oldTitle": "分压计算"
   },
   {
     "id": "09A",
     "origin": 9,
-    "title": "两电源的相量",
+    "title": "Problem 10.11",
     "category": "Nodal · 节点分析",
     "ref": "10.11",
     "page": 468,
     "printed": 444,
     "task": "先把题中全部独立源写成余弦参考相量，再进入电路分析。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "按教材 Problem 10.11：8sin(2t+30°) V与4cos(2t) A的余弦相量分别为？",
+    "choices": [
+      "8∠120° V；4∠90° A",
+      "8∠−60° V；4∠−90° A",
+      "8∠−60° V；4∠0° A",
+      "8∠30° V；4∠0° A"
+    ],
+    "answer": 2,
+    "explanation": "正弦相位减90°，余弦不变。",
+    "verification": "教材题干独立复核：上传手册10.11使用另一张电路图，不能照搬其数值答案。",
+    "manualPage": 839,
+    "oldTitle": "两电源的相量"
   },
   {
     "id": "09B",
     "origin": 9,
-    "title": "两电源的相量",
+    "title": "Problem 10.25",
     "category": "Nodal · 节点分析",
     "ref": "10.25",
     "page": 469,
     "printed": 445,
     "task": "先把题中全部独立源写成余弦参考相量，再进入电路分析。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.25：图10.73向下的共享电容电流Io为？",
+    "choices": [
+      "1−j1 A",
+      "−1−j1 A",
+      "2+j0 A",
+      "1+j1 A"
+    ],
+    "answer": 3,
+    "explanation": "同向网孔的共享支路Io=I1−I2。由(2−j)I1+jI2=5与I1+I2=3得到Io=1+j。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 857,
+    "oldTitle": "两电源的相量"
   },
   {
     "id": "09C",
     "origin": 9,
-    "title": "两电源的相量",
+    "title": "Problem 10.26",
     "category": "Nodal · 节点分析",
     "ref": "10.26",
     "page": 470,
     "printed": 446,
     "task": "先把题中全部独立源写成余弦参考相量，再进入电路分析。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.26：图10.74向下的电感电流Io为？",
+    "choices": [
+      "37.5−j12.5 mA",
+      "−37.5+j12.5 mA",
+      "2.5−j7.5 mA",
+      "37.5+j12.5 mA"
+    ],
+    "answer": 0,
+    "explanation": "正确原始矩阵为[[2000+j400,−j400],[−j400,−j600]]，右端[10,j20] V。解得I1=2.5−j7.5 mA，I2=−35+j5 mA，Io=I1−I2。",
+    "verification": "手册最终电流与独立矩阵复算一致；手册中间列式有排印错误，已纠正。",
+    "manualPage": 858,
+    "oldTitle": "两电源的相量"
   },
   {
     "id": "10A",
     "origin": 10,
-    "title": "写原始 KCL 方程",
+    "title": "Problem 10.7",
     "category": "Nodal · 节点分析",
     "ref": "10.7",
     "page": 467,
     "printed": 443,
     "task": "选参考地并标未知节点，先写未经整理的 KCL 方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.7：图10.56的节点电压V为？",
+    "choices": [
+      "57.46∠−123.7° V",
+      "124.08∠−154° V",
+      "124.08∠26° V",
+      "120∠−15° V"
+    ],
+    "answer": 1,
+    "explanation": "按图的电流源方向写(120∠−15°−V)/(40+j20)=6∠30°+V/(−j30)+V/50。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 834,
+    "oldTitle": "写原始 KCL 方程"
   },
   {
     "id": "10B",
     "origin": 10,
-    "title": "写原始 KCL 方程",
+    "title": "Problem 10.8",
     "category": "Nodal · 节点分析",
     "ref": "10.8",
     "page": 467,
     "printed": 443,
     "task": "选参考地并标未知节点，先写未经整理的 KCL 方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.8：图10.57的输出电流Io为？",
+    "choices": [
+      "3.638∠−82.17° A",
+      "6∠15° A",
+      "7.276∠−82.17° A",
+      "7.276∠82.17° A"
+    ],
+    "answer": 2,
+    "explanation": "保留受控源，节点解约V1=−70.63−j127.23，V2=−110.30+j161.09。Io=(V1−V2)/40。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 835,
+    "oldTitle": "写原始 KCL 方程"
   },
   {
     "id": "10C",
     "origin": 10,
-    "title": "写原始 KCL 方程",
+    "title": "Problem 10.9",
     "category": "Nodal · 节点分析",
     "ref": "10.9",
     "page": 467,
     "printed": 443,
     "task": "选参考地并标未知节点，先写未经整理的 KCL 方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.9：图10.58的输出电压Vo为？",
+    "choices": [
+      "6.154∠−70.26° V",
+      "10∠0° V",
+      "6.154∠−19.74° V",
+      "6.154∠70.26° V"
+    ],
+    "answer": 3,
+    "explanation": "先解两节点，再用Vo=30V2/(30+j10)；输出是30 Ω电阻电压，并非整个串联支路电压。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 837,
+    "oldTitle": "写原始 KCL 方程"
   },
   {
     "id": "11A",
     "origin": 11,
-    "title": "手算得到节点电压",
+    "title": "Problem 10.1",
     "category": "Nodal · 节点分析",
     "ref": "10.1",
     "page": 467,
     "printed": 443,
     "task": "列出节点方程，解出未知节点，再计算题目要求的输出。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.1：图10.50输入电流的峰值相量为？",
+    "choices": [
+      "1.970∠5.65° A",
+      "1.970∠−5.65° A",
+      "2∠90° A",
+      "0.5075∠−5.65° A"
+    ],
+    "answer": 0,
+    "explanation": "Zin=1+(1/j10+1/(−j0.1)+1)⁻¹≈1.0101−j0.1；I=2/Zin。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 828,
+    "oldTitle": "手算得到节点电压"
   },
   {
     "id": "11B",
     "origin": 11,
-    "title": "手算得到节点电压",
+    "title": "Problem 10.3",
     "category": "Nodal · 节点分析",
     "ref": "10.3",
     "page": 467,
     "printed": 443,
     "task": "列出节点方程，解出未知节点，再计算题目要求的输出。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.3：图10.52的输出电压相量为？",
+    "choices": [
+      "4.682∠−33.15° V",
+      "3.835∠−35.02° V",
+      "3.835∠35.02° V",
+      "16∠−90° V"
+    ],
+    "answer": 1,
+    "explanation": "KCL整理为(1.22+j0.04)Vo=3.92−j2.56；相除得结果。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 830,
+    "oldTitle": "手算得到节点电压"
   },
   {
     "id": "11C",
     "origin": 11,
-    "title": "手算得到节点电压",
+    "title": "Problem 10.7",
     "category": "Nodal · 节点分析",
     "ref": "10.7",
     "page": 467,
     "printed": 443,
     "task": "列出节点方程，解出未知节点，再计算题目要求的输出。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.7：图10.56的节点电压V为？",
+    "choices": [
+      "120∠−15° V",
+      "57.46∠−123.7° V",
+      "124.08∠−154° V",
+      "124.08∠26° V"
+    ],
+    "answer": 2,
+    "explanation": "按图的电流源方向写(120∠−15°−V)/(40+j20)=6∠30°+V/(−j30)+V/50。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 834,
+    "oldTitle": "手算得到节点电压"
   },
   {
     "id": "12A",
     "origin": 12,
-    "title": "两节点手算消元",
+    "title": "Problem 10.14",
     "category": "Nodal · 节点分析",
     "ref": "10.14",
     "page": 468,
     "printed": 444,
     "task": "用节点法组成复数线性方程组；先展示系数矩阵，再解方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.14：图10.63的节点V₁为？",
+    "choices": [
+      "28.93∠−44.62° V",
+      "49.18∠124.08° V",
+      "20∠30° V",
+      "28.93∠135.38° V"
+    ],
+    "answer": 3,
+    "explanation": "节点系数矩阵为[[1+j2.5,j2.5],[j2.5,−j5.5]]，右端为[−200∠30°,200∠30°]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 844,
+    "oldTitle": "两节点手算消元"
   },
   {
     "id": "12B",
     "origin": 12,
-    "title": "两节点手算消元",
+    "title": "Problem 10.16",
     "category": "Nodal · 节点分析",
     "ref": "10.16",
     "page": 468,
     "printed": 444,
     "task": "用节点法组成复数线性方程组；先展示系数矩阵，再解方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.16：Vx正端在节点1，负端在节点2。Vx约为？",
+    "choices": [
+      "−4.335+j3.776 V",
+      "4.335−j3.776 V",
+      "14.894−j14.615 V",
+      "5.279−j5.419 V"
+    ],
+    "answer": 0,
+    "explanation": "Vx=V1−V2；约(5.279−j5.419)−(9.615−j9.196)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 846,
+    "oldTitle": "两节点手算消元"
   },
   {
     "id": "12C",
     "origin": 12,
-    "title": "两节点手算消元",
+    "title": "Problem 10.23",
     "category": "Nodal · 节点分析",
     "ref": "10.23",
     "page": 469,
     "printed": 445,
     "task": "用节点法组成复数线性方程组；先展示系数矩阵，再解方程。",
     "hint": "流出节点的支路电流写成 (Va−Vb)/Z。普通无受控源电阻抗网络的节点矩阵：对角为所接导纳之和，非对角为共享导纳的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.23：哪个是节点V的正确KCL？",
+    "choices": [
+      "(V−Vs)R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)/R + V/(jωL) + jωCV = 0",
+      "(V+Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0"
+    ],
+    "answer": 1,
+    "explanation": "流出节点的三支路电流相加为零；其中一支路是串联LC，须使用其总阻抗。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 855,
+    "oldTitle": "两节点手算消元"
   },
   {
     "id": "13A",
     "origin": 13,
-    "title": "两个网孔的原始方程",
+    "title": "Problem 10.25",
     "category": "Mesh · 网孔分析",
     "ref": "10.25",
     "page": 469,
     "printed": 445,
     "task": "为各网孔标同一绕行方向，逐支路写出原始 KVL。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.25：图10.73向下的共享电容电流Io为？",
+    "choices": [
+      "−1−j1 A",
+      "2+j0 A",
+      "1+j1 A",
+      "1−j1 A"
+    ],
+    "answer": 2,
+    "explanation": "同向网孔的共享支路Io=I1−I2。由(2−j)I1+jI2=5与I1+I2=3得到Io=1+j。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 857,
+    "oldTitle": "两个网孔的原始方程"
   },
   {
     "id": "13B",
     "origin": 13,
-    "title": "两个网孔的原始方程",
+    "title": "Problem 10.26",
     "category": "Mesh · 网孔分析",
     "ref": "10.26",
     "page": 470,
     "printed": 446,
     "task": "为各网孔标同一绕行方向，逐支路写出原始 KVL。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.26：图10.74向下的电感电流Io为？",
+    "choices": [
+      "−37.5+j12.5 mA",
+      "2.5−j7.5 mA",
+      "37.5+j12.5 mA",
+      "37.5−j12.5 mA"
+    ],
+    "answer": 3,
+    "explanation": "正确原始矩阵为[[2000+j400,−j400],[−j400,−j600]]，右端[10,j20] V。解得I1=2.5−j7.5 mA，I2=−35+j5 mA，Io=I1−I2。",
+    "verification": "手册最终电流与独立矩阵复算一致；手册中间列式有排印错误，已纠正。",
+    "manualPage": 858,
+    "oldTitle": "两个网孔的原始方程"
   },
   {
     "id": "13C",
     "origin": 13,
-    "title": "两个网孔的原始方程",
+    "title": "Problem 10.27",
     "category": "Mesh · 网孔分析",
     "ref": "10.27",
     "page": 470,
     "printed": 446,
     "task": "为各网孔标同一绕行方向，逐支路写出原始 KVL。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.27：图10.75的顺时针网孔电流I₂为？",
+    "choices": [
+      "0.9928∠37.71° A",
+      "0.9928∠−37.71° A",
+      "4.698∠95.24° A",
+      "0.9928∠−142.29° A"
+    ],
+    "answer": 0,
+    "explanation": "矩阵系数[[−j10,j20],[j20,40−j20]]，右端[40∠30°,−50]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 859,
+    "oldTitle": "两个网孔的原始方程"
   },
   {
     "id": "14A",
     "origin": 14,
-    "title": "2×2 矩阵列式",
+    "title": "Problem 10.26",
     "category": "Mesh · 网孔分析",
     "ref": "10.26",
     "page": 470,
     "printed": 446,
     "task": "将 KVL 整理为 ZI=V；核对对角项与共享支路项的符号。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.26：图10.74向下的电感电流Io为？",
+    "choices": [
+      "37.5+j12.5 mA",
+      "37.5−j12.5 mA",
+      "−37.5+j12.5 mA",
+      "2.5−j7.5 mA"
+    ],
+    "answer": 1,
+    "explanation": "正确原始矩阵为[[2000+j400,−j400],[−j400,−j600]]，右端[10,j20] V。解得I1=2.5−j7.5 mA，I2=−35+j5 mA，Io=I1−I2。",
+    "verification": "手册最终电流与独立矩阵复算一致；手册中间列式有排印错误，已纠正。",
+    "manualPage": 858,
+    "oldTitle": "2×2 矩阵列式"
   },
   {
     "id": "14B",
     "origin": 14,
-    "title": "2×2 矩阵列式",
+    "title": "Problem 10.27",
     "category": "Mesh · 网孔分析",
     "ref": "10.27",
     "page": 470,
     "printed": 446,
     "task": "将 KVL 整理为 ZI=V；核对对角项与共享支路项的符号。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.27：图10.75的顺时针网孔电流I₂为？",
+    "choices": [
+      "4.698∠95.24° A",
+      "0.9928∠−142.29° A",
+      "0.9928∠37.71° A",
+      "0.9928∠−37.71° A"
+    ],
+    "answer": 2,
+    "explanation": "矩阵系数[[−j10,j20],[j20,40−j20]]，右端[40∠30°,−50]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 859,
+    "oldTitle": "2×2 矩阵列式"
   },
   {
     "id": "14C",
     "origin": 14,
-    "title": "2×2 矩阵列式",
+    "title": "Problem 10.28",
     "category": "Mesh · 网孔分析",
     "ref": "10.28",
     "page": 470,
     "printed": 446,
     "task": "将 KVL 整理为 ZI=V；核对对角项与共享支路项的符号。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.28：图10.76的两个顺时针网孔电流系数矩阵首行为？",
+    "choices": [
+      "[2+j4.25, −1−j0.25]",
+      "[2+j3.75, 1−j0.25]",
+      "[1+j4, −j0.25]",
+      "[2+j3.75, −1+j0.25]"
+    ],
+    "answer": 3,
+    "explanation": "共享阻抗1−j0.25，独占1+j4；对角相加，非对角取共享阻抗的负值。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 860,
+    "oldTitle": "2×2 矩阵列式"
   },
   {
     "id": "15A",
     "origin": 15,
-    "title": "手算两网孔电流",
+    "title": "Problem 10.25",
     "category": "Mesh · 网孔分析",
     "ref": "10.25",
     "page": 469,
     "printed": 445,
     "task": "解出网孔电流，再按照题图箭头还原所求支路电流。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.25：图10.73向下的共享电容电流Io为？",
+    "choices": [
+      "1+j1 A",
+      "1−j1 A",
+      "−1−j1 A",
+      "2+j0 A"
+    ],
+    "answer": 0,
+    "explanation": "同向网孔的共享支路Io=I1−I2。由(2−j)I1+jI2=5与I1+I2=3得到Io=1+j。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 857,
+    "oldTitle": "手算两网孔电流"
   },
   {
     "id": "15B",
     "origin": 15,
-    "title": "手算两网孔电流",
+    "title": "Problem 10.27",
     "category": "Mesh · 网孔分析",
     "ref": "10.27",
     "page": 470,
     "printed": 446,
     "task": "解出网孔电流，再按照题图箭头还原所求支路电流。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.27：图10.75的顺时针网孔电流I₂为？",
+    "choices": [
+      "0.9928∠−142.29° A",
+      "0.9928∠37.71° A",
+      "0.9928∠−37.71° A",
+      "4.698∠95.24° A"
+    ],
+    "answer": 1,
+    "explanation": "矩阵系数[[−j10,j20],[j20,40−j20]]，右端[40∠30°,−50]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 859,
+    "oldTitle": "手算两网孔电流"
   },
   {
     "id": "15C",
     "origin": 15,
-    "title": "手算两网孔电流",
+    "title": "Problem 10.28",
     "category": "Mesh · 网孔分析",
     "ref": "10.28",
     "page": 470,
     "printed": 446,
     "task": "解出网孔电流，再按照题图箭头还原所求支路电流。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.28：图10.76的两个顺时针网孔电流系数矩阵首行为？",
+    "choices": [
+      "[2+j3.75, 1−j0.25]",
+      "[1+j4, −j0.25]",
+      "[2+j3.75, −1+j0.25]",
+      "[2+j4.25, −1−j0.25]"
+    ],
+    "answer": 2,
+    "explanation": "共享阻抗1−j0.25，独占1+j4；对角相加，非对角取共享阻抗的负值。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 860,
+    "oldTitle": "手算两网孔电流"
   },
   {
     "id": "16A",
     "origin": 16,
-    "title": "共享支路电容电压",
+    "title": "Problem 10.26",
     "category": "Mesh · 网孔分析",
     "ref": "10.26",
     "page": 470,
     "printed": 446,
     "task": "额外选择共享支路，标注电压正负端，用支路电流乘阻抗求其电压。此问为原创延伸。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.26：图10.74向下的电感电流Io为？",
+    "choices": [
+      "−37.5+j12.5 mA",
+      "2.5−j7.5 mA",
+      "37.5+j12.5 mA",
+      "37.5−j12.5 mA"
+    ],
+    "answer": 3,
+    "explanation": "正确原始矩阵为[[2000+j400,−j400],[−j400,−j600]]，右端[10,j20] V。解得I1=2.5−j7.5 mA，I2=−35+j5 mA，Io=I1−I2。",
+    "verification": "手册最终电流与独立矩阵复算一致；手册中间列式有排印错误，已纠正。",
+    "manualPage": 858,
+    "oldTitle": "共享支路电容电压"
   },
   {
     "id": "16B",
     "origin": 16,
-    "title": "共享支路电容电压",
+    "title": "Problem 10.27",
     "category": "Mesh · 网孔分析",
     "ref": "10.27",
     "page": 470,
     "printed": 446,
     "task": "额外选择共享支路，标注电压正负端，用支路电流乘阻抗求其电压。此问为原创延伸。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.27：图10.75的顺时针网孔电流I₂为？",
+    "choices": [
+      "0.9928∠37.71° A",
+      "0.9928∠−37.71° A",
+      "4.698∠95.24° A",
+      "0.9928∠−142.29° A"
+    ],
+    "answer": 0,
+    "explanation": "矩阵系数[[−j10,j20],[j20,40−j20]]，右端[40∠30°,−50]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 859,
+    "oldTitle": "共享支路电容电压"
   },
   {
     "id": "16C",
     "origin": 16,
-    "title": "共享支路电容电压",
+    "title": "Problem 10.28",
     "category": "Mesh · 网孔分析",
     "ref": "10.28",
     "page": 470,
     "printed": 446,
     "task": "额外选择共享支路，标注电压正负端，用支路电流乘阻抗求其电压。此问为原创延伸。",
     "hint": "所有网孔同向时，共享支路压降为 Z(Ik−Im)。普通阻抗网络的对角项是本网孔阻抗之和，非对角项是共享阻抗的负值。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.28：图10.76的两个顺时针网孔电流系数矩阵首行为？",
+    "choices": [
+      "[1+j4, −j0.25]",
+      "[2+j3.75, −1+j0.25]",
+      "[2+j4.25, −1−j0.25]",
+      "[2+j3.75, 1−j0.25]"
+    ],
+    "answer": 1,
+    "explanation": "共享阻抗1−j0.25，独占1+j4；对角相加，非对角取共享阻抗的负值。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 860,
+    "oldTitle": "共享支路电容电压"
   },
   {
     "id": "17A",
     "origin": 17,
-    "title": "三网孔：只列式",
+    "title": "Problem 10.30",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.30",
     "page": 470,
     "printed": 446,
     "task": "练习多网孔矩阵列式，先不计算逆矩阵；检查源的绕行符号。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.30：图10.78电容输出电压Vo约为？",
+    "choices": [
+      "31.40−j46.68 V",
+      "80+j0 V",
+      "46.68+j31.40 V",
+      "−46.68−j31.40 V"
+    ],
+    "answer": 2,
+    "explanation": "ω=100，ZC=−j200。用中、右顺时针网孔电流：Vo=−j200(I2−I3)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 863,
+    "oldTitle": "三网孔：只列式"
   },
   {
     "id": "17B",
     "origin": 17,
-    "title": "三网孔：只列式",
+    "title": "Problem 10.31",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.31",
     "page": 470,
     "printed": 446,
     "task": "练习多网孔矩阵列式，先不计算逆矩阵；检查源的绕行符号。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.31：图10.79，三个网孔均顺时针，中间网孔KVL为？",
+    "choices": [
+      "−j40I₁+j60I₂−j40I₃=0",
+      "j40I₁+j140I₂+j40I₃=0",
+      "j40I₁−j20I₂−j40I₃=0",
+      "j40I₁−j20I₂+j40I₃=0"
+    ],
+    "answer": 3,
+    "explanation": "中间网孔总阻抗j60−j40−j40=−j20；两共享电容的非对角系数均为+j40。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 865,
+    "oldTitle": "三网孔：只列式"
   },
   {
     "id": "17C",
     "origin": 17,
-    "title": "三网孔：只列式",
+    "title": "Problem 10.39",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.39",
     "page": 471,
     "printed": 447,
     "task": "练习多网孔矩阵列式，先不计算逆矩阵；检查源的绕行符号。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.39：按解答的顺时针网孔方向，Ix=I₁−I₂约为？",
+    "choices": [
+      "66.6+j75.2 mA",
+      "−66.6−j75.2 mA",
+      "−322.6+j643.4 mA",
+      "71.8−j126.5 mA"
+    ],
+    "answer": 0,
+    "explanation": "I1≈−128+j359.3 mA，I2≈−194.6+j284.1 mA；按方向相减。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 873,
+    "oldTitle": "三网孔：只列式"
   },
   {
     "id": "18A",
     "origin": 18,
-    "title": "不求电流也能表达输出",
+    "title": "Problem 10.30",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.30",
     "page": 470,
     "printed": 446,
     "task": "先用网孔电流表示所求支路电流，再写目标电压表达式。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.30：图10.78电容输出电压Vo约为？",
+    "choices": [
+      "80+j0 V",
+      "46.68+j31.40 V",
+      "−46.68−j31.40 V",
+      "31.40−j46.68 V"
+    ],
+    "answer": 1,
+    "explanation": "ω=100，ZC=−j200。用中、右顺时针网孔电流：Vo=−j200(I2−I3)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 863,
+    "oldTitle": "不求电流也能表达输出"
   },
   {
     "id": "18B",
     "origin": 18,
-    "title": "不求电流也能表达输出",
+    "title": "Problem 10.31",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.31",
     "page": 470,
     "printed": 446,
     "task": "先用网孔电流表示所求支路电流，再写目标电压表达式。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.31：图10.79，三个网孔均顺时针，中间网孔KVL为？",
+    "choices": [
+      "j40I₁+j140I₂+j40I₃=0",
+      "j40I₁−j20I₂−j40I₃=0",
+      "j40I₁−j20I₂+j40I₃=0",
+      "−j40I₁+j60I₂−j40I₃=0"
+    ],
+    "answer": 2,
+    "explanation": "中间网孔总阻抗j60−j40−j40=−j20；两共享电容的非对角系数均为+j40。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 865,
+    "oldTitle": "不求电流也能表达输出"
   },
   {
     "id": "18C",
     "origin": 18,
-    "title": "不求电流也能表达输出",
+    "title": "Problem 10.39",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.39",
     "page": 471,
     "printed": 447,
     "task": "先用网孔电流表示所求支路电流，再写目标电压表达式。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.39：按解答的顺时针网孔方向，Ix=I₁−I₂约为？",
+    "choices": [
+      "−66.6−j75.2 mA",
+      "−322.6+j643.4 mA",
+      "71.8−j126.5 mA",
+      "66.6+j75.2 mA"
+    ],
+    "answer": 3,
+    "explanation": "I1≈−128+j359.3 mA，I2≈−194.6+j284.1 mA；按方向相减。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 873,
+    "oldTitle": "不求电流也能表达输出"
   },
   {
     "id": "19A",
     "origin": 19,
-    "title": "电感参考方向",
+    "title": "Problem 10.30",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.30",
     "page": 470,
     "printed": 446,
     "task": "额外挑选一个支路，分别写出正向和反向参考电流的表达式。此问为原创延伸。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.30：图10.78电容输出电压Vo约为？",
+    "choices": [
+      "46.68+j31.40 V",
+      "−46.68−j31.40 V",
+      "31.40−j46.68 V",
+      "80+j0 V"
+    ],
+    "answer": 0,
+    "explanation": "ω=100，ZC=−j200。用中、右顺时针网孔电流：Vo=−j200(I2−I3)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 863,
+    "oldTitle": "电感参考方向"
   },
   {
     "id": "19B",
     "origin": 19,
-    "title": "电感参考方向",
+    "title": "Problem 10.31",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.31",
     "page": 470,
     "printed": 446,
     "task": "额外挑选一个支路，分别写出正向和反向参考电流的表达式。此问为原创延伸。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.31：图10.79，三个网孔均顺时针，中间网孔KVL为？",
+    "choices": [
+      "j40I₁−j20I₂−j40I₃=0",
+      "j40I₁−j20I₂+j40I₃=0",
+      "−j40I₁+j60I₂−j40I₃=0",
+      "j40I₁+j140I₂+j40I₃=0"
+    ],
+    "answer": 1,
+    "explanation": "中间网孔总阻抗j60−j40−j40=−j20；两共享电容的非对角系数均为+j40。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 865,
+    "oldTitle": "电感参考方向"
   },
   {
     "id": "19C",
     "origin": 19,
-    "title": "电感参考方向",
+    "title": "Problem 10.39",
     "category": "Mesh · 多网孔矩阵",
     "ref": "10.39",
     "page": 471,
     "printed": 447,
     "task": "额外挑选一个支路，分别写出正向和反向参考电流的表达式。此问为原创延伸。",
     "hint": "先定义参考方向，再列 ZI=V。目标支路可能等于单个网孔电流，也可能是两个网孔电流之差。不要仅凭图上位置判断正负。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.39：按解答的顺时针网孔方向，Ix=I₁−I₂约为？",
+    "choices": [
+      "−322.6+j643.4 mA",
+      "71.8−j126.5 mA",
+      "66.6+j75.2 mA",
+      "−66.6−j75.2 mA"
+    ],
+    "answer": 2,
+    "explanation": "I1≈−128+j359.3 mA，I2≈−194.6+j284.1 mA；按方向相减。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 873,
+    "oldTitle": "电感参考方向"
   },
   {
     "id": "20A",
     "origin": 20,
-    "title": "独立源置零",
+    "title": "Problem 10.55",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.55",
     "page": 473,
     "printed": 449,
     "task": "先标出独立源置零后的网络；若有受控源，保持受控关系并使用测试源。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.55(a)：端口等效阻抗Zth为？",
+    "choices": [
+      "10+j20 Ω",
+      "10−j10 Ω",
+      "−j20 Ω",
+      "10−j20 Ω"
+    ],
+    "answer": 3,
+    "explanation": "独立电压源短路后，Zth=10+(j20||−j10)=10−j20。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 902,
+    "oldTitle": "独立源置零"
   },
   {
     "id": "20B",
     "origin": 20,
-    "title": "独立源置零",
+    "title": "Problem 10.56",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.56",
     "page": 473,
     "printed": 449,
     "task": "先标出独立源置零后的网络；若有受控源，保持受控关系并使用测试源。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.56(a)：Vth、Zth分别为？",
+    "choices": [
+      "12−j8 V；6−j4 Ω",
+      "12+j8 V；6+j4 Ω",
+      "2 V；6−j4 Ω",
+      "6−j4 V；12−j8 Ω"
+    ],
+    "answer": 0,
+    "explanation": "Zth=6+(j4||−j2)=6−j4 Ω，IN=2 A，所以Vth=INZth。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 904,
+    "oldTitle": "独立源置零"
   },
   {
     "id": "20C",
     "origin": 20,
-    "title": "独立源置零",
+    "title": "Problem 10.58",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.58",
     "page": 473,
     "printed": 449,
     "task": "先标出独立源置零后的网络；若有受控源，保持受控关系并使用测试源。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.58：端口等效阻抗为？",
+    "choices": [
+      "8−j6 Ω",
+      "10+j5 Ω",
+      "10−j5 Ω",
+      "8+j4 Ω"
+    ],
+    "answer": 1,
+    "explanation": "Zth=j10||(8−j6)=(j10)(8−j6)/(8+j4)=10+j5 Ω。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 908,
+    "oldTitle": "独立源置零"
   },
   {
     "id": "21A",
     "origin": 21,
-    "title": "原题等效阻抗",
+    "title": "Problem 10.55",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.55",
     "page": 473,
     "printed": 449,
     "task": "从指定端口求等效阻抗，检查串并联关系和复数运算。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.55(a)：端口等效阻抗Zth为？",
+    "choices": [
+      "10−j10 Ω",
+      "−j20 Ω",
+      "10−j20 Ω",
+      "10+j20 Ω"
+    ],
+    "answer": 2,
+    "explanation": "独立电压源短路后，Zth=10+(j20||−j10)=10−j20。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 902,
+    "oldTitle": "原题等效阻抗"
   },
   {
     "id": "21B",
     "origin": 21,
-    "title": "原题等效阻抗",
+    "title": "Problem 10.56",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.56",
     "page": 473,
     "printed": 449,
     "task": "从指定端口求等效阻抗，检查串并联关系和复数运算。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.56(a)：Vth、Zth分别为？",
+    "choices": [
+      "12+j8 V；6+j4 Ω",
+      "2 V；6−j4 Ω",
+      "6−j4 V；12−j8 Ω",
+      "12−j8 V；6−j4 Ω"
+    ],
+    "answer": 3,
+    "explanation": "Zth=6+(j4||−j2)=6−j4 Ω，IN=2 A，所以Vth=INZth。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 904,
+    "oldTitle": "原题等效阻抗"
   },
   {
     "id": "21C",
     "origin": 21,
-    "title": "原题等效阻抗",
+    "title": "Problem 10.60",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.60",
     "page": 474,
     "printed": 450,
     "task": "从指定端口求等效阻抗，检查串并联关系和复数运算。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.60(a)：a-b端口的Zth为？",
+    "choices": [
+      "1.333 Ω",
+      "4 Ω",
+      "2.667−j4 Ω",
+      "2−j4 Ω"
+    ],
+    "answer": 0,
+    "explanation": "10||j5=2+j4；加−j4后为2 Ω，再与4 Ω并联得到4/3 Ω。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 910,
+    "oldTitle": "原题等效阻抗"
   },
   {
     "id": "22A",
     "origin": 22,
-    "title": "原题开路电压",
+    "title": "Problem 10.55",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.55",
     "page": 473,
     "printed": 449,
     "task": "求端口开路电压，并标明正负端；有多个子图时先完成第一个子图。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.55(a)：端口等效阻抗Zth为？",
+    "choices": [
+      "−j20 Ω",
+      "10−j20 Ω",
+      "10+j20 Ω",
+      "10−j10 Ω"
+    ],
+    "answer": 1,
+    "explanation": "独立电压源短路后，Zth=10+(j20||−j10)=10−j20。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 902,
+    "oldTitle": "原题开路电压"
   },
   {
     "id": "22B",
     "origin": 22,
-    "title": "原题开路电压",
+    "title": "Problem 10.56",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.56",
     "page": 473,
     "printed": 449,
     "task": "求端口开路电压，并标明正负端；有多个子图时先完成第一个子图。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.56(a)：Vth、Zth分别为？",
+    "choices": [
+      "2 V；6−j4 Ω",
+      "6−j4 V；12−j8 Ω",
+      "12−j8 V；6−j4 Ω",
+      "12+j8 V；6+j4 Ω"
+    ],
+    "answer": 2,
+    "explanation": "Zth=6+(j4||−j2)=6−j4 Ω，IN=2 A，所以Vth=INZth。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 904,
+    "oldTitle": "原题开路电压"
   },
   {
     "id": "22C",
     "origin": 22,
-    "title": "原题开路电压",
+    "title": "Problem 10.58",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.58",
     "page": 473,
     "printed": 449,
     "task": "求端口开路电压，并标明正负端；有多个子图时先完成第一个子图。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.58：端口等效阻抗为？",
+    "choices": [
+      "10−j5 Ω",
+      "8+j4 Ω",
+      "8−j6 Ω",
+      "10+j5 Ω"
+    ],
+    "answer": 3,
+    "explanation": "Zth=j10||(8−j6)=(j10)(8−j6)/(8+j4)=10+j5 Ω。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 908,
+    "oldTitle": "原题开路电压"
   },
   {
     "id": "23A",
     "origin": 23,
-    "title": "接负载后的端口",
+    "title": "Problem 10.60",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.60",
     "page": 474,
     "printed": 450,
     "task": "用端口等效计算负载响应；若原题未指定负载，额外接入 10 Ω 电阻求其电流。此负载为原创延伸。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.60(a)：a-b端口的Zth为？",
+    "choices": [
+      "1.333 Ω",
+      "4 Ω",
+      "2.667−j4 Ω",
+      "2−j4 Ω"
+    ],
+    "answer": 0,
+    "explanation": "10||j5=2+j4；加−j4后为2 Ω，再与4 Ω并联得到4/3 Ω。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 910,
+    "oldTitle": "接负载后的端口"
   },
   {
     "id": "23B",
     "origin": 23,
-    "title": "接负载后的端口",
+    "title": "Problem 10.62",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.62",
     "page": 474,
     "printed": 450,
     "task": "用端口等效计算负载响应；若原题未指定负载，额外接入 10 Ω 电阻求其电流。此负载为原创延伸。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.62：图10.105负载电压vo(t)约为？",
+    "choices": [
+      "12cos(t) V",
+      "2.3cos(t−163.3°) V",
+      "2.3cos(t+163.3°) V",
+      "3.073cos(t+140.2°) V"
+    ],
+    "answer": 1,
+    "explanation": "保留受控源，用测试源求Zth≈−0.5246−j2.229 Ω；再由Vo=2Vth/(2+Zth)求负载电压。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 915,
+    "oldTitle": "接负载后的端口"
   },
   {
     "id": "23C",
     "origin": 23,
-    "title": "接负载后的端口",
+    "title": "Problem 10.64",
     "category": "Thevenin / Norton · 等效电路",
     "ref": "10.64",
     "page": 474,
     "printed": 450,
     "task": "用端口等效计算负载响应；若原题未指定负载，额外接入 10 Ω 电阻求其电流。此负载为原创延伸。",
     "hint": "Vth=Voc；独立电压源置零为短路，独立电流源置零为开路。受控源保留。IL=Vth/(Zth+ZL)，IN=Vth/Zth。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.64：Norton等效的ZN为？",
+    "choices": [
+      "100+j50 Ω",
+      "60+j80 Ω",
+      "20+j40 Ω",
+      "20−j40 Ω"
+    ],
+    "answer": 2,
+    "explanation": "独立电流源开路后：ZN=(60+40)||(j80−j30)=100||j50。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 918,
+    "oldTitle": "接负载后的端口"
   },
   {
     "id": "24A",
     "origin": 24,
-    "title": "串联电路：各元件功率",
+    "title": "Problem 11.2",
     "category": "Power · 功率",
     "ref": "11.2",
     "page": 514,
     "printed": 490,
     "task": "分别计算各电阻、理想电感及理想电容的平均功率。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.2：图11.35中5 Ω电阻平均吸收功率为？",
+    "choices": [
+      "5.294 W",
+      "20 W",
+      "0 W",
+      "2.647 W"
+    ],
+    "answer": 3,
+    "explanation": "峰值电流I1=−j6/(5−j3)，P=|I1|²×5/2。理想电感电容平均功率为零。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 961,
+    "oldTitle": "串联电路：各元件功率"
   },
   {
     "id": "24B",
     "origin": 24,
-    "title": "串联电路：各元件功率",
+    "title": "Problem 11.3",
     "category": "Power · 功率",
     "ref": "11.3",
     "page": 514,
     "printed": 490,
     "task": "分别计算各电阻、理想电感及理想电容的平均功率。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.3：60 Ω电阻并联理想电容，电压峰值160 V。平均功率约为？",
+    "choices": [
+      "213.33 W",
+      "426.67 W",
+      "106.67 W",
+      "0 W"
+    ],
+    "answer": 0,
+    "explanation": "电阻承受全部端电压：P=160²/(2×60)。手册213.4 W来自先舍入电流。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 962,
+    "oldTitle": "串联电路：各元件功率"
   },
   {
     "id": "24C",
     "origin": 24,
-    "title": "串联电路：各元件功率",
+    "title": "Problem 11.5",
     "category": "Power · 功率",
     "ref": "11.5",
     "page": 515,
     "printed": 491,
     "task": "分别计算各电阻、理想电感及理想电容的平均功率。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.5：图11.37中1 Ω、2 Ω电阻的平均功率约为？",
+    "choices": [
+      "0 W；5.097 W",
+      "1.416 W；5.097 W",
+      "2.832 W；10.194 W",
+      "1.416 W；0 W"
+    ],
+    "answer": 1,
+    "explanation": "先求源电流，再分流得到2 Ω支路电流。用峰值电流时P=|I|²R/2。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 965,
+    "oldTitle": "串联电路：各元件功率"
   },
   {
     "id": "25A",
     "origin": 25,
-    "title": "电源吸收与提供",
+    "title": "Problem 11.2",
     "category": "Power · 功率",
     "ref": "11.2",
     "page": 514,
     "printed": 490,
     "task": "用被动符号约定判断源的吸收与提供，再检查全电路平均功率守恒。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.2：图11.35中5 Ω电阻平均吸收功率为？",
+    "choices": [
+      "20 W",
+      "0 W",
+      "2.647 W",
+      "5.294 W"
+    ],
+    "answer": 2,
+    "explanation": "峰值电流I1=−j6/(5−j3)，P=|I1|²×5/2。理想电感电容平均功率为零。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 961,
+    "oldTitle": "电源吸收与提供"
   },
   {
     "id": "25B",
     "origin": 25,
-    "title": "电源吸收与提供",
+    "title": "Problem 11.5",
     "category": "Power · 功率",
     "ref": "11.5",
     "page": 515,
     "printed": 491,
     "task": "用被动符号约定判断源的吸收与提供，再检查全电路平均功率守恒。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.5：图11.37中1 Ω、2 Ω电阻的平均功率约为？",
+    "choices": [
+      "2.832 W；10.194 W",
+      "1.416 W；0 W",
+      "0 W；5.097 W",
+      "1.416 W；5.097 W"
+    ],
+    "answer": 3,
+    "explanation": "先求源电流，再分流得到2 Ω支路电流。用峰值电流时P=|I|²R/2。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 965,
+    "oldTitle": "电源吸收与提供"
   },
   {
     "id": "25C",
     "origin": 25,
-    "title": "电源吸收与提供",
+    "title": "Problem 11.8",
     "category": "Power · 功率",
     "ref": "11.8",
     "page": 515,
     "printed": 491,
     "task": "用被动符号约定判断源的吸收与提供，再检查全电路平均功率守恒。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.8：图11.40中40 Ω电阻平均功率约为？",
+    "choices": [
+      "43.78 W",
+      "87.56 W",
+      "21.89 W",
+      "0 W"
+    ],
+    "answer": 0,
+    "explanation": "节点解V2=360(−1+j6)/37；P=|V2|²/(2×40)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 968,
+    "oldTitle": "电源吸收与提供"
   },
   {
     "id": "26A",
     "origin": 26,
-    "title": "瞬时功率与平均值",
+    "title": "Problem 11.1",
     "category": "Power · 功率",
     "ref": "11.1",
     "page": 514,
     "printed": 490,
     "task": "区分瞬时功率、平均功率与复功率；对时域信号先统一相位参考。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.1：v=160cos50t，i=−33sin(50t−30°)，平均吸收功率为？",
+    "choices": [
+      "0 W",
+      "1320 W",
+      "2640 W",
+      "−1320 W"
+    ],
+    "answer": 1,
+    "explanation": "i=33cos(50t+60°)；P=(160×33/2)cos60°=1320 W。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 960,
+    "oldTitle": "瞬时功率与平均值"
   },
   {
     "id": "26B",
     "origin": 26,
-    "title": "瞬时功率与平均值",
+    "title": "Problem 11.47",
     "category": "Power · 功率",
     "ref": "11.47",
     "page": 519,
     "printed": 495,
     "task": "区分瞬时功率、平均功率与复功率；对时域信号先统一相位参考。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.47(a)：峰值V=112∠10° V、I=4∠−50° A，复功率为？",
+    "choices": [
+      "112−j194 VA",
+      "448+j0 VA",
+      "112+j194 VA",
+      "224+j388 VA"
+    ],
+    "answer": 2,
+    "explanation": "S=VI*/2=224∠60°≈112+j194 VA。共轭使相位变成10°−(−50°)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1013,
+    "oldTitle": "瞬时功率与平均值"
   },
   {
     "id": "26C",
     "origin": 26,
-    "title": "瞬时功率与平均值",
+    "title": "Problem 11.45",
     "category": "Power · 功率",
     "ref": "11.45",
     "page": 519,
     "printed": 495,
     "task": "区分瞬时功率、平均功率与复功率；对时域信号先统一相位参考。",
     "hint": "峰值相量：P=Re(VI*)/2；有效值相量：P=Re(VI*)。电流参考方向必须流入电压正端才是吸收功率。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.45：v=20+60cos100t，i=1−0.5sin100t，平均功率为？",
+    "choices": [
+      "35 W",
+      "5 W",
+      "0 W",
+      "20 W"
+    ],
+    "answer": 3,
+    "explanation": "直流乘积贡献20 W；交流电压和电流正交，交流平均乘积为0。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1011,
+    "oldTitle": "瞬时功率与平均值"
   },
   {
     "id": "27A",
     "origin": 27,
-    "title": "正弦峰峰值转 RMS",
+    "title": "Problem 11.36",
     "category": "RMS · 有效值",
     "ref": "11.36",
     "page": 518,
     "printed": 494,
     "task": "练习有效值定义；所选题包含非正弦或偏置波形时不可直接用峰值除以 √2。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.36(b)：v=4+3cos5t V，有效值为？",
+    "choices": [
+      "√20.5 ≈ 4.528 V",
+      "7/√2 ≈ 4.950 V",
+      "5 V",
+      "3/√2 ≈ 2.121 V"
+    ],
+    "answer": 0,
+    "explanation": "直流和零均值正弦的均方值相加：4²+3²/2=20.5。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1002,
+    "oldTitle": "正弦峰峰值转 RMS"
   },
   {
     "id": "27B",
     "origin": 27,
-    "title": "正弦峰峰值转 RMS",
+    "title": "Problem 11.22",
     "category": "RMS · 有效值",
     "ref": "11.22",
     "page": 517,
     "printed": 493,
     "task": "练习有效值定义；所选题包含非正弦或偏置波形时不可直接用峰值除以 √2。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.22：偏置波形i(t)=2−2cos(2t) A的有效值为？",
+    "choices": [
+      "4 A",
+      "√6 ≈ 2.449 A",
+      "2√2 ≈ 2.828 A",
+      "√2 ≈ 1.414 A"
+    ],
+    "answer": 1,
+    "explanation": "Irms²=2²+2²/2=6。",
+    "verification": "手册给出波形表达式；有效值按定义独立计算。",
+    "manualPage": 988,
+    "oldTitle": "正弦峰峰值转 RMS"
   },
   {
     "id": "27C",
     "origin": 27,
-    "title": "正弦峰峰值转 RMS",
+    "title": "Problem 11.24",
     "category": "RMS · 有效值",
     "ref": "11.24",
     "page": 517,
     "printed": 493,
     "task": "练习有效值定义；所选题包含非正弦或偏置波形时不可直接用峰值除以 √2。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.24：在+5 V与−5 V间切换的对称方波，其有效值为？",
+    "choices": [
+      "5/√2 V",
+      "10 V",
+      "5 V",
+      "0 V"
+    ],
+    "answer": 2,
+    "explanation": "电压平方全周期恒为25 V²，均方根为5 V；平均值为0不代表有效值为0。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 990,
+    "oldTitle": "正弦峰峰值转 RMS"
   },
   {
     "id": "28A",
     "origin": 28,
-    "title": "RMS 电流与功率",
+    "title": "Problem 11.28",
     "category": "RMS · 有效值",
     "ref": "11.28",
     "page": 517,
     "printed": 493,
     "task": "先求有效值，再求电阻的平均功率；注意不同支路电流可能不同。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.28：图11.59的Vrms与2 Ω电阻平均功率为？",
+    "choices": [
+      "2.921 V；8.533 W",
+      "4 V；8 W",
+      "5.657 V；16 W",
+      "2.921 V；4.267 W"
+    ],
+    "answer": 3,
+    "explanation": "周期5；前2秒v=4t，其余为0。Vrms²=(1/5)∫₀²16t²dt=128/15。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 994,
+    "oldTitle": "RMS 电流与功率"
   },
   {
     "id": "28B",
     "origin": 28,
-    "title": "RMS 电流与功率",
+    "title": "Problem 11.29",
     "category": "RMS · 有效值",
     "ref": "11.29",
     "page": 518,
     "printed": 494,
     "task": "先求有效值，再求电阻的平均功率；注意不同支路电流可能不同。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.29：图11.60的Irms与12 Ω电阻平均功率为？",
+    "choices": [
+      "17.321 A；3.6 kW",
+      "30 A；10.8 kW",
+      "21.213 A；5.4 kW",
+      "0 A；0 W"
+    ],
+    "answer": 0,
+    "explanation": "对称三角波峰值30 A，Irms=30/√3；P=Irms²×12。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 995,
+    "oldTitle": "RMS 电流与功率"
   },
   {
     "id": "28C",
     "origin": 28,
-    "title": "RMS 电流与功率",
+    "title": "Problem 11.38",
     "category": "RMS · 有效值",
     "ref": "11.38",
     "page": 518,
     "printed": 494,
     "task": "先求有效值，再求电阻的平均功率；注意不同支路电流可能不同。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.38：图11.67总功率因数约为？",
+    "choices": [
+      "1，纯电阻",
+      "0.873，超前",
+      "0.873，滞后",
+      "0.487，超前"
+    ],
+    "answer": 1,
+    "explanation": "总复功率约1634.7−j913.5 VA；Q<0为容性，电流超前，pf=P/|S|。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1004,
+    "oldTitle": "RMS 电流与功率"
   },
   {
     "id": "29A",
     "origin": 29,
-    "title": "带直流偏置的正弦",
+    "title": "Problem 11.22",
     "category": "RMS · 有效值",
     "ref": "11.22",
     "page": 517,
     "printed": 493,
     "task": "练习直流分量与交流分量的有效值合成，并与直接积分核对。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.22：偏置波形i(t)=2−2cos(2t) A的有效值为？",
+    "choices": [
+      "√2 ≈ 1.414 A",
+      "4 A",
+      "√6 ≈ 2.449 A",
+      "2√2 ≈ 2.828 A"
+    ],
+    "answer": 2,
+    "explanation": "Irms²=2²+2²/2=6。",
+    "verification": "手册给出波形表达式；有效值按定义独立计算。",
+    "manualPage": 988,
+    "oldTitle": "带直流偏置的正弦"
   },
   {
     "id": "29B",
     "origin": 29,
-    "title": "带直流偏置的正弦",
+    "title": "Problem 11.36",
     "category": "RMS · 有效值",
     "ref": "11.36",
     "page": 518,
     "printed": 494,
     "task": "练习直流分量与交流分量的有效值合成，并与直接积分核对。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.36(b)：v=4+3cos5t V，有效值为？",
+    "choices": [
+      "7/√2 ≈ 4.950 V",
+      "5 V",
+      "3/√2 ≈ 2.121 V",
+      "√20.5 ≈ 4.528 V"
+    ],
+    "answer": 3,
+    "explanation": "直流和零均值正弦的均方值相加：4²+3²/2=20.5。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1002,
+    "oldTitle": "带直流偏置的正弦"
   },
   {
     "id": "29C",
     "origin": 29,
-    "title": "带直流偏置的正弦",
+    "title": "Problem 11.45",
     "category": "RMS · 有效值",
     "ref": "11.45",
     "page": 519,
     "printed": 495,
     "task": "练习直流分量与交流分量的有效值合成，并与直接积分核对。",
     "hint": "Xrms=√[(1/T)∫x²dt]。直流加零均值正弦：Xrms=√(Xdc²+Xm²/2)。",
-    "relation": "同类方法练习"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 11.45：v=20+60cos100t，i=1−0.5sin100t，平均功率为？",
+    "choices": [
+      "20 W",
+      "35 W",
+      "5 W",
+      "0 W"
+    ],
+    "answer": 0,
+    "explanation": "直流乘积贡献20 W；交流电压和电流正交，交流平均乘积为0。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 1011,
+    "oldTitle": "带直流偏置的正弦"
   },
   {
     "id": "30A",
     "origin": 30,
-    "title": "时间差转换相位",
+    "title": "Problem 9.5",
     "category": "Phase · 实验相关理论",
     "ref": "9.5",
     "page": 428,
     "printed": 404,
     "task": "统一正弦/余弦参考后比较相位；额外把相位差换算为时间差。此问为实验相关理论延伸。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.5：比较 v₁=45sin(ωt+30°) 与 v₂=50cos(ωt−30°)。",
+    "choices": [
+      "二者同相",
+      "v₁ 滞后 v₂ 30°",
+      "v₁ 超前 v₂ 30°",
+      "v₁ 超前 v₂ 60°"
+    ],
+    "answer": 1,
+    "explanation": "v₁的余弦相位为−60°，v₂为−30°；前者相位更小，滞后30°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 735,
+    "oldTitle": "时间差转换相位"
   },
   {
     "id": "30B",
     "origin": 30,
-    "title": "时间差转换相位",
+    "title": "Problem 9.6",
     "category": "Phase · 实验相关理论",
     "ref": "9.6",
     "page": 428,
     "printed": 404,
     "task": "统一正弦/余弦参考后比较相位；额外把相位差换算为时间差。此问为实验相关理论延伸。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.6(a)：v=10cos(4t−60°)，i=4sin(4t+50°)，相位关系？",
+    "choices": [
+      "i 超前 v 110°",
+      "i 滞后 v 110°",
+      "i 超前 v 20°",
+      "i 滞后 v 20°"
+    ],
+    "answer": 2,
+    "explanation": "i的余弦相位是−40°，比v的−60°大20°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 736,
+    "oldTitle": "时间差转换相位"
   },
   {
     "id": "30C",
     "origin": 30,
-    "title": "时间差转换相位",
+    "title": "Problem 9.20",
     "category": "Phase · 实验相关理论",
     "ref": "9.20",
     "page": 428,
     "printed": 404,
     "task": "统一正弦/余弦参考后比较相位；额外把相位差换算为时间差。此问为实验相关理论延伸。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.20：电压120∠75° V、电流7.5∠30° A，阻抗为？",
+    "choices": [
+      "16∠−45° Ω",
+      "900∠105° Ω",
+      "0.0625∠45° Ω",
+      "16∠45° Ω"
+    ],
+    "answer": 3,
+    "explanation": "Z=V/I：模相除，相位相减。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 750,
+    "oldTitle": "时间差转换相位"
   },
   {
     "id": "31A",
     "origin": 31,
-    "title": "从读数写峰值相量",
+    "title": "Problem 9.11",
     "category": "Phase · 实验相关理论",
     "ref": "9.11",
     "page": 428,
     "printed": 404,
     "task": "用题给振幅与相位写相量，再写回时域并核对单位。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.11(b)：i(t)=−8sin(10t+70°) mA，峰值余弦相量为？",
+    "choices": [
+      "8∠160° mA",
+      "8∠−20° mA",
+      "8∠70° mA",
+      "8∠−160° mA"
+    ],
+    "answer": 0,
+    "explanation": "负号增加180°；正弦变余弦减90°：70°+180°−90°=160°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 741,
+    "oldTitle": "从读数写峰值相量"
   },
   {
     "id": "31B",
     "origin": 31,
-    "title": "从读数写峰值相量",
+    "title": "Problem 9.16",
     "category": "Phase · 实验相关理论",
     "ref": "9.16",
     "page": 428,
     "printed": 404,
     "task": "用题给振幅与相位写相量，再写回时域并核对单位。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.16(c)：20cos(2t)+15sin(2t) 的余弦相量为？",
+    "choices": [
+      "35+j0",
+      "20−j15",
+      "20+j15",
+      "15−j20"
+    ],
+    "answer": 1,
+    "explanation": "cos项对应实部，sin项对应−j方向；模为25，相位−36.87°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 746,
+    "oldTitle": "从读数写峰值相量"
   },
   {
     "id": "31C",
     "origin": 31,
-    "title": "从读数写峰值相量",
+    "title": "Problem 9.18",
     "category": "Phase · 实验相关理论",
     "ref": "9.18",
     "page": 428,
     "printed": 404,
     "task": "用题给振幅与相位写相量，再写回时域并核对单位。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.18(b)：V=6+j8 V，ω=40 rad/s，对应时域电压？",
+    "choices": [
+      "14cos(40t+53.13°) V",
+      "10cos(40t+36.87°) V",
+      "10cos(40t+53.13°) V",
+      "10cos(40t−53.13°) V"
+    ],
+    "answer": 2,
+    "explanation": "幅值√(6²+8²)=10；相位atan2(8,6)=53.13°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 748,
+    "oldTitle": "从读数写峰值相量"
   },
   {
     "id": "32A",
     "origin": 32,
-    "title": "电容与电感的超前滞后",
+    "title": "Problem 9.28",
     "category": "Phase · 实验相关理论",
     "ref": "9.28",
     "page": 429,
     "printed": 405,
     "task": "用元件的相量关系判断电压与电流的超前或滞后。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "按教材 Problem 9.28：8 Ω 电阻接110cos(377t) V，电流为？",
+    "choices": [
+      "7.333cos(377t) A",
+      "10.4cos(377t+45°) A",
+      "13.75cos(377t−90°) A",
+      "13.75cos(377t) A"
+    ],
+    "answer": 3,
+    "explanation": "纯电阻i=v/R=110cos(377t)/8。",
+    "verification": "教材数据独立复算：手册9.28使用156 V、15 Ω，与本教材题干不一致。",
+    "manualPage": 758,
+    "oldTitle": "电容与电感的超前滞后"
   },
   {
     "id": "32B",
     "origin": 32,
-    "title": "电容与电感的超前滞后",
+    "title": "Problem 9.29",
     "category": "Phase · 实验相关理论",
     "ref": "9.29",
     "page": 429,
     "printed": 405,
     "task": "用元件的相量关系判断电压与电流的超前或滞后。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.29：2 μF 电容中 i=4sin(10⁶t+25°) A，电压为？",
+    "choices": [
+      "2sin(10⁶t−65°) V",
+      "2sin(10⁶t+115°) V",
+      "8sin(10⁶t−65°) V",
+      "2sin(10⁶t+25°) V"
+    ],
+    "answer": 0,
+    "explanation": "|ZC|=1/(10⁶×2×10⁻⁶)=0.5 Ω；电压比电流滞后90°，振幅2 V。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 759,
+    "oldTitle": "电容与电感的超前滞后"
   },
   {
     "id": "32C",
     "origin": 32,
-    "title": "电容与电感的超前滞后",
+    "title": "Problem 9.30",
     "category": "Phase · 实验相关理论",
     "ref": "9.30",
     "page": 429,
     "printed": 405,
     "task": "用元件的相量关系判断电压与电流的超前或滞后。",
     "hint": "相同频率且参考一致时，滞后 Δt 对应相位 −360°Δt/T；电容电流超前电压 90°，电感电压超前电流 90°。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 9.30：40 kΩ 电阻与50 μF电容并联，v=100cos(60t+20°) V。电容电流为？",
+    "choices": [
+      "3cos(60t+110°) mA",
+      "300cos(60t+110°) mA",
+      "300cos(60t−70°) mA",
+      "2.5cos(60t+20°) mA"
+    ],
+    "answer": 1,
+    "explanation": "IC=jωCV；振幅60×50μ×100=0.3 A，相位增加90°。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 760,
+    "oldTitle": "电容与电感的超前滞后"
   },
   {
     "id": "33A",
     "origin": 33,
-    "title": "节点电压变元件电压",
+    "title": "Problem 10.14",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.14",
     "page": 468,
     "printed": 444,
     "task": "额外任选两个节点 a、b，求 Vab=Va−Vb；注意这不是两个幅值相减。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.14：图10.63的节点V₁为？",
+    "choices": [
+      "49.18∠124.08° V",
+      "20∠30° V",
+      "28.93∠135.38° V",
+      "28.93∠−44.62° V"
+    ],
+    "answer": 2,
+    "explanation": "节点系数矩阵为[[1+j2.5,j2.5],[j2.5,−j5.5]]，右端为[−200∠30°,200∠30°]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 844,
+    "oldTitle": "节点电压变元件电压"
   },
   {
     "id": "33B",
     "origin": 33,
-    "title": "节点电压变元件电压",
+    "title": "Problem 10.16",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.16",
     "page": 468,
     "printed": 444,
     "task": "额外任选两个节点 a、b，求 Vab=Va−Vb；注意这不是两个幅值相减。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.16：Vx正端在节点1，负端在节点2。Vx约为？",
+    "choices": [
+      "4.335−j3.776 V",
+      "14.894−j14.615 V",
+      "5.279−j5.419 V",
+      "−4.335+j3.776 V"
+    ],
+    "answer": 3,
+    "explanation": "Vx=V1−V2；约(5.279−j5.419)−(9.615−j9.196)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 846,
+    "oldTitle": "节点电压变元件电压"
   },
   {
     "id": "33C",
     "origin": 33,
-    "title": "节点电压变元件电压",
+    "title": "Problem 10.23",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.23",
     "page": 469,
     "printed": 445,
     "task": "额外任选两个节点 a、b，求 Vab=Va−Vb；注意这不是两个幅值相减。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.23：哪个是节点V的正确KCL？",
+    "choices": [
+      "(V−Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)/R + V/(jωL) + jωCV = 0",
+      "(V+Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)R + V/[jωL+1/(jωC)] + jωCV = 0"
+    ],
+    "answer": 0,
+    "explanation": "流出节点的三支路电流相加为零；其中一支路是串联LC，须使用其总阻抗。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 855,
+    "oldTitle": "节点电压变元件电压"
   },
   {
     "id": "34A",
     "origin": 34,
-    "title": "用两条波形读跨元件电压",
+    "title": "Problem 10.3",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.3",
     "page": 467,
     "printed": 443,
     "task": "求出题目所需电压的时域表达式，再取 t=0 验证极性。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.3：图10.52的输出电压相量为？",
+    "choices": [
+      "4.682∠−33.15° V",
+      "3.835∠−35.02° V",
+      "3.835∠35.02° V",
+      "16∠−90° V"
+    ],
+    "answer": 1,
+    "explanation": "KCL整理为(1.22+j0.04)Vo=3.92−j2.56；相除得结果。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 830,
+    "oldTitle": "用两条波形读跨元件电压"
   },
   {
     "id": "34B",
     "origin": 34,
-    "title": "用两条波形读跨元件电压",
+    "title": "Problem 10.9",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.9",
     "page": 467,
     "printed": 443,
     "task": "求出题目所需电压的时域表达式，再取 t=0 验证极性。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.9：图10.58的输出电压Vo为？",
+    "choices": [
+      "10∠0° V",
+      "6.154∠−19.74° V",
+      "6.154∠70.26° V",
+      "6.154∠−70.26° V"
+    ],
+    "answer": 2,
+    "explanation": "先解两节点，再用Vo=30V2/(30+j10)；输出是30 Ω电阻电压，并非整个串联支路电压。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 837,
+    "oldTitle": "用两条波形读跨元件电压"
   },
   {
     "id": "34C",
     "origin": 34,
-    "title": "用两条波形读跨元件电压",
+    "title": "Problem 10.30",
     "category": "Voltage · 仿真相关理论",
     "ref": "10.30",
     "page": 470,
     "printed": 446,
     "task": "求出题目所需电压的时域表达式，再取 t=0 验证极性。此问为仿真相关理论延伸。",
     "hint": "Vab=Va−Vb。时域电压按同一时刻相减，相量电压按复数相减；不能直接用幅值相减。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.30：图10.78电容输出电压Vo约为？",
+    "choices": [
+      "−46.68−j31.40 V",
+      "31.40−j46.68 V",
+      "80+j0 V",
+      "46.68+j31.40 V"
+    ],
+    "answer": 3,
+    "explanation": "ω=100，ZC=−j200。用中、右顺时针网孔电流：Vo=−j200(I2−I3)。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 863,
+    "oldTitle": "用两条波形读跨元件电压"
   },
   {
     "id": "35A",
     "origin": 35,
-    "title": "节点题必须展示什么",
+    "title": "Problem 10.7",
     "category": "Nodal · 节点分析",
     "ref": "10.7",
     "page": 467,
     "printed": 443,
     "task": "完整展示参考地、未知节点、相量电路与 KCL；这是书写训练，不能代替老师的考试要求。",
     "hint": "先标地与未知节点，将所有源和元件转成统一频率下的相量与阻抗，再列 KCL。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.7：图10.56的节点电压V为？",
+    "choices": [
+      "124.08∠−154° V",
+      "124.08∠26° V",
+      "120∠−15° V",
+      "57.46∠−123.7° V"
+    ],
+    "answer": 0,
+    "explanation": "按图的电流源方向写(120∠−15°−V)/(40+j20)=6∠30°+V/(−j30)+V/50。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 834,
+    "oldTitle": "节点题必须展示什么"
   },
   {
     "id": "35B",
     "origin": 35,
-    "title": "节点题必须展示什么",
+    "title": "Problem 10.14",
     "category": "Nodal · 节点分析",
     "ref": "10.14",
     "page": 468,
     "printed": 444,
     "task": "完整展示参考地、未知节点、相量电路与 KCL；这是书写训练，不能代替老师的考试要求。",
     "hint": "先标地与未知节点，将所有源和元件转成统一频率下的相量与阻抗，再列 KCL。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.14：图10.63的节点V₁为？",
+    "choices": [
+      "20∠30° V",
+      "28.93∠135.38° V",
+      "28.93∠−44.62° V",
+      "49.18∠124.08° V"
+    ],
+    "answer": 1,
+    "explanation": "节点系数矩阵为[[1+j2.5,j2.5],[j2.5,−j5.5]]，右端为[−200∠30°,200∠30°]。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 844,
+    "oldTitle": "节点题必须展示什么"
   },
   {
     "id": "35C",
     "origin": 35,
-    "title": "节点题必须展示什么",
+    "title": "Problem 10.23",
     "category": "Nodal · 节点分析",
     "ref": "10.23",
     "page": 469,
     "printed": 445,
     "task": "完整展示参考地、未知节点、相量电路与 KCL；这是书写训练，不能代替老师的考试要求。",
     "hint": "先标地与未知节点，将所有源和元件转成统一频率下的相量与阻抗，再列 KCL。",
-    "relation": "相关理论 / 原创延伸"
+    "relation": "教材对应小问 · 选择题化",
+    "prompt": "Problem 10.23：哪个是节点V的正确KCL？",
+    "choices": [
+      "(V+Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)/R + V/[jωL+1/(jωC)] + jωCV = 0",
+      "(V−Vs)/R + V/(jωL) + jωCV = 0"
+    ],
+    "answer": 2,
+    "explanation": "流出节点的三支路电流相加为零；其中一支路是串联LC，须使用其总阻抗。",
+    "verification": "已与上传解答对应小题核对",
+    "manualPage": 855,
+    "oldTitle": "节点题必须展示什么"
   }
 ];
 const PDF='https://www.kaizen-ju.com/storage/images/files/file_17265317748jBDU.pdf';
 const KEY='engr202-sadiku-workbook-v1';
-let state={};try{state=JSON.parse(localStorage.getItem(KEY)||'{}')}catch{};
+let state={};try{state=JSON.parse(localStorage.getItem(KEY)||'{}')||{}}catch{};
 let category='全部题型',wrongOnly=false,current=DATA[0].id;
 const el=id=>document.getElementById(id),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch{el('toast').textContent='无法保存到浏览器，请导出备份。'}}
 function filtered(){return DATA.filter(d=>(category==='全部题型'||d.category===category)&&(!wrongOnly||state[d.id]?.status==='wrong'))}
-function setStatus(status){state[current]={...state[current],status};save();render()}
+function setStatus(status){state[current]={...state[current],status};if(status==='')delete state[current].choice;save();render()}
+function choose(index){const d=DATA.find(x=>x.id===current);state[current]={...state[current],choice:index,status:index===d.answer?'correct':'wrong'};save();render()}
+function feedback(d){const c=state[d.id]?.choice;if(!Number.isInteger(c))return '';return `<div class="feedback" role="status"><b>${c===d.answer?'✓ 回答正确':'✗ 已加入错题集'} · 正确答案 ${'ABCD'[d.answer]}</b><p>${esc(d.explanation)}</p><p class="muted">核对：上传的 Instructor Solutions Manual，第 ${d.manualPage} 页，Chapter ${d.ref.split('.')[0]} / Solution ${d.ref.split('.')[1]}。${esc(d.verification)}</p></div>`}
 function render(){let list=filtered();if(!list.some(d=>d.id===current))current=list[0]?.id;const d=DATA.find(d=>d.id===current);const wrong=DATA.filter(d=>state[d.id]?.status==='wrong').length,done=DATA.filter(d=>state[d.id]?.status==='correct').length;
 el('stats').textContent=`已掌握 ${done}/105 · 错题 ${wrong}`;
 el('cats').innerHTML=['全部题型',...new Set(DATA.map(d=>d.category))].map(c=>{const ds=DATA.filter(x=>c==='全部题型'||x.category===c),w=ds.filter(x=>state[x.id]?.status==='wrong').length;return `<button class="${category===c?'active':''}" data-cat="${esc(c)}"><span>${esc(c)}</span><small>${ds.length} · 错 ${w}</small></button>`}).join('');el('cats').querySelectorAll('button').forEach(b=>b.onclick=()=>{category=b.dataset.cat;render()});
 el('numbers').innerHTML=list.map(x=>`<button class="${state[x.id]?.status||''} ${current===x.id?'current':''}" data-id="${x.id}" aria-label="练习 ${x.id}">${x.id}</button>`).join('');el('numbers').querySelectorAll('button').forEach(b=>b.onclick=()=>{current=b.dataset.id;render()});el('wrongOnly').textContent=wrongOnly?'显示全部状态':'只练错题';el('wrongOnly').setAttribute('aria-pressed',wrongOnly);
 const i=list.findIndex(x=>x.id===current);el('prev').disabled=i<=0;el('next').disabled=i<0||i>=list.length-1;el('position').textContent=list.length?`${i+1} / ${list.length}`:'0 / 0';
 if(!d){el('card').innerHTML='<div class="empty"><h2>这里没有错题</h2><p>切换题型或关闭“只练错题”继续练习。</p></div>';return}
-el('card').innerHTML=`<div class="topline"><b>${d.id} / 105</b><span class="tag">${esc(d.category)}</span></div><h2>${esc(d.title)}</h2><span class="tag">${esc(d.relation)}</span><span class="muted">对应原练习 Q${String(d.origin).padStart(2,'0')}</span><p class="task">${esc(d.task)}</p><div class="source"><b>Sadiku 5e · 章末 Problem ${d.ref}</b><br><span class="muted">书页 ${d.printed} · PDF 第 ${d.page} 页（请找 Problems 区，不是 Review Questions）</span><br><a href="${PDF}#page=${d.page}" target="_blank" rel="noopener">打开原题与电路图 ↗</a><button id="showPdf">在本页展开教材</button><p class="muted">若 PDF 定位未生效，在阅读器页码框输入 ${d.page}。原题数据与图形以教材为准。</p></div><div id="pdfBox"></div><details><summary>做题方法提示</summary><p>${esc(d.hint)}</p></details><details><summary>如何核对答案</summary><p>先把解代回全部 KCL / KVL，检查单位、方向、峰值与有效值。书后 Appendix D 列出部分奇数题答案；仅核对原题要求，原创延伸小问不在官方答案中。</p><a href="${PDF}#page=${d.ref.startsWith('9.')?962:d.ref.startsWith('10.')?963:964}" target="_blank" rel="noopener">打开本章书后答案区域 ↗</a><p class="muted">答案可能续于下一页；偶数题没有统一书后答案。</p></details><div class="work"><label for="draft"><b>我的计算与错因</b></label><textarea id="draft" placeholder="写下矩阵、计算过程、参考方向或错因…">${esc(state[d.id]?.note||'')}</textarea></div><div class="row actions"><button id="bad" class="${state[d.id]?.status==='wrong'?'wrong':''}">标记为错题</button><button id="good" class="${state[d.id]?.status==='correct'?'correct':''}">已核对 · 掌握</button><button id="clear">恢复未做</button><span class="muted">手动记录，不自动判分</span></div>`;
+el('card').innerHTML=`<div class="topline"><b>${d.id} / 105</b><span class="tag">${esc(d.category)}</span></div><h2>${esc(d.title)}</h2><span class="tag">${esc(d.relation)}</span><span class="muted">对应原练习 Q${String(d.origin).padStart(2,'0')} · ${esc(d.oldTitle)}</span><p class="task">${esc(d.prompt)}</p><div class="source"><b>Sadiku 5e · 章末 Problem ${d.ref}</b><br><span class="muted">书页 ${d.printed} · PDF 第 ${d.page} 页（请找 Problems 区，不是 Review Questions）</span><br><a href="${PDF}#page=${d.page}" target="_blank" rel="noopener">打开原题与电路图 ↗</a><button id="showPdf">在本页展开教材</button><p class="muted">若 PDF 定位未生效，在阅读器页码框输入 ${d.page}。原题数据与图形以教材为准。</p></div><div id="pdfBox"></div><div class="choices" role="group" aria-label="答案选项">${d.choices.map((c,k)=>`<button class="choice ${state[d.id]?.choice===k?'selected':''} ${Number.isInteger(state[d.id]?.choice)&&k===d.answer?'hit':''} ${state[d.id]?.choice===k&&k!==d.answer?'miss':''}" data-choice="${k}">${'ABCD'[k]}. ${esc(c)}</button>`).join('')}</div>${feedback(d)}<details><summary>做题方法提示</summary><p>${esc(d.hint)}</p></details><details><summary>答案来源与原题</summary><p>选择选项后显示正确答案和简要解析。解析注明上传解答手册的PDF页码；有不一致处以题干和独立计算为准。原教材书后另列部分奇数题答案。</p><a href="${PDF}#page=${d.ref.startsWith('9.')?962:d.ref.startsWith('10.')?963:964}" target="_blank" rel="noopener">打开本章书后答案区域 ↗</a><p class="muted">答案可能续于下一页；偶数题没有统一书后答案。</p></details><div class="work"><label for="draft"><b>我的计算与错因</b></label><textarea id="draft" placeholder="写下矩阵、计算过程、参考方向或错因…">${esc(state[d.id]?.note||'')}</textarea></div><div class="row actions"><button id="bad" class="${state[d.id]?.status==='wrong'?'wrong':''}">标记为错题</button><button id="good" class="${state[d.id]?.status==='correct'?'correct':''}">已核对 · 掌握</button><button id="clear">恢复未做</button><span class="muted">选答案自动判分；也可手动标记重练</span></div>`;
+el('card').querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>choose(Number(b.dataset.choice)));
 el('draft').oninput=e=>{state[d.id]={...state[d.id],note:e.target.value};save()};el('bad').onclick=()=>setStatus('wrong');el('good').onclick=()=>setStatus('correct');el('clear').onclick=()=>setStatus('');el('showPdf').onclick=()=>{el('pdfBox').innerHTML=`<iframe class="viewer" title="教材 Problem ${d.ref}" src="${PDF}#page=${d.page}"></iframe>`;el('showPdf').disabled=true};}
 function move(dir){const ds=filtered(),i=ds.findIndex(d=>d.id===current);if(ds[i+dir]){current=ds[i+dir].id;render()}}
 el('prev').onclick=()=>move(-1);el('next').onclick=()=>move(1);el('wrongOnly').onclick=()=>{wrongOnly=!wrongOnly;render()};
 function download(name,text,type){const u=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)}
-function exportDoc(ds,title){const hints=el('includeHints').checked;return `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>${title}</title><style>body{font:16px/1.7 system-ui;max-width:880px;margin:35px auto;padding:20px;color:#193e3a}article{border-top:1px solid #ccc;padding:20px 0;break-inside:avoid}pre{white-space:pre-wrap;font:inherit;background:#f3f5f0;padding:15px}a{color:#086851}.blank{height:150px}small{color:#647b75}@media print{button{display:none}}</style><h1>${title}</h1><p>${ds.length} 个练习入口 · ${new Date().toLocaleDateString('zh-CN')} · 手动标记记录</p><p>包含题号、定位链接、训练任务${hints?'、通用方法提示与个人草稿':''}。原题图文请通过链接查看；本文件不含教材题目副本或逐题数值解答。</p><button onclick="window.print()">打印 / 保存为 PDF</button>${ds.map(d=>`<article><small>${esc(d.category)} · 原练习 Q${d.origin}</small><h2>${d.id} · ${esc(d.title)}</h2><p>Problem ${d.ref} · 书页 ${d.printed} / PDF 页 ${d.page}</p><a href="${PDF}#page=${d.page}">教材原题与电路图</a><p>${esc(d.task)}</p>${hints?`<p><b>方法提示：</b>${esc(d.hint)}</p><pre>${esc(state[d.id]?.note||'暂无草稿')}</pre>`:'<div class="blank"></div>'}</article>`).join('')}</html>`}
+function exportDoc(ds,title){const hints=el('includeHints').checked;return `<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>${title}</title><style>body{font:16px/1.7 system-ui;max-width:880px;margin:35px auto;padding:20px;color:#193e3a}article{border-top:1px solid #ccc;padding:20px 0;break-inside:avoid}pre{white-space:pre-wrap;font:inherit;background:#f3f5f0;padding:15px}a{color:#086851}.blank{height:150px}small{color:#647b75}@media print{button{display:none}}</style><h1>${title}</h1><p>${ds.length} 个练习入口 · ${new Date().toLocaleDateString('zh-CN')} · 手动标记记录</p><p>包含题号、定位链接、训练任务${hints?'、正确答案、解析与个人草稿':''}。原题图文请通过链接查看；电路图保留原教材链接；本文件包含选择题文字与选项。</p><button onclick="window.print()">打印 / 保存为 PDF</button>${ds.map(d=>`<article><small>${esc(d.category)} · 原练习 Q${d.origin}</small><h2>${d.id} · ${esc(d.title)}</h2><p>Problem ${d.ref} · 书页 ${d.printed} / PDF 页 ${d.page}</p><a href="${PDF}#page=${d.page}">教材原题与电路图</a><p>${esc(d.prompt)}</p>${d.choices.map((c,k)=>`<p>${'ABCD'[k]}. ${esc(c)}</p>`).join('')}${hints?`<p><b>正确答案：${'ABCD'[d.answer]}</b> ${esc(d.choices[d.answer])}</p><p>${esc(d.explanation)}</p><p>手册PDF第${d.manualPage}页。${esc(d.verification)}</p><pre>${esc(state[d.id]?.note||'暂无草稿')}</pre>`:'<div class="blank"></div>'}</article>`).join('')}</html>`}
 function wrongs(){return DATA.filter(d=>state[d.id]?.status==='wrong')}
 function output(ds,print,title){if(!ds.length){el('toast').textContent='没有已标记的错题，请先标记。';return}const html=exportDoc(ds,title);if(print){const w=window.open('','_blank');if(!w){el('toast').textContent='弹窗被阻止，请使用 HTML 导出后打印。';return}w.document.write(html);w.document.close();w.focus();setTimeout(()=>w.print(),300)}else download('sadiku-wrong-questions.html',html,'text/html;charset=utf-8');el('toast').textContent=`已准备 ${ds.length} 个练习入口（所有题型）。`}
-el('exportWrong').onclick=()=>output(wrongs(),false,'Sadiku 错题工作簿');el('printWrong').onclick=()=>output(wrongs(),true,'Sadiku 错题工作簿');el('printAll').onclick=()=>output(DATA,true,'Sadiku 全部练习索引');el('backup').onclick=()=>download('sadiku-progress.json',JSON.stringify({version:1,state},null,2),'application/json');el('restore').onchange=async e=>{try{const v=JSON.parse(await e.target.files[0].text());if(v.version!==1||!v.state||typeof v.state!=='object')throw Error();const clean={};for(const d of DATA){const x=v.state[d.id];if(x&&typeof x==='object')clean[d.id]={status:['wrong','correct',''].includes(x.status)?x.status:'',note:typeof x.note==='string'?x.note:''}}state={...state,...clean};save();render();el('toast').textContent='记录已合并恢复。'}catch{el('toast').textContent='无法读取此备份，请选择本站导出的 JSON。'}e.target.value=''};render();
+el('exportWrong').onclick=()=>output(wrongs(),false,'Sadiku 错题工作簿');el('printWrong').onclick=()=>output(wrongs(),true,'Sadiku 错题工作簿');el('printAll').onclick=()=>output(DATA,true,'Sadiku 全部练习索引');el('backup').onclick=()=>download('sadiku-progress.json',JSON.stringify({version:1,state},null,2),'application/json');el('restore').onchange=async e=>{try{const v=JSON.parse(await e.target.files[0].text());if(v.version!==1||!v.state||typeof v.state!=='object')throw Error();const clean={};for(const d of DATA){const x=v.state[d.id];if(x&&typeof x==='object')clean[d.id]={status:['wrong','correct',''].includes(x.status)?x.status:'',note:typeof x.note==='string'?x.note:'',choice:Number.isInteger(x.choice)&&x.choice>=0&&x.choice<4?x.choice:undefined}}state={...state,...clean};save();render();el('toast').textContent='记录已合并恢复。'}catch{el('toast').textContent='无法读取此备份，请选择本站导出的 JSON。'}e.target.value=''};render();
 </script></body></html>
+
