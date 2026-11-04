@@ -1,0 +1,30 @@
+<!doctype html><html lang="zh-Hans"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MTH 256 · Homework Practice</title>
+<style>
+:root{font:16px system-ui;color:#182b35;background:#f4f7f6}*{box-sizing:border-box}body{margin:0;display:grid;grid-template-columns:300px 1fr;min-height:100vh}aside{background:#122d35;color:#effaf7;padding:26px 22px;position:sticky;top:0;height:100vh;overflow:auto}aside a{color:#d3eeea;display:block;margin:.6em 0}aside details{margin:14px 0}summary{cursor:pointer}main{width:min(100%,900px);padding:44px clamp(18px,5vw,64px)}h1{font-size:clamp(2rem,5vw,3.4rem);margin:.2em 0}.tag{font-weight:bold;letter-spacing:.12em;color:#27705e}header p{line-height:1.6}section{margin-top:42px}article{background:white;border:1px solid #d7e3df;border-radius:12px;padding:20px;margin:14px 0;scroll-margin-top:12px}h3{margin:0 0 .5em}button{display:block;width:100%;text-align:left;margin:7px 0;padding:10px 13px;background:#f4f8f7;border:1px solid #c5d9d3;border-radius:7px;font:inherit;color:inherit;cursor:pointer}button:hover,button:focus-visible{background:#e1f0eb}button[aria-pressed=true]{outline:2px solid #297561}.feedback{line-height:1.55;color:#235747}.note{color:#566b70}.numbers a{display:inline-block;margin:4px;padding:3px 5px}@media(max-width:700px){body{display:block}aside{position:static;height:auto}main{padding-top:24px}}
+</style><body><aside><strong>LBCC · MTH 256</strong><a href="../../">← 返回课程练习</a><nav id="nav" aria-label="作业目录"></nav></aside><main><header><div class="tag">APPLIED DIFFERENTIAL EQUATIONS</div><h1>Homework Practice</h1><p>Week 5–6 · 10/26–11/8。每题四选一，作答后显示判定和推导。</p><p id="coverage" class="note"></p></header><div id="sets"></div></main>
+<script src="questions.js"></script><script>
+const nav=document.querySelector('#nav'), sets=document.querySelector('#sets');
+const add=(parent,tag,value)=>{const element=document.createElement(tag);if(value)element.textContent=value;parent.append(element);return element};
+document.querySelector('#coverage').textContent=coverage;
+for(const week of [5,6]){
+ const weekNav=add(nav,'details');weekNav.open=true;add(weekNav,'summary','Week '+week);
+ for(const [index,group] of groups.entries()){
+  if(group.week!==week)continue;
+  const id='assignment-'+index, link=add(weekNav,'a',group.title);link.href='#'+id;
+  const numbers=add(weekNav,'div');numbers.className='numbers';
+  const section=add(sets,'section');section.id=id;add(section,'h2',group.title);
+  const source=add(section,'a','Canvas 作业');source.href='https://linnbenton.instructure.com/courses/12964/modules/items/'+group.source;
+  if(group.note)add(section,'p',group.note).className='note';
+  for(const [i,q] of group.questions.entries()){
+   const article=add(section,'article');article.id=id+'-q'+(i+1);
+   add(numbers,'a',q.label).href='#'+article.id;add(article,'h3',q.label);
+   add(article,'p',q.prompt);
+   const choices=add(article,'div'), feedback=add(article,'p');feedback.className='feedback';feedback.setAttribute('aria-live','polite');
+   for(const [j,option] of q.choices.entries()){
+    const button=add(choices,'button','ABCD'[j]+'. '+option);button.setAttribute('aria-pressed','false');
+    button.onclick=()=>{for(const sibling of choices.children)sibling.setAttribute('aria-pressed',String(sibling===button));feedback.textContent=(j===q.correct?'正确。':'这项不对。正确答案是 '+'ABCD'[q.correct]+'。')+q.why};
+   }
+  }
+ }
+}
+</script></body></html>
