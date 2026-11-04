@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Practice counting, permutations, combinations, and binomial coefficients with 30 verified multiple-choice questions.">
+<title>MTH 231 · Counting Practice</title>
+<style>:root{color-scheme:light;--ink:#192c37;--muted:#485e69;--teal:#0b5c56;--line:#d1dedd;--paper:#f4f8f7}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.55 system-ui,sans-serif}
+.wrap{max-width:840px;margin:auto;padding-inline:clamp(16px,5vw,36px)}
+header{background:#153735;color:#fff;padding:clamp(28px,7vw,60px) 0 36px}
+h1{font-size:clamp(2.2rem,7vw,4rem);letter-spacing:-.045em;line-height:1;margin:.35em 0;font-weight:720}
+.eyebrow{letter-spacing:.14em;font-size:.78rem;font-weight:700;color:#c5e6df}.eyebrow span{margin:0 .5em}
+.intro{max-width:550px;color:#dfefec;margin:0}
+main{padding-block:22px 45px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+progress{display:block;width:165px;margin-top:4px;accent-color:var(--teal)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid var(--teal);border-radius:7px;background:var(--teal);color:white;padding:9px 15px;font:inherit;font-weight:650;cursor:pointer}.secondary{color:var(--teal);background:transparent}
+nav{display:flex;gap:8px 16px;flex-wrap:wrap;margin:20px 0}a{color:var(--teal);text-underline-offset:3px}
+h2{font-size:1.3rem;margin:28px 0 10px}
+.card{background:white;border:1px solid var(--line);border-radius:12px;padding:clamp(12px,3vw,22px);margin:0 0 12px}
+fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;padding:0;margin-bottom:10px}.number{color:var(--teal);margin-right:.55em;font-variant-numeric:tabular-nums}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.option{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:7px;padding:8px 10px;cursor:pointer}.option:hover{border-color:var(--teal)}.option:has(:checked){background:#eaf4f2;border-color:var(--teal)}input{accent-color:var(--teal);margin:0}
+.option.right{background:#e8f6ee;border-color:#3a805f}.option.wrong{background:#fff1ef;border-color:#a84c42}.feedback,#summary{background:#e6efed;padding:10px 12px;border-radius:7px;margin:12px 0 0}.feedback strong{display:block}.top{margin-left:12px}
+:focus-visible{outline:3px solid #b45f16;outline-offset:3px}@media(max-width:380px){.choices{grid-template-columns:1fr}}
+</style>
+
+
+</head>
+<body>
+<header><div class="wrap"><p class="eyebrow">MTH 231 <span>·</span> DISCRETE MATHEMATICS</p><h1>Counting practice</h1><p class="intro">30 single-answer questions covering the sum and product rules, permutations and combinations, and the binomial theorem.</p></div></header>
+<main class="wrap">
+<section class="toolbar" aria-label="Quiz controls">
+<div><strong id="progress-text" role="status">0 of 30 answered</strong><progress id="progress" value="0" max="30" aria-label="Questions answered"></progress></div>
+<div class="actions"><button id="grade" type="button">Check answers</button><button id="reset" class="secondary" type="button">Start over</button></div>
+</section>
+<p id="summary" tabindex="-1" hidden></p>
+<nav aria-label="Question sections"><a href="#rules">01–10 Counting rules</a><a href="#arrangements">11–25 Arrangements and selections</a><a href="#binomial">26–30 Binomial theorem</a></nav>
+<form id="quiz"></form>
+<button id="grade-end" type="button">Check answers</button>
+<a href="#" class="top">Back to top ↑</a>
+</main>
+<script>const questions = [{"prompt": "A library has 8 floors, each with 13 study rooms. How many study rooms are there?", "options": [21, 96, 104, 112], "answer": 2, "explanation": "Choose a floor and then a room. The product rule gives 8 × 13 = 104."}, {"prompt": "A food truck offers 7 distinct sandwiches and 5 distinct salads. How many ways can you order exactly one item?", "options": [2, 12, 30, 35], "answer": 1, "explanation": "The two choices are disjoint. Add 7 + 5 = 12."}, {"prompt": "How many 4-letter codes can be made from A through H if no letter repeats?", "options": [1680, 70, 2400, 4096], "answer": 0, "explanation": "The successive choices are 8, 7, 6, and 5. Their product is 1,680."}, {"prompt": "How many nonempty bit strings have length at most 5?", "options": [31, 32, 63, 62], "answer": 3, "explanation": "Add the counts for lengths 1 through 5. The sum is 2 + 4 + 8 + 16 + 32 = 62."}, {"prompt": "How many bit strings of length 9 start with 0 and end with 1?", "options": [64, 256, 512, 128], "answer": 3, "explanation": "The two end bits are fixed. Each of the seven interior bits has two choices, so the count is 2⁷ = 128."}, {"prompt": "How many 5-character strings over {A, B, C, D} contain at least one D?", "options": [243, 405, 781, 1024], "answer": 2, "explanation": "Subtract the 3⁵ strings without D from the 4⁵ unrestricted strings. The result is 781."}, {"prompt": "How many 6-letter DNA strings over {A, C, G, T} begin with G, end with A, and contain no T?", "options": [27, 81, 243, 256], "answer": 1, "explanation": "Both ends are fixed. Each of the four interior positions can be A, C, or G. Thus 3⁴ = 81."}, {"prompt": "A badge code is either two digits followed by one letter from {A, B, C, D, E} or one such letter followed by two digits. Digits may repeat and may be 0. How many codes are possible?", "options": [1000, 100, 500, 900], "answer": 0, "explanation": "Each format contributes 10 × 10 × 5 = 500. Their first characters have different types, so add to get 1,000."}, {"prompt": "How many 4-digit positive integers have distinct digits?", "options": [4536, 3024, 5040, 6561], "answer": 0, "explanation": "The first digit has 9 nonzero choices. The remaining positions have 9, 8, and 7 choices. The product is 4,536."}, {"prompt": "How many 5-character strings over {A, B, C} contain both A and B at least once?", "options": [179, 211, 242, 180], "answer": 3, "explanation": "Subtract the 2⁵ strings missing A and the 2⁵ missing B. Add back CCCCC, which was subtracted twice. The count is 180."}, {"prompt": "In how many orders can 7 distinct speakers present?", "options": [720, 2520, 5040, 40320], "answer": 2, "explanation": "There are 7 choices for the first slot, then 6, and so on. The total is 7! = 5,040."}, {"prompt": "How many ways can 4 students be selected from 11 for an unranked team?", "options": [44, 330, 495, 7920], "answer": 1, "explanation": "Order is irrelevant, so choose 4 of 11. The result is C(11, 4) = 330."}, {"prompt": "How many bit strings of length 10 contain exactly four 1s?", "options": [120, 210, 252, 5040], "answer": 1, "explanation": "Choosing the four positions of the 1s completely determines the string. C(10, 4) = 210."}, {"prompt": "How many bit strings of length 8 contain at most two 1s?", "options": [37, 28, 36, 93], "answer": 0, "explanation": "Add the disjoint cases with zero, one, and two 1s. The result is 1 + 8 + 28 = 37."}, {"prompt": "How many bit strings of length 7 contain at least three 1s?", "options": [35, 98, 106, 99], "answer": 3, "explanation": "Exclude the strings with zero, one, or two 1s. The result is 128 − (1 + 7 + 21) = 99."}, {"prompt": "How many bit strings of length 8 have equal numbers of 0s and 1s and begin with 1?", "options": [21, 56, 35, 70], "answer": 2, "explanation": "Four 1s are needed in total. One is fixed, so choose three of the seven remaining positions. C(7, 3) = 35."}, {"prompt": "How many permutations of ABCDEFG contain both the consecutive block DE and the consecutive block BA, in those internal orders?", "options": [24, 240, 120, 720], "answer": 2, "explanation": "Treat DE and BA as single objects with fixed order. Along with C, F, and G there are five objects, giving 5! = 120."}, {"prompt": "Six distinct books include a math book and a physics book. How many orders keep those two books apart?", "options": [240, 480, 360, 600], "answer": 1, "explanation": "Start with 6! orders. The adjacent pair forms a block with two internal orders, giving 2 × 5! to subtract. The result is 480."}, {"prompt": "Five distinct adults and three distinct children stand in a line. How many orders have no adjacent children?", "options": [14400, 2400, 7200, 40320], "answer": 0, "explanation": "Arrange the adults in 5! ways, choose three of their six gaps, and place the children in 3! orders. The product is 14,400."}, {"prompt": "A 14-item true/false answer key has exactly six True entries. How many different keys are possible?", "options": [2002, 3432, 6006, 3003], "answer": 3, "explanation": "Choose the six positions marked True. All other positions are False. C(14, 6) = 3,003."}, {"prompt": "A 4-person committee is chosen from 6 engineers and 5 designers. How many committees include at least one designer?", "options": [255, 310, 330, 315], "answer": 3, "explanation": "Subtract the 15 all-engineer committees from the 330 unrestricted committees. The result is 315."}, {"prompt": "A 4-person committee is chosen from 5 mathematicians and 4 physicists. How many committees contain at least one of each?", "options": [60, 125, 120, 126], "answer": 2, "explanation": "From 126 total committees, subtract the 5 all-mathematician committees and the 1 all-physicist committee. The result is 120."}, {"prompt": "A 5-person committee is chosen from 7 juniors and 5 seniors. How many committees have more juniors than seniors?", "options": [350, 546, 525, 792], "answer": 1, "explanation": "Add the counts for three, four, and five juniors. The sum is 350 + 175 + 21 = 546."}, {"prompt": "From 9 volunteers, how many ways can you assign one chair, one secretary, and one treasurer, with no person holding two roles?", "options": [504, 84, 336, 729], "answer": 0, "explanation": "The roles are distinct, so the ordered choices give 9 × 8 × 7 = 504."}, {"prompt": "An 8-bit string has exactly three 1s, and no two 1s are adjacent. How many such strings are there?", "options": [20, 10, 35, 56], "answer": 0, "explanation": "Place the five 0s first. There are six gaps, including both ends. Choose three distinct gaps for the 1s, giving C(6, 3) = 20."}, {"prompt": "What is the coefficient of x⁴y⁵ in (x + y)⁹?", "options": [36, 84, 252, 126], "answer": 3, "explanation": "Choose the four factors contributing x. The remaining five contribute y. C(9, 4) = 126."}, {"prompt": "What is the coefficient of x³ in (4 − x)⁷?", "options": [-2240, -35840, -8960, 8960], "answer": 2, "explanation": "Three factors contribute −x and four contribute 4. The coefficient is C(7, 3) × (−1)³ × 4⁴ = −8,960."}, {"prompt": "What is the coefficient of x²y⁴ in (3x + 2y)⁶?", "options": [540, 2160, 1080, 4860], "answer": 1, "explanation": "Choose two factors for 3x and use 2y from the other four. The coefficient is C(6, 2) × 3² × 2⁴ = 2,160."}, {"prompt": "What is the coefficient of x⁶y³ in (x² − 2y)⁶?", "options": [-40, -160, -320, 160], "answer": 1, "explanation": "Three factors contribute x² and three contribute −2y. The coefficient is C(6, 3) × (−2)³ = −160."}, {"prompt": "What is the coefficient of x⁰ in (2x − 3)⁶?", "options": [729, -729, 64, 216], "answer": 0, "explanation": "A constant term requires choosing −3 from all six factors. This gives (−3)⁶ = 729."}];
+</script>
+<script>"use strict";
+
+const quiz = document.querySelector("#quiz");
+const summary = document.querySelector("#summary");
+const progress = document.querySelector("#progress");
+const progressText = document.querySelector("#progress-text");
+const format = new Intl.NumberFormat("en-US");
+const sections = {
+  0: ["rules", "Counting rules"],
+  10: ["arrangements", "Arrangements and selections"],
+  25: ["binomial", "Binomial theorem"]
+};
+
+function element(tag, className, text) {
+  const node = document.createElement(tag);
+  node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+const cards = questions.map((question, index) => {
+  if (sections[index]) {
+    const [id, title] = sections[index];
+    const heading = element("h2", "", title);
+    heading.id = id;
+    quiz.append(heading);
+  }
+  const card = element("article", "card");
+  const field = element("fieldset", "");
+  const legend = element("legend", "");
+  legend.append(element("span", "number", String(index + 1).padStart(2, "0")), question.prompt);
+  const choices = element("div", "choices");
+  const inputs = question.options.map((option, choice) => {
+    const label = element("label", "option");
+    const radio = element("input", "");
+    radio.type = "radio";
+    radio.name = "q" + index;
+    label.append(radio, element("span", "", "ABCD"[choice] + ". " + format.format(option)));
+    choices.append(label);
+    return radio;
+  });
+  const feedback = element("p", "feedback");
+  feedback.hidden = true;
+  field.append(legend, choices);
+  card.append(field, feedback);
+  quiz.append(card);
+  return {inputs, feedback};
+});
+
+function selections() {
+  return cards.map(card => card.inputs.findIndex(input => input.checked));
+}
+
+function updateProgress() {
+  const answered = selections().filter(choice => choice >= 0).length;
+  progress.value = answered;
+  progressText.textContent = answered + " of " + questions.length + " answered";
+}
+
+function clearFeedback() {
+  summary.hidden = true;
+  for (const {inputs, feedback} of cards) {
+    feedback.hidden = true;
+    for (const input of inputs) input.parentElement.classList.remove("right", "wrong");
+  }
+}
+
+function grade() {
+  let correct = 0;
+  let unanswered = 0;
+  selections().forEach((choice, index) => {
+    const {answer, explanation, options} = questions[index];
+    const {inputs, feedback} = cards[index];
+    if (choice === answer) correct++;
+    if (choice < 0) unanswered++;
+    inputs.forEach((input, i) => {
+      input.parentElement.classList.toggle("right", i === answer);
+      input.parentElement.classList.toggle("wrong", i === choice && i !== answer);
+    });
+    const result = choice < 0 ? "Unanswered" : choice === answer ? "Correct" : "Incorrect";
+    feedback.replaceChildren(
+      element("strong", "", result + " · " + "ABCD"[answer] + ". " + format.format(options[answer])),
+      explanation
+    );
+    feedback.hidden = false;
+  });
+  summary.textContent = correct + " / " + questions.length + " correct · " + unanswered + " unanswered";
+  summary.hidden = false;
+  summary.focus();
+}
+
+quiz.addEventListener("change", () => {
+  if (!summary.hidden) clearFeedback();
+  updateProgress();
+});
+document.querySelector("#grade").addEventListener("click", grade);
+document.querySelector("#grade-end").addEventListener("click", grade);
+document.querySelector("#reset").addEventListener("click", () => {
+  quiz.reset();
+  clearFeedback();
+  updateProgress();
+});
+updateProgress();
+</script>
+</body>
+</html>
