@@ -10,6 +10,10 @@ Notes on physics, mathematics, semiconductors, and computational research.
 
 Several articles began as personal technical notes or Chinese answers on Zhihu and were later translated and edited into English.
 
+## Contact
+
+[Add me on WeChat · 微信二维码](wechat.md)
+
 ## Questions
 
 [Python Editor — 在线编辑、语义高亮与运行](tools/python-editor.md)
