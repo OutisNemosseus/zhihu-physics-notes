@@ -1,11 +1,5 @@
-# Add me on WeChat / 微信联系
+# WeChat | 微信
 
-**WeChat profile:** Anoamly (United States)
+![微信二维码原始截图](assets/contact-image.jpg)
 
-![WeChat QR code for Anoamly](assets/wechat-qr.svg)
-
-Scan the QR code in WeChat to add me as a friend, or [open my WeChat invite link](https://u.wechat.com/kApSn77sxd8jmc8KT2l492Q?s=2).
-
-**中文：** 微信扫一扫，添加我的微信好友。
-
-**Tiếng Việt:** Quét mã QR bằng WeChat để kết bạn với anh.
+[查看原始图片](assets/contact-image.jpg)
