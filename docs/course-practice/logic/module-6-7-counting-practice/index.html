@@ -32,13 +32,21 @@ fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;pa
 .topic-table thead th{background:var(--paper);color:var(--muted)}
 .topic-table tbody th{width:51%}
 .question-links{display:flex;flex-wrap:wrap;gap:3px 7px}
-.question-links a{display:inline-block;min-width:1.2rem;font-variant-numeric:tabular-nums}
+.question-links a:not([hidden]){display:inline-block;min-width:1.2rem;font-variant-numeric:tabular-nums}
 #quiz h2,.card{scroll-margin-top:16px}
 #quiz h2:target,.card:target{outline:2px solid var(--teal);outline-offset:3px}
 @media(max-width:780px){
   .practice-layout{grid-template-columns:minmax(0,1fr)}
   .topic-sidebar{position:static;max-height:none}
 }
+.edition-controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:0 0 16px}
+.edition-controls a{display:inline-block;padding:6px 10px;border:1px solid var(--line);border-radius:7px;background:white}
+.edition-controls a[aria-current="page"]{font-weight:750;text-decoration:none;border-color:var(--teal)}
+.edition-controls button{padding:6px 10px}
+#wrong-book{margin-top:16px;border-top:1px solid var(--line);padding-top:12px}
+#wrong-book h2{font-size:1.05rem}
+#wrong-toggle{font-size:.88rem;padding:6px 10px}
+#wrong-toggle[aria-pressed="true"]{background:var(--teal);color:white}
 </style>
 
 
@@ -55,8 +63,21 @@ fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;pa
 <thead><tr><th scope="col">解题方法</th><th scope="col">题号</th></tr></thead>
 <tbody id="topic-rows"></tbody>
 </table>
+<section id="wrong-book" aria-labelledby="wrong-title">
+<h2 id="wrong-title">错题本</h2>
+<p id="wrong-count" role="status">已保存 0 道错题</p>
+<p>原版与数字变式分别记录。</p>
+<button id="wrong-toggle" class="secondary" type="button" aria-pressed="false" disabled>只练错题</button>
+<p id="wrong-storage-note" hidden>此浏览器无法保存错题。刷新后，本次记录会丢失。</p>
+</section>
 </aside>
 <div class="practice-content">
+<nav class="edition-controls" lang="zh-CN" aria-label="题目版本与题序">
+<a id="original-edition" href="./">原版</a>
+<a id="variant-edition" href="?edition=variant">数字变式</a>
+<button id="shuffle" type="button" class="secondary">打乱各类题序</button>
+<span id="shuffle-status" role="status"></span>
+</nav>
 <section class="toolbar" aria-label="Quiz controls">
 <div><strong id="progress-text" role="status">0 of 30 answered</strong><progress id="progress" value="0" max="30" aria-label="Questions answered"></progress></div>
 <div class="actions"><button id="grade" type="button">Check answers</button><button id="reset" class="secondary" type="button">Start over</button></div>
@@ -68,7 +89,7 @@ fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;pa
 </div>
 </div>
 </main>
-<script>const questions = [
+<script>const originalQuestions = [
   {"prompt":"At an open house, you can book either one of four films, or one of three demonstrations paired with one of two practice stations. Film bookings never include a station. How many distinct bookings are possible?","options":[10,14,24,7],"answer":0,"explanation":"电影有 4 种。演示要再选一个练习站，有 3 × 2 种。两类预约互斥，所以 4 + 6 = 10。"},
   {"prompt":"A rental kit contains one of three cameras and one of four lenses. One camera cannot use two of the lenses. Every other camera–lens pairing works. How many kits are possible?","options":[12,10,6,8],"answer":1,"explanation":"先按乘法法则数出 3 × 4 = 12 对，再减去唯一不兼容的相机产生的 2 对，得到 10。"},
   {"prompt":"A message can use one of two direct channels or travel through exactly one relay. Relay X has three incoming and four outgoing channels. Relay Y has two incoming and two outgoing channels. A relayed route uses one incoming and one outgoing channel at the same relay. How many routes are there?","options":[20,18,14,48],"answer":1,"explanation":"按直达、经 X、经 Y 分成三个互斥情形。总数是 2 + 3 × 4 + 2 × 2 = 18。"},
@@ -108,6 +129,43 @@ const summary = document.querySelector("#summary");
 const progress = document.querySelector("#progress");
 const progressText = document.querySelector("#progress-text");
 const format = new Intl.NumberFormat("en-US");
+const variantQuestions = [
+  {"prompt":"At an open house, you can book either one of five films, or one of three demonstrations paired with one of two practice stations. Film bookings never include a station. How many distinct bookings are possible?","options":[15,11,26,8],"answer":1,"explanation":"电影 5 种，演示和练习站有 3 × 2 种，共 11 种。"},
+  {"prompt":"A rental kit contains one of four cameras and one of four lenses. One camera cannot use two of the lenses. Every other camera–lens pairing works. How many kits are possible?","options":[14,17,8,11],"answer":0,"explanation":"共有 4 × 4 对，减去 2 对不兼容组合，得 14。"},
+  {"prompt":"A message can use one of three direct channels or travel through exactly one relay. Relay X has three incoming and four outgoing channels. Relay Y has two incoming and two outgoing channels. A relayed route uses one incoming and one outgoing channel at the same relay. How many routes are there?","options":[21,15,51,19],"answer":3,"explanation":"直达、经 X、经 Y 互斥，合计 3 + 3 × 4 + 2 × 2 = 19。"},
+  {"prompt":"Each of six slots in a light strip displays A, B, or C. Neighboring slots must display different letters. Letters may recur in nonadjacent slots. How many strips are possible?","options":[486,64,96,162],"answer":2,"explanation":"首格 3 种，之后每格 2 种，得 3 × 2⁵ = 96。"},
+  {"prompt":"A gallery has eight distinct panels, including panels A and B. A display contains three panels and must contain exactly one of A and B. The order of the panels is ignored. How many displays are possible?","options":[15,30,45,38],"answer":1,"explanation":"先选 A 或 B，再从另 6 块选两个，得 2 × C(6, 2) = 30。"},
+  {"prompt":"A four-letter signal uses the alphabet {R, G, B, Y}, with repetition allowed. At least one of its two end positions must contain R. How many signals are possible?","options":[112,96,144,128],"answer":0,"explanation":"两端都没有 R 的有 3 × 4² × 3 种。从 4⁴ 中减去，得 112。"},
+  {"prompt":"Seven different speakers are available. A program has three ordered speaking slots, each filled by a different speaker. Only four of the seven speakers are eligible for the middle slot. How many programs are possible?","options":[144,72,180,120],"answer":3,"explanation":"先排中间，再排首尾，得 4 × 6 × 5 = 120。"},
+  {"prompt":"Nine different sensor models are available, including models X and Y. A lab buys four distinct models, and X and Y cannot both be in the order. How many different orders are possible, ignoring the order of the models?","options":[76,134,105,29],"answer":2,"explanation":"从 C(9, 4) 中减去同时含 X、Y 的 C(7, 2)，得 105。"},
+  {"prompt":"A row of seven instrument icons uses three identical L icons, two identical M icons, one N icon, and one O icon. How many distinct rows are possible?","options":[840,420,210,1680],"answer":1,"explanation":"3 个 L 和 2 个 M 的互换要去重，得 7!/(3!2!) = 420。"},
+  {"prompt":"A technician selects five fuses from three types. Supply is unlimited, and only the number of fuses of each type matters. How many selections are possible?","options":[21,113,17,49],"answer":0,"explanation":"5 个星、2 块隔板，选 2 个位置放隔板。C(7, 2) = 21。"},
+  {"prompt":"Ten identical vouchers are distributed among four named clubs. The robotics club must get at least two vouchers. The other clubs may get none. How many distributions are possible?","options":[227,303,116,165],"answer":3,"explanation":"先给机器人社 2 张。用 3 块隔板把剩余 8 张分给 4 个社团，得 C(11, 3) = 165。"},
+  {"prompt":"In (1 + 2x)⁷, by how much does the coefficient of x³ exceed the coefficient of x²?","options":[314,284,196,78],"answer":2,"explanation":"x³ 与 x² 的系数分别是 C(7, 3) × 2³ = 280 和 C(7, 2) × 2² = 84，差为 196。"},
+  {"prompt":"A six-character code uses {A, B, C, D}. A and B each appear exactly once, A appears before B, and A and B are not adjacent. The other characters can be C or D, with repetition allowed. How many codes are possible?","options":[107,160,267,320],"answer":1,"explanation":"C(6, 2) 对位置减去 5 对相邻位置，靠前的放 A。剩 4 格各 2 种，共 160。"},
+  {"prompt":"A sequence is made from A, A, B, B, B, C, D, using every symbol. How many distinct sequences begin with A?","options":[120,240,60,180],"answer":0,"explanation":"首格固定 A，剩 6 个符号里有三个 B 相同，得 6!/3! = 120。"},
+  {"prompt":"Seven identical calibration tokens go into three labeled bins. The first bin can hold at most two tokens. The other two have no capacity limit. Empty bins are allowed. How many distributions are possible?","options":[12,33,25,21],"answer":3,"explanation":"无限制有 C(9, 2) 种。第一箱违规先放 3 枚，剩 4 枚自由分，有 C(6, 2) 种。相减得 21。"},
+  {"prompt":"What is the coefficient of x³ in (1 − 2x)⁶ + (2 + x)⁵?","options":[120,-429,-120,-274],"answer":2,"explanation":"两项的 x³ 系数相加：C(6, 3)(−2)³ + C(5, 3)2² = −120。"},
+  {"prompt":"Evaluate C(9, 1) + C(9, 3) + C(9, 5) + C(9, 7) + C(9, 9), where C(n, k) denotes “n choose k.”","options":[512,256,254,128],"answer":1,"explanation":"(1+1)⁹ 减去 (1−1)⁹ 留下两倍奇数项，所以和是 2⁸ = 256。"},
+  {"prompt":"Ten identical tokens are distributed among labeled bins A, B, C, and D. A and B must each receive an even number, possibly zero. C and D must each receive at least one. How many distributions are possible?","options":[55,64,103,37],"answer":0,"explanation":"A、B 总数为 0、2、4、6、8 时有 1、2、3、4、5 种拆法。C、D 分别有 9、7、5、3、1 种拆法。乘后相加得 55。"},
+  {"prompt":"How many binary strings of length eight avoid three consecutive 1s?","options":[199,177,118,149],"answer":3,"explanation":"按结尾 0、01、011 分类，递推 aₙ = aₙ₋₁ + aₙ₋₂ + aₙ₋₃，从 1、2、4 算得 a₈ = 149。"},
+  {"prompt":"A length-seven banner is filled exactly by an ordered row of tiles. There are two types of length-one tile and one type of length-three tile. Each type may be reused. How many banners are possible?","options":[212,73,214,276],"answer":2,"explanation":"按末砖分类，bₙ = 2bₙ₋₁ + bₙ₋₃。由 b₆ = 97、b₄ = 20，得 b₇ = 214。"},
+  {"prompt":"A three-act showcase uses exactly two of five distinct music acts and one of three distinct dance acts. The dance act must open or close the showcase. How many ordered programs are possible?","options":[30,120,180,60],"answer":1,"explanation":"先选两个音乐节目和一个舞蹈，再排舞蹈端点及音乐顺序，得 C(5, 2) × 3 × 2 × 2 = 120。"},
+  {"prompt":"How many distinct rows can be formed using all the symbols in AAAABBCC if neither BB nor CC may appear as a consecutive pair?","options":[240,458,196,327],"answer":0,"explanation":"总数 8!/(4!2!2!) = 420。BB 或 CC 成块各有 105，两块都成块有 30。容斥得 240。"},
+  {"prompt":"Ten identical units of storage are split among four labeled accounts. The first two accounts each have a cap of three units. The other two have no cap. Zero allocations are allowed. How many allocations are possible?","options":[251,123,187,128],"answer":3,"explanation":"不限有 C(13, 3) 种；单个超限有 C(9, 3) 种；两个都超限有 C(5, 3) 种。容斥得 128。"},
+  {"prompt":"A device has six labeled switches. Each switch has two distinct zero-cost settings, one setting costing 1 credit, and one setting costing 2 credits. How many configurations cost exactly 3 credits?","options":[384,256,640,512],"answer":2,"explanation":"费用拆为 1+1+1 或 2+1，分别有 C(6, 3) × 2³ = 160 和 6 × 5 × 2⁴ = 480 种，共 640。"},
+  {"prompt":"A six-symbol code uses {A, B, C, D}, with repetition allowed. Both A and B must occur, and at least one of them must occur twice or more. How many codes are possible?","options":[3089,2222,2656,2049],"answer":1,"explanation":"同时含 A、B 有 4⁶ − 2 × 3⁶ + 2⁶ = 2702 种，减去恰好各一次的 6 × 5 × 2⁴ = 480 种，得 2222。"},
+  {"prompt":"Five identical red beads and three identical blue beads are distributed among three labeled boxes. A box may be empty, but no box may contain both colors. How many distributions are possible?","options":[24,31,17,103],"answer":0,"explanation":"红蓝分别占 (1,1)、(2,1)、(1,2) 箱，有 6、12、6 种，共 24。"},
+  {"prompt":"What is the coefficient of x⁴ in (1 + x²)(3x² − 1)⁵?","options":[-100,75,-125,-75],"answer":3,"explanation":"外因子取 1 或 x² 时，内因子分别取 x⁴ 或 x²。贡献 −90 和 15，合计 −75。"},
+  {"prompt":"A string of length seven uses {R, B, G}, with repetition allowed. How many such strings contain an even number of Rs, including zero?","options":[1457,728,1094,1091],"answer":2,"explanation":"按 R 的数量 0、2、4、6 分组。每组先选 R 的位置，其他位置填 B 或 G。相加 128 + 672 + 280 + 14 = 1094。"},
+  {"prompt":"Ten identical samples are assigned to five labeled lockers. Exactly three of lockers A, B, C, and D must be nonempty. Locker E must contain at least two samples. How many allocations are possible?","options":[56,224,358,134],"answer":1,"explanation":"从 A–D 选 3 柜。先放 3+2=5 份，剩 5 份分给四个已用柜。C(4, 3) × C(8, 3) = 224。"},
+  {"prompt":"How many length-nine strings over {A, B} have neither AAA nor BBB as a consecutive substring?","options":[110,178,131,55],"answer":0,"explanation":"每段长 1 或 2。用 gₙ = gₙ₋₁ + gₙ₋₂ 和 g₀ = g₁ = 1 得 g₉ = 55。首段字母有两种，共 110。"}
+];
+const variantEdition = new URLSearchParams(location.search).get("edition") === "variant";
+const questions = variantEdition ? variantQuestions : originalQuestions;
+document.querySelector(variantEdition ? "#variant-edition" : "#original-edition")
+  .setAttribute("aria-current", "page");
+
 const topics = [
   ["fundamentals","加法、乘法与补集","Sum, product & complements",[1,2,3,4,6,24,25]],
   ["permutations","排列与相同物品","Permutations",[7,9,14,21,22]],
@@ -148,6 +206,7 @@ const cards = questions.map((question, index) => {
 });
 
 const topicRows = document.querySelector("#topic-rows");
+const topicViews = [];
 for (const [id, label, title, numbers] of topics) {
   const heading = element("h2", "", title);
   heading.id = id;
@@ -162,25 +221,115 @@ for (const [id, label, title, numbers] of topics) {
 
   const questionCell = element("td", "");
   const links = element("div", "question-links");
+  const questionLinks = [];
   for (const number of numbers) {
     const link = element("a", "", String(number).padStart(2, "0"));
     link.href = "#q" + number;
     link.setAttribute("aria-label", "第 " + number + " 题");
     links.append(link);
+    questionLinks.push(link);
   }
   questionCell.append(links);
   row.append(method, questionCell);
   topicRows.append(row);
+  topicViews.push({heading, row, numbers, links, questionLinks});
 }
+
+document.querySelector("#shuffle").addEventListener("click", () => {
+  for (const {heading, numbers, links, questionLinks} of topicViews) {
+    const order = numbers.map((_, index) => index);
+    for (let i = order.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [order[i], order[j]] = [order[j], order[i]];
+    }
+    if (order.every((index, i) => links.children[i] === questionLinks[index])) {
+      [order[0], order[1]] = [order[1], order[0]];
+    }
+    quiz.append(heading, ...order.map(index => cards[numbers[index] - 1].card));
+    links.append(...order.map(index => questionLinks[index]));
+  }
+  document.querySelector("#shuffle-status").textContent = "各类别题序已打乱";
+});
+
+const wrongPrefix = variantEdition
+  ? "mth231-counting-2026-11-07:variant:wrong:"
+  : "mth231-counting-2026-11-07:wrong:";
+const wrong = new Set();
+const wrongToggle = document.querySelector("#wrong-toggle");
+const wrongCount = document.querySelector("#wrong-count");
+const wrongStorageNote = document.querySelector("#wrong-storage-note");
+let review = null;
+
+try {
+  cards.forEach((_, index) => {
+    if (localStorage.getItem(wrongPrefix + index) === "1") wrong.add(index);
+  });
+} catch {
+  wrongStorageNote.hidden = false;
+}
+
+function updateWrongBook() {
+  wrongCount.textContent = "已保存 " + wrong.size + " 道错题";
+  wrongToggle.disabled = review === null && wrong.size === 0;
+}
+
+function recordResult(index, incorrect) {
+  if (incorrect) wrong.add(index);
+  else wrong.delete(index);
+  try {
+    if (incorrect) localStorage.setItem(wrongPrefix + index, "1");
+    else localStorage.removeItem(wrongPrefix + index);
+  } catch {
+    wrongStorageNote.hidden = false;
+  }
+}
+
+function toggleReview() {
+  if (review === null && !wrong.size) return;
+  review = review === null ? new Set(wrong) : null;
+  clearFeedback();
+  cards.forEach(({card, inputs}, index) => {
+    card.hidden = review !== null && !review.has(index);
+    if (review !== null && review.has(index)) inputs.forEach(input => { input.checked = false; });
+  });
+  for (const {heading, row, numbers, questionLinks} of topicViews) {
+    const visible = numbers.map(number => review === null || review.has(number - 1));
+    heading.hidden = row.hidden = !visible.some(Boolean);
+    questionLinks.forEach((link, index) => { link.hidden = !visible[index]; });
+  }
+  wrongToggle.textContent = review === null ? "只练错题" : "返回全部题目";
+  wrongToggle.setAttribute("aria-pressed", String(review !== null));
+  updateProgress();
+  updateWrongBook();
+}
+
+wrongToggle.addEventListener("click", toggleReview);
+window.addEventListener("storage", event => {
+  if (event.storageArea !== localStorage) return;
+  if (event.key === null) {
+    wrong.clear();
+  } else {
+    if (!event.key.startsWith(wrongPrefix)) return;
+    const index = Number(event.key.slice(wrongPrefix.length));
+    if (!Number.isInteger(index) || index < 0 || index >= cards.length || event.key !== wrongPrefix + index) return;
+    if (event.newValue === "1") wrong.add(index);
+    else wrong.delete(index);
+  }
+  updateWrongBook();
+});
 
 function selections() {
   return cards.map(card => card.inputs.findIndex(input => input.checked));
 }
 
 function updateProgress() {
-  const answered = selections().filter(choice => choice >= 0).length;
+  const total = review === null ? questions.length : review.size;
+  const answered = selections().filter((choice, index) =>
+    choice >= 0 && (review === null || review.has(index))
+  ).length;
+  progress.max = total;
   progress.value = answered;
-  progressText.textContent = answered + " of " + questions.length + " answered";
+  progressText.textContent = answered + " of " + total + " answered";
 }
 
 function clearFeedback() {
@@ -195,10 +344,12 @@ function grade() {
   let correct = 0;
   let unanswered = 0;
   selections().forEach((choice, index) => {
+    if (review !== null && !review.has(index)) return;
     const {answer, explanation, options} = questions[index];
     const {inputs, feedback} = cards[index];
     if (choice === answer) correct++;
     if (choice < 0) unanswered++;
+    else recordResult(index, choice !== answer);
     inputs.forEach((input, i) => {
       input.parentElement.classList.toggle("right", i === answer);
       input.parentElement.classList.toggle("wrong", i === choice && i !== answer);
@@ -210,7 +361,9 @@ function grade() {
     );
     feedback.hidden = false;
   });
-  summary.textContent = correct + " / " + questions.length + " correct · " + unanswered + " unanswered";
+  const total = review === null ? questions.length : review.size;
+  summary.textContent = correct + " / " + total + " correct · " + unanswered + " unanswered";
+  updateWrongBook();
   summary.hidden = false;
   summary.focus();
 }
@@ -222,11 +375,13 @@ quiz.addEventListener("change", () => {
 document.querySelector("#grade").addEventListener("click", grade);
 document.querySelector("#grade-end").addEventListener("click", grade);
 document.querySelector("#reset").addEventListener("click", () => {
-  quiz.reset();
+  if (review === null) quiz.reset();
+  else review.forEach(index => cards[index].inputs.forEach(input => { input.checked = false; }));
   clearFeedback();
   updateProgress();
 });
 updateProgress();
+updateWrongBook();
 </script>
 </body>
 </html>
