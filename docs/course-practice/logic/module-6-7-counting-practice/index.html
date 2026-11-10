@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MTH 231 Modules 6–7 counting practice: 30 multiple-choice questions with worked solutions.">
+<title>MTH 231 · Modules 6–7 Counting Practice</title>
+<style>:root{color-scheme:light;--ink:#192c37;--muted:#485e69;--teal:#0b5c56;--line:#d1dedd;--paper:#f4f8f7}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:1rem/1.55 system-ui,sans-serif}
+.wrap{max-width:840px;margin:auto;padding-inline:clamp(16px,5vw,36px)}
+header{background:#153735;color:#fff;padding:clamp(28px,7vw,60px) 0 36px}
+h1{font-size:clamp(2.2rem,7vw,4rem);letter-spacing:-.045em;line-height:1;margin:.35em 0;font-weight:720}
+.eyebrow{letter-spacing:.14em;font-size:.78rem;font-weight:700;color:#c5e6df}.eyebrow span{margin:0 .5em}
+.intro{max-width:550px;color:#dfefec;margin:0}
+main{padding-block:22px 45px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+progress{display:block;width:165px;margin-top:4px;accent-color:var(--teal)}.actions{display:flex;gap:8px;flex-wrap:wrap}
+button{border:1px solid var(--teal);border-radius:7px;background:var(--teal);color:white;padding:9px 15px;font:inherit;font-weight:650;cursor:pointer}.secondary{color:var(--teal);background:transparent}
+nav{display:flex;gap:8px 16px;flex-wrap:wrap;margin:20px 0}a{color:var(--teal);text-underline-offset:3px}
+h2{font-size:1.3rem;margin:28px 0 10px}
+.card{background:white;border:1px solid var(--line);border-radius:12px;padding:clamp(12px,3vw,22px);margin:0 0 12px}
+fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;padding:0;margin-bottom:10px}.number{color:var(--teal);margin-right:.55em;font-variant-numeric:tabular-nums}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.option{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:7px;padding:8px 10px;cursor:pointer}.option:hover{border-color:var(--teal)}.option:has(:checked){background:#eaf4f2;border-color:var(--teal)}input{accent-color:var(--teal);margin:0}
+.option.right{background:#e8f6ee;border-color:#3a805f}.option.wrong{background:#fff1ef;border-color:#a84c42}.feedback,#summary{background:#e6efed;padding:10px 12px;border-radius:7px;margin:12px 0 0}.feedback strong{display:block}.top{margin-left:12px}
+:focus-visible{outline:3px solid #b45f16;outline-offset:3px}@media(max-width:380px){.choices{grid-template-columns:1fr}}
+</style>
+
+
+</head>
+<body>
+<header><div class="wrap"><p class="eyebrow">MTH 231 <span>·</span> DISCRETE MATHEMATICS</p><h1>Counting Practice</h1><p class="intro">Modules 6–7 · Mini-Exam 3 review · November 7, 2026</p><p class="intro">30 multiple-choice questions with worked solutions in Chinese. C(n, k) means “n choose k.”</p></div></header>
+<main class="wrap">
+<p><a href="../../">← Course Practice</a></p>
+<section class="toolbar" aria-label="Quiz controls">
+<div><strong id="progress-text" role="status">0 of 30 answered</strong><progress id="progress" value="0" max="30" aria-label="Questions answered"></progress></div>
+<div class="actions"><button id="grade" type="button">Check answers</button><button id="reset" class="secondary" type="button">Start over</button></div>
+</section>
+<p id="summary" tabindex="-1" hidden></p>
+<nav aria-label="Question sections"><a href="#fundamentals">01–6 Counting fundamentals</a><a href="#arrangements">07–12 Arrangements &amp; selections</a><a href="#constraints">13–18 Constraints &amp; coefficients</a><a href="#recurrences">19–24 Recurrences &amp; mixed counting</a><a href="#cumulative">25–30 Cumulative practice</a></nav>
+<form id="quiz"></form>
+<button id="grade-end" type="button">Check answers</button>
+<a href="#" class="top">Back to top ↑</a>
+</main>
+<script>const questions = [
+  {"prompt":"At an open house, you can book either one of four films, or one of three demonstrations paired with one of two practice stations. Film bookings never include a station. How many distinct bookings are possible?","options":[10,14,24,7],"answer":0,"explanation":"电影有 4 种。演示要再选一个练习站，有 3 × 2 种。两类预约互斥，所以 4 + 6 = 10。"},
+  {"prompt":"A rental kit contains one of three cameras and one of four lenses. One camera cannot use two of the lenses. Every other camera–lens pairing works. How many kits are possible?","options":[12,10,6,8],"answer":1,"explanation":"先按乘法法则数出 3 × 4 = 12 对，再减去唯一不兼容的相机产生的 2 对，得到 10。"},
+  {"prompt":"A message can use one of two direct channels or travel through exactly one relay. Relay X has three incoming and four outgoing channels. Relay Y has two incoming and two outgoing channels. A relayed route uses one incoming and one outgoing channel at the same relay. How many routes are there?","options":[20,18,14,48],"answer":1,"explanation":"按直达、经 X、经 Y 分成三个互斥情形。总数是 2 + 3 × 4 + 2 × 2 = 18。"},
+  {"prompt":"Each of five slots in a light strip displays A, B, or C. Neighboring slots must display different letters. Letters may recur in nonadjacent slots. How many strips are possible?","options":[243,32,81,48],"answer":3,"explanation":"第一格有 3 种选法。后面每一格都只需避开前一格的字母，各有 2 种，所以 3 × 2⁴ = 48。"},
+  {"prompt":"A gallery has seven distinct panels, including panels A and B. A display contains three panels and must contain exactly one of A and B. The order of the panels is ignored. How many displays are possible?","options":[10,30,20,25],"answer":2,"explanation":"先从 A、B 中选一个，再从另外五个面板中选两个。总数是 2 × C(5, 2) = 20。"},
+  {"prompt":"A three-letter signal uses the alphabet {R, G, B, Y}, with repetition allowed. At least one of its two end positions must contain R. How many signals are possible?","options":[24,36,32,28],"answer":3,"explanation":"全部有 4³ 种，两端都不是 R 时有 3 × 4 × 3 种。相减得 28。中间出现 R 与否不受限制。"},
+  {"prompt":"Six different speakers are available. A program has three ordered speaking slots, each filled by a different speaker. Only four of the six speakers are eligible for the middle slot. How many programs are possible?","options":[80,96,48,120],"answer":0,"explanation":"先排中间，只有 4 人符合条件。再依次排两端，可选人数为 5 和 4。总数是 4 × 5 × 4 = 80。"},
+  {"prompt":"Eight different sensor models are available, including models X and Y. A lab buys four distinct models, and X and Y cannot both be in the order. How many different orders are possible, ignoring the order of the models?","options":[40,70,55,15],"answer":2,"explanation":"共有 C(8, 4) 种。若同时选 X 和 Y，另两种从六种里选，有 C(6, 2) 种。相减得 70 − 15 = 55。"},
+  {"prompt":"A row of six instrument icons uses two identical L icons, two identical M icons, one N icon, and one O icon. How many distinct rows are possible?","options":[360,180,90,720],"answer":1,"explanation":"先把六个图标都视为有编号，得到 6!。两对同类图标各可互换，除以 2! × 2!，得到 180。"},
+  {"prompt":"A technician selects four fuses from three types. Supply is unlimited, and only the number of fuses of each type matters. How many selections are possible?","options":[81,12,35,15],"answer":3,"explanation":"四个星号代表四根保险丝，两块隔板分出三类。六个位置选两个放隔板，得到 C(6, 2) = 15。"},
+  {"prompt":"Nine identical vouchers are distributed among four named clubs. The robotics club must get at least two vouchers. The other clubs may get none. How many distributions are possible?","options":[120,165,220,84],"answer":0,"explanation":"先给机器人社两张，剩七张自由分配。用三块隔板分成四组，得到 C(10, 3) = 120。"},
+  {"prompt":"In (1 + 2x)⁶, by how much does the coefficient of x³ exceed the coefficient of x²?","options":[100,160,145,40],"answer":0,"explanation":"x³ 的系数是 C(6, 3) × 2³ = 160。x² 的系数是 C(6, 2) × 2² = 60。差为 100。"},
+  {"prompt":"A five-character code uses {A, B, C, D}. A and B each appear exactly once, A appears before B, and A and B are not adjacent. The other characters can be C or D, with repetition allowed. How many codes are possible?","options":[32,80,48,96],"answer":2,"explanation":"选 A、B 的位置后，靠前的位置必须放 A。C(5, 2) 对位置中，4 对相邻，剩 6 对。其余三格各有两种， 得 6 × 2³ = 48。"},
+  {"prompt":"A sequence is made from A, A, B, B, C, D, using every symbol. How many distinct sequences begin with A?","options":[120,30,60,90],"answer":2,"explanation":"固定第一个 A，余下 A、B、B、C、D 可排 5!/2! = 60 种。只有 B 在剩余符号中重复。"},
+  {"prompt":"Six identical calibration tokens go into three labeled bins. The first bin can hold at most two tokens. The other two have no capacity limit. Empty bins are allowed. How many distributions are possible?","options":[10,18,28,21],"answer":1,"explanation":"不限容量时有 C(8, 2) = 28 种。第一箱若装至少 3 枚，先给它 3 枚，再分其余 3 枚，有 C(5, 2) = 10 种。相减得 18。"},
+  {"prompt":"What is the coefficient of x³ in (1 − 2x)⁶ + (3 + x)⁵?","options":[70,-250,-160,-70],"answer":3,"explanation":"第一个幂贡献 C(6, 3) × (−2)³ = −160，第二个幂贡献 C(5, 3) × 3² = 90。相加得 −70。"},
+  {"prompt":"Evaluate C(8, 1) + C(8, 3) + C(8, 5) + C(8, 7), where C(n, k) denotes “n choose k.”","options":[256,127,128,64],"answer":2,"explanation":"把 (1 + 1)⁸ 与 (1 − 1)⁸ 相减，偶数项抵消，奇数项变成两倍。所以原和是 (256 − 0)/2 = 128。"},
+  {"prompt":"Eight identical tokens are distributed among labeled bins A, B, C, and D. A and B must each receive an even number, possibly zero. C and D must each receive at least one. How many distributions are possible?","options":[35,56,30,20],"answer":2,"explanation":"A、B 合计可为 0、2、4、6，对应拆法数为 1、2、3、4。C、D 的正整数拆法依次为 7、5、3、1。加 总 7 + 10 + 9 + 4 = 30。"},
+  {"prompt":"How many binary strings of length seven avoid three consecutive 1s?","options":[81,108,96,64],"answer":0,"explanation":"当 n ≥ 3 时，合法串按结尾分为 0、01 或 011 三类，对应递推 aₙ = aₙ₋₁ + aₙ₋₂ + aₙ₋₃。初值 a₀ = 1、a₁ = 2、a₂ = 4，继续得到 7、13、24、44、81。"},
+  {"prompt":"A length-six banner is filled exactly by an ordered row of tiles. There are two types of length-one tile and one type of length-three tile. Each type may be reused. How many banners are possible?","options":[97,96,33,125],"answer":0,"explanation":"按最后一块分，bₙ = 2bₙ₋₁ + bₙ₋₃。空横幅算 1 种，负长度算 0 种。长度 1 到 6 依次有 2、4、9、22、 52、97 种。"},
+  {"prompt":"A three-act showcase uses exactly two of four distinct music acts and one of three distinct dance acts. The dance act must open or close the showcase. How many ordered programs are possible?","options":[18,108,72,36],"answer":2,"explanation":"选两支音乐节目和一支舞蹈，有 C(4, 2) × 3 种。舞蹈有两个端点可放，音乐有两种顺序。总数为 72。"},
+  {"prompt":"How many distinct rows can be formed using all the symbols in AAABBCC if neither BB nor CC may appear as a consecutive pair?","options":[210,110,90,150],"answer":1,"explanation":"总数为 7!/(3!2!2!) = 210。把 BB 或 CC 各看成一块，每种违规有 60 种。两块同时出现的 20 种被减 了两次，加回后得 110。"},
+  {"prompt":"Nine identical units of storage are split among four labeled accounts. The first two accounts each have a cap of three units. The other two have no cap. Zero allocations are allowed. How many allocations are possible?","options":[220,112,108,164],"answer":1,"explanation":"无限制时有 C(12, 3) = 220 种。前两户各自超上限的有 C(8, 3) = 56 种。两户同时超出的有 C(4, 3) = 4 种。得 220 − 112 + 4 = 112。"},
+  {"prompt":"A device has five labeled switches. Each switch has two distinct zero-cost settings, one setting costing 1 credit, and one setting costing 2 credits. How many configurations cost exactly 3 credits?","options":[120,80,160,200],"answer":3,"explanation":"用三个 1 点档，有 C(5, 3) × 2² = 40 种。用一个 1 点档加一个 2 点档，有 5 × 4 × 2³ = 160 种。两 类合计 200。"},
+  {"prompt":"A five-symbol code uses {A, B, C, D}, with repetition allowed. Both A and B must occur, and at least one of them must occur twice or more. How many codes are possible?","options":[410,570,490,378],"answer":0,"explanation":"先容斥数出同时含 A、B 的 4⁵ − 2 × 3⁵ + 2⁵ = 570 种。再减去 A、B 恰好各一次的 5 × 4 × 2³ = 160 种，得 410。"},
+  {"prompt":"Four identical red beads and three identical blue beads are distributed among three labeled boxes. A box may be empty, but no box may contain both colors. How many distributions are possible?","options":[27,15,90,21],"answer":3,"explanation":"每色各占一箱，有 3 × 2 = 6 种。红占两箱、蓝占一箱，有 3 × 3 = 9 种。蓝占两箱、红占一箱，有 3 × 2 = 6 种。合计 21。"},
+  {"prompt":"What is the coefficient of x⁴ in (1 + x²)(2x² − 1)⁵?","options":[-40,30,-50,-30],"answer":3,"explanation":"外因子选 1，内幂取 x⁴，贡献 C(5, 2) × 2² × (−1)³ = −40。外因子选 x²，内幂取 x²，贡献 5 × 2 × (−1)⁴ = 10。合计 −30。"},
+  {"prompt":"A string of length six uses {R, B, G}, with repetition allowed. How many such strings contain an even number of Rs, including zero?","options":[486,365,243,364],"answer":1,"explanation":"令 eₙ、oₙ 为 R 出现偶数次和奇数次的数量。追加 B 或 G 保持奇偶，追加 R 交换奇偶。由 (e₀, o₀) = (1, 0) 按 (2e + o, e + 2o) 更新六次，得到 e₆ = 365。"},
+  {"prompt":"Nine identical samples are assigned to five labeled lockers. Exactly three of lockers A, B, C, and D must be nonempty. Locker E must contain at least two samples. How many allocations are possible?","options":[140,35,224,84],"answer":0,"explanation":"先选 A 到 D 中哪三柜使用，有 C(4, 3) 种。给它们各一份，给 E 两份。余下四份只在这四个已用柜中分 配，有 C(7, 3) 种。乘积为 140。"},
+  {"prompt":"How many length-eight strings over {A, B} have neither AAA nor BBB as a consecutive substring?","options":[110,68,81,34],"answer":1,"explanation":"每段相同字母只能长 1 或 2。长度分拆数满足 gₙ = gₙ₋₁ + gₙ₋₂，且 g₀ = g₁ = 1，故 g₈ = 34。首段有 A、B 两种选择，之后交替，得 68。"}
+];
+</script>
+<script>"use strict";
+
+const quiz = document.querySelector("#quiz");
+const summary = document.querySelector("#summary");
+const progress = document.querySelector("#progress");
+const progressText = document.querySelector("#progress-text");
+const format = new Intl.NumberFormat("en-US");
+const sections = {
+  "0": [
+    "fundamentals",
+    "Counting fundamentals"
+  ],
+  "6": [
+    "arrangements",
+    "Arrangements & selections"
+  ],
+  "12": [
+    "constraints",
+    "Constraints & coefficients"
+  ],
+  "18": [
+    "recurrences",
+    "Recurrences & mixed counting"
+  ],
+  "24": [
+    "cumulative",
+    "Cumulative practice"
+  ]
+};
+
+function element(tag, className, text) {
+  const node = document.createElement(tag);
+  node.className = className;
+  if (text !== undefined) node.textContent = text;
+  return node;
+}
+
+const cards = questions.map((question, index) => {
+  if (sections[index]) {
+    const [id, title] = sections[index];
+    const heading = element("h2", "", title);
+    heading.id = id;
+    quiz.append(heading);
+  }
+  const card = element("article", "card");
+  const field = element("fieldset", "");
+  const legend = element("legend", "");
+  legend.append(element("span", "number", String(index + 1).padStart(2, "0")), question.prompt);
+  const choices = element("div", "choices");
+  const inputs = question.options.map((option, choice) => {
+    const label = element("label", "option");
+    const radio = element("input", "");
+    radio.type = "radio";
+    radio.name = "q" + index;
+    label.append(radio, element("span", "", "ABCD"[choice] + ". " + format.format(option)));
+    choices.append(label);
+    return radio;
+  });
+  const feedback = element("p", "feedback");
+  feedback.hidden = true;
+  field.append(legend, choices);
+  card.append(field, feedback);
+  quiz.append(card);
+  return {inputs, feedback};
+});
+
+function selections() {
+  return cards.map(card => card.inputs.findIndex(input => input.checked));
+}
+
+function updateProgress() {
+  const answered = selections().filter(choice => choice >= 0).length;
+  progress.value = answered;
+  progressText.textContent = answered + " of " + questions.length + " answered";
+}
+
+function clearFeedback() {
+  summary.hidden = true;
+  for (const {inputs, feedback} of cards) {
+    feedback.hidden = true;
+    for (const input of inputs) input.parentElement.classList.remove("right", "wrong");
+  }
+}
+
+function grade() {
+  let correct = 0;
+  let unanswered = 0;
+  selections().forEach((choice, index) => {
+    const {answer, explanation, options} = questions[index];
+    const {inputs, feedback} = cards[index];
+    if (choice === answer) correct++;
+    if (choice < 0) unanswered++;
+    inputs.forEach((input, i) => {
+      input.parentElement.classList.toggle("right", i === answer);
+      input.parentElement.classList.toggle("wrong", i === choice && i !== answer);
+    });
+    const result = choice < 0 ? "Unanswered" : choice === answer ? "Correct" : "Incorrect";
+    feedback.replaceChildren(
+      element("strong", "", result + " · " + "ABCD"[answer] + ". " + format.format(options[answer])),
+      Object.assign(element("span", "", explanation), {lang: "zh-CN"})
+    );
+    feedback.hidden = false;
+  });
+  summary.textContent = correct + " / " + questions.length + " correct · " + unanswered + " unanswered";
+  summary.hidden = false;
+  summary.focus();
+}
+
+quiz.addEventListener("change", () => {
+  if (!summary.hidden) clearFeedback();
+  updateProgress();
+});
+document.querySelector("#grade").addEventListener("click", grade);
+document.querySelector("#grade-end").addEventListener("click", grade);
+document.querySelector("#reset").addEventListener("click", () => {
+  quiz.reset();
+  clearFeedback();
+  updateProgress();
+});
+updateProgress();
+</script>
+</body>
+</html>
