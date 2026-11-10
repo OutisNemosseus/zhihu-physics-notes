@@ -15,13 +15,30 @@ h1{font-size:clamp(2.2rem,7vw,4rem);letter-spacing:-.045em;line-height:1;margin:
 main{padding-block:22px 45px}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 progress{display:block;width:165px;margin-top:4px;accent-color:var(--teal)}.actions{display:flex;gap:8px;flex-wrap:wrap}
 button{border:1px solid var(--teal);border-radius:7px;background:var(--teal);color:white;padding:9px 15px;font:inherit;font-weight:650;cursor:pointer}.secondary{color:var(--teal);background:transparent}
-nav{display:flex;gap:8px 16px;flex-wrap:wrap;margin:20px 0}a{color:var(--teal);text-underline-offset:3px}
+a{color:var(--teal);text-underline-offset:3px}
 h2{font-size:1.3rem;margin:28px 0 10px}
 .card{background:white;border:1px solid var(--line);border-radius:12px;padding:clamp(12px,3vw,22px);margin:0 0 12px}
 fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;padding:0;margin-bottom:10px}.number{color:var(--teal);margin-right:.55em;font-variant-numeric:tabular-nums}
 .choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.option{display:flex;align-items:center;gap:9px;border:1px solid var(--line);border-radius:7px;padding:8px 10px;cursor:pointer}.option:hover{border-color:var(--teal)}.option:has(:checked){background:#eaf4f2;border-color:var(--teal)}input{accent-color:var(--teal);margin:0}
 .option.right{background:#e8f6ee;border-color:#3a805f}.option.wrong{background:#fff1ef;border-color:#a84c42}.feedback,#summary{background:#e6efed;padding:10px 12px;border-radius:7px;margin:12px 0 0}.feedback strong{display:block}.top{margin-left:12px}
 :focus-visible{outline:3px solid #b45f16;outline-offset:3px}@media(max-width:380px){.choices{grid-template-columns:1fr}}
+.wrap{max-width:1170px}
+.practice-layout{display:grid;grid-template-columns:minmax(250px,290px) minmax(0,1fr);gap:clamp(16px,3vw,32px);align-items:start}
+.topic-sidebar{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;background:white;border:1px solid var(--line);border-radius:12px;padding:14px}
+.topic-sidebar h2{margin:0 0 6px}
+.topic-sidebar p{margin:0 0 10px;color:var(--muted);font-size:.85rem}
+.topic-table{width:100%;border-collapse:collapse;font-size:.88rem}
+.topic-table th,.topic-table td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.topic-table thead th{background:var(--paper);color:var(--muted)}
+.topic-table tbody th{width:51%}
+.question-links{display:flex;flex-wrap:wrap;gap:3px 7px}
+.question-links a{display:inline-block;min-width:1.2rem;font-variant-numeric:tabular-nums}
+#quiz h2,.card{scroll-margin-top:16px}
+#quiz h2:target,.card:target{outline:2px solid var(--teal);outline-offset:3px}
+@media(max-width:780px){
+  .practice-layout{grid-template-columns:minmax(0,1fr)}
+  .topic-sidebar{position:static;max-height:none}
+}
 </style>
 
 
@@ -30,15 +47,26 @@ fieldset{border:0;padding:0;margin:0;min-inline-size:0}legend{font-weight:650;pa
 <header><div class="wrap"><p class="eyebrow">MTH 231 <span>·</span> DISCRETE MATHEMATICS</p><h1>Counting Practice</h1><p class="intro">Modules 6–7 · Mini-Exam 3 review · November 7, 2026</p><p class="intro">30 multiple-choice questions with worked solutions in Chinese. C(n, k) means “n choose k.”</p></div></header>
 <main class="wrap">
 <p><a href="../../">← Course Practice</a></p>
+<div class="practice-layout">
+<aside id="categories" class="topic-sidebar" aria-labelledby="categories-title" lang="zh-CN">
+<h2 id="categories-title">题目分类</h2>
+<p>点击类别跳到该组，点击题号直达原题。</p>
+<table class="topic-table" aria-labelledby="categories-title">
+<thead><tr><th scope="col">解题方法</th><th scope="col">题号</th></tr></thead>
+<tbody id="topic-rows"></tbody>
+</table>
+</aside>
+<div class="practice-content">
 <section class="toolbar" aria-label="Quiz controls">
 <div><strong id="progress-text" role="status">0 of 30 answered</strong><progress id="progress" value="0" max="30" aria-label="Questions answered"></progress></div>
 <div class="actions"><button id="grade" type="button">Check answers</button><button id="reset" class="secondary" type="button">Start over</button></div>
 </section>
 <p id="summary" tabindex="-1" hidden></p>
-<nav aria-label="Question sections"><a href="#fundamentals">01–6 Counting fundamentals</a><a href="#arrangements">07–12 Arrangements &amp; selections</a><a href="#constraints">13–18 Constraints &amp; coefficients</a><a href="#recurrences">19–24 Recurrences &amp; mixed counting</a><a href="#cumulative">25–30 Cumulative practice</a></nav>
 <form id="quiz"></form>
 <button id="grade-end" type="button">Check answers</button>
-<a href="#" class="top">Back to top ↑</a>
+<a href="#categories" class="top" lang="zh-CN">回到分类表 ↑</a>
+</div>
+</div>
 </main>
 <script>const questions = [
   {"prompt":"At an open house, you can book either one of four films, or one of three demonstrations paired with one of two practice stations. Film bookings never include a station. How many distinct bookings are possible?","options":[10,14,24,7],"answer":0,"explanation":"电影有 4 种。演示要再选一个练习站，有 3 × 2 种。两类预约互斥，所以 4 + 6 = 10。"},
@@ -80,28 +108,14 @@ const summary = document.querySelector("#summary");
 const progress = document.querySelector("#progress");
 const progressText = document.querySelector("#progress-text");
 const format = new Intl.NumberFormat("en-US");
-const sections = {
-  "0": [
-    "fundamentals",
-    "Counting fundamentals"
-  ],
-  "6": [
-    "arrangements",
-    "Arrangements & selections"
-  ],
-  "12": [
-    "constraints",
-    "Constraints & coefficients"
-  ],
-  "18": [
-    "recurrences",
-    "Recurrences & mixed counting"
-  ],
-  "24": [
-    "cumulative",
-    "Cumulative practice"
-  ]
-};
+const topics = [
+  ["fundamentals","加法、乘法与补集","Sum, product & complements",[1,2,3,4,6,24,25]],
+  ["permutations","排列与相同物品","Permutations",[7,9,14,21,22]],
+  ["combinations","组合与选位置","Combinations",[5,8,13]],
+  ["stars-bars","隔板法与分配","Stars and bars",[10,11,15,18,23,26,29]],
+  ["binomial","二项式系数","Binomial coefficients",[12,16,17,27]],
+  ["recurrences","计数递推","Counting recurrences",[19,20,28,30]]
+];
 
 function element(tag, className, text) {
   const node = document.createElement(tag);
@@ -111,13 +125,8 @@ function element(tag, className, text) {
 }
 
 const cards = questions.map((question, index) => {
-  if (sections[index]) {
-    const [id, title] = sections[index];
-    const heading = element("h2", "", title);
-    heading.id = id;
-    quiz.append(heading);
-  }
   const card = element("article", "card");
+  card.id = "q" + (index + 1);
   const field = element("fieldset", "");
   const legend = element("legend", "");
   legend.append(element("span", "number", String(index + 1).padStart(2, "0")), question.prompt);
@@ -135,9 +144,34 @@ const cards = questions.map((question, index) => {
   feedback.hidden = true;
   field.append(legend, choices);
   card.append(field, feedback);
-  quiz.append(card);
-  return {inputs, feedback};
+  return {card, inputs, feedback};
 });
+
+const topicRows = document.querySelector("#topic-rows");
+for (const [id, label, title, numbers] of topics) {
+  const heading = element("h2", "", title);
+  heading.id = id;
+  quiz.append(heading, ...numbers.map(number => cards[number - 1].card));
+
+  const row = element("tr", "");
+  const method = element("th", "");
+  method.scope = "row";
+  const category = element("a", "", label);
+  category.href = "#" + id;
+  method.append(category);
+
+  const questionCell = element("td", "");
+  const links = element("div", "question-links");
+  for (const number of numbers) {
+    const link = element("a", "", String(number).padStart(2, "0"));
+    link.href = "#q" + number;
+    link.setAttribute("aria-label", "第 " + number + " 题");
+    links.append(link);
+  }
+  questionCell.append(links);
+  row.append(method, questionCell);
+  topicRows.append(row);
+}
 
 function selections() {
   return cards.map(card => card.inputs.findIndex(input => input.checked));
