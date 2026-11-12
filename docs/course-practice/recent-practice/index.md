@@ -15,6 +15,7 @@ title: 近期练习链接
 
 ## ENGR 202 · 电路
 
+- [Midterm 1 · 错题汇总与复算](https://engr202-midterm1-review.lively-bard-9876.chatgpt.site/missed.html)（私人复习页）
 - [HW 5–9 · Midterm 同型练习 · 每份独立网页](../engr202/hw5-9-midterm/)
 - [HW 6 交流功率 · 5 个电路，每个做 (a)–(o)](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr202/week6-sadiku-five-circuits/)
 - [HW 7–8 滤波器练习](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr202/hw7-hw8-filter-practice/)
