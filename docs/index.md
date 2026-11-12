@@ -46,6 +46,8 @@ Several articles began as personal technical notes or Chinese answers on Zhihu a
 
 ## ENGR 202
 
+[**Midterm 1 原题、电路图与解析 →**](course-practice/engr202/midterm1-review/index.html)
+
 [电路作业、三道原题截图与 LTspice 下载](engr202/index.md) · Run 后按 Ctrl+L 查看答案。
 
 ## Circuits
