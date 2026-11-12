@@ -12,12 +12,22 @@ h2{font-size:1.35rem;margin-top:0}a{color:var(--teal)}section{background:white;p
 label{display:block;margin:.8rem 0}input,select,button{font:inherit;padding:.38rem .55rem;border:1px solid #6c8a82;border-radius:6px}input{width:8rem;max-width:100%}
 button{background:var(--teal);color:white;cursor:pointer}summary{cursor:pointer;color:var(--teal);font-weight:650}details{margin-top:12px}
 table{border-collapse:collapse}td,th{border:1px solid var(--line);padding:.3rem .8rem;text-align:center}output{display:block;margin-top:.5rem;min-height:1.5em}.muted{color:#415d58}
+.circuit{max-width:500px;margin:18px 0;background:#f8fbf9;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.circuit svg{display:block;width:100%;height:auto;color:var(--teal);font:18px system-ui,sans-serif}
+.circuit .wires{stroke:currentColor;fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.circuit text,.circuit .nodes{fill:currentColor}.circuit figcaption{padding:0 6px 4px;font-size:.88rem;color:#415d58}
 </style>
 </head>
 <body><main>
 <header><a href="../../../engr202/">ENGR 202</a><h1>Midterm 2 Practice</h1><p lang="zh">根据往年卷公开预览中可辨认的三类题各出一道原创题。并联 R–L 部分按可见的电路结构设计小问，预览未显示其完整问法。</p><p>Show your work. Enter numerical answers without units and round to three significant digits.</p></header>
 <section><h2>1. AC power and power-factor correction</h2>
 <p>A 120 V RMS, 60 Hz ideal sinusoidal source supplies a load with impedance <strong>Z = 12 + j9 Ω</strong>.</p>
+<figure class="circuit"><svg viewBox="0 0 500 218" role="img" aria-labelledby="power-diagram-title power-diagram-desc">
+<title id="power-diagram-title">AC load and shunt compensation</title><desc id="power-diagram-desc">The AC source, load impedance, and optional capacitor share the same top and bottom nodes. The capacitor is added in part c.</desc>
+<g class="wires"><path d="M72 99V57H406V113M72 147V189H406V131M248 57V100m0 46v43"/><rect x="207" y="100" width="82" height="46" rx="3"/><circle cx="72" cy="123" r="24"/><path d="M57 123q7.5-14 15 0t15 0"/><path d="M384 113h44m-44 18h44"/></g>
+<g class="nodes"><circle cx="248" cy="57" r="4"/><circle cx="248" cy="189" r="4"/></g>
+<g text-anchor="middle"><text x="72" y="23">120 V RMS</text><text x="72" y="43">60 Hz</text><text x="248" y="129">Load</text><text x="248" y="169">12 + j9 Ω</text><text x="406" y="84">Part (c) only</text><text x="406" y="157">C</text></g>
+</svg><figcaption>The capacitor is added across the load in part (c).</figcaption></figure>
 <form>
 <label>(a) Find the load power factor. <input type="number" step="any" data-answer="0.8" data-part="a" aria-label="Power factor" required></label>
 <label>State whether it is leading or lagging. <select data-answer="lagging" data-part="a, direction" required><option value="">Choose</option><option>leading</option><option>lagging</option></select></label>
@@ -37,6 +47,12 @@ table{border-collapse:collapse}td,th{border:1px solid var(--line);padding:.3rem 
 <details lang="zh"><summary>中文推导</summary><p>每段电流先平方，再按该段持续时间加权。I<sub>RMS</sub> = √[(0² × 1 + 6² × 2 + (−3)² × 1)/4] = √20.25 = 4.50 A。</p></details></section>
 <section><h2>3. Parallel R–L load</h2>
 <p>A source with phasor voltage 120∠0° V RMS drives a 30 Ω resistor in parallel with an ideal inductor whose reactance at the source frequency is 40 Ω. Use the voltage as the phase reference.</p>
+<figure class="circuit"><svg viewBox="0 0 500 218" role="img" aria-labelledby="rl-diagram-title rl-diagram-desc">
+<title id="rl-diagram-title">Parallel resistor and inductor</title><desc id="rl-diagram-desc">The AC source supplies a resistor of 30 ohms and an inductor with reactance of 40 ohms. All three branches share the same two nodes.</desc>
+<g class="wires"><path d="M72 99V57H390V91M72 147V189H390V155M239 57V91l-9 6 18 8-18 8 18 8-18 8 18 8-18 8 9 7v37M390 91a12 8 0 0 1 0 16a12 8 0 0 1 0 16a12 8 0 0 1 0 16a12 8 0 0 1 0 16"/><circle cx="72" cy="123" r="24"/><path d="M57 123q7.5-14 15 0t15 0"/></g>
+<g class="nodes"><circle cx="239" cy="57" r="4"/><circle cx="239" cy="189" r="4"/></g>
+<g text-anchor="middle"><text x="91" y="33">120∠0° V RMS</text><text x="291" y="128">30 Ω</text><text x="452" y="128">j40 Ω</text></g>
+</svg></figure>
 <form>
 <label>(a) Find the resistor branch current magnitude (A). <input type="number" step="any" data-answer="4" data-part="a" required></label>
 <label>(b) Find the inductor branch current phase angle (degrees). <input type="number" step="any" data-answer="-90" data-part="b" required></label>
