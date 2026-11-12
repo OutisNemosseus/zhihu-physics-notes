@@ -28,6 +28,7 @@ theme:
 
 nav:
   - Home: index.md
+  - 近期练习汇总: course-practice/recent-practice/index.md
   - WeChat: wechat.md
   - Course Practice: https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/
   - Python Editor: tools/python-editor.md

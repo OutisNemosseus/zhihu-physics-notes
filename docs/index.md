@@ -10,6 +10,12 @@ Notes on physics, mathematics, semiconductors, and computational research.
 
 Several articles began as personal technical notes or Chinese answers on Zhihu and were later translated and edited into English.
 
+## 近期练习汇总
+
+[**打开近期练习汇总 →**](course-practice/recent-practice/index.md)
+
+按课程查看 MTH 231、ENGR 202、ENGR 103 和 MTH 256 最近新增的练习网页。
+
 ## Contact
 
 [Add me on WeChat · 微信二维码](wechat.md)
