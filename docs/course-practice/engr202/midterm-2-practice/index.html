@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Midterm 2 Practice</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--teal:#075a55;--line:#ccdcd6;--paper:#f2f7f4}*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 system-ui,sans-serif}
+main{max-width:790px;margin:auto;padding:38px 18px 60px}
+header{border-bottom:2px solid var(--teal);padding-bottom:16px}h1{font-size:clamp(2rem,6vw,3.3rem);letter-spacing:-.05em;line-height:1.1;margin:.28em 0}
+h2{font-size:1.35rem;margin-top:0}a{color:var(--teal)}section{background:white;padding:clamp(16px,4vw,28px);border:1px solid var(--line);border-radius:14px;margin-top:18px}
+label{display:block;margin:.8rem 0}input,select,button{font:inherit;padding:.38rem .55rem;border:1px solid #6c8a82;border-radius:6px}input{width:8rem;max-width:100%}
+button{background:var(--teal);color:white;cursor:pointer}summary{cursor:pointer;color:var(--teal);font-weight:650}details{margin-top:12px}
+table{border-collapse:collapse}td,th{border:1px solid var(--line);padding:.3rem .8rem;text-align:center}output{display:block;margin-top:.5rem;min-height:1.5em}.muted{color:#415d58}
+</style>
+</head>
+<body><main>
+<header><a href="../../../engr202/">ENGR 202</a><h1>Midterm 2 Practice</h1><p lang="zh">根据往年卷公开预览中可辨认的三类题各出一道原创题。并联 R–L 部分按可见的电路结构设计小问，预览未显示其完整问法。</p><p>Show your work. Enter numerical answers without units and round to three significant digits.</p></header>
+<section><h2>1. AC power and power-factor correction</h2>
+<p>A 120 V RMS, 60 Hz ideal sinusoidal source supplies a load with impedance <strong>Z = 12 + j9 Ω</strong>.</p>
+<form>
+<label>(a) Find the load power factor. <input type="number" step="any" data-answer="0.8" data-part="a" aria-label="Power factor" required></label>
+<label>State whether it is leading or lagging. <select data-answer="lagging" data-part="a, direction" required><option value="">Choose</option><option>leading</option><option>lagging</option></select></label>
+<label>(b) Find the average power dissipated by the load (W). <input type="number" step="any" data-answer="768" data-part="b" required></label>
+<label>(c) Find the shunt capacitance (μF) that makes the overall power factor seen by the source unity. <input type="number" step="any" data-answer="106.1033" data-part="c" required></label>
+<button>Check answers</button><output aria-live="polite"></output>
+</form>
+<details lang="zh"><summary>中文推导</summary>
+<p>(a) |Z| = √(12² + 9²) = 15 Ω，PF = R/|Z| = 0.800。正电抗表示感性负载，电流滞后。</p>
+<p>(b) I<sub>RMS</sub> = 120/15 = 8 A，所以 P = I<sub>RMS</sub>²R = 8² × 12 = 768 W。</p>
+<p>(c) Q<sub>L</sub> = 8² × 9 = 576 var。并联电容两端同为 120 V RMS，Q<sub>C</sub> = −2πfCV<sub>RMS</sub>²。令 Q<sub>C</sub> + Q<sub>L</sub> = 0，得 C = 576/[2π × 60 × 120²] ≈ 106 μF。</p></details></section>
+<section><h2>2. RMS of a periodic current</h2>
+<p>The current below repeats every 4 ms. Calculate its RMS value over one full period.</p>
+<table><thead><tr><th scope="col">Time interval (ms)</th><th scope="col">Current (A)</th></tr></thead><tbody>
+<tr><td>0 ≤ t &lt; 1</td><td>0</td></tr><tr><td>1 ≤ t &lt; 3</td><td>+6</td></tr><tr><td>3 ≤ t &lt; 4</td><td>−3</td></tr></tbody></table>
+<form><label>RMS current (A) <input type="number" step="any" data-answer="4.5" data-part="RMS current" required></label><button>Check answer</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>中文推导</summary><p>每段电流先平方，再按该段持续时间加权。I<sub>RMS</sub> = √[(0² × 1 + 6² × 2 + (−3)² × 1)/4] = √20.25 = 4.50 A。</p></details></section>
+<section><h2>3. Parallel R–L load</h2>
+<p>A source with phasor voltage 120∠0° V RMS drives a 30 Ω resistor in parallel with an ideal inductor whose reactance at the source frequency is 40 Ω. Use the voltage as the phase reference.</p>
+<form>
+<label>(a) Find the resistor branch current magnitude (A). <input type="number" step="any" data-answer="4" data-part="a" required></label>
+<label>(b) Find the inductor branch current phase angle (degrees). <input type="number" step="any" data-answer="-90" data-part="b" required></label>
+<label>(c) Find the magnitude of the total current (A). <input type="number" step="any" data-answer="5" data-part="c, magnitude" required></label>
+<label>Find its phase angle (degrees). <input type="number" step="any" data-answer="-36.8699" data-part="c, phase" required></label>
+<button>Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>中文推导</summary><p>(a) I<sub>R</sub> = 120/30 = 4∠0° A。</p><p>(b) I<sub>L</sub> = 120/(j40) = −j3 = 3∠−90° A。</p><p>(c) 用直角坐标相加，I = 4 − j3 A，幅值为 5 A，相角为 arctan(−3/4) ≈ −36.9°。</p></details></section>
+<p class="muted" lang="zh">题型参考 <a href="https://www.coursehero.com/file/23518095/Midterm2-v2-solution/">OSU ENGR 202 · Midterm 2 v2 公开预览</a>。</p>
+</main>
+<script>
+function isCorrect(field) {
+  if (field.tagName === 'SELECT') return field.value === field.dataset.answer;
+  const target = Number(field.dataset.answer);
+  return Math.abs(field.valueAsNumber - target) <= Math.abs(target) * 0.005;
+}
+for (const form of document.querySelectorAll('form')) {
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    const fields = Array.from(form.querySelectorAll('[data-answer]'));
+    const feedback = fields.map(field => field.dataset.part + (isCorrect(field) ? ' ✓ Correct' : ' · Try again'));
+    form.querySelector('output').textContent = feedback.join(' | ');
+  });
+}
+</script>
+</body></html>
