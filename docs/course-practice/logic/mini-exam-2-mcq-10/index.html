@@ -27,4 +27,4 @@ document.addEventListener('keydown',e=>{if(e.target.closest('input,textarea,sele
 $('reset').onclick=()=>{if(confirm('清空这10题的作答与草稿？')){state={answers:{},drafts:{}};revealed.clear();$('filter').value='all';save();render();}};
 $('download').onclick=()=>{const lines=[document.title,'导出时间：'+new Date().toISOString(),'来源：'+location.origin+location.pathname,''];for(const q of questions){const a=state.answers[q.id];lines.push(q.id+' · '+q.topic,q.prompt,...q.options.map((v,i)=>'ABCD'[i]+'. '+v),'我的选择：'+(a===undefined?'未作答':'ABCD'[a]),'草稿：'+(state.drafts[q.id]||'未填写'),'');}const url=URL.createObjectURL(new Blob(['\uFEFF'+lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='MTH231-Exam2-MCQ10-answers.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 render();if(!storage)$('status').textContent='浏览器存储不可用，请及时下载作答。';
-</script></body></html>
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
