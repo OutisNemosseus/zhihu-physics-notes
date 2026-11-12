@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Loaded RL Filter</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-12">November 12, 2026</time></p>
+<h1>Loaded RL Low-Pass Filter</h1>
+<article class="worksheet">
+<p>An ideal sinusoidal source drives the circuit below. The 240 Ω resistor <i>R</i><sub>L</sub> is an external load that can be removed, leaving an open branch. The other 240 Ω resistor <i>R</i> remains connected. Define <i>H</i>(<i>jω</i>) = <i>V</i><sub>out</sub>/<i>V</i><sub>s</sub>.</p>
+<figure><svg viewBox="0 0 565 253" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Series resistor and inductor feeding a loaded output node</title>
+<desc id="circuit-desc">The source top terminal connects to a 120 ohm series resistor, then a 40 millihenry inductor, then the output node. A permanent 240 ohm resistor and a removable 240 ohm load both connect between the output node and the common return.</desc>
+<g class="wire">
+<path d="M60 125V76H119l8-9 10 18 10-18 10 18 10-18 10 18 8-9h28"/>
+<path d="M213 76a9 14 0 0 1 18 0a9 14 0 0 1 18 0a9 14 0 0 1 18 0a9 14 0 0 1 18 0h213"/>
+<circle cx="60" cy="149" r="24"/><path d="M45 149q7.5-14 15 0t15 0M60 173v44h438"/>
+<path d="M359 76v47l-9 8 18 8-18 8 18 8-18 8 18 8-9 8v38M498 76v47l-9 8 18 8-18 8 18 8-18 8 18 8-9 8v38"/>
+<path d="M359 217v10m-14 0h28m-23 6h18m-14 6h10"/>
+</g>
+<g class="node"><circle cx="359" cy="76" r="4"/><circle cx="359" cy="217" r="4"/></g>
+<text x="102" y="50">Rₛ = 120 Ω</text><text x="210" y="50">L = 40 mH</text>
+<text x="330" y="54">Vout</text><text x="16" y="154">Vₛ</text>
+<text x="373" y="157">R = 240 Ω</text><text x="445" y="108">RL = 240 Ω</text><text x="455" y="200">Load</text>
+</svg></figure>
+<p><strong>Show your work.</strong> Write the loaded transfer function on paper. Enter the answers below to three significant figures. For each configuration, define cutoff relative to its own low-frequency passband gain.</p>
+<form id="answers">
+<ol type="a">
+<li><label for="gain">Loaded passband gain |H(0)| (V/V)</label><input id="gain" type="number" step="any" required data-answer="0.5"></li>
+<li><label for="loaded">Loaded cutoff frequency (Hz)</label><input id="loaded" type="number" step="any" required data-answer="954.929658551372"></li>
+<li><label for="db">Gain 20 log₁₀|H| at the loaded cutoff (dB, referenced to 1 V/V)</label><input id="db" type="number" step="any" required data-answer="-9.030899869919436"></li>
+<li><label for="phase">Output phase relative to the source at the loaded cutoff (degrees)</label><input id="phase" type="number" step="any" required data-answer="-45"></li>
+<li><label for="unloaded">Cutoff frequency after removing R<sub>L</sub> (Hz)</label><input id="unloaded" type="number" step="any" required data-answer="1432.394487827058"></li>
+</ol>
+<button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<ol type="a">
+<li>接上负载后，输出端的电阻为 R ∥ R<sub>L</sub> = 240 ∥ 240 = 120 Ω。用分压公式得 <span class="math">H(jω) = 120/(120 + 120 + jω·0.040) = 120/(240 + jω·0.040)</span>。令 ω = 0，通带增益为 0.500 V/V。</li>
+<li>当电感电抗 ωL 等于分母的实部 240 Ω 时，分母幅值变为低频时的 √2 倍。因此 f<sub>c</sub> = 240/[2π(0.040)] = 955 Hz。</li>
+<li>截止点的增益幅值为 0.500/√2。相对 1 V/V 的增益是 20 log₁₀(0.500/√2) = −9.03 dB，比通带的 −6.02 dB 低约 3.01 dB。</li>
+<li>截止点分母为 240 + j240，相角为 +45°。分子相角为 0°，所以输出相位为 −45°。</li>
+<li>移除 R<sub>L</sub> 后，输出仍跨在 R = 240 Ω 上，分母变成 360 + jω·0.040。新的截止频率为 360/[2π(0.040)] ≈ 1.43 × 10³ Hz。</li>
+</ol></details></article>
+<p lang="zh">原创填空题，参考 <a href="../hw7-hw8-filter-practice/hw8.html">HW 8 的带负载滤波题</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcde'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
