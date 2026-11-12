@@ -1,5 +1,7 @@
 (() => {
+  const isHomework = /\/engr202\/(?:hw5-9-midterm\/hw[5-9]|hw7-hw8-filter-practice\/hw[78])\.html$/.test(location.pathname);
   const host = document.createElement('aside');
+  if (isHomework) host.setAttribute('data-inline', '');
   host.setAttribute('aria-label', 'Practice timers');
   const shadow = host.attachShadow({ mode: 'open' });
   shadow.innerHTML = `
@@ -12,6 +14,13 @@
         z-index: 900;
         color: #172630;
         font: 14px/1.4 system-ui, sans-serif;
+      }
+      :host([data-inline]) {
+        display: block;
+        position: static;
+        max-width: 100%;
+        width: fit-content;
+        margin: 0 0 1rem;
       }
       details {
         background: #fff;
@@ -63,7 +72,13 @@
         </section>
       </div>
     </details>`;
-  document.body.append(host);
+  const heading = isHomework ? document.querySelector('main h1') : null;
+  if (heading) {
+    shadow.querySelector('details').open = true;
+    heading.after(host);
+  } else {
+    document.body.append(host);
+  }
 
   const duration = 60 * 60 * 1000;
   const path = location.pathname.replace(/\/index\.html$/, '/');
