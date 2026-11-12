@@ -5,6 +5,8 @@ description: ENGR 202 电路作业：三道原题截图、串并联与节点/网
 
 # ENGR 202
 
+[期中二：往年题型互动练习](../course-practice/engr202/midterm-2-practice/index.html)
+
 [第 4 周：瞬时功率、平均功率与 RMS 原书 10 题](../course-practice/engr202/power-rms-10/)
 
 
