@@ -2,186 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="ENGR 202 Homework 7 and 8 practice: 32 questions on passive and active filters, Bode plots and LTspice.">
-<title>ENGR 202 · HW 7 &amp; 8 Filter Practice</title>
-<style>
-:root{color-scheme:light;--ink:#13263b;--muted:#50647a;--accent:#155c72;--wash:#edf3f6;--line:#cedae3;--white:#fff}
-*{box-sizing:border-box}body{margin:0;background:var(--wash);color:var(--ink);font:16px/1.55 system-ui,sans-serif}header{background:#12283a;color:white;padding:14px max(5vw,20px);display:flex;gap:14px;justify-content:space-between}header a{color:#d8f3fa}main{max-width:1080px;margin:auto;padding:28px 18px 50px}.eyebrow{color:var(--accent);font-size:.78rem;font-weight:800;letter-spacing:.12em}h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.04em;line-height:1.1;margin:.3em 0}h2{margin:.25em 0}p{margin:.4em 0;color:var(--muted)}nav,.actions,.steps{display:flex;flex-wrap:wrap;gap:8px}nav{margin:20px 0 14px}.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:16px;align-items:start}.card{background:var(--white);border:1px solid var(--line);border-radius:15px;padding:18px}.card svg{width:100%;display:block;margin:9px 0;color:#193c52;background:#f2f7f9;border-radius:10px}button{font:inherit;border:1px solid #b7c8d4;border-radius:8px;padding:6px 10px;background:#fff;color:var(--ink);cursor:pointer}button:hover{border-color:var(--accent)}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #1686a3;outline-offset:2px}button[aria-current]{background:#e0f2f6;border-color:var(--accent);font-weight:750}.steps button{min-width:31px;padding:3px 5px}.steps .done{box-shadow:inset 0 -3px #55a88a}.primary{background:var(--accent);color:white}.actions{margin-top:14px}.option{display:flex;align-items:start;gap:9px;padding:10px;border:1px solid var(--line);border-radius:8px;margin-top:8px;cursor:pointer}.option:has(input:checked){border-color:var(--accent);background:#eff9fa}.option input{margin-top:.4em;accent-color:var(--accent)}#feedback{margin-top:12px;padding:10px;background:#eef5f8;border-radius:8px}#feedback:empty{display:none}.score{margin-left:auto;align-self:center;color:var(--muted);font-size:.88rem}.source{font-size:.88rem;color:var(--accent)}footer{margin-top:18px;color:var(--muted);font-size:.9rem}fieldset{border:0;margin:0;padding:0;min-width:0}legend{font-weight:750;margin:12px 0 0;padding:0}
-@media(max-width:740px){.grid{grid-template-columns:1fr}.card{padding:13px}.card svg{max-height:185px}}
-button:disabled{opacity:.55;cursor:default}.card svg text{letter-spacing:.01em}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 · HW 7 & 8 Filter Practice</title>
+<link rel="stylesheet" href="worksheet.css">
 </head>
 <body>
-<header><strong>Zhihu Physics Notes</strong><a href="../../">Course Practice</a></header>
+<header><a href="../../">Course Practice</a><a href="./">HW 7 &amp; 8</a></header>
 <main>
-<div class="eyebrow">ENGR 202 / HW 7 &amp; 8</div>
-<h1>Filter Practice</h1>
-<p>Four circuit groups · 32 single-answer questions · English questions and Chinese explanations</p>
-<nav id="circuits" aria-label="Select circuit"></nav>
-<div class="grid">
-<section class="card" aria-labelledby="circuit-title">
-<div class="eyebrow">CIRCUIT DATA</div><h2 id="circuit-title"></h2>
-<div id="diagram"></div><p id="givens"></p><p class="source" id="source"></p>
-</section>
-<section class="card" aria-label="Question">
-<div class="steps" id="steps" aria-label="Select part"></div>
-<fieldset><legend id="question"></legend><div id="options"></div></fieldset>
-<div class="actions"><button class="primary" id="check">Check answer</button><button id="prev">Previous</button><button id="next">Next</button><span id="score" class="score"></span></div>
-<div id="feedback" role="status"></div>
-<div class="actions"><button id="download-current">Download current answer</button><button id="download-all">Download all answers</button></div>
-</section>
+<h1>HW 7 &amp; 8 Filter Practice</h1>
+<div class="assignment-links">
+<a href="hw7.html"><strong>Homework #7</strong><span>Two problems · RC design and passive RL filters</span></a>
+<a href="hw8.html"><strong>Homework #8</strong><span>Two problems · Loaded RL and active filters</span></a>
 </div>
-<footer>Original variants mapped to ENGR 202 Homework 7 and 8. Select the closest displayed value for numerical questions. Sketch and simulation parts are practiced through Bode characteristics and predicted LTspice readings.<br><span id="storage-note">Answers are saved in this browser.</span></footer>
 </main>
-<script type="application/json" id="bank">[{"name": "HW 7 · RC design", "given": "Use C = 82 nF and target fc = 400 Hz. Choose the closest E24 resistor from 4.3, 4.7, 5.1 and 5.6 kΩ. Use the chosen resistor for the remaining parts.", "svg": "<svg viewBox=\"0 0 510 180\" role=\"img\" aria-label=\"Series R with 82 nF from output to ground\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M35 38H126l7 -8 10 16 10 -16 10 16 10 -16 10 16 7 -8H445 M35 150H445 M278 38v49m-15 0h30m-30 10h30m-15 0v53\"/><circle cx=\"278\" cy=\"38\" r=\"3\" fill=\"currentColor\"/><circle cx=\"278\" cy=\"150\" r=\"3\" fill=\"currentColor\"/></g><g fill=\"currentColor\" font-size=\"15\" font-family=\"system-ui\"><text x=\"20\" y=\"27\">Vᵢₙ</text><text x=\"419\" y=\"27\">Vₒᵤₜ</text><text x=\"134\" y=\"67\">R</text><text x=\"298\" y=\"100\">82 nF</text><text x=\"20\" y=\"142\">0 V</text></g></svg>", "q": [{"ref": "7.1 A", "prompt": "What ideal resistance meets the target?", "choices": ["2.43 kΩ", "0.00 kΩ", "30.49 kΩ", "4.85 kΩ"], "answer": 3, "explain": "使用 R = 1/(2πfcC)，把 82 nF 换成 82 × 10⁻⁹ F。"}, {"ref": "7.1 B", "prompt": "Which E24 resistor and resulting cutoff are correct?", "choices": ["4.7 kΩ; 400.00 Hz", "5.1 kΩ; 380.57 Hz", "4.7 kΩ; 412.96 Hz", "4.3 kΩ; 451.38 Hz"], "answer": 2, "explain": "理想值约 4.85 kΩ，最接近 4.7 kΩ。用实际电阻重算 fc = 1/(2πRC)。"}, {"ref": "7.1 C", "prompt": "Let x = f/fc using the selected E24 resistor. What is H(jω)?", "choices": ["jx/(1 + jx)", "1/(1 + x)", "1/(1 + jx)", "1/(1 − jx)"], "answer": 2, "explain": "输出跨在电容上。用分压 H = ZC/(R + ZC)，分子分母同乘 jωC。"}, {"ref": "7.1 C", "prompt": "What are |H(jω)| and phase for x = f/fc?", "choices": ["1/√(1 + x²); −atan(x)", "x/√(1 + x²); −atan(x)", "1/√(1 + x²); +atan(x)", "1/(1 + x²); −atan(x)"], "answer": 0, "explain": "复数分母 1 + jx 的模是 √(1+x²)，相角是 atan(x)。取倒数时相角变号。"}, {"ref": "7.1 D", "prompt": "Which Bode magnitude sketch description matches the circuit?", "choices": ["0 dB passband, −3.01 dB at 412.96 Hz, then −20 dB/decade asymptotically", "0 dB passband, −3.01 dB at 412.96 Hz, then −40 dB/decade asymptotically", "−20 dB/decade below 412.96 Hz, 0 dB above it", "0 dB passband, −6.02 dB at 412.96 Hz, then −20 dB/decade asymptotically"], "answer": 0, "explain": "一阶低通在通带趋近 0 dB，cutoff 在 412.96 Hz。此时幅值是 1/√2，即 −3.01 dB。高频渐近斜率为 −20 dB/decade。"}, {"ref": "7.1 D", "prompt": "What are the phase limits and the phase at cutoff (low frequency, cutoff, high frequency)?", "choices": ["−90°, −45°, 0°", "0°, −45°, −90°", "0°, −90°, −180°", "0°, +45°, +90°"], "answer": 1, "explain": "RC 的传递函数含分母 1 + j(f/fc)，所以相位是 −atan(f/fc)。在 fc 处 atan(1) = 45°。"}, {"ref": "7.1 E", "prompt": "The input source is set to AC 1. Which LTspice check verifies the theoretical half-power frequency?", "choices": ["Run an AC sweep and read −6.02 dB near 412.96 Hz.", "Run a DC operating-point analysis and read V(out) at 412.96 Hz.", "Run an AC sweep and look for a phase of −90° at 412.96 Hz.", "Run an AC sweep and read −3.01 dB on dB(V(out)/V(in)) near 412.96 Hz."], "answer": 3, "explain": "用 AC Sweep，画 dB(V(out)/V(in))。通带约 0 dB，半功率对应幅值 1/√2，所以游标应读到约 −3.01 dB。"}]}, {"name": "HW 7 · Passive RL", "given": "Use L = 12 mH and R = 150 Ω. Measure Vout across the resistor.", "svg": "<svg viewBox=\"0 0 510 180\" role=\"img\" aria-label=\"Series 12 mH with 150 Ω from output to ground\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M35 38H126q7 -24 14 0q7 -24 14 0q7 -24 14 0q7 -24 14 0H445 M35 150H445 M278 38v28l-8 7 16 10 -16 10 16 10 -16 10 8 7v30\"/><circle cx=\"278\" cy=\"38\" r=\"3\" fill=\"currentColor\"/><circle cx=\"278\" cy=\"150\" r=\"3\" fill=\"currentColor\"/></g><g fill=\"currentColor\" font-size=\"15\" font-family=\"system-ui\"><text x=\"20\" y=\"27\">Vᵢₙ</text><text x=\"419\" y=\"27\">Vₒᵤₜ</text><text x=\"134\" y=\"67\">12 mH</text><text x=\"298\" y=\"100\">150 Ω</text><text x=\"20\" y=\"142\">0 V</text></g></svg>", "q": [{"ref": "7.2 A", "prompt": "Which classification and explanation are correct?", "choices": ["Low-pass; the series inductor is a short at DC and blocks current at very high frequency.", "High-pass; the series inductor blocks current at DC and is a short at very high frequency.", "Low-pass; the output is taken across the inductor.", "Band-pass; the resistor and inductor resonate at cutoff."], "answer": 0, "explain": "DC 时电感短路，Vout = Vin。高频电感阻抗很大，电阻上电压趋近零。"}, {"ref": "7.2 B", "prompt": "Which voltage-divider expression gives H(jω)?", "choices": ["150/(150 + ω·0.012)", "jω·0.012/(150 + jω·0.012)", "150/(150 − jω·0.012)", "150/(150 + jω·0.012)"], "answer": 3, "explain": "输出跨电阻，分子用 R。分母是串联阻抗 R + jωL。"}, {"ref": "7.2 B", "prompt": "What is the cutoff frequency in hertz?", "choices": ["1989.44 Hz", "12500.00 Hz", "316.63 Hz", "994.72 Hz"], "answer": 0, "explain": "令 ωcL = R，得 fc = R/(2πL)。"}, {"ref": "7.2 B", "prompt": "At f = 2fc, what magnitude and phase should you expect?", "choices": ["0.7071; −45.00°", "0.2000; −63.43°", "0.4472; +63.43°", "0.4472; −63.43°"], "answer": 3, "explain": "f/fc = 2，因此 |H| = 1/√5，∠H = −atan(2)。"}, {"ref": "7.2 C", "prompt": "Which Bode magnitude sketch description matches the circuit?", "choices": ["0 dB passband, −3.01 dB at 1989.44 Hz, then −20 dB/decade asymptotically", "0 dB passband, −3.01 dB at 1989.44 Hz, then −40 dB/decade asymptotically", "−20 dB/decade below 1989.44 Hz, 0 dB above it", "0 dB passband, −6.02 dB at 1989.44 Hz, then −20 dB/decade asymptotically"], "answer": 0, "explain": "一阶低通在通带趋近 0 dB，cutoff 在 1989.44 Hz。此时幅值是 1/√2，即 −3.01 dB。高频渐近斜率为 −20 dB/decade。"}, {"ref": "7.2 C", "prompt": "What are the phase limits and the phase at cutoff (low frequency, cutoff, high frequency)?", "choices": ["−90°, −45°, 0°", "0°, +45°, +90°", "0°, −90°, −180°", "0°, −45°, −90°"], "answer": 3, "explain": "RL 的传递函数含分母 1 + j(f/fc)，所以相位是 −atan(f/fc)。在 fc 处 atan(1) = 45°。"}, {"ref": "7.2 D", "prompt": "The input source is set to AC 1. Which LTspice check verifies the theoretical half-power frequency?", "choices": ["Run an AC sweep and read −6.02 dB near 1989.44 Hz.", "Run a DC operating-point analysis and read V(out) at 1989.44 Hz.", "Run an AC sweep and look for a phase of −90° at 1989.44 Hz.", "Run an AC sweep and read −3.01 dB on dB(V(out)/V(in)) near 1989.44 Hz."], "answer": 3, "explain": "用 AC Sweep，画 dB(V(out)/V(in))。通带约 0 dB，半功率对应幅值 1/√2，所以游标应读到约 −3.01 dB。"}]}, {"name": "HW 8 · Loaded RL", "given": "Use L = 22 mH. Design R for an unloaded cutoff of 2.000 kHz. The 47 Ω branch is disconnected for A–D and connected in parallel with R for E–H. For J, compare both configurations.", "svg": "<svg viewBox=\"0 0 510 180\" role=\"img\" aria-label=\"Series 22 mH with R from output to ground and optional 47 ohm load in parallel\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M35 38H126q7 -24 14 0q7 -24 14 0q7 -24 14 0q7 -24 14 0H445 M35 150H445 M278 38v28l-8 7 16 10 -16 10 16 10 -16 10 8 7v30\"/><circle cx=\"278\" cy=\"38\" r=\"3\" fill=\"currentColor\"/><circle cx=\"278\" cy=\"150\" r=\"3\" fill=\"currentColor\"/><path d=\"M385 38v28l-8 7 16 10 -16 10 16 10 -16 10 8 7v30\"/><circle cx=\"385\" cy=\"38\" r=\"3\" fill=\"currentColor\"/><circle cx=\"385\" cy=\"150\" r=\"3\" fill=\"currentColor\"/></g><g fill=\"currentColor\" font-size=\"15\" font-family=\"system-ui\"><text x=\"20\" y=\"27\">Vᵢₙ</text><text x=\"419\" y=\"27\">Vₒᵤₜ</text><text x=\"134\" y=\"67\">22 mH</text><text x=\"298\" y=\"100\">R</text><text x=\"20\" y=\"142\">0 V</text><text x=\"399\" y=\"100\">47 Ω</text></g></svg>", "q": [{"ref": "8.1 A", "prompt": "How does the unloaded circuit behave?", "choices": ["Band-stop: Vout/Vin tends to 1 at both limits.", "High-pass: Vout/Vin tends to 0 at DC and 1 at high frequency.", "Low-pass: Vout/Vin tends to 1 at DC and 0 at high frequency.", "Band-pass: Vout/Vin tends to 0 at both limits."], "answer": 2, "explain": "电感在 DC 短路，高频阻抗增大。输出跨电阻，因此只通过低频。"}, {"ref": "8.1 B", "prompt": "What value of R sets the unloaded cutoff to 2.000 kHz?", "choices": ["47.00 Ω", "44.00 Ω", "552.92 Ω", "276.46 Ω"], "answer": 3, "explain": "用 R = 2πfcL = 2π(2000)(0.022)。"}, {"ref": "8.1 C", "prompt": "Using x = f/(2000 Hz), which unloaded response is correct?", "choices": ["H = jx/(1 + jx); |H| = x/√(1 + x²); phase = 90° − atan(x)", "H = 1/(1 − jx); |H| = 1/√(1 + x²); phase = +atan(x)", "H = 1/(1 + x); |H| = 1/(1 + x); phase = 0°", "H = 1/(1 + jx); |H| = 1/√(1 + x²); phase = −atan(x)"], "answer": 3, "explain": "先用分压 R/(R+jωL)，再除以 R。因为 ωL/R = f/2000 Hz，所以 x 进入标准一阶低通形式。"}, {"ref": "8.1 D", "prompt": "What are the unloaded Bode readings at 2.000 kHz?", "choices": ["−6.02 dB and −45°", "−3.01 dB and +45°", "−3.01 dB and −45°", "0 dB and 0°"], "answer": 2, "explain": "在未加载的截止频率，H = 1/(1+j)，幅值 1/√2，相位 −45°。"}, {"ref": "8.1 E", "prompt": "With the 47 Ω load attached, what effective resistance shunts the output?", "choices": ["40.17 Ω", "47.00 Ω", "323.46 Ω", "276.46 Ω"], "answer": 0, "explain": "两个电阻跨在同一对节点上，先算 R∥47 = R·47/(R+47)。"}, {"ref": "8.1 F", "prompt": "Which loaded transfer function uses the correct effective resistance?", "choices": ["47/(47 + jω·0.022)", "jω·0.022/(40.17 + jω·0.022)", "323.46/(323.46 + jω·0.022)", "40.17/(40.17 + jω·0.022)"], "answer": 3, "explain": "把未加载表达式的 R 换成 R∥47。保留分压的结构，电感继续串在输入与输出之间。"}, {"ref": "8.1 F", "prompt": "Using x = f/(290.61 Hz), which loaded magnitude and phase are correct?", "choices": ["1/(1 + x²); −atan(x)", "x/√(1 + x²); 90° − atan(x)", "1/√(1 + x²); −atan(x)", "1/√(1 + x²); +atan(x)"], "answer": 2, "explain": "加载后仍是一阶低通，变化的是极点位置。幅值用复数模，相位取分母相角的负值。"}, {"ref": "8.1 G", "prompt": "How does the loaded Bode plot compare with the unloaded plot?", "choices": ["Same 0 dB DC gain and −20 dB/decade slope; the loaded corner shifts lower.", "The DC gain drops and the corner shifts higher.", "The corner stays at 2.000 kHz because L is unchanged.", "The DC gain stays 0 dB, but the high-frequency slope changes to −40 dB/decade."], "answer": 0, "explain": "理想电感在 DC 短路，低频增益仍为 1。并联使有效电阻变小，fc = Req/(2πL) 随之降低。"}, {"ref": "8.1 H", "prompt": "What is the loaded half-power frequency, measured relative to its passband?", "choices": ["290.61 Hz", "1825.94 Hz", "2000.00 Hz", "340.01 Hz"], "answer": 0, "explain": "把 R∥47 代入 fc = Req/(2πL)。这里的半功率点是相对同一电路通带低约 3.01 dB 的频率。"}, {"ref": "8.1 J", "prompt": "Which cursor readings verify the loaded circuit at the original, unloaded 2.000 kHz corner?", "choices": ["-16.85 dB and -81.73°", "16.85 dB and -81.73°", "−3.01 dB and −45.00°", "-16.85 dB and 81.73°"], "answer": 0, "explain": "使用加载后的比值 x = 2000/fc,loaded。幅值 dB = −10 log₁₀(1+x²)，相位 = −atan(x)。"}, {"ref": "8.1 J", "prompt": "Where should the two AC-sweep traces cross −3.01 dB?", "choices": ["Unloaded 2000.00 Hz; loaded 290.61 Hz", "Unloaded 290.61 Hz; loaded 2000.00 Hz", "Both at 0 Hz.", "Both 2000.00 Hz"], "answer": 0, "explain": "两种接法的通带都趋于 0 dB，但各自的 −3.01 dB 频率不同。用游标分别检查两个截止点。"}]}, {"name": "HW 8 · Active RL", "given": "Assume an ideal op-amp. Use L = 12 mH and design for a 12 dB passband and a 3.000 kHz half-power frequency. The noninverting input is grounded.", "svg": "<svg viewBox=\"0 0 510 200\" role=\"img\" aria-label=\"Ideal inverting op-amp with series input inductor and resistor, resistor feedback, and grounded noninverting input\"><g fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M25 103h45q7 -22 14 0q7 -22 14 0q7 -22 14 0q7 -22 14 0h18l7 -8 10 16 10 -16 10 16 10 -16 10 16 7 -8h92 M310 85v70l80 -35z M390 120h86 M247 103V35h41l7 -8 10 16 10 -16 10 16 10 -16 10 16 7 -8h71v85 M310 138h-43v36m-13 0h26m-20 6h14m-10 5h6\"/><circle cx=\"247\" cy=\"103\" r=\"3\" fill=\"currentColor\"/><circle cx=\"433\" cy=\"120\" r=\"3\" fill=\"currentColor\"/></g><g fill=\"currentColor\" font-size=\"15\" font-family=\"system-ui\"><text x=\"12\" y=\"88\">Vᵢₙ</text><text x=\"76\" y=\"133\">12 mH</text><text x=\"162\" y=\"134\">Rₛ</text><text x=\"307\" y=\"19\">Rꜰ</text><text x=\"317\" y=\"107\">−</text><text x=\"317\" y=\"142\">+</text><text x=\"433\" y=\"106\">Vₒᵤₜ</text></g></svg>", "q": [{"ref": "8.2 A", "prompt": "What is H(jω) for the ideal inverting stage?", "choices": ["−Rꜰ/(Rₛ + jωL)", "+Rꜰ/(Rₛ + jωL)", "−(Rₛ + jωL)/Rꜰ", "−Rꜰ/(Rₛ − jωL)"], "answer": 0, "explain": "理想反相放大器 H = −Zf/Zin。反馈阻抗为 Rf，输入支路阻抗为 Rs + jωL。"}, {"ref": "8.2 B", "prompt": "What is the magnitude of the transfer function?", "choices": ["Rꜰ/√(Rₛ² + (ωL)²)", "√(Rₛ² + (ωL)²)/Rꜰ", "−Rꜰ/√(Rₛ² + (ωL)²)", "Rꜰ/(Rₛ + ωL)"], "answer": 0, "explain": "幅值取正。分母的实部是 Rs，虚部是 ωL，因此模为 √(Rs² + (ωL)²)。"}, {"ref": "8.2 C", "prompt": "Which filter type follows from the low- and high-frequency limits?", "choices": ["Band-pass; |H| tends to zero at both frequency limits.", "Low-pass; |H| tends to Rꜰ/Rₛ at DC and to zero at high frequency.", "Band-stop; |H| tends to Rꜰ/Rₛ at both frequency limits.", "High-pass; |H| tends to zero at DC and to Rꜰ/Rₛ at high frequency."], "answer": 1, "explain": "DC 时电感短路，增益幅值为 Rf/Rs。高频输入阻抗增大，增益幅值趋近零。"}, {"ref": "8.2 D", "prompt": "What linear voltage gain magnitude corresponds to 12 dB?", "choices": ["15.85 V/V", "0.25 V/V", "12.00 V/V", "3.98 V/V"], "answer": 3, "explain": "电压幅值增益用 20 log₁₀(G)。反解 G = 10^(12/20)。"}, {"ref": "8.2 D", "prompt": "Which component set meets both design targets?", "choices": ["L = 12 mH; Rₛ = 900.50 Ω; Rꜰ = 226.19 Ω", "L = 12 mH; Rₛ = 226.19 Ω; Rꜰ = 3584.94 Ω", "L = 12 mH; Rₛ = 36.00 Ω; Rꜰ = 143.32 Ω", "L = 12 mH; Rₛ = 226.19 Ω; Rꜰ = 900.50 Ω"], "answer": 3, "explain": "先用 Rs = 2πfcL 设截止频率，再用 Rf = Rs × 10^(12/20) 设通带增益。"}, {"ref": "8.2 E", "prompt": "Which magnitude sketch description matches the design?", "choices": ["0 dB at low frequency, −3.01 dB at 3.000 kHz, −20 dB/decade high-frequency slope.", "12 dB at low frequency, −3.01 dB at 3.000 kHz, −20 dB/decade high-frequency slope.", "12 dB at low frequency, 8.99 dB at 3.000 kHz, −20 dB/decade high-frequency slope.", "12 dB at low frequency, 8.99 dB at 3.000 kHz, −40 dB/decade high-frequency slope."], "answer": 2, "explain": "截止点低于通带 3.01 dB。通带是 12 dB，所以截止点为 8.99 dB。一阶低通的高频渐近斜率是 −20 dB/decade。"}, {"ref": "8.2 E", "prompt": "What is the exact-response magnitude in dB at 30.00 kHz (one decade above cutoff)?", "choices": ["-8.04 dB", "-20.00 dB", "-28.00 dB", "1.59 dB"], "answer": 0, "explain": "此处 x = 10。计算 12 − 10 log₁₀(1 + 10²) ≈ −8.04 dB。渐近线给 −8 dB。"}]}]</script>
-<script>
-const bank = JSON.parse(document.getElementById('bank').textContent);
-const get = id => document.getElementById(id);
-const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const storageKey = 'engr202-hw7-hw8-filters-v1';
-const total = bank.reduce((sum, section) => sum + section.q.length, 0);
-let progress = {};
-let circuit = 0;
-let part = 0;
-try {
-  const saved = JSON.parse(localStorage.getItem(storageKey));
-  if (saved?.progress) progress = saved.progress;
-  if (bank[saved?.circuit]?.q[saved?.part]) {
-    circuit = saved.circuit;
-    part = saved.part;
-  }
-} catch {}
-
-function save() {
-  try {
-    localStorage.setItem(storageKey, JSON.stringify({progress, circuit, part}));
-  } catch {
-    get('storage-note').textContent = 'Browser storage is unavailable. You can still download your answers.';
-  }
-}
-
-function button(label, active, action) {
-  const node = document.createElement('button');
-  node.textContent = label;
-  if (active) node.setAttribute('aria-current', 'true');
-  node.onclick = action;
-  return node;
-}
-
-function move(toCircuit, toPart, focusId) {
-  circuit = toCircuit;
-  part = toPart;
-  save();
-  render();
-  if (focusId) get(focusId).focus();
-}
-
-function render() {
-  const section = bank[circuit];
-  const q = section.q[part];
-  const id = circuit + '-' + part;
-  const state = progress[id];
-  get('circuits').replaceChildren(...bank.map((item, j) => {
-    const node = button(item.name, j === circuit, () => move(j, 0, 'circuit-' + j));
-    node.id = 'circuit-' + j;
-    return node;
-  }));
-  get('steps').replaceChildren(...section.q.map((_, j) => {
-    const node = button(letters[j].toLowerCase(), j === part, () => move(circuit, j, 'part-' + j));
-    node.id = 'part-' + j;
-    node.setAttribute('aria-label', 'Part ' + letters[j].toLowerCase());
-    if (progress[circuit + '-' + j]?.checked) node.classList.add('done');
-    return node;
-  }));
-  get('circuit-title').textContent = section.name;
-  get('diagram').innerHTML = section.svg;
-  get('givens').textContent = section.given;
-  get('source').textContent = 'Homework mapping: ' + q.ref;
-  get('question').textContent = '(' + letters[part].toLowerCase() + ') ' + q.prompt;
-  get('options').replaceChildren(...q.choices.map((choice, j) => {
-    const label = document.createElement('label');
-    label.className = 'option';
-    const input = document.createElement('input');
-    input.type = 'radio';
-    input.name = 'answer';
-    input.value = j;
-    input.checked = state?.choice === j;
-    input.onchange = () => {
-      progress[id] = {choice: j, checked: false};
-      save();
-      get('feedback').textContent = '';
-      updateProgress();
-    };
-    label.append(input, document.createTextNode(letters[j] + '. ' + choice));
-    return label;
-  }));
-  get('feedback').textContent = state?.checked ? message(q, state.choice) : '';
-  get('prev').disabled = circuit === 0 && part === 0;
-  get('next').disabled = circuit === bank.length - 1 && part === section.q.length - 1;
-  updateProgress();
-}
-
-function updateProgress() {
-  const checked = Object.values(progress).filter(state => state.checked).length;
-  get('score').textContent = checked + ' / ' + total + ' checked';
-  const currentStep = get('part-' + part);
-  currentStep.classList.toggle('done', Boolean(progress[circuit + '-' + part]?.checked));
-}
-
-function message(q, choice) {
-  return (choice === q.answer ? 'Correct. ' : 'Answer ' + letters[q.answer] + '. ') + q.explain;
-}
-
-get('check').onclick = () => {
-  const selected = document.querySelector('input[name="answer"]:checked');
-  if (!selected) {
-    get('feedback').textContent = 'Choose one answer first.';
-    return;
-  }
-  const choice = Number(selected.value);
-  progress[circuit + '-' + part] = {choice, checked: true};
-  save();
-  get('feedback').textContent = message(bank[circuit].q[part], choice);
-  updateProgress();
-};
-
-get('prev').onclick = () => {
-  if (part > 0) move(circuit, part - 1);
-  else if (circuit > 0) move(circuit - 1, bank[circuit - 1].q.length - 1);
-};
-
-get('next').onclick = () => {
-  if (part + 1 < bank[circuit].q.length) move(circuit, part + 1);
-  else if (circuit + 1 < bank.length) move(circuit + 1, 0);
-};
-
-function responseLine(section, index, q, j) {
-  const state = progress[index + '-' + j];
-  const choice = state?.choice;
-  const selected = Number.isInteger(choice) ? letters[choice] + '. ' + q.choices[choice] : 'Unanswered';
-  const status = !state?.checked ? '' : choice === q.answer ? ' (correct)' : ' (incorrect)';
-  return section.name + ' · (' + letters[j].toLowerCase() + ') · ' + q.ref + '\n' + q.prompt + '\n' + selected + status;
-}
-
-function download(entries, name) {
-  const file = new Blob([entries.join('\n\n') + '\n'], {type: 'text/plain;charset=utf-8'});
-  const link = document.createElement('a');
-  link.href = URL.createObjectURL(file);
-  link.download = name;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-}
-
-get('download-current').onclick = () => download(
-  [responseLine(bank[circuit], circuit, bank[circuit].q[part], part)],
-  'ENGR202-HW7-HW8-current-answer.txt'
-);
-get('download-all').onclick = () => download(
-  bank.flatMap((section, i) => section.q.map((q, j) => responseLine(section, i, q, j))),
-  'ENGR202-HW7-HW8-all-answers.txt'
-);
-render();
-</script>
-<script src="../../assets/practice-timers.js" defer></script></body>
+<script src="../../assets/practice-timers.js" defer></script>
+</body>
 </html>

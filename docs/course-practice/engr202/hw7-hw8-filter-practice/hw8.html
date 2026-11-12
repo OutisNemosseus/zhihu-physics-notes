@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 · Homework #8</title>
+<link rel="stylesheet" href="worksheet.css">
+</head>
+<body>
+<header><a href="../../">Course Practice</a><a href="./">HW 7 &amp; 8</a></header>
+<main>
+<h1>Homework #8</h1>
+<nav aria-label="Jump to a problem"><a href="#problem-1">Problem 1</a><a href="#problem-2">Problem 2</a><a href="hw7.html">Homework #7</a><a href="https://canvas.oregonstate.edu/courses/2061800/assignments/10612667">Canvas assignment</a></nav>
+<p id="draft-status" role="status">Your work is saved in this browser as you type.</p>
+<section class="problem" id="problem-1"><h2>Problem 1 (15 points)</h2>
+<p><strong>Note:&nbsp; &nbsp; You may use the ideal inductor model for this homework (e.g. no series resistance).</strong></p>
+<p>Consider the following simple circuit:</p>
+<p><a class="figure" href="figures/hw8-problem-1-unloaded.jpg" target="_blank" rel="noopener"><img src="figures/hw8-problem-1-unloaded.jpg" alt="ENGR202 HW8 Figure 1.jpg"></a></p>
+<p>A) By inspection is this a high pass or low pass filter?&nbsp; &nbsp; Why?</p>
+<div class="response"><label for="p1-a">Your work for 1A</label><textarea id="p1-a" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>B) Select the Value of R to produce a cutoff frequency of 2.5kHz.</p>
+<div class="response"><label for="p1-b">Your work for 1B</label><textarea id="p1-b" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>C) Find H(jw),&nbsp; |H(jw)|,&nbsp;<span style="text-decoration: underline;"> /H(jw).</span>&nbsp; &nbsp;Show you work.&nbsp; &nbsp;Use real component values for your final answer.</p>
+<div class="response"><label for="p1-c">Your work for 1C</label><textarea id="p1-c" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>D) Hand Sketch the Bode Plot for |H(j)| and <span style="text-decoration: underline;">/H(jw).</span>&nbsp; &nbsp;Frequency Axis should be in Hz.&nbsp; &nbsp;Use the real component values and frequency.&nbsp; &nbsp; Don't do a normalized plot to wc.</p>
+<div class="response"><label for="p1-d">Your work for 1D</label><textarea id="p1-d" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>E) This filter is connected to a 34 ohm load</p>
+<p><a class="figure" href="figures/hw8-problem-1-loaded.jpg" target="_blank" rel="noopener"><img src="figures/hw8-problem-1-loaded.jpg" alt="ENGR202 HW8 Figure 2.jpg"></a></p>
+<p>F)&nbsp; Find H(jw), |H(jw)|, and <span style="text-decoration: underline;">/H(jw)</span>.&nbsp; &nbsp;Show your work!!&nbsp; &nbsp;Express your final answer with the REAL COMPONENT values.</p>
+<div class="response"><label for="p1-f">Your work for 1F</label><textarea id="p1-f" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>G) Hand Draw Bode Plot. &nbsp;Frequency Axis should be in Hz.&nbsp; &nbsp;Use the real component values and frequency.&nbsp; &nbsp; Don't do a normalized plot to wc.</p>
+<div class="response"><label for="p1-g">Your work for 1G</label><textarea id="p1-g" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>H)&nbsp; What is the frequency at the 1/2 power point?</p>
+<div class="response"><label for="p1-h">Your work for 1H</label><textarea id="p1-h" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>I)&nbsp; CANCELED.&nbsp; &nbsp; NO PART i.</p>
+<p>J) Use Spice to verify you results for |H(jw)| and <span style="text-decoration: underline;">/H(jw)</span>&nbsp; part C and part F.&nbsp; &nbsp; &nbsp; Your result should look a lot like your hand drawn Bode Plot for part C and part F.&nbsp; For the part C plot use the -3dB point to verify your result.&nbsp; &nbsp; For the part F plot use the -3dB point and the w=wc point to verify your result.</p>
+<div class="response"><label for="p1-j">Your work for 1J</label><textarea id="p1-j" rows="3" spellcheck="false" data-draft></textarea></div>
+</section>
+<section class="problem" id="problem-2"><h2>Problem 2 (10 points)</h2>
+<p>Consider the following Active Filter Circuit.</p>
+<p><a class="figure" href="figures/hw8-problem-2.jpg" target="_blank" rel="noopener"><img src="figures/hw8-problem-2.jpg" alt="ENGR202 Fall 2025 Week 8 HW Problem 2 Graphic.jpg"></a></p>
+<p>A) Derive H(jw).&nbsp; &nbsp;Show all your work.</p>
+<div class="response"><label for="p2-a">Your work for 2A</label><textarea id="p2-a" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>B) Derive |H(jw)|.&nbsp; &nbsp;Show all your work.</p>
+<div class="response"><label for="p2-b">Your work for 2B</label><textarea id="p2-b" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>C) Is this a High Pass, Low Pass, Bandpass, or Bandstop filter?&nbsp; &nbsp;Why?</p>
+<div class="response"><label for="p2-c">Your work for 2C</label><textarea id="p2-c" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>D) Select component values to achieve the following response.&nbsp; &nbsp;Clearly state your values for RF, Rs, and L.&nbsp; &nbsp;The procurement department has informed you that a summer intern accidently ordered 100,000 X 10mH inductors rather than the desired 1000.&nbsp; &nbsp; All engineers are ordered to incorporate this inductor in future designs.</p>
+<p style="padding-left: 40px;">Passband Gain 15dB</p>
+<p style="padding-left: 40px;">Half Power Frequency 2.5 kHz</p>
+<div class="response"><label for="p2-d">Your work for 2D</label><textarea id="p2-d" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>E) Sketch the Magnitude Bode Plot for your filter design.&nbsp; &nbsp; Show your work in deriving the Bode Plot.</p>
+<div class="response"><label for="p2-e">Your work for 2E</label><textarea id="p2-e" rows="3" spellcheck="false" data-draft></textarea></div>
+</section>
+</main>
+<script src="../../assets/practice-timers.js" defer></script>
+<script src="drafts.js" defer></script>
+</body>
+</html>

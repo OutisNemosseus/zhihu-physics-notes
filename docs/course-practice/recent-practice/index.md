@@ -18,7 +18,7 @@ title: 近期练习链接
 - [Midterm 1 · 原题、电路图与解析](../engr202/midterm1-review/index.html)
 - [HW 5–9 · Midterm 同型练习 · 每份独立网页](../engr202/hw5-9-midterm/)
 - [HW 6 交流功率 · 5 个电路，每个做 (a)–(o)](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr202/week6-sadiku-five-circuits/)
-- [HW 7–8 滤波器练习](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr202/hw7-hw8-filter-practice/)
+- [HW 7 滤波器原题 · 填空](../engr202/hw7-hw8-filter-practice/hw7.html) · [HW 8 滤波器原题 · 填空](../engr202/hw7-hw8-filter-practice/hw8.html)
 
 ## ENGR 103 · Python
 

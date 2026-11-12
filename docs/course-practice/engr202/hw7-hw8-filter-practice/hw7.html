@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 · Homework #7</title>
+<link rel="stylesheet" href="worksheet.css">
+</head>
+<body>
+<header><a href="../../">Course Practice</a><a href="./">HW 7 &amp; 8</a></header>
+<main>
+<h1>Homework #7</h1>
+<nav aria-label="Jump to a problem"><a href="#problem-1">Problem 1</a><a href="#problem-2">Problem 2</a><a href="hw8.html">Homework #8</a><a href="https://canvas.oregonstate.edu/courses/2061800/assignments/10612666">Canvas assignment</a></nav>
+<p id="draft-status" role="status">Your work is saved in this browser as you type.</p>
+<section class="problem" id="problem-1"><h2>Problem 1 (10 points)</h2>
+<p>Using a 100 nF capacitor design a low pass filter with a cutoff frequency of 300 Hz.&nbsp; &nbsp; Reference Video Lecture #1.</p>
+<p>A) What is the resistor value?</p>
+<div class="response"><label for="p1-a">Your work for 1A</label><textarea id="p1-a" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>B) In the real world, resistors are only available in standard values, as shown in Appendix H.&nbsp; &nbsp;Select the resistor that best matches your solution to part A and determine the new cutoff frequency.</p>
+<div class="response"><label for="p1-b">Your work for 1B</label><textarea id="p1-b" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>C) For the resistor in Part B find H(jw), |H(jw)|, and <span style="text-decoration: underline;">/H(jw)</span></p>
+<div class="response"><label for="p1-c">Your work for 1C</label><textarea id="p1-c" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>D) Hand draw the bode plot of both |H(jw)| and <span style="text-decoration: underline;">/H(jw)</span>.&nbsp; &nbsp; The magnitude plot should be in dB vs Frequency (Log Scale) and the phase plot should be in degrees vs Frequency (Log Scale).&nbsp; &nbsp;Remember to consider the three cases; w&lt;&lt;w<sub>c</sub>, w = w<sub>c</sub>, and w &gt;&gt;&gt; w<sub>c</sub>.</p>
+<div class="response"><label for="p1-d">Your work for 1D</label><textarea id="p1-d" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>E) Perform a Spice SImulation that Validates your Bode Plot.&nbsp; Make sure to explicitly show a measurement of the -3dB point.</p>
+<div class="response"><label for="p1-e">Your work for 1E</label><textarea id="p1-e" rows="3" spellcheck="false" data-draft></textarea></div>
+</section>
+<section class="problem" id="problem-2"><h2>Problem 2 (10 Points)</h2>
+<p>Consider the follow circuit.&nbsp; &nbsp; This problem is a canonical example of what you will need to do on Midterm #2.&nbsp; &nbsp; Make sure you can do the derivations and bode plots.</p>
+<p><strong><a class="figure" href="figures/hw7-problem-2.jpg" target="_blank" rel="noopener"><img src="figures/hw7-problem-2.jpg" alt="ENGR HW7 Problem 1.jpg"></a></strong></p>
+<p>A) if this a High Pass or a Low Pass Filter?&nbsp; &nbsp;Why?&nbsp; &nbsp; Think about the DC (Zero Impedance/Short Circuit) and Ultra High Frequency (Infinite Impedance/Open Circuit) behavior of an inductor.</p>
+<div class="response"><label for="p2-a">Your work for 2A</label><textarea id="p2-a" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>B) Derive the following three transfer functions; H(jw), |H(jw)|, and <span style="text-decoration: underline;">/H(jw)</span>.&nbsp; &nbsp; &nbsp;Show all your work.&nbsp; &nbsp; &nbsp;You can just look up the answer on-line, but I need to see your work if you want any credit and you will need to be able to do this derivation on Midterm #2.</p>
+<div class="response"><label for="p2-b">Your work for 2B</label><textarea id="p2-b" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>C) Hand draw the bode plot of both |H(jw)| and <span style="text-decoration: underline;">/H(jw)</span>.&nbsp; &nbsp; The magnitude plot should be in dB vs Frequency (Log Scale) and the phase plot should be in degrees vs Frequency (Log Scale).&nbsp; &nbsp;Remember to consider the three cases; w&lt;&lt;w<sub>c</sub>, w = w<sub>c</sub>, and w &gt;&gt;&gt; w<sub>c</sub>.</p>
+<div class="response"><label for="p2-c">Your work for 2C</label><textarea id="p2-c" rows="3" spellcheck="false" data-draft></textarea></div>
+<p>D) Perform a Spice SImulation that Validates your Bode Plot.&nbsp; Make sure to explicitly show a measurement of the -3dB point.</p>
+<div class="response"><label for="p2-d">Your work for 2D</label><textarea id="p2-d" rows="3" spellcheck="false" data-draft></textarea></div>
+<p><a class="figure" href="figures/hw7-appendix-h.jpg" target="_blank" rel="noopener"><img src="figures/hw7-appendix-h.jpg" alt="HW7AppendixH.jpg"></a></p>
+</section>
+</main>
+<script src="../../assets/practice-timers.js" defer></script>
+<script src="drafts.js" defer></script>
+</body>
+</html>
