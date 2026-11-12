@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="MTH 231 Written Homework 6 题目整理：按 6.1 计数基础、6.3 排列组合、6.4 二项式定理分类，17 组题，保留原题号与英文题干，不含答案。">
+  <meta name="description" content="MTH 231 Written Homework 6 题目整理：按 6.1 计数基础、6.3 排列组合、6.4 二项式定理分类，17 组题，保留原题号与英文题干。">
   <title>WHW 6 · 分类题目 | MTH 231</title>
   <link rel="stylesheet" href="style.css">
   <script src="app.js" defer></script>
@@ -47,7 +47,7 @@
       <p class="eyebrow">MTH 231 / WEEK 6</p>
       <h1>Written Homework <span>6</span></h1>
       <p class="subtitle">原题整理，按章节与题型分类。</p>
-      <div class="intro-bottom"><p class="facts"><span>3 个章节</span><span>17 组题</span><span>不含答案</span></p><button type="button" id="print">打印题目</button></div>
+      <div class="intro-bottom"><p class="facts"><span>3 个章节</span><span>17 组题</span><span>§6.1.18 可在线作答</span></p><button type="button" id="print">打印题目</button></div>
       <p class="source-note">依据提供的「WHW 6 (1).pdf」整理。保留原章节、题号和题目条件；中文标题用于导航。6.3 第 32 题的共同背景合并展示，数学上标与字母间距已整理。此页是个人学习整理页，不是课程提交页面。</p>
     </div>
     <section class="chapter" id="section-61" aria-labelledby="section-61-title"><div class="section-heading"><span class="section-number">6.1</span><div><p class="eyebrow">Basic counting</p><h2 id="section-61-title">计数基础</h2></div><span class="count">7 组题</span></div>
@@ -56,7 +56,66 @@
 <article class="question" id="q61-12" aria-labelledby="q61-12-title"><div class="question-meta"><span>§6.1 · 12</span><a href="#q61-12" aria-label="链接到第 6.1.12 题">#</a></div><h3 id="q61-12-title">不同长度的位串</h3><div class="prompt" lang="en"><p>How many bit strings are there of length six or less, not counting the empty string?</p></div></article>
 <article class="question" id="q61-14" aria-labelledby="q61-14-title"><div class="question-meta"><span>§6.1 · 14</span><a href="#q61-14" aria-label="链接到第 6.1.14 题">#</a></div><h3 id="q61-14-title">固定首尾的位串</h3><div class="prompt" lang="en"><p>How many bit strings of length <i>n</i>, where <i>n</i> is a positive integer, start and end with 1s?</p></div></article>
 <article class="question" id="q61-16" aria-labelledby="q61-16-title"><div class="question-meta"><span>§6.1 · 16</span><a href="#q61-16" aria-label="链接到第 6.1.16 题">#</a></div><h3 id="q61-16-title">至少包含一个 x</h3><div class="prompt" lang="en"><p>How many strings are there of four lowercase letters that have the letter x in them?</p></div></article>
-<article class="question" id="q61-18" aria-labelledby="q61-18-title"><div class="question-meta"><span>§6.1 · 18</span><a href="#q61-18" aria-label="链接到第 6.1.18 题">#</a></div><h3 id="q61-18-title">DNA 序列</h3><div class="prompt" lang="en"><p>How many 5-element DNA sequences</p><ol type="a"><li>end with A?</li><li>start with T and end with G?</li><li>contain only A and T?</li><li>do not contain C?</li></ol></div></article>
+<article class="question" id="q61-18" aria-labelledby="q61-18-title"><div class="question-meta"><span>§6.1 · 18</span><a href="#q61-18" aria-label="链接到第 6.1.18 题">#</a></div><h3 id="q61-18-title">DNA 序列</h3><div class="prompt"><p lang="en">How many 5-element DNA sequences satisfy each condition? Use the alphabet {A, C, G, T}.</p>
+<form id="q61-18-quiz" aria-labelledby="q61-18-title">
+<fieldset style="margin: 0 0 0.75rem" data-answer="256">
+<legend lang="en">a) end with A?</legend>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-0" value="64"> A. 64</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-0" value="256"> B. 256</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-0" value="625"> C. 625</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-0" value="1024"> D. 1,024</label>
+<p class="choice-feedback" data-explanation="最后一格固定为 A，前四格各有 4 种选择，所以是 4⁴ = 256。" role="status" hidden></p>
+</fieldset>
+<fieldset style="margin: 0 0 0.75rem" data-answer="64">
+<legend lang="en">b) start with T and end with G?</legend>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-1" value="16"> A. 16</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-1" value="32"> B. 32</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-1" value="64"> C. 64</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-1" value="256"> D. 256</label>
+<p class="choice-feedback" data-explanation="首尾都固定，中间三格各有 4 种选择，所以是 4³ = 64。" role="status" hidden></p>
+</fieldset>
+<fieldset style="margin: 0 0 0.75rem" data-answer="32">
+<legend lang="en">c) contain only A and T?</legend>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-2" value="32"> A. 32</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-2" value="10"> B. 10</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-2" value="16"> C. 16</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-2" value="64"> D. 64</label>
+<p class="choice-feedback" data-explanation="每一格都可选 A 或 T，所以是 2⁵ = 32。" role="status" hidden></p>
+</fieldset>
+<fieldset style="margin: 0 0 0.75rem" data-answer="243">
+<legend lang="en">d) do not contain C?</legend>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-3" value="81"> A. 81</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-3" value="125"> B. 125</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-3" value="781"> C. 781</label>
+<label style="display:inline-block;margin:0.25rem 1rem 0.25rem 0"><input type="radio" name="q61-18-3" value="243"> D. 243</label>
+<p class="choice-feedback" data-explanation="每一格都可选 A、G 或 T，所以是 3⁵ = 243。" role="status" hidden></p>
+</fieldset>
+<button type="submit">检查答案</button> <button type="reset">重做</button>
+</form>
+<script>
+(() => {
+  const quiz = document.getElementById('q61-18-quiz');
+  const parts = [...quiz.querySelectorAll('fieldset')];
+  function clearFeedback(part) {
+    const feedback = part.querySelector('.choice-feedback');
+    feedback.textContent = '';
+    feedback.hidden = true;
+  }
+  quiz.addEventListener('change', event => clearFeedback(event.target.closest('fieldset')));
+  quiz.addEventListener('reset', () => parts.forEach(clearFeedback));
+  quiz.addEventListener('submit', event => {
+    event.preventDefault();
+    for (const part of parts) {
+      const selected = part.querySelector('input:checked');
+      const feedback = part.querySelector('.choice-feedback');
+      feedback.hidden = false;
+      feedback.textContent = !selected ? '请选择一个答案。'
+        : selected.value === part.dataset.answer ? '正确。' + feedback.dataset.explanation
+        : '再试一次。想想哪些位置固定，以及其余位置各有几个选择。';
+    }
+  });
+})();
+</script></div></article>
 <article class="question" id="q61-28" aria-labelledby="q61-28-title"><div class="question-meta"><span>§6.1 · 28</span><a href="#q61-28" aria-label="链接到第 6.1.28 题">#</a></div><h3 id="q61-28-title">两种车牌格式</h3><div class="prompt" lang="en"><p>How many license plates can be made using either three digits followed by three uppercase English letters or three uppercase English letters followed by three digits?</p></div></article>
 </section>
 <section class="chapter" id="section-63" aria-labelledby="section-63-title"><div class="section-heading"><span class="section-number">6.3</span><div><p class="eyebrow">Permutations & combinations</p><h2 id="section-63-title">排列与组合</h2></div><span class="count">7 组题</span></div>
@@ -73,7 +132,7 @@
 <article class="question" id="q64-7" aria-labelledby="q64-7-title"><div class="question-meta"><span>§6.4 · 7</span><a href="#q64-7" aria-label="链接到第 6.4.7 题">#</a></div><h3 id="q64-7-title">含负号的系数</h3><div class="prompt" lang="en"><p>What is the coefficient of <span class="math"><i>x</i><sup>9</sup></span> in <span class="math">(2 − <i>x</i>)<sup>19</sup></span>?</p></div></article>
 <article class="question" id="q64-8" aria-labelledby="q64-8-title"><div class="question-meta"><span>§6.4 · 8</span><a href="#q64-8" aria-label="链接到第 6.4.8 题">#</a></div><h3 id="q64-8-title">含常数因子的系数</h3><div class="prompt" lang="en"><p>What is the coefficient of <span class="math"><i>x</i><sup>8</sup><i>y</i><sup>9</sup></span> in the expansion of <span class="math">(3<i>x</i> + 2<i>y</i>)<sup>17</sup></span>?</p></div></article>
 </section>
-    <footer><p>来源：MTH 231 · Week 6, Written Homework，7 页题目单。</p><p>网页只展示题目。具体作业格式与评分要求以课程文件为准。</p><a href="#main">回到顶部 ↑</a></footer>
+    <footer><p>来源：MTH 231 · Week 6, Written Homework，7 页题目单。</p><p>具体作业格式与评分要求以课程文件为准。</p><a href="#main">回到顶部 ↑</a></footer>
   </main>
 </div>
 <script src="../../assets/practice-timers.js" defer></script></body>
