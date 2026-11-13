@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Inverting Active Filter</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-13">November 13, 2026</time></p>
+<h1>Inverting Active Filter</h1>
+<article class="worksheet">
+<p>Assume the op amp is ideal and operates in its linear region. All voltages are measured relative to ground. Derive <i>H</i>(<i>jω</i>) = <i>V</i><sub>out</sub>/<i>V</i><sub>in</sub> on paper and sketch the asymptotic magnitude Bode plot, labeling the corner frequency and the passband level. Show your work. Enter numerical answers to three significant figures.</p>
+<figure><svg viewBox="0 0 640 265" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Inverting op-amp filter circuit</title>
+<desc id="circuit-desc">Vin passes through a 20 nanofarad capacitor and a 10 kilohm resistor in series to the inverting input. The non-inverting input is grounded. A 30 kilohm resistor connects the output back to the inverting input.</desc>
+<g class="wire"><path d="M48 145h65m0-16v32m14-32v32m0-16h43l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h114"/>
+<path d="M360 117v114l124-57zM484 174h109M305 145V68h86l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h71v106"/>
+<path d="M360 202h-55v28m-14 0h28m-23 6h18m-14 6h10"/></g>
+<g class="node"><circle cx="48" cy="145" r="4"/><circle cx="305" cy="145" r="4"/><circle cx="538" cy="174" r="4"/><circle cx="593" cy="174" r="4"/></g>
+<g text-anchor="middle"><text x="48" y="122">Vᵢₙ</text><text x="120" y="113">20 nF</text><text x="210" y="118">10 kΩ</text><text x="429" y="40">30 kΩ</text><text x="380" y="151">−</text><text x="380" y="207">+</text><text x="593" y="150">Vₒᵤₜ</text></g>
+</svg></figure>
+<form id="answers"><ol type="a">
+<li><label for="passband">High-frequency passband gain magnitude (V/V)</label><input id="passband" type="number" step="any" required data-answer="3"></li>
+<li><label for="cutoff">Cutoff frequency (Hz)</label><input id="cutoff" type="number" step="any" required data-answer="795.7747154594767"></li>
+<li><label for="gain">Magnitude gain at cutoff (dB, referenced to 1 V/V)</label><input id="gain" type="number" step="any" required data-answer="6.532125137753436"></li>
+<li><label for="phase">Output phase relative to input at cutoff (degrees, −180° to +180°)</label><input id="phase" type="number" step="any" required data-answer="-135"></li>
+<li><label for="slope">Low-frequency asymptotic slope as frequency increases (dB/decade)</label><input id="slope" type="number" step="any" required data-answer="20"></li>
+</ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>理想运放的反相端是虚地，输入支路阻抗 Z<sub>in</sub> = R<sub>in</sub> + 1/(jωC)，反馈阻抗 Z<sub>f</sub> = R<sub>f</sub>。对反相端写 KCL 得 V<sub>in</sub>/Z<sub>in</sub> + V<sub>out</sub>/R<sub>f</sub> = 0。因此 H(jω) = −3·jωR<sub>in</sub>C/(1 + jωR<sub>in</sub>C)。</p>
+<ol type="a">
+<li>高频时电容阻抗趋近于零，H → −R<sub>f</sub>/R<sub>in</sub> = −3，故通带增益幅值是 3.00 V/V。</li>
+<li>截止时 ωR<sub>in</sub>C = 1，故 f<sub>c</sub> = 1/[2π(10 kΩ)(20 nF)] ≈ 796 Hz。</li>
+<li>截止处 |H| = 3/√2，故增益为 20 log₁₀(3/√2) ≈ +6.53 dB。通带平台为 20 log₁₀(3) ≈ +9.54 dB。</li>
+<li>截止时 H = −3j/(1 + j) = −1.5 − j1.5，所以相位是 −135°。</li>
+<li>低频时 |H| ≈ 3f/f<sub>c</sub>。频率增大 10 倍时增益增大 20 dB。画渐近线时，从低频以 +20 dB/decade 上升，到 796 Hz 后接 +9.54 dB 水平线。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw7-hw8-filter-practice/hw8.html#problem-2">ENGR 202 HW 8 第 2 题的有源滤波与 Bode 图考点</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcde'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
