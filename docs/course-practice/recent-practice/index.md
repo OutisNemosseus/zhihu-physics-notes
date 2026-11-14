@@ -8,6 +8,8 @@ title: 近期练习链接
 
 ## MTH 231 · 离散数学
 
+- [轮换 01 · 二项式系数 · 8 道原创复习题（2026-11-14）](../logic/rotation-01-binomial/)
+
 - [Written Homework 6 · 17 组原题 · 分类侧栏](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/logic/whw6-questions/)
 - [Modules 6–7 计数练习 · 30 题（11 月 7 日版）](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/logic/module-6-7-counting-practice/)
 - [WHW 6 计数加练 · 30 题](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/logic/whw6-counting-practice/)
