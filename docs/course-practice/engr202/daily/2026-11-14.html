@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Recovering Load Impedance from Meter Readings</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-14">November 14, 2026</time></p>
+<h1>Recovering Load Impedance from Meter Readings</h1>
+<article class="worksheet">
+<p>An ideal 60 Hz sinusoidal source drives an unknown two-terminal load in steady state. The measured load voltage is <strong>120 V RMS</strong>, the measured current is <strong>10.0 A RMS</strong>, and an ideal wattmeter reads <strong>960 W</strong> absorbed by the load. The current <strong>lags</strong> the voltage. Use the source voltage as the 0° reference and the current direction shown.</p>
+<figure><svg viewBox="0 0 520 225" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Sinusoidal source and an unknown two-terminal load</title>
+<desc id="circuit-desc">The AC source connects directly to the load. The current arrow points from the positive source terminal toward the load along the top wire.</desc>
+<g class="wire"><path d="M89 105V60H401v38M89 155v42h312v-35"/><circle cx="89" cy="130" r="25"/><path d="M74 130q7.5-14 15 0t15 0"/><rect x="344" y="98" width="114" height="64" rx="4"/>
+<path d="M218 45h62m-11-7 11 7-11 7"/></g>
+<g text-anchor="middle"><text x="247" y="34">I</text><text x="401" y="137">Z<tspan baseline-shift="sub" font-size="14">load</tspan></text><text x="30" y="137">Vₛ</text><text x="120" y="108">+</text><text x="120" y="163">−</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> On paper, write the complex power and impedance relationships you use. Enter each answer to three significant figures.</p>
+<form id="answers"><ol type="a">
+<li><label for="pf">Load power factor (decimal)</label><input id="pf" type="number" step="any" required data-answer="0.8"></li>
+<li><label for="q">Reactive power absorbed by the load (var)</label><input id="q" type="number" step="any" required data-answer="720"></li>
+<li><label for="r">Real part of the load impedance (Ω)</label><input id="r" type="number" step="any" required data-answer="9.6"></li>
+<li><label for="x">Imaginary part of the load impedance (Ω)</label><input id="x" type="number" step="any" required data-answer="7.2"></li>
+<li><label for="phase">Current phase relative to the source voltage (degrees, −180° to +180°)</label><input id="phase" type="number" step="any" required data-answer="-36.86989764584401"></li>
+</ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary><ol type="a">
+<li>先算视在功率的大小 |S| = V<sub>RMS</sub>I<sub>RMS</sub> = 120 × 10.0 = 1200 VA。功率因数是 P/|S| = 960/1200 = 0.800，电流滞后。</li>
+<li>由 |S|² = P² + Q²，得到 |Q| = √(1200² − 960²) = 720 var。电流滞后，负载为感性，所以 Q = +720 var。</li>
+<li>对负载使用被动符号约定，S = V I* = Z|I|²。取实部，R = P/|I|² = 960/100 = 9.60 Ω。</li>
+<li>取虚部，X = Q/|I|² = 720/100 = +7.20 Ω。因此 Z = 9.60 + j7.20 Ω。</li>
+<li>阻抗相角 arctan(7.20/9.60) ≈ +36.87°。由 I = V/Z，电压以 0° 为参考，电流相位是 −36.9°。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw6.html#question-1">ENGR 202 HW 6 的交流功率与功率因数考点</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcde'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
