@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Maximum Power with Two Load Constraints</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-15">November 15, 2026</time></p>
+<h1>Maximum Power with Two Load Constraints</h1>
+<article class="worksheet">
+<p>An ideal sinusoidal source has a voltage phasor of <strong>24∠0° V peak</strong>. At its operating frequency, the source drives a passive adjustable load <i>Z</i><sub>L</sub> through the fixed series impedance shown. The circuit is in sinusoidal steady state.</p>
+<figure><svg viewBox="0 0 520 228" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">AC source, series impedance and adjustable load</title>
+<desc id="circuit-desc">The top terminal of the sinusoidal voltage source connects through an 8 plus j6 ohm series impedance to the top of the adjustable load. The bottom terminals of the load and source share the return wire.</desc>
+<g class="wire"><path d="M89 105V60H174m142 0h99v43m0 60v38H89v-46"/><rect x="174" y="40" width="142" height="40" rx="3"/><rect x="368" y="103" width="94" height="60" rx="3"/><circle cx="89" cy="130" r="25"/><path d="M74 130q7.5-14 15 0t15 0"/></g>
+<g text-anchor="middle"><text x="245" y="67">8 + j6 Ω</text><text x="415" y="140">Z<tspan baseline-shift="sub" font-size="14">L</tspan></text><text x="89" y="28">24 V peak</text><text x="37" y="137">Vₛ</text><text x="124" y="112">+</text><text x="124" y="164">−</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Write the load's average power in terms of its resistance and reactance. Optimize it under each load constraint and justify the optimum. Enter numerical answers in the units shown.</p>
+<form id="answers"><ol type="a">
+<li><label for="rl">For an adjustable complex load, find the optimal resistance (Ω).</label><input id="rl" type="number" step="any" required data-answer="8"></li>
+<li><label for="xl">For that same load, find the optimal signed reactance (Ω).</label><input id="xl" type="number" step="any" required data-answer="-6"></li>
+<li><label for="pmax">Find the maximum average power absorbed by the complex load (W).</label><input id="pmax" type="number" step="any" required data-answer="9"></li>
+<li><label for="r-only">If the load must be purely resistive, find the new optimal resistance (Ω).</label><input id="r-only" type="number" step="any" required data-answer="10"></li>
+<li><label for="p-only">Find the maximum average power absorbed by the purely resistive load (W).</label><input id="p-only" type="number" step="any" required data-answer="8"></li>
+</ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>先把源电压换成 RMS：24/√2 V，所以 |V<sub>s,RMS</sub>|² = 288 V²。令负载为 R<sub>L</sub> + jX<sub>L</sub>，串联总阻抗为 (8 + R<sub>L</sub>) + j(6 + X<sub>L</sub>)。于是负载平均功率 P<sub>L</sub> = |I<sub>RMS</sub>|²R<sub>L</sub> = 288R<sub>L</sub>/[(8 + R<sub>L</sub>)² + (6 + X<sub>L</sub>)²]。</p>
+<ol type="a">
+<li>负载的电抗可调时，先令 6 + X<sub>L</sub> = 0，让分母最小。此时对 R<sub>L</sub> 求导，导数为 288(8 − R<sub>L</sub>)/(8 + R<sub>L</sub>)³，在 R<sub>L</sub> = 8 Ω 处由正转负。</li>
+<li>刚才抵消串联电抗所需的负载电抗为 −6 Ω。最佳负载是 8 − j6 Ω，即源串联阻抗的复共轭。</li>
+<li>代入总阻抗 16 Ω，P<sub>max</sub> = 288 × 8/16² = 9 W。</li>
+<li>纯电阻负载固定 X<sub>L</sub> = 0。将分母展开为 R<sub>L</sub>² + 16R<sub>L</sub> + 100，求导后分子为 288(100 − R<sub>L</sub>²)，分母为原分母的平方。导数在 R<sub>L</sub> = 10 Ω 处由正转负。</li>
+<li>纯电阻的最大平均功率为 288 × 10/(18² + 6²) = 8 W。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw6.html#question-2">ENGR 202 HW 6 的交流最大平均功率传输考点</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcde'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
