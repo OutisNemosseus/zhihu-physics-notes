@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Reconnecting a Three-Phase Load</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-16">November 16, 2026</time></p>
+<h1>Reconnecting a Three-Phase Load</h1>
+<article class="worksheet">
+<p>A balanced, positive-sequence (abc) three-phase source supplies the delta load shown. Its line-to-line voltage is <strong>Vₐᵦ = 208∠0° V RMS</strong>. Each branch has impedance <strong>Z = 12 + j9 Ω</strong>. Take Iₐᵦ from a to b and Iₐ from the source into the load. Assume ideal lines.</p>
+<figure><svg viewBox="0 0 540 280" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Balanced delta-connected three-phase load</title><desc id="circuit-desc">Three identical impedances join phases a to b, b to c, and c to a. The three supply lines connect to the triangle vertices. The phase a line current arrow points into the load.</desc>
+<g class="wire"><path d="M270 38 130 226H410Z M270 38H436 M130 226H40 M410 226H500 M384 27h-63m9-6-9 6 9 6"/></g>
+<g fill="#f6faf8" stroke="currentColor" stroke-width="2.6"><rect x="172" y="118" width="56" height="33" rx="3" transform="rotate(-53.3 200 134.5)"/><rect x="312" y="118" width="56" height="33" rx="3" transform="rotate(53.3 340 134.5)"/><rect x="242" y="209.5" width="56" height="33" rx="3"/></g>
+<g class="node"><circle cx="270" cy="38" r="4"/><circle cx="130" cy="226" r="4"/><circle cx="410" cy="226" r="4"/></g>
+<g text-anchor="middle"><text x="447" y="44">a</text><text x="27" y="232">b</text><text x="515" y="232">c</text><text x="353" y="20">Iₐ</text><text x="200" y="141">Z</text><text x="340" y="141">Z</text><text x="270" y="233">Z</text><text x="270" y="269">Each Z = 12 + j9 Ω</text></g>
+</svg></figure>
+<p>After analyzing the delta connection, reconnect the same three impedances in a balanced wye on the same source, with one impedance from each line to the common star point.</p>
+<p><strong>Show your work.</strong> On paper, derive Iₐ from the branch currents using KCL and explain how reconnecting the load changes each branch voltage. Round numerical answers to three significant figures. Use principal phase angles.</p>
+<form id="answers"><ol type="a"><li><label for="branch">Delta branch current magnitude |Iₐᵦ| (A)</label><input id="branch" type="number" step="any" required data-answer="13.866666666666667"></li>
+<li><label for="line">Delta line current magnitude |Iₐ| (A)</label><input id="line" type="number" step="any" required data-answer="24.01777119828843"></li>
+<li><label for="phase">Delta line current angle ∠Iₐ relative to Vₐᵦ (degrees)</label><input id="phase" type="number" step="any" required data-answer="-66.86989764584402"></li>
+<li><label for="power">Total average power in delta (kW)</label><input id="power" type="number" step="any" required data-answer="6.9222399999999995"></li>
+<li><label for="wye">Line current magnitude after reconnecting in wye (A)</label><input id="wye" type="number" step="any" required data-answer="8.005923732762811"></li>
+<li><label for="ratio">Power ratio P<sub>wye</sub>/P<sub>delta</sub> (decimal)</label><input id="ratio" type="number" step="any" required data-answer="0.3333333333333333"></li></ol>
+<button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary><ol type="a">
+<li>Δ 接法中，ab 支路两端就是线电压。阻抗 Z = 15∠36.87° Ω，所以 Iₐᵦ = 208∠0°/Z = 13.87∠−36.87° A，幅值约为 13.9 A。</li>
+<li>正相序下 V꜀ₐ = 208∠120° V，故 I꜀ₐ = 13.87∠83.13° A。a 节点的 KCL 给出 Iₐ = Iₐᵦ − I꜀ₐ。两相量幅值相同、夹角 120°，相减后幅值为 √3 × 13.87 ≈ 24.0 A。</li>
+<li>把公共相量 Iₐᵦ 提出来，Iₐ = Iₐᵦ(1 − 1∠120°) = Iₐᵦ√3∠−30°。因此相角为 −36.87° − 30° ≈ −66.9°。</li>
+<li>每条支路的平均功率为 |Iₐᵦ|² × 12 W。乘以三条支路，P<sub>Δ</sub> = 3(208/15)² × 12 ≈ 6.92 kW。</li>
+<li>改接 Y 后，每个阻抗跨在一条线和星点之间，电压幅值变为 208/√3 V。Y 接线电流等于支路电流，得 208/(√3 × 15) ≈ 8.01 A。</li>
+<li>每个阻抗上的电压幅值变为原来的 1/√3，电流幅值也变为原来的 1/√3。同一电阻的平均功率随电流平方变化，所以总功率比是 1/3 ≈ 0.333。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw9.html#question-5">ENGR 202 HW 9 三相负载接法对比</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
