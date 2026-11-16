@@ -28,6 +28,8 @@ title: 近期练习链接
 
 ## MTH 256 · 微分方程
 
+- [轮换 02 · 实特征根初值问题 · 8 道原创复习题（2026-11-16）](../differential-equations/rotation-02-real-roots/)
+
 - [Weeks 5–6 作业同型练习 · 63 道选择题](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/differential-equations/homework-weeks-5-6/)
 
 [全部练习](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/)
