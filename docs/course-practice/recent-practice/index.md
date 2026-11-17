@@ -8,6 +8,8 @@ title: 近期练习链接
 
 ## MTH 231 · 离散数学
 
+- [Exam 3 · 官方复习题与额外练习 · 28 大题 / 56 小问 · 分类侧栏与计时](../logic/exam3-review/)
+
 - [轮换 01 · 二项式系数 · 8 道原创复习题（2026-11-14）](../logic/rotation-01-binomial/)
 
 - [Written Homework 6 · 17 组原题 · 分类侧栏](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/logic/whw6-questions/)
