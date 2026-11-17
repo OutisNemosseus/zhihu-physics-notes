@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Identify a Capacitor from Scope Measurements</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-17">November 17, 2026</time></p>
+<h1>Identify a Capacitor from Scope Measurements</h1>
+<article class="worksheet">
+<p>The circuit contains an ideal unknown capacitor and a 1.00 kΩ resistor. At angular frequency <strong>ω = 1000 rad/s</strong>, the input voltage is <strong>Vᵢₙ = √20∠0° V RMS</strong>. The scope shows that the output <strong>lags</strong> the input by <strong>arctan(1/2) = 26.565051…°</strong> and that <strong>|Vout|/|Vin| = 2/√5</strong>. The measuring instruments do not load the circuit.</p>
+<figure><svg viewBox="0 0 520 240" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">RC low-pass circuit with output measured across the capacitor</title>
+<desc id="circuit-desc">An ideal source feeds a 1 kilohm series resistor. The output node connects to a capacitor whose lower terminal connects to the source return. Vin and Vout are measured relative to that common return.</desc>
+<g class="wire"><path d="M85 103V63h91l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h126v58M85 153v45h293v-63m-20-14h40m-40 14h40M378 63h76M378 198v10m-14 0h28m-23 6h18m-14 6h10"/><circle cx="85" cy="128" r="25"/><path d="M70 128q7.5-14 15 0t15 0"/></g>
+<g class="node"><circle cx="378" cy="63" r="4"/><circle cx="378" cy="198" r="4"/><circle cx="454" cy="63" r="4"/></g>
+<g text-anchor="middle"><text x="217" y="36">R = 1.00 kΩ</text><text x="431" y="139">C = ?</text><text x="454" y="44">Vout</text><text x="30" y="134">Vin</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Write the complex voltage-divider equation and use it to find C. Give numerical answers to three significant figures. Use the input voltage as the phase reference at each frequency.</p>
+<form id="answers"><ol type="a"><li><label for="vout">Magnitude of the output voltage phasor (V RMS)</label><input id="vout" type="number" step="any" required data-answer="4"></li>
+<li><label for="xc">Signed imaginary part of the capacitor impedance (Ω)</label><input id="xc" type="number" step="any" required data-answer="-2000"></li>
+<li><label for="cap">Capacitance (nF)</label><input id="cap" type="number" step="any" required data-answer="500"></li>
+<li><label for="fc">Cutoff frequency (Hz)</label><input id="fc" type="number" step="any" required data-answer="318.3098861837907"></li>
+<li><label for="phase2">Output phase relative to the input at twice the measurement frequency (degrees)</label><input id="phase2" type="number" step="any" required data-answer="-45"></li></ol>
+<button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>由串联分压，H(jω) = Z<sub>C</sub>/(R + Z<sub>C</sub>) = 1/(1 + jωRC)。其相角是 −arctan(ωRC)。测得输出滞后 arctan(1/2)，所以 ωRC = 1/2。</p>
+<ol type="a">
+<li>|Vout| = |Vin| × |H| = √20 × 2/√5 = 4.00 V RMS。</li>
+<li>ωRC = 1/2，故 1/(ωC) = 2R = 2000 Ω。电容阻抗是 −j/(ωC) = −j2000 Ω，虚部为 −2.00 × 10³ Ω。</li>
+<li>C = (1/2)/(ωR) = 0.5/(1000 × 1000) F = 500 nF。</li>
+<li>ω<sub>c</sub> = 1/(RC) = 2000 rad/s，故 f<sub>c</sub> = 2000/(2π) ≈ 318 Hz。</li>
+<li>测量频率加倍后，ω′ = 2000 rad/s，恰好等于 ω<sub>c</sub>。此时 H = 1/(1 + j)，相角为 −45°。</li>
+</ol><p>幅值也可独立验证，|H| = 1/√[1 + (ωRC)²] = 1/√(1.25) = 2/√5。</p></details></article>
+<p lang="zh">原创题，参考 <a href="../hw7-hw8-filter-practice/hw7.html#problem-1">HW 7 的 RC 低通滤波与截止频率</a>及 <a href="../hw5-9-midterm/hw5.html#question-4">HW 5 的仪表与游标读数练习</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
