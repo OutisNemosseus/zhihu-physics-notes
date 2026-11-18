@@ -26,6 +26,8 @@ title: 近期练习链接
 
 ## ENGR 103 · Python
 
+- [轮换 03 · 三角形面积数组 · 6 道原创同型练习（2026-11-18）](../engr103/rotation-03-triangle-arrays/)
+
 - [ICA / HW 6–7 · 13 道代码排序题](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr103/ica-hw-6-7-ordering/)
 
 ## MTH 256 · 微分方程
