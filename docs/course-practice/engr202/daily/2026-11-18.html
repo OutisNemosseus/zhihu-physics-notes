@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · When the Shunt Capacitor Is Too Large</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-18">November 18, 2026</time></p>
+<h1>When the Shunt Capacitor Is Too Large</h1>
+<article class="worksheet">
+<p>A <strong>120∠0° V RMS, 50 Hz</strong> ideal source supplies a load with impedance <strong>Z<sub>load</sub> = 9 + j9 Ω</strong>. An ideal capacitor is connected in parallel with the load. Its capacitance is <strong>C = 7/(7200π) F ≈ 309.47 μF</strong>. Use the exact value of C in your calculations. The current Iₛ flows from the source into the parallel combination.</p>
+<figure><svg viewBox="0 0 540 238" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Inductive load and shunt capacitor</title><desc id="circuit-desc">The voltage source, load impedance and capacitor connect across the same top and bottom nodes. The source current arrow points from the source into their parallel combination.</desc>
+<g class="wire"><path d="M78 106V63H432v56M78 156v47h354v-70M276 63v39m0 62v39"/><rect x="228" y="102" width="96" height="62" rx="3"/><circle cx="78" cy="131" r="25"/><path d="M63 131q7.5-14 15 0t15 0M412 119h40m-40 14h40M133 46h65m-11-7 11 7-11 7"/></g>
+<g class="node"><circle cx="276" cy="63" r="4"/><circle cx="276" cy="203" r="4"/></g>
+<g text-anchor="middle"><text x="166" y="32">Iₛ</text><text x="276" y="138">Z<tspan baseline-shift="sub" font-size="14">load</tspan></text><text x="276" y="188">9 + j9 Ω</text><text x="432" y="100">C</text><text x="432" y="169">309.47 μF</text><text x="30" y="137">Vₛ</text><text x="78" y="228">120 V RMS</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Find the load and capacitor currents separately, then use KCL to find Iₛ. Write the total complex power and state on paper whether the final power factor is leading or lagging. Enter answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="p">Total average power absorbed by the load and capacitor (W)</label><input id="p" type="number" step="any" required data-answer="800"></li>
+<li><label for="q">Total reactive power absorbed by the load and capacitor (var)</label><input id="q" type="number" step="any" required data-answer="-600"></li>
+<li><label for="imag">Imaginary part of the source current phasor Iₛ (A)</label><input id="imag" type="number" step="any" required data-answer="5"></li>
+<li><label for="mag">Magnitude of Iₛ (A)</label><input id="mag" type="number" step="any" required data-answer="8.333333333333334"></li>
+<li><label for="phase">Phase of Iₛ relative to Vₛ (degrees)</label><input id="phase" type="number" step="any" required data-answer="36.86989764584402"></li>
+<li><label for="pf">Overall power factor (decimal)</label><input id="pf" type="number" step="any" required data-answer="0.8"></li></ol>
+<button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>先求负载电流。I<sub>load</sub> = 120/(9 + j9) = 20/3 − j20/3 A。电容电流 I<sub>C</sub> = jωCV = j(100π)[7/(7200π)](120) = j35/3 A。根据 KCL，Iₛ = I<sub>load</sub> + I<sub>C</sub> = 20/3 + j5 A。</p>
+<ol type="a">
+<li>复功率使用 RMS 相量和电流的复共轭，S = VₛIₛ* = 120(20/3 − j5) = 800 − j600 VA。实部为 P = 800 W。理想电容的平均功率是零。</li>
+<li>总无功功率为复功率虚部，Q = −600 var。负载原本吸收 +800 var，电容贡献 −1400 var，合计为 −600 var。</li>
+<li>由刚才的 KCL，电源电流虚部为 +5.00 A。</li>
+<li>|Iₛ| = √[(20/3)² + 5²] = 25/3 ≈ 8.33 A。</li>
+<li>∠Iₛ = arctan[5/(20/3)] = arctan(3/4) ≈ +36.9°，电流超前电压。</li>
+<li>|S| = 120 × (25/3) = 1000 VA，所以 PF = P/|S| = 800/1000 = 0.800 leading。电容提供的容性无功超过原负载的感性无功，形成过补偿。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw6.html#question-5">ENGR 202 HW 6 的过补偿与功率因数练习</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
