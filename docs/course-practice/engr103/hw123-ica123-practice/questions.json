@@ -8,7 +8,7 @@
     "given": "A_triangle = BH/2; C = 2πr; A_circle = πr²; A_sphere = 4πs²; V_sphere = 4πs³/3. 1 in = 2.54 cm.",
     "input": "12\n5\n3\n2",
     "starter": "from math import pi\n\n# Read four measurements and calculate each result.\n",
-    "hint": "面积换算用 2.54**2，体积用 2.54**3；input() 后用 float()。",
+    "hint": "Use 2.54**2 for area and 2.54**3 for volume. Convert input() with float().",
     "check": "For B=12, H=5, r=3, s=2: triangle area = 30.000 in² = 193.548 cm²; circumference = 18.850 in; sphere volume = 33.510 in³."
   },
   {
@@ -20,7 +20,7 @@
     "given": "θ = asin((R−r)/L), BL = 2L cos(θ) + π(R+r) + 2θ(R−r). θ is in radians. 1 ft = 12 in; 1 in = 0.0254 m.",
     "input": "20\n8\n40",
     "starter": "from math import asin, cos, pi\n\n# Read R, r, L; validate; calculate and convert BL.\n",
-    "hint": "asin 返回弧度，直接传给 cos；不要再转成角度。",
+    "hint": "asin returns radians. Pass the result directly to cos.",
     "check": "For R=20, r=8, L=40: BL is about 171.592 in. Test invalid inputs too."
   },
   {
@@ -32,7 +32,7 @@
     "given": "Triangle area = BH/2. Sphere volume = 4πr³/3. 1 in = 2.54 cm and 1 ft = 12 in.",
     "input": "",
     "starter": "from math import pi\nB, H, r = 7, 3, 2\narea = B * H // 2\nvolume = (4 // 3) * pi * r**3\nprint('Triangle area [cm^2]:', area * 2.54)\nprint('Triangle area [ft^2]:', area / 12)\nprint('Sphere volume [cm^3]:', volume * 2.54)\n",
-    "hint": "先修正原始公式，再对换算因子平方或立方。",
+    "hint": "Correct the original formula first, then square or cube the conversion factor.",
     "check": "Triangle area = 10.5 in² = 67.7418 cm²; sphere volume ≈ 549.136 cm³."
   },
   {
@@ -44,7 +44,7 @@
     "given": "d = sqrt((x2−x1)²+(y2−y1)²); midpoint = ((x1+x2)/2, (y1+y2)/2). 1 ft = 30.48 cm. P = SG × 1000 × 9.81 × H; psi = Pa × 14.7/101325.",
     "input": "0\n0\n30.48\n40.64\n3\n0.9",
     "starter": "from math import hypot\n\n# Read coordinates, depth and SG.\n",
-    "hint": "中点可以为负；压力是表压，不要额外加大气压。",
+    "hint": "A midpoint coordinate can be negative. For gauge pressure, use only the fluid pressure contribution.",
     "check": "Distance ≈ 1.667 ft; midpoint ≈ (0.500, 0.667) ft; pressure = 26487 Pa."
   },
   {
@@ -56,7 +56,7 @@
     "given": "c² = a²+b²−2ab cos(gamma); alpha = acos((b²+c²−a²)/(2bc)); beta = acos((a²+c²−b²)/(2ac)). Require positive sides and 0 < gamma < 180.",
     "input": "6\n8\n90",
     "starter": "from math import sqrt, cos, acos, radians, degrees\n\n# Convert the input angle before evaluating cosine.\n",
-    "hint": "cos 接受弧度，acos 返回弧度；用 degrees 转回角度。",
+    "hint": "cos takes radians and acos returns radians. Convert the result with degrees.",
     "check": "For a=6, b=8, gamma=90: c=10; alpha≈36.870°, beta≈53.130°."
   },
   {
@@ -68,7 +68,7 @@
     "given": "r = L sin(theta/2), h = L cos(theta/2); V = 2πr³/3 + πhr²/3; exposed A = 2πr² + πrL.",
     "input": "6\n60",
     "starter": "from math import pi, sin, cos, radians\n\n# Derive r and h, then add the two solids.\n",
-    "hint": "全顶角先除以 2 再转弧度；m³→cm³ 乘 100**3。",
+    "hint": "Halve the full apex angle before converting to radians. Multiply by 100**3 to convert cubic meters to cubic centimeters.",
     "check": "For L=6 and theta=60°: r=3 m, h≈5.196 m, A=36π≈113.097 m²."
   },
   {
@@ -80,7 +80,7 @@
     "given": "T(t)=Ts+(T0−Ts)exp(−kt). k = −ln((T2−Ts)/(T1−Ts))/Δt; elapsed since initial temperature = ln((T0−Ts)/(T1−Ts))/k. Times are within one day of each other.",
     "input": "",
     "starter": "from math import log\n\nt1, t2 = '23:30', '00:30'\nT1, T2, Ts, T0 = 90.0, 80.0, 70.0, 110.0\n# Convert times, then calculate k and the elapsed cooling time.\n",
-    "hint": "跨午夜用 (t2_minutes-t1_minutes) % 1440；ln 对应 math.log。",
+    "hint": "Use (t2_minutes-t1_minutes) % 1440 across midnight. Use math.log for the natural logarithm.",
     "check": "Δt=60 min; k≈0.01155245 min⁻¹; the initial temperature occurred 60 min before the first reading."
   },
   {
@@ -92,7 +92,7 @@
     "given": "Use np.random.default_rng(103) for reproducibility. The high bound of rng.integers is excluded.",
     "input": "1 4 9 16",
     "starter": "import numpy as np\n\nrng = np.random.default_rng(103)\n# Construct the five requested arrays.\n",
-    "hint": "arange 的 stop 不包含；linspace 的第三个参数是点数。",
+    "hint": "arange excludes the stop value. The third argument of linspace is the number of points.",
     "check": "C has 8 values and D has 7 values. The random integer array has shape (4,6), and the permutation contains each original value once."
   },
   {
@@ -104,7 +104,7 @@
     "given": "Numbered positions in the prompt are one-based; Python indices are zero-based.",
     "input": "",
     "starter": "import numpy as np\n\nA = np.array([9, 4, 18, 7, 31, 50])\nB = np.array([[2, 40], [5, 8], [11, 12], [16, 3], [22, 6], [30, 1]])\n# Build C and D from A and B.\n",
-    "hint": "A[-1] 是最后一个；np.column_stack 可以把一维 A 当一列拼接。",
+    "hint": "A[-1] selects the last element. np.column_stack treats a 1D array as a column.",
     "check": "C must have shape (3,3), with first row [4,7,50]. D must have shape (6,3), with last row [30,50,1]."
   },
   {
@@ -116,7 +116,7 @@
     "given": "Cylinder V = πr²h. For the ingredient system, use exactly 1 lb = 16 oz.",
     "input": "",
     "starter": "import numpy as np\n\nradii = np.array([1, 2, 3])\nheights = np.array([4, 6, 8, 10])\nM = np.array([[2, 1, 1], [1, 3, 1], [1, 1, 2]], dtype=float)\nsupplies_lb = np.array([5, 8.125, 6.25])\n# Part A: grid and volume. Part B: convert and solve.\n",
-    "hint": "np.meshgrid(radii, heights) 的结果为 4×3；不要把 lb 直接当 oz。",
+    "hint": "np.meshgrid(radii, heights) produces a 4-by-3 grid. Convert pounds to ounces before solving.",
     "check": "The volume table has shape (4,3); its last element is 90π m³. Bag counts are [10,30,30]."
   },
   {
@@ -128,7 +128,7 @@
     "given": "g=9.81 m/s²; range=v0² sin(2θ)/g; maximum height=v0² sin²(θ)/(2g); pressure=1000 SG g H.",
     "input": "",
     "starter": "import numpy as np\n\nv0, g = 100.0, 9.81\nangles_deg = np.array([20, 35, 45, 55, 70])\nsg = np.array([0.8, 1.0, 1.2])\ndepths = np.array([2, 4, 6, 8])\n# Compute both tables.\n",
-    "hint": "np.deg2rad 转换整个数组；range 的 sin(2θ) 与 height 的 sin(θ)**2 不同。",
+    "hint": "np.deg2rad converts an entire array. Range uses sin(2θ), while peak height uses sin(θ)**2.",
     "check": "Greatest range occurs at 45° and is about 1019.368 m. Pressure table shape is (4,3); its last entry is 94176 Pa."
   },
   {
@@ -140,7 +140,7 @@
     "given": "Use slices and NumPy stacking functions; do not retype values from the arrays.",
     "input": "",
     "starter": "import numpy as np\n\nA = np.array([[2, 5, 9], [4, 7, 12], [6, 8, 15]])\nB = np.array([3, 11, 20])\nC = np.array([10, 30, 50, 70])\n# Create D, E, F, G and H.\n",
-    "hint": "A[:,2] 选第三列；(6,) 和 (6,1) 是不同形状。",
+    "hint": "A[:,2] selects the third column. Distinguish shape (6,) from (6,1).",
     "check": "D=[9,12,15]; H=[9,30,11]; shapes E=(3,2), F=(6,1), G=(4,3)."
   },
   {
@@ -152,7 +152,7 @@
     "given": "Rows of A hold equation coefficients; columns correspond to a,b,c,d,e,f in that order.",
     "input": "",
     "starter": "import numpy as np\n\nA = np.array([[4,1,0,0,0,0], [1,4,1,0,0,0],\n              [0,1,4,1,0,0], [0,0,1,4,1,0],\n              [0,0,0,1,4,1], [0,0,0,0,1,4]], dtype=float)\nrhs = np.array([6,12,18,24,30,29], dtype=float)\n# Solve, label the six unknowns, and check the residual.\n",
-    "hint": "np.linalg.solve(A,rhs) 解 A x = rhs；A @ x 才是矩阵乘法。",
+    "hint": "np.linalg.solve(A,rhs) solves A x = rhs. Use A @ x for matrix multiplication.",
     "check": "Solution is [1,2,3,4,5,6] m. np.allclose should report True."
   },
   {
@@ -167,7 +167,7 @@
       "practice_voltage.csv": "time_s,voltage_V\n0,1.2\n1,1.7\n2,2.1\n3,2.8\n4,3.2\n5,3.7\n"
     },
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Read practice_voltage.csv, fit, and plot.\n",
-    "hint": "np.loadtxt(...,delimiter=',',skiprows=1)；m,b=np.polyfit(x,y,1)。",
+    "hint": "np.loadtxt(...,delimiter=',',skiprows=1), then fit with m,b=np.polyfit(x,y,1).",
     "check": "Slope ≈ 0.505714 V/s; intercept ≈ 1.185714 V. Check marker style, grid, labels and legend visually."
   },
   {
@@ -179,7 +179,7 @@
     "given": "This exercise evaluates the handout's prescribed decaying-cosine family. It does not claim these are the exact critical/overdamped solutions of the spring ODE.",
     "input": "",
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\nA0, m, k = 2.0, 8.0, 2.0\n# Construct time, calculate all three curves, and plot.\n",
-    "hint": "np.exp(-alpha*t) 和 np.cos(omega*t) 逐元素相乘。",
+    "hint": "Multiply np.exp(-alpha*t) and np.cos(omega*t) element by element.",
     "check": "All three start at y=2. The largest b has the fastest exponential envelope decay. The time vector has 801 points."
   },
   {
@@ -194,7 +194,7 @@
       "practice_transistors.csv": "count,year\n1000,2000\n2000,2002\n4000,2004\n8000,2006\n16000,2008\n"
     },
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Part A: mind the CSV column order.\n# Part B: use a separate figure for sine and cosine.\n",
-    "hint": "拟合 np.log(count)；年份先减 2000。对数坐标不会自动完成指数拟合。",
+    "hint": "Subtract 2000 from the years and fit np.log(count). A log axis alone does not perform the fit.",
     "check": "Doubling time is 2 years. The alpha vector has 33 points. At alpha=π/2, sin≈1 and cos≈0."
   },
   {
@@ -206,7 +206,7 @@
     "given": "Use NumPy elementwise powers. Include both endpoints in x.",
     "input": "",
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Create x and both y arrays, then style the figure.\n",
-    "hint": "平方写 x**2；用 r'$y_1=...$' 创建公式图例。",
+    "hint": "Use x**2 to square x. Use a raw string such as r'$y_1=...$' for the legend.",
     "check": "x contains 41 points. Both curves reach their peak at x=10; heights are 40 ft and 50 ft."
   },
   {
@@ -221,7 +221,7 @@
       "practice_bacteria.csv": "time_s,count\n0,80\n2,160\n4,320\n6,640\n8,1280\n"
     },
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Read practice_bacteria.csv and fit log(count).\n",
-    "hint": "np.polyfit(t,np.log(N),1) 返回 k 和 ln(N0)，不是 N0。",
+    "hint": "np.polyfit(t,np.log(N),1) returns k and ln(N0). Exponentiate the intercept to get N0.",
     "check": "N0=80, k≈0.346574 s⁻¹, doubling time=2 s. On a semilog-y plot the fitted curve appears straight."
   },
   {
@@ -236,7 +236,7 @@
       "practice_load.csv": "resistance_ohm,voltage_V\n50,4\n100,6\n200,8\n400,9.6\n"
     },
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Load CSV, compute I and P, create three axes.\n",
-    "hint": "np.argmax(P) 给最大值的位置，再用 R[index] 找电阻。",
+    "hint": "np.argmax(P) returns the index of maximum power. Use R[index] for its resistance.",
     "check": "I=[0.08,0.06,0.04,0.024] A; P=[0.32,0.36,0.32,0.2304] W. Maximum sampled power occurs at 100 Ω."
   },
   {
@@ -248,7 +248,7 @@
     "given": "Use np.linspace for an exact sample count. The formulas are a new practice variant of HW 3_4.",
     "input": "",
     "starter": "import numpy as np\nimport matplotlib.pyplot as plt\n\n# Construct t, v1, v2; plot and verify their sum.\n",
-    "hint": "每个分母都加括号；np.allclose(v1+v2,65) 检查整条曲线。",
+    "hint": "Put parentheses around each denominator. Use np.allclose(v1+v2,65) to check the full curve.",
     "check": "len(t)=2000; t[0]=0 and t[-1]=1. v1+v2 remains 65 to floating-point precision."
   }
 ]

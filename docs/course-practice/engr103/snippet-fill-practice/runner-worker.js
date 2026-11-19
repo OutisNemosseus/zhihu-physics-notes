@@ -83,7 +83,7 @@ self.onmessage = async (event) => {
   const { code, stdin, files = [] } = event.data;
   try {
     if (!runtime) {
-      self.postMessage({ type: 'status', text: '首次运行正在加载 Python，稍等片刻…' });
+      self.postMessage({ type: 'status', text: 'Loading Python for the first run…' });
       importScripts('https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js');
       runtime = await loadPyodide({ indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.2/full/' });
     }
@@ -111,7 +111,7 @@ self.onmessage = async (event) => {
           for (const image of images) self.postMessage({ type: 'image', ...image });
         }
       } catch (error) {
-        self.postMessage({ type: 'stderr', text: `图像导出失败：${String(error)}` });
+        self.postMessage({ type: 'stderr', text: `Could not export the figure: ${String(error)}` });
       } finally { globals.destroy(); }
     }
     self.postMessage({ type: 'done' });
