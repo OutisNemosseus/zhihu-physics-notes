@@ -18,7 +18,7 @@ Each ZIP contains separate scripts for every numbered problem, required input da
 | [Homework 4](hw-04.md) | Oct 28 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_HW4_Su_Tong_Reference.zip) |
 | [ICA 5](ica-05.md) | Nov 4 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_ICA5_Su_Tong_Reference.zip) |
 | [Homework 5](hw-05.md) | Nov 4 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_HW5_Su_Tong_Reference.zip) |
-| [ICA 6](ica-06.md) | Nov 9 | 4 | [ZIP](../assets/downloads/engr103/ENGR103_ICA6_Su_Tong_Reference.zip) |
+| [ICA 6](ica-06.md) | Nov 9 | 4 | [ZIP](../assets/downloads/engr103/ENGR103_ICA6_Su_Tong_Reference.zip) · [Code and lecture slides](../course-practice/engr103/ica6-slide-guide/index.html) |
 | [Homework 6](hw-06.md) | Nov 16 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_HW6_Su_Tong_Reference.zip) |
 | [ICA 7](ica-07.md) | Nov 16 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_ICA7_Su_Tong_Reference.zip) |
 | [Homework 7](hw-07.md) | Nov 18 | 3 | [ZIP](../assets/downloads/engr103/ENGR103_HW7_Su_Tong_Reference.zip) |

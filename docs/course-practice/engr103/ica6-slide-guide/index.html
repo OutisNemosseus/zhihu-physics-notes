@@ -1,0 +1,149 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>ICA 6 Code and Lecture Slides</title><style>*{box-sizing:border-box}body{font:16px/1.55 system-ui,sans-serif;color:#172c3c;background:#fafaf8;margin:0}main{max-width:1700px;margin:auto;padding:26px clamp(16px,3vw,52px) 64px}h1{font-size:clamp(28px,3.2vw,48px);line-height:1.15;margin:.35em 0}nav{display:flex;flex-wrap:wrap;gap:18px}a{color:#165165}h2{border-bottom:2px solid #214b53;padding-bottom:7px;margin-top:2em}h3{font-size:22px;margin-bottom:4px}.note{margin:0 0 16px}.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}.pair>div{min-width:0}.sources{position:sticky;top:8px}h4{margin:0 0 8px;font-weight:600}.label,figcaption{font-size:14px;margin:0 0 4px}pre{background:#edf2f3;overflow:auto;padding:12px;margin:0 0 14px;font:14px/1.5 ui-monospace,monospace}img{width:100%;height:auto;display:block;border:1px solid #ccd4d5}figure{margin:0 0 16px}article{padding:4px 0 20px;border-bottom:1px solid #ccd4d5}@media(max-width:760px){.pair{grid-template-columns:1fr}.sources{position:static}}</style><main><a href="../../../engr103/">ENGR 103 reference programs</a><h1>ICA 6 Code and Lecture Slides</h1><p>Compare the numbered lines from the four ICA 6 scripts with the original course slides. Select a screenshot to enlarge it.</p><nav><a href="#topic0">Projectile motion</a> <a href="#topic1">Unit conversion</a> <a href="#topic2">Test calls</a></nav><h2 id="topic0">Projectile motion</h2><article><h3>Launch conditions and plot legend</h3><p class="note">The handout specifies the launch conditions and shows the ball and trajectory in the upper-right legend.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-1, lines 1–9</p><pre><code> 1  &#x27;&#x27;&#x27;
+ 2  Name: Tong Su
+ 3  ENGR 103 ICA 6-1
+ 4  
+ 5  Animate the motion of a projectile under Earth&#x27;s gravity, neglecting air drag.
+ 6  Use an initial speed of 25 m/s, a launch angle of 45 degrees, and g = 9.81 m/s^2.
+ 7  Calculate the flight time and the horizontal and vertical positions over time.
+ 8  Animate the path as shown in the handout and save it as a GIF.
+ 9  &#x27;&#x27;&#x27;</code></pre><p class="label">ICA 6-1, lines 16–18</p><pre><code>16  g = 9.81
+17  theta0 = 45
+18  v0 = 25</code></pre><p class="label">ICA 6-1, line 41</p><pre><code>41  ax.legend(loc=&quot;upper right&quot;)  # ICA 6 handout, p. 1: sample plot legend.</code></pre></div><div class="sources"><h4>Assignment handout</h4><figure><figcaption>Handout · page 1 &nbsp; <a href="https://drive.google.com/file/d/1gMHzZ1nXAEgqWlkXIBJlzgbiQUgPqmSb/view">Source PDF</a></figcaption><a href="ICA6_p01.png"><img loading="lazy" src="ICA6_p01.png" alt="Handout page 1"></a></figure></div></div></article><article><h3>Generate the trajectory</h3><p class="note">Compare the data-generation example with the time array and the horizontal and vertical position equations.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-1, lines 11–13</p><pre><code>11  # L05, p. 30: imports, fixed time step, and position arrays.
+12  import numpy as np
+13  import matplotlib.pyplot as plt</code></pre><p class="label">ICA 6-1, lines 16–25</p><pre><code>16  g = 9.81
+17  theta0 = 45
+18  v0 = 25
+19  dt = 0.01
+20  
+21  # L05, p. 30: sin(theta0) multiplies 2*v0/g.
+22  tf = 2 * v0 / g * np.sin(np.radians(theta0))
+23  t = np.arange(0, tf, dt)
+24  x = v0 * np.cos(np.radians(theta0)) * t
+25  z = v0 * np.sin(np.radians(theta0)) * t - 0.5 * g * t**2</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 30 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p30.png"><img loading="lazy" src="L05_p30.png" alt="L05 page 30"></a></figure></div></div></article><article><h3>Set up the axes, point, path, and clock</h3><p class="note">The figure, axes, marker, line, and text objects are created before the first frame.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-1, lines 27–40</p><pre><code>27  # L05, p. 31: fixed axes, marker, trajectory, and time label.
+28  fig = plt.figure(1)
+29  plt.clf()
+30  ax = fig.add_subplot(autoscale_on=False, xlim=(0, 1.1 * max(x)),
+31                       ylim=(0, 1.1 * max(z)))
+32  ax.set_xlabel(&quot;Horizontal Distance (x) [m]&quot;, c=&quot;b&quot;, weight=&quot;bold&quot;)
+33  ax.set_ylabel(&quot;Vertical Distance (z) [m]&quot;, c=&quot;b&quot;, weight=&quot;bold&quot;)
+34  ax.set_title(f&quot;Projectile Trajectory\nθ₀ = {theta0}°, v₀ = {v0} m/s&quot;,
+35               c=&quot;b&quot;, weight=&quot;bold&quot;)
+36  ax.grid()
+37  loc, = ax.plot(x[0], z[0], &quot;bo&quot;, label=&quot;Ball&quot;)
+38  traj, = ax.plot(x[0], z[0], &quot;r--&quot;, lw=2, label=&quot;Path of the Ball&quot;)
+39  time_txt = ax.text(0.05 * max(x), max(z), &quot;&quot;, fontsize=12,
+40                     weight=&quot;bold&quot;, backgroundcolor=&quot;w&quot;)</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 31 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p31.png"><img loading="lazy" src="L05_p31.png" alt="L05 page 31"></a></figure></div></div></article><article><h3>Update the current frame</h3><p class="note">The callback updates the path, marker, and time label. The slice through frame + 1 includes the current point.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-1, lines 44–49</p><pre><code>44  # L05, p. 32: update all three plot objects for each frame.
+45  def animate(frame):
+46      traj.set_data(x[:frame + 1], z[:frame + 1])
+47      loc.set_data([x[frame]], [z[frame]])
+48      time_txt.set_text(f&quot;t = {t[frame]:.2f} sec&quot;)
+49      return traj, loc, time_txt</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 32 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p32.png"><img loading="lazy" src="L05_p32.png" alt="L05 page 32"></a></figure></div></div></article><article><h3>Create and save the animation</h3><p class="note">Slide 33 explains the animation arguments. Slide 34 shows the writer import and the GIF save call.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-1, line 14</p><pre><code>14  from matplotlib.animation import FuncAnimation, PillowWriter</code></pre><p class="label">ICA 6-1, lines 52–56</p><pre><code>52  # L05, pp. 32–34: use the slide timing and save the required GIF.
+53  ani = FuncAnimation(fig=fig, func=animate, frames=len(t), interval=dt * 1000,
+54                      repeat=False, blit=True)
+55  ani.save(&quot;ICA6_1.gif&quot;, writer=PillowWriter(fps=24))
+56  plt.show()</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 33 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p33.png"><img loading="lazy" src="L05_p33.png" alt="L05 page 33"></a></figure><figure><figcaption>L05 · page 34 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p34.png"><img loading="lazy" src="L05_p34.png" alt="L05 page 34"></a></figure></div></div></article><h2 id="topic1">Unit conversion</h2><article><h3>Requirements for all three converters</h3><p class="note">Items 6_2, 6_3, and 6_4 specify the function names, unit lists, and required control structures. Item 6_4 also requires reusing the first two converters.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-2, lines 1–9</p><pre><code> 1  &#x27;&#x27;&#x27;
+ 2  Name: Tong Su
+ 3  ENGR 103 ICA 6-2
+ 4  
+ 5  Define us2metlen(x, in_unit=&quot;in&quot;, out_unit=&quot;cm&quot;) to convert US length
+ 6  units to metric units using if, elif, and else statements.
+ 7  US input units: in, ft, yd, mi, nmi.
+ 8  Metric output units: nm, um, mm, cm, m, km.
+ 9  &#x27;&#x27;&#x27;</code></pre><p class="label">ICA 6-3, lines 1–9</p><pre><code> 1  &#x27;&#x27;&#x27;
+ 2  Name: Tong Su
+ 3  ENGR 103 ICA 6-3
+ 4  
+ 5  Define met2uslen(x, in_unit=&quot;cm&quot;, out_unit=&quot;in&quot;) to convert metric
+ 6  length units to US units using match statements.
+ 7  Metric input units: nm, um, mm, cm, m, km.
+ 8  US output units: in, ft, yd, mi, nmi.
+ 9  &#x27;&#x27;&#x27;</code></pre><p class="label">ICA 6-4, lines 1–8</p><pre><code> 1  &#x27;&#x27;&#x27;
+ 2  Name: Tong Su
+ 3  ENGR 103 ICA 6-4
+ 4  
+ 5  Define convlen(x, in_unit=&quot;in&quot;, out_unit=&quot;cm&quot;) using match statements.
+ 6  Reuse the functions from ICA 6-2 and 6-3 to convert between any pair of
+ 7  supported units: in, ft, yd, mi, nmi, nm, um, mm, cm, m, km.
+ 8  &#x27;&#x27;&#x27;</code></pre><p class="label">ICA 6-4, lines 16–17</p><pre><code>16      us = (&quot;in&quot;, &quot;ft&quot;, &quot;yd&quot;, &quot;mi&quot;, &quot;nmi&quot;)
+17      metric = (&quot;nm&quot;, &quot;um&quot;, &quot;mm&quot;, &quot;cm&quot;, &quot;m&quot;, &quot;km&quot;)</code></pre></div><div class="sources"><h4>Assignment handout</h4><figure><figcaption>Handout · page 2 &nbsp; <a href="https://drive.google.com/file/d/1gMHzZ1nXAEgqWlkXIBJlzgbiQUgPqmSb/view">Source PDF</a></figcaption><a href="ICA6_p02.png"><img loading="lazy" src="ICA6_p02.png" alt="Handout page 2"></a></figure></div></div></article><article><h3>Function definitions and default units</h3><p class="note">Slide 5 identifies the parts of a function. Slide 8 explains positional and default arguments. Compare the starting unit and target unit in each signature.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-2, lines 12–13</p><pre><code>12  def us2metlen(x, in_unit=&quot;in&quot;, out_unit=&quot;cm&quot;):
+13      &quot;&quot;&quot;Convert x from in/ft/yd/mi/nmi to nm/um/mm/cm/m/km.&quot;&quot;&quot;</code></pre><p class="label">ICA 6-3, lines 12–13</p><pre><code>12  def met2uslen(x, in_unit=&quot;cm&quot;, out_unit=&quot;in&quot;):
+13      &quot;&quot;&quot;Convert x from nm/um/mm/cm/m/km to in/ft/yd/mi/nmi.&quot;&quot;&quot;</code></pre><p class="label">ICA 6-4, line 15</p><pre><code>15  def convlen(x, in_unit=&quot;in&quot;, out_unit=&quot;cm&quot;):</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 5 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p05.png"><img loading="lazy" src="L05_p05.png" alt="L05 page 5"></a></figure><figure><figcaption>L05 · page 8 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p08.png"><img loading="lazy" src="L05_p08.png" alt="L05 page 8"></a></figure></div></div></article><article><h3>Select a conversion with if and elif</h3><p class="note">The two chains in ICA 6-2 select the input and output units. L06 shows the branching structure. L05 shows how a function returns its result. The factors implement the unit conversions.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-2, lines 14–25</p><pre><code>14      # L06, pp. 16–17: select the input unit with if/elif/else.
+15      if in_unit == &quot;in&quot;:
+16          meters = x * 0.0254
+17      elif in_unit == &quot;ft&quot;:
+18          meters = x * 0.3048
+19      elif in_unit == &quot;yd&quot;:
+20          meters = x * 0.9144
+21      elif in_unit == &quot;mi&quot;:
+22          meters = x * 1609.344
+23      elif in_unit == &quot;nmi&quot;:
+24          meters = x * 1852.0
+25      else:</code></pre><p class="label">ICA 6-2, lines 28–41</p><pre><code>28      # L06, pp. 16–17: select the output unit with the same structure.
+29      if out_unit == &quot;nm&quot;:
+30          return meters / 1e-9
+31      elif out_unit == &quot;um&quot;:
+32          return meters / 1e-6
+33      elif out_unit == &quot;mm&quot;:
+34          return meters / 1e-3
+35      elif out_unit == &quot;cm&quot;:
+36          return meters / 1e-2
+37      elif out_unit == &quot;m&quot;:
+38          return meters
+39      elif out_unit == &quot;km&quot;:
+40          return meters / 1e3
+41      else:</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L06 · page 16 &nbsp; <a href="https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view">Source PDF</a></figcaption><a href="L06_p16.png"><img loading="lazy" src="L06_p16.png" alt="L06 page 16"></a></figure><figure><figcaption>L06 · page 17 &nbsp; <a href="https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view">Source PDF</a></figcaption><a href="L06_p17.png"><img loading="lazy" src="L06_p17.png" alt="L06 page 17"></a></figure><figure><figcaption>L05 · page 12 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p12.png"><img loading="lazy" src="L05_p12.png" alt="L05 page 12"></a></figure></div></div></article><article><h3>Select a conversion with match and case</h3><p class="note">Compare the input and output match statements with the status-code example. Each string literal selects one unit.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-3, lines 14–28</p><pre><code>14      # L06, pp. 22–23: literal cases and a fallback for invalid input.
+15      match in_unit:
+16          case &quot;nm&quot;:
+17              meters = x * 1e-9
+18          case &quot;um&quot;:
+19              meters = x * 1e-6
+20          case &quot;mm&quot;:
+21              meters = x * 1e-3
+22          case &quot;cm&quot;:
+23              meters = x * 1e-2
+24          case &quot;m&quot;:
+25              meters = x
+26          case &quot;km&quot;:
+27              meters = x * 1e3
+28          case _:</code></pre><p class="label">ICA 6-3, lines 30–42</p><pre><code>30      # L06, p. 22: return a value from each matching output case.
+31      match out_unit:
+32          case &quot;in&quot;:
+33              return meters / 0.0254
+34          case &quot;ft&quot;:
+35              return meters / 0.3048
+36          case &quot;yd&quot;:
+37              return meters / 0.9144
+38          case &quot;mi&quot;:
+39              return meters / 1609.344
+40          case &quot;nmi&quot;:
+41              return meters / 1852.0
+42          case _:</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L06 · page 22 &nbsp; <a href="https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view">Source PDF</a></figcaption><a href="L06_p22.png"><img loading="lazy" src="L06_p22.png" alt="L06 page 22"></a></figure></div></div></article><article><h3>Import the two converter functions</h3><p class="note">Slide 19 explains where Python finds modules. Slide 20 shows how to import individual functions.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-4, lines 10–12</p><pre><code>10  # L05, pp. 19–20: import the two functions from their script files.
+11  from Su_Tong_ICA6_2 import us2metlen
+12  from Su_Tong_ICA6_3 import met2uslen</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 19 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p19.png"><img loading="lazy" src="L05_p19.png" alt="L05 page 19"></a></figure><figure><figcaption>L05 · page 20 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p20.png"><img loading="lazy" src="L05_p20.png" alt="L05 page 20"></a></figure></div></div></article><article><h3>Check whether a unit is supported</h3><p class="note">Both conditions use and. Each checks the unit against both groups before the conversion begins.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-4, lines 19–23</p><pre><code>19      # L06, pp. 17–18 and 23: check invalid units before matching.
+20      if in_unit not in us and in_unit not in metric:
+21          raise ValueError(f&quot;Unsupported input unit: {in_unit}&quot;)
+22      if out_unit not in us and out_unit not in metric:
+23          raise ValueError(f&quot;Unsupported output unit: {out_unit}&quot;)</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L06 · page 18 &nbsp; <a href="https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view">Source PDF</a></figcaption><a href="L06_p18.png"><img loading="lazy" src="L06_p18.png" alt="L06 page 18"></a></figure></div></div></article><article><h3>Fallback errors and tuple matching</h3><p class="note">The lower-left fallback raises ValueError. The tuple cases above it illustrate the two-value pattern used in ICA 6-4. The code uses Boolean pairs to choose a conversion path.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-2, lines 25–27</p><pre><code>25      else:
+26          # L06, p. 23: raise ValueError for an invalid input.
+27          raise ValueError(f&quot;Unsupported US unit: {in_unit}&quot;)</code></pre><p class="label">ICA 6-2, lines 41–42</p><pre><code>41      else:
+42          raise ValueError(f&quot;Unsupported metric unit: {out_unit}&quot;)</code></pre><p class="label">ICA 6-3, lines 28–29</p><pre><code>28          case _:
+29              raise ValueError(f&quot;Unsupported metric unit: {in_unit}&quot;)</code></pre><p class="label">ICA 6-3, lines 42–43</p><pre><code>42          case _:
+43              raise ValueError(f&quot;Unsupported US unit: {out_unit}&quot;)</code></pre><p class="label">ICA 6-4, lines 20–23</p><pre><code>20      if in_unit not in us and in_unit not in metric:
+21          raise ValueError(f&quot;Unsupported input unit: {in_unit}&quot;)
+22      if out_unit not in us and out_unit not in metric:
+23          raise ValueError(f&quot;Unsupported output unit: {out_unit}&quot;)</code></pre><p class="label">ICA 6-4, lines 25–37</p><pre><code>25      # L06, p. 23: match the two entries of a tuple.
+26      # ICA 6 handout, p. 2: reuse the converters from 6-2 and 6-3.
+27      match (in_unit in us, out_unit in us):
+28          case (True, False):
+29              return us2metlen(x, in_unit, out_unit)
+30          case (False, True):
+31              return met2uslen(x, in_unit, out_unit)
+32          case (True, True):
+33              meters = us2metlen(x, in_unit, &quot;m&quot;)
+34              return met2uslen(meters, &quot;m&quot;, out_unit)
+35          case (False, False):
+36              inches = met2uslen(x, in_unit, &quot;in&quot;)
+37              return us2metlen(inches, &quot;in&quot;, out_unit)</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L06 · page 23 &nbsp; <a href="https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view">Source PDF</a></figcaption><a href="L06_p23.png"><img loading="lazy" src="L06_p23.png" alt="L06 page 23"></a></figure></div></div></article><h2 id="topic2">Test calls</h2><article><h3>Run examples when a script is executed directly</h3><p class="note">The three scripts share the same entry-point condition. Their test calls use different values and units.</p><div class="pair"><div><h4>ICA 6 code</h4><p class="label">ICA 6-2, lines 45–46 · ICA 6-3, lines 46–47</p><pre><code>45  # L05, p. 21: run the example only when this file is run directly.
+46  if __name__ == &quot;__main__&quot;:</code></pre><p class="label">ICA 6-4, lines 40–41</p><pre><code>40  # L05, p. 21: run the examples only when this file is run directly.
+41  if __name__ == &quot;__main__&quot;:</code></pre><p class="label">ICA 6-2, line 47</p><pre><code>47      print(f&quot;12 in = {us2metlen(12):.2f} cm&quot;)</code></pre><p class="label">ICA 6-3, line 48</p><pre><code>48      print(f&quot;30.48 cm = {met2uslen(30.48):.2f} in&quot;)</code></pre><p class="label">ICA 6-4, lines 42–43</p><pre><code>42      print(f&quot;1 mi = {convlen(1, &#x27;mi&#x27;, &#x27;km&#x27;):.6f} km&quot;)
+43      print(f&quot;1 km = {convlen(1, &#x27;km&#x27;, &#x27;mi&#x27;):.6f} mi&quot;)</code></pre></div><div class="sources"><h4>Lecture slides</h4><figure><figcaption>L05 · page 21 &nbsp; <a href="https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view">Source PDF</a></figcaption><a href="L05_p21.png"><img loading="lazy" src="L05_p21.png" alt="L05 page 21"></a></figure></div></div></article></main></html>
