@@ -1,6 +1,6 @@
 const slides = {"L02":"https://drive.google.com/file/d/1-Ah1XbD2dm0Nq_W1Ogai5HkSe7byVhIL/view","L03":"https://drive.google.com/file/d/10XLowCfYfFVO94reVTG0fTRTyoYZYRMh/view","L05":"https://drive.google.com/file/d/1WDp-IVJEkD44ENwXgYEradBFyfIQNyqu/view","L06":"https://drive.google.com/file/d/1gRfTlpa9CeVrTkT4Li6ztDAIO6IH4Cyt/view","L07":"https://drive.google.com/file/d/10ZHEu72CAIfqWv4txzROSnlFpZgvnHtb/view","L08":"https://drive.google.com/file/d/1AJwe6Pn4wTCGTXmqeFY2k6k0qfKO7e2-/view"};
 const byId = id => document.getElementById(id);
-const key = "engr103-ordering-67-v1";
+const key = document.body.dataset.storageKey || "engr103-ordering-67-v1";
 let state = {};
 try { state = JSON.parse(localStorage.getItem(key) || "{}") || {}; } catch {}
 let index = 0;
@@ -72,7 +72,7 @@ function render() {
   byId("progress").value = count;
   byId("done").textContent = count + " / " + Q.length + " 已通过";
   byId("nav").replaceChildren();
-  for (const label of ["ICA 6", "ICA 7", "HW 6", "HW 7"]) {
+  for (const label of new Set(Q.map(q => q[1]))) {
     const heading = document.createElement("h2");
     heading.textContent = label;
     byId("nav").append(heading);
