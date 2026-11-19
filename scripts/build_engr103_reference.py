@@ -150,7 +150,10 @@ def main():
                 page += [f"![{path.stem} output](../assets/images/engr103/{slug(name)}/{path.name})", ""]
         page += ["", "These are reference examples. The course requires your submitted code to be your own work.", ""]
         (PAGES / f"{slug(name)}.md").write_text("\n".join(page), encoding="utf-8")
-        index.append(f"| [{display(name)}]({slug(name)}.md) | {DUE[name]} | {len(files)} | [ZIP](../assets/downloads/engr103/{zip_name}) |")
+        guide_link = ""
+        if name == "ICA6":
+            guide_link = " · [Code and lecture slides](/zhihu-physics-notes/course-practice/engr103/ica6-slide-guide/)"
+        index.append(f"| [{display(name)}]({slug(name)}.md) | {DUE[name]} | {len(files)} | [ZIP](../assets/downloads/engr103/{zip_name}){guide_link} |")
         navigation.append(f"      - {display(name)}: engr103/{slug(name)}.md")
     (PAGES / "index.md").write_text("\n".join(index) + "\n", encoding="utf-8")
 
