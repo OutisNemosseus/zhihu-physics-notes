@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · RMS and Heating from a Nonsinusoidal Current</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-19">November 19, 2026</time></p>
+<h1>RMS and Heating from a Nonsinusoidal Current</h1>
+<article class="worksheet">
+<p>An ideal current source drives a <strong>10.0 Ω resistor</strong> with the periodic current shown. The period is <strong>T = 4.00 ms</strong>. Within each period, i(t) = (3000 A/s)t for 0 ≤ t &lt; 2.00 ms and i(t) = −2.00 A for 2.00 ms ≤ t &lt; 4.00 ms. Time t in this formula is in seconds.</p>
+<figure><svg viewBox="0 0 560 292" role="img" aria-labelledby="wave-title wave-desc">
+<title id="wave-title">One period of the prescribed current</title><desc id="wave-desc">The current rises linearly from 0 to 6 amperes during 0 to 2 milliseconds, then jumps to minus 2 amperes and stays there until 4 milliseconds. It repeats every 4 milliseconds.</desc>
+<g class="wire" opacity=".6"><path d="M64 222V24m-6 11 6-11 6 11M52 180H518m-10-6 10 6-10 6"/></g>
+<g class="wire" stroke-dasharray="5 5" opacity=".4"><path d="M64 60H264M264 60v160M464 180v40"/></g>
+<g class="wire" style="stroke-width:4"><path d="M64 180 264 60M264 220H464"/></g>
+<g class="wire" stroke-dasharray="4 4"><path d="M264 60v160m200 0v-40"/></g>
+<g text-anchor="middle"><text x="35" y="32">i (A)</text><text x="40" y="67">6</text><text x="40" y="227">−2</text><text x="64" y="253">0</text><text x="264" y="253">2</text><text x="464" y="253">4</text><text x="507" y="275">t (ms)</text></g>
+</svg><figcaption>Dashed vertical segments indicate instantaneous jumps.</figcaption></figure>
+<figure><svg viewBox="0 0 480 215" role="img" aria-labelledby="circuit-title circuit-desc"><title id="circuit-title">Prescribed current through a ten ohm resistor</title><desc id="circuit-desc">An ideal current source and a ten ohm resistor share top and bottom nodes. The source arrow points upward and the resistor current flows downward.</desc>
+<g class="wire"><path d="M104 84V42H349v32M104 134v44h245v-42"/><circle cx="104" cy="109" r="25"/><path d="M104 125V93m-7 10 7-10 7 10"/><rect x="334" y="74" width="30" height="62"/><path d="M397 76v53m-7-10 7 10 7-10"/></g>
+<g text-anchor="middle"><text x="50" y="116">i(t)</text><text x="349" y="29">10.0 Ω</text><text x="430" y="108">i(t)</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Write separate integrals for average current and mean-square current over one complete period. Then use the RMS result to find the resistor heating power. Enter numerical answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="freq">Fundamental repetition frequency (Hz)</label><input id="freq" type="number" step="any" required data-answer="250"></li>
+<li><label for="avg">Average current over a complete period (A)</label><input id="avg" type="number" step="any" required data-answer="0.5"></li>
+<li><label for="rms">RMS current over a complete period (A)</label><input id="rms" type="number" step="any" required data-answer="2.8284271247461903"></li>
+<li><label for="p">Average power absorbed by the resistor (W)</label><input id="p" type="number" step="any" required data-answer="80"></li>
+<li><label for="peak">Peak instantaneous resistor power just before the downward jump, using the left-hand limit (W)</label><input id="peak" type="number" step="any" required data-answer="360"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary><ol type="a">
+<li>f = 1/T = 1/0.004 = 250 Hz。</li>
+<li>平均电流等于带符号面积除以周期。前半周期三角形面积是 ½ × 0.002 × 6 = 0.006 A·s，后半周期面积是 −2 × 0.002 = −0.004 A·s。因此 I<sub>avg</sub> = (0.006 − 0.004)/0.004 = 0.500 A。</li>
+<li>均方值为 [∫<sub>0</sub><sup>0.002</sup>(3000t)²dt + ∫<sub>0.002</sub><sup>0.004</sup>(−2)²dt]/0.004。前一项积分为 9×10⁶ × (0.002)³/3 = 0.024 A²·s，后一项为 4 × 0.002 = 0.008 A²·s。均方值为 8 A²，所以 I<sub>RMS</sub> = √8 ≈ 2.83 A。</li>
+<li>平均功率 P = RI<sub>RMS</sub>² = 10 × 8 = 80.0 W。</li>
+<li>瞬时功率 p(t) = Ri(t)²。电流幅值的峰值为 6 A，波形在跳变前趋近该值，峰值功率为 10 × 6² = 360 W。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw5.html#question-4">HW 5 的仪表读数与功率练习</a>和 <a href="../midterm-2-practice/index.html">往年期中二公开预览中的周期波形 RMS 题型</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
