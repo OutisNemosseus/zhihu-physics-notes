@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Design a Low-Pass Filter with Source Resistance</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-20">November 20, 2026</time></p>
+<h1>Design a Low-Pass Filter with Source Resistance</h1>
+<article class="worksheet">
+<p>Design the RC low-pass circuit below for a <strong>1.00 kHz cutoff</strong>, measured from the ideal source Vₛ to Vout. The source has a fixed series resistance <strong>Rₛ = 500 Ω</strong> and the capacitor is <strong>C = 100 nF</strong>. The output is unloaded. All components are ideal except for the explicitly shown source resistance.</p>
+<figure><svg viewBox="0 0 620 248" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Low-pass RC filter including source resistance</title><desc id="circuit-desc">The ideal voltage source top terminal connects through a 500 ohm source resistor and an unknown resistor R in series to the output node. A 100 nanofarad capacitor connects from the output to the common return.</desc>
+<g class="wire"><path d="M70 112V70h65l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h68l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h124v55M70 162v48h424v-71m-20-14h40m-40 14h40M494 70h71"/><circle cx="70" cy="137" r="25"/><path d="M55 137q7.5-14 15 0t15 0"/></g>
+<g class="node"><circle cx="494" cy="70" r="4"/><circle cx="565" cy="70" r="4"/></g>
+<g text-anchor="middle"><text x="174" y="40">Rₛ = 500 Ω</text><text x="323" y="40">R = ?</text><text x="565" y="48">Vout</text><text x="552" y="166">100 nF</text><text x="25" y="144">Vₛ</text></g>
+</svg></figure>
+<p>The available resistor values are <strong>820 Ω, 1.00 kΩ, 1.10 kΩ, 1.20 kΩ, and 1.50 kΩ</strong>. Choose the value nearest to the ideal calculated R. Use the chosen resistor for parts (c)–(e).</p>
+<p><strong>Show your work.</strong> Derive H(jω) = Vout/Vₛ, calculate the ideal resistor, and show the magnitude and phase substitutions at 1.00 kHz. Enter numerical answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="ideal">Required ideal value of R for a 1.00 kHz cutoff (Ω)</label><input id="ideal" type="number" step="any" required data-answer="1091.5494309189537"></li>
+<li><label for="selected">Nearest available resistor to your ideal R (Ω)</label><input id="selected" type="number" step="any" required data-answer="1100"></li>
+<li><label for="cutoff">Actual cutoff using the selected resistor (Hz)</label><input id="cutoff" type="number" step="any" required data-answer="994.718394324346"></li>
+<li><label for="output">Output magnitude at 1.00 kHz for Vₛ = 2.00 V RMS (V RMS)</label><input id="output" type="number" step="any" required data-answer="1.4104640703262579"></li>
+<li><label for="phase">Output phase relative to Vₛ at 1.00 kHz (degrees)</label><input id="phase" type="number" step="any" required data-answer="-45.151707132165285"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>电容前面串联着 Rₛ 和 R。分压关系为 H(jω) = [1/(jωC)]/[Rₛ + R + 1/(jωC)] = 1/[1 + jω(Rₛ + R)C]。低频增益趋近 1 V/V。</p><ol type="a">
+<li>f<sub>c</sub> = 1/[2π(Rₛ + R)C]，所以 R = 1/(2πf<sub>c</sub>C) − Rₛ = 1591.55 − 500 ≈ 1.09 × 10³ Ω。</li>
+<li>理想 R 约为 1091.55 Ω，给定列表中最接近的是 1100 Ω。</li>
+<li>此时总串联电阻是 500 + 1100 = 1600 Ω，实际 f<sub>c</sub> = 1/[2π(1600)(100×10⁻⁹)] ≈ 995 Hz。</li>
+<li>1.00 kHz 时，ω(Rₛ + R)C = 2π(1000)(1600)(100×10⁻⁹) ≈ 1.00531。|H| = 1/√(1 + 1.00531²)，故 |Vout| = 2.00|H| ≈ 1.41 V RMS。</li>
+<li>相位为 −arctan[ω(Rₛ + R)C] ≈ −45.2°，输出滞后理想源电压。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw7-hw8-filter-practice/hw7.html#problem-1">HW 7 第 1 题的 RC 低通设计与标准电阻选取</a>，加入已知电源内阻条件。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
