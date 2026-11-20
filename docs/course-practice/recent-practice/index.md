@@ -8,6 +8,8 @@ title: 近期练习链接
 
 ## MTH 231 · 离散数学
 
+- [轮换 04 · 从邻接矩阵画有向图 · 6 道原创结构变体（2026-11-20）](../logic/rotation-04-adjacency-matrix/)
+
 - [Exam 3 · 官方复习题与额外练习 · 28 大题 / 56 小问 · 分类侧栏与计时](../logic/exam3-review/)
 
 - [轮换 01 · 二项式系数 · 8 道原创复习题（2026-11-14）](../logic/rotation-01-binomial/)
