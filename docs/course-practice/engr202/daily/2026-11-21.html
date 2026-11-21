@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Combine Two Parallel Loads by Complex Power</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-21">November 21, 2026</time></p>
+<h1>Combine Two Parallel Loads by Complex Power</h1>
+<article class="worksheet">
+<p>An ideal source <strong>Vₛ = 100∠0° V RMS</strong> supplies the two parallel loads shown. At the operating frequency, Load 1 absorbs <strong>600 W at a power factor of 0.800 lagging</strong>. Load 2 absorbs <strong>S₂ = 400 − j150 VA</strong>. Assume sinusoidal steady state and ideal wires. Iₛ flows from the source into the loads.</p>
+<figure><svg viewBox="0 0 570 240" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Two loads in parallel across an ideal source</title><desc id="circuit-desc">Both load one and load two connect between the source top node and the common bottom return. Source current points toward the loads along the top wire.</desc>
+<g class="wire"><path d="M75 106V66H449v39M75 156v50h374v-37M275 66v39m0 64v37"/><circle cx="75" cy="131" r="25"/><path d="M60 131q7.5-14 15 0t15 0M135 47h64m-10-7 10 7-10 7"/><rect x="232" y="105" width="86" height="64" rx="3"/><rect x="406" y="105" width="86" height="64" rx="3"/></g>
+<g class="node"><circle cx="275" cy="66" r="4"/><circle cx="275" cy="206" r="4"/></g>
+<g text-anchor="middle"><text x="167" y="30">Iₛ</text><text x="275" y="143">Load 1</text><text x="449" y="143">Load 2</text><text x="28" y="138">Vₛ</text><text x="75" y="232">100 V RMS</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> First find the reactive power of Load 1. Add the two complex powers, then use the total to find Iₛ. State on paper whether the combined power factor is leading or lagging. Enter numerical answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="p">Total average power absorbed (W)</label><input id="p" type="number" step="any" required data-answer="1000"></li>
+<li><label for="q">Total reactive power absorbed (var)</label><input id="q" type="number" step="any" required data-answer="300"></li>
+<li><label for="i">Source current magnitude (A RMS)</label><input id="i" type="number" step="any" required data-answer="10.44030650891055"></li>
+<li><label for="phase">Source current phase relative to Vₛ (degrees)</label><input id="phase" type="number" step="any" required data-answer="-16.69924423399362"></li>
+<li><label for="pf">Overall power factor (decimal)</label><input id="pf" type="number" step="any" required data-answer="0.9578262852211513"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>负载 1 的视在功率幅值 |S₁| = P₁/PF₁ = 600/0.800 = 750 VA。Q₁ = +√(750² − 600²) = +450 var，正号来自 lagging。于是 S₁ = 600 + j450 VA。</p><ol type="a">
+<li>复功率相加，S<sub>total</sub> = S₁ + S₂ = (600 + j450) + (400 − j150) = 1000 + j300 VA。实部为总平均功率 P = 1000 W。</li>
+<li>虚部为总无功功率 Q = +300 var。</li>
+<li>对负载采用被动符号约定，S<sub>total</sub> = VₛIₛ*，所以 Iₛ = (S<sub>total</sub>/Vₛ)* = (1000 − j300)/100 = 10 − j3 A。幅值为 √(10² + 3²) = √109 ≈ 10.4 A RMS。</li>
+<li>∠Iₛ = arctan(−3/10) ≈ −16.7°。电流滞后源电压。</li>
+<li>|S<sub>total</sub>| = √(1000² + 300²) ≈ 1044.03 VA，故 PF = 1000/1044.03 ≈ 0.958 lagging。</li>
+</ol><p>也可用 KCL 检查。I₁ = (600 − j450)/100 = 6 − j4.5 A，I₂ = (400 + j150)/100 = 4 + j1.5 A，两者相加为 10 − j3 A。</p></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw5.html#question-3">HW 5 的复功率平衡练习</a>，结合两个并联负载的功率因数与电流相位。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
