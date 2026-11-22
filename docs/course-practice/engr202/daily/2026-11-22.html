@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Design an Inverting Active Low-Pass Filter</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-22">November 22, 2026</time></p>
+<h1>Design an Inverting Active Low-Pass Filter</h1>
+<article class="worksheet">
+<p>The op amp in the circuit below is ideal and operates in its linear region. Design the feedback network for a <strong>low-frequency gain magnitude of 4.00 V/V</strong> and a <strong>cutoff frequency of 1.00 kHz</strong>. The input resistor is <strong>10.0 kΩ</strong>. The output is unloaded.</p>
+<figure><svg viewBox="0 0 650 310" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Inverting amplifier with parallel resistor-capacitor feedback</title><desc id="circuit-desc">Vin passes through a ten kilohm resistor to the inverting input. The non-inverting input is grounded. Feedback resistor Rf and capacitor Cf connect in parallel from the output to the inverting input.</desc>
+<g class="wire"><path d="M42 183h65l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h172M355 155v114l124-57zM479 212h122M295 183V94h84l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h65v118M295 94V43h103m0-13v26m14-26v26m0-13h98v51M355 240h-60v41m-14 0h28m-23 6h18m-14 6h10"/></g>
+<g class="node"><circle cx="295" cy="183" r="4"/><circle cx="295" cy="94" r="4"/><circle cx="510" cy="94" r="4"/><circle cx="510" cy="212" r="4"/></g>
+<g text-anchor="middle"><text x="45" y="160">Vin</text><text x="154" y="153">10.0 kΩ</text><text x="409" y="22">C<tspan baseline-shift="sub" font-size="14">f</tspan> = ?</text><text x="413" y="128">R<tspan baseline-shift="sub" font-size="14">f</tspan> = ?</text><text x="377" y="190">−</text><text x="377" y="246">+</text><text x="601" y="190">Vout</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Derive H(jω) = Vout/Vin from the parallel feedback impedance. Solve for R<sub>f</sub> and C<sub>f</sub>. Use your ideal design values at 2.00 kHz and show the complex-number calculation used to find the output phase. Enter numerical answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="rf">Required feedback resistance R<sub>f</sub> (kΩ)</label><input id="rf" type="number" step="any" required data-answer="40"></li>
+<li><label for="cf">Required feedback capacitance C<sub>f</sub> (nF)</label><input id="cf" type="number" step="any" required data-answer="3.9788735772973833"></li>
+<li><label for="gain">Gain magnitude |H| at 2.00 kHz (V/V)</label><input id="gain" type="number" step="any" required data-answer="1.7888543819998317"></li>
+<li><label for="output">Output magnitude for a 0.500 V RMS input at 2.00 kHz (V RMS)</label><input id="output" type="number" step="any" required data-answer="0.8944271909999159"></li>
+<li><label for="phase">Output phase relative to input at 2.00 kHz, in (−180°, +180°] (degrees)</label><input id="phase" type="number" step="any" required data-answer="116.56505117707799"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>反馈电阻与电容并联，Z<sub>f</sub> = [1/R<sub>f</sub> + jωC<sub>f</sub>]⁻¹ = R<sub>f</sub>/(1 + jωR<sub>f</sub>C<sub>f</sub>)。由理想反相端的 KCL 得 H(jω) = −Z<sub>f</sub>/R<sub>in</sub> = −(R<sub>f</sub>/R<sub>in</sub>)/(1 + jωR<sub>f</sub>C<sub>f</sub>)。</p>
+<ol type="a">
+<li>低频时 H → −R<sub>f</sub>/R<sub>in</sub>。增益幅值要求为 4，所以 R<sub>f</sub> = 4 × 10.0 kΩ = 40.0 kΩ。</li>
+<li>截止频率 f<sub>c</sub> = 1/(2πR<sub>f</sub>C<sub>f</sub>)，因此 C<sub>f</sub> = 1/[2π(1000)(40000)] F ≈ 3.98 nF。</li>
+<li>在 2.00 kHz 时 f/f<sub>c</sub> = 2，H = −4/(1 + j2) = −0.8 + j1.6。所以 |H| = 4/√5 ≈ 1.79 V/V。</li>
+<li>|Vout| = |H| × 0.500 = 2/√5 ≈ 0.894 V RMS。</li>
+<li>H 的实部为负、虚部为正，位于第二象限。题目要求主值相角，因此 ∠H = 180° − arctan(2) ≈ +116.6°，三位有效数字为 +117°。写成 −243.4° 表示相同相位，但本题按要求输入 (−180°, +180°] 内的值。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="../hw7-hw8-filter-practice/hw8.html#problem-2">HW 8 第 2 题的有源滤波、元件设计与 Bode 分析考点</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
