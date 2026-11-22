@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>正弦数组写入与读回 CSV · 轮换 05</title>
+<style>
+:root{color-scheme:light;--ink:#183832;--sub:#4a625d;--brand:#176958;--line:#c9dcd5;--surface:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f3f7f5;color:var(--ink);font:clamp(16px,2vw,18px)/1.65 system-ui,sans-serif}
+main{width:min(100%,850px);margin:auto;padding:22px 20px 65px}h1,h2,h3{line-height:1.22}h1{font-size:clamp(1.8rem,5vw,2.8rem);margin:.25em 0}h2{font-size:1.38rem;margin-top:0}h3{font-size:1.05rem}a{color:var(--brand)}p{margin:.8em 0}.note{color:var(--sub);font-size:.92em}.tag{color:var(--brand);font-weight:700}.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;margin:14px 0}.equations{background:#edf5f1;border-radius:10px;padding:10px 16px;font-size:1.06em}.equations p{margin:.1em 0}.panelpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.panelpair>div{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;min-width:0}.panelpair strong{display:block}nav{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;color:var(--ink);background:#fff;border:1px solid #77958b;border-radius:8px;cursor:pointer;min-height:44px;min-width:44px;padding:7px 12px}button[aria-current=true]{background:var(--brand);color:white}button:disabled{opacity:.45;cursor:default}details{border-top:1px solid var(--line);padding-top:12px;margin-top:18px}summary{cursor:pointer;font-weight:700}code{font-size:.9em;overflow-wrap:anywhere}pre{overflow:auto;max-width:100%;background:#edf5f1;padding:10px;border-radius:8px;font-size:.83em;white-space:pre}li{margin-bottom:.38em}ol{padding-left:1.4em}[hidden]{display:none!important}:focus-visible{outline:3px solid #a55c15;outline-offset:3px}.sr{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+@media(max-width:480px){main{padding:14px 12px 48px}.card{padding:14px}.panelpair>div{font-size:.83em}.equations{padding:8px 10px}}
+</style></head><body><main>
+<a href="../../recent-practice/">← 近期练习汇总</a><p class="tag">ENGR 103 · Python · 2026-11-22 · 轮换 05</p>
+<h1>正弦数组：写入与读回 CSV</h1>
+<p>先用 NumPy 生成数据，再用 pandas 写入、读回 CSV，最后并排画图比较。每题都是原创参数变体。</p>
+<p class="note">结构依据：已核对 ENGR 103 HW8 的 CSV 小题。保留数组生成、CSV 读写、两幅并排子图，不提供需要预读的输入 CSV。教师文件不公开。</p>
+<nav id="numbers" aria-label="题号"></nav>
+<div id="announcer" class="sr" aria-live="polite"></div>
+<section id="questions" aria-label="练习题"><article class="card" id="q1">
+<h2>第 1 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 2π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 2.5 sin(θ) cm</p><p>y₂(θ) = 5.5 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_01.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    5.500000
+  1 |    0.063467 |    0.158560 |    5.488927
+ 33 |    2.094395 |    2.165064 |   -2.750000
+ 99 |    6.283185 |    0.000000 |    5.500000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 2 * np.pi, 100)
+y1 = 2.5 * np.sin(theta)
+y2 = 5.5 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_01.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article>
+<article class="card" id="q2" hidden>
+<h2>第 2 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 3π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 4 sin(θ) cm</p><p>y₂(θ) = 1.5 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_02.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    1.500000
+  1 |    0.095200 |    0.380224 |    1.493208
+ 33 |    3.141593 |   -0.000000 |   -1.500000
+ 99 |    9.424778 |    0.000000 |   -1.500000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 3 * np.pi, 100)
+y1 = 4 * np.sin(theta)
+y2 = 1.5 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_02.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article>
+<article class="card" id="q3" hidden>
+<h2>第 3 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 5π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 5.25 sin(θ) cm</p><p>y₂(θ) = 8 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_03.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    8.000000
+  1 |    0.158666 |    0.829507 |    7.899511
+ 33 |    5.235988 |   -4.546633 |    4.000000
+ 99 |   15.707963 |    0.000000 |   -8.000000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 5 * np.pi, 100)
+y1 = 5.25 * np.sin(theta)
+y2 = 8 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_03.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article>
+<article class="card" id="q4" hidden>
+<h2>第 4 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 6π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 1.75 sin(θ) cm</p><p>y₂(θ) = 6 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_04.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    6.000000
+  1 |    0.190400 |    0.331190 |    5.891572
+ 33 |    6.283185 |    0.000000 |    6.000000
+ 99 |   18.849556 |   -0.000000 |    6.000000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 6 * np.pi, 100)
+y1 = 1.75 * np.sin(theta)
+y2 = 6 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_04.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article>
+<article class="card" id="q5" hidden>
+<h2>第 5 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 7π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 6.75 sin(θ) cm</p><p>y₂(θ) = 2.25 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_05.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    2.250000
+  1 |    0.222133 |    1.487096 |    2.194717
+ 33 |    7.330383 |    5.845671 |    1.125000
+ 99 |   21.991149 |    0.000000 |   -2.250000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 7 * np.pi, 100)
+y1 = 6.75 * np.sin(theta)
+y2 = 2.25 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_05.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article>
+<article class="card" id="q6" hidden>
+<h2>第 6 / 6 题</h2>
+<p>写一个 Python 程序，生成以下三列数据并完成一次 CSV 写入、读回与绘图。</p>
+<div class="equations"><p>θ：从 0 到 8π rad，等间距取 100 个值，包含两个端点。</p><p>y₁(θ) = 8.5 sin(θ) cm</p><p>y₂(θ) = 4.75 cos(θ) cm</p></div>
+<ol><li>用 NumPy 生成 <code>theta</code>、<code>y1</code>、<code>y2</code> 数组。先把生成的两条曲线画在左图。</li>
+<li>实现 <code>filewritecsv(filename, theta, y1, y2)</code>，用 pandas <code>DataFrame</code> 和 <code>to_csv()</code> 写到 <code>signal_variant_06.csv</code>。逗号分隔，表头按 <code>theta,y1,y2</code> 排列；单位依次为 rad、cm、cm，不输出行索引。</li>
+<li>实现 <code>filereadcsv(filename)</code>，用 pandas <code>read_csv()</code> 读取表头，按同一顺序返回三个 NumPy 数组。用读回的数组在右图画两条曲线。</li>
+<li>一张图内排成 <strong>1 行 × 2 列</strong>。两图各有标题、横轴 Angle (rad)、纵轴 Displacement (cm)、网格和图例；y₁ 蓝色实线，y₂ 红色虚线。</li></ol>
+<div class="panelpair" aria-label="子图布局"><div><strong>左图</strong>原数组，两条曲线</div><div><strong>右图</strong>CSV 读回，两条曲线</div></div>
+<details><summary>展开参考答案与检查点</summary><p>CSV 包含 1 行表头、100 行数据。两个子图各有两条曲线，读回图应与左图重合；下列行号从 0 开始，不含表头。浮点数可有微小尾差。</p>
+<pre>  i |   theta rad |       y1 cm |       y2 cm
+  0 |    0.000000 |    0.000000 |    4.750000
+  1 |    0.253866 |    2.134758 |    4.597756
+ 33 |    8.377580 |    7.361216 |   -2.375000
+ 99 |   25.132741 |    0.000000 |    4.750000</pre>
+<h3>参考实现</h3><pre><code>import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def filewritecsv(filename, theta, y1, y2):
+    data = pd.DataFrame({&quot;theta&quot;: theta, &quot;y1&quot;: y1, &quot;y2&quot;: y2})
+    data.to_csv(filename, index=False)
+
+def filereadcsv(filename):
+    data = pd.read_csv(filename)
+    return (data[&quot;theta&quot;].to_numpy(),
+            data[&quot;y1&quot;].to_numpy(),
+            data[&quot;y2&quot;].to_numpy())
+
+def draw(ax, theta, y1, y2, title):
+    ax.plot(theta, y1, &quot;b-&quot;, label=&quot;y1&quot;)
+    ax.plot(theta, y2, &quot;r--&quot;, label=&quot;y2&quot;)
+    ax.set_title(title)
+    ax.set_xlabel(&quot;Angle (rad)&quot;)
+    ax.set_ylabel(&quot;Displacement (cm)&quot;)
+    ax.grid(True)
+    ax.legend()
+
+theta = np.linspace(0, 8 * np.pi, 100)
+y1 = 8.5 * np.sin(theta)
+y2 = 4.75 * np.cos(theta)
+fig, (left, right) = plt.subplots(1, 2)
+draw(left, theta, y1, y2, &quot;Generated arrays&quot;)
+
+name = &quot;signal_variant_06.csv&quot;
+filewritecsv(name, theta, y1, y2)
+theta_r, y1_r, y2_r = filereadcsv(name)
+draw(right, theta_r, y1_r, y2_r, &quot;Read back from CSV&quot;)
+fig.subplots_adjust(wspace=0.55, bottom=0.15)
+plt.show()
+</code></pre></details></article></section>
+<nav aria-label="翻题"><button id="prev" disabled>上一题</button><button id="next">下一题</button></nav>
+</main><script>
+const cards=[...document.querySelectorAll('.card')],nav=document.getElementById('numbers');
+const prev=document.getElementById('prev'),next=document.getElementById('next');
+const buttons=cards.map((_,i)=>{const b=document.createElement('button');b.type='button';b.textContent=i+1;b.setAttribute('aria-label','第 '+(i+1)+' 题');b.addEventListener('click',()=>show(i));nav.append(b);return b});
+let current=0;
+function show(n){const i=Math.max(0,Math.min(cards.length-1,n));if(i!==current)cards.forEach(c=>c.querySelector('details').open=false);current=i;cards.forEach((c,j)=>{c.hidden=j!==i});buttons.forEach((b,j)=>b.setAttribute('aria-current',String(i===j)));prev.disabled=i===0;next.disabled=i===cards.length-1;document.getElementById('announcer').textContent='第 '+(i+1)+' / '+cards.length+' 题'}
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));show(0);
+</script></body></html>
