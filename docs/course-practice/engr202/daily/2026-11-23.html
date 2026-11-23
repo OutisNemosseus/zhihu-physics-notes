@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Balanced Wye Load with Line Impedance</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-23">November 23, 2026</time></p>
+<h1>Balanced Wye Load with Line Impedance</h1>
+<article class="worksheet">
+<p>A balanced positive-sequence three-phase source supplies a balanced wye-connected load. The source line-to-line voltage magnitude is <strong>120√3 V RMS</strong>. Choose <strong>Vₐₙ = 120∠0° V RMS</strong> as the phase reference. Each line has impedance <strong>1 + j1 Ω</strong>, and each load phase has impedance <strong>11 + j8 Ω</strong>. The source and load star points are joined by an ideal neutral conductor. All values apply at the operating frequency.</p>
+<figure><svg viewBox="0 0 590 245" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Single-phase equivalent of the balanced three-phase circuit</title><desc id="circuit-desc">The phase a source connects through a 1 plus j1 ohm line impedance to an 11 plus j8 ohm load phase impedance. The bottom wire is the neutral reference. This drawing represents one of three identical phase circuits.</desc>
+<g class="wire"><path d="M82 111V66h108m133 0h115v38M82 161v49h356v-42"/><circle cx="82" cy="136" r="25"/><path d="M67 136q7.5-14 15 0t15 0"/><rect x="190" y="45" width="133" height="42" rx="3"/><rect x="392" y="104" width="92" height="64" rx="3"/><path d="M132 28h58m-10-7 10 7-10 7"/></g>
+<g text-anchor="middle"><text x="160" y="17">Iₐ</text><text x="257" y="72">1 + j1 Ω</text><text x="438" y="141">11 + j8 Ω</text><text x="28" y="142">Vₐₙ</text><text x="130" y="229">Neutral reference</text><text x="438" y="196">Load phase</text></g>
+</svg><figcaption>Per-phase equivalent. There are three identical line and load impedances.</figcaption></figure>
+<p><strong>Show your work.</strong> Write the phase-a KVL equation, calculate the voltage across the load phase, and distinguish the load's average power from the losses in the three lines. Enter numerical answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="i">Line current magnitude |Iₐ| (A RMS)</label><input id="i" type="number" step="any" required data-answer="8"></li>
+<li><label for="phase">Line current angle relative to Vₐₙ (degrees)</label><input id="phase" type="number" step="any" required data-answer="-36.86989764584402"></li>
+<li><label for="loadv">Load phase-voltage magnitude (V RMS)</label><input id="loadv" type="number" step="any" required data-answer="108.81176406988355"></li>
+<li><label for="loadp">Total average power absorbed by the three load impedances (W)</label><input id="loadp" type="number" step="any" required data-answer="2112"></li>
+<li><label for="loss">Total average power dissipated in the three line impedances (W)</label><input id="loss" type="number" step="any" required data-answer="192"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>平衡 Y 接负载中，线电流等于对应支路电流。每相 KVL 为 Vₐₙ = Iₐ(Z<sub>line</sub> + Z<sub>load</sub>)。总串联阻抗是 (1 + j1) + (11 + j8) = 12 + j9 = 15∠36.87° Ω。</p><ol type="a">
+<li>Iₐ = 120∠0°/(15∠36.87°) = 8∠−36.87° A RMS，幅值为 8.00 A。</li>
+<li>电流相角为 0° − 36.87° ≈ −36.9°。</li>
+<li>负载相电压是 IₐZ<sub>load</sub>，幅值为 8√(11² + 8²) = 8√185 ≈ 109 V RMS。直角坐标验证，Iₐ = 6.4 − j4.8 A，负载相电压为 (6.4 − j4.8)(11 + j8) = 108.8 − j1.6 V。</li>
+<li>三相负载总平均功率为 3|Iₐ|²Re(Z<sub>load</sub>) = 3 × 64 × 11 = 2112 W，三位有效数字为 2.11 × 10³ W。</li>
+<li>三条线路的平均损耗为 3|Iₐ|²Re(Z<sub>line</sub>) = 3 × 64 × 1 = 192 W。</li>
+</ol><p>功率平衡检查，源输出总平均功率为 3Re(VₐₙIₐ*) = 3 × 120 × 6.4 = 2304 W，等于 2112 + 192 W。</p></details></article>
+<p lang="zh">原创题，参考 <a href="../hw5-9-midterm/hw9.html#question-1">HW 9 的平衡 Y 负载练习</a>，加入每相线路阻抗和损耗计算。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
