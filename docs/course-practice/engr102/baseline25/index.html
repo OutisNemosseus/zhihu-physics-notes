@@ -1,0 +1,53 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>25/25 · 十趟直行实验</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f3ea;color:#163c35;font:16px/1.6 system-ui,sans-serif}main{max-width:960px;margin:auto;padding:28px 18px}h1{font-size:clamp(30px,5vw,52px);margin:0;letter-spacing:-.055em}h2{font-size:21px;margin:0 0 6px}p{margin:4px 0 14px}section,figure{background:#fffef9;border:1px solid #cbd9ce;border-radius:14px;padding:16px;margin:0}article{display:grid;grid-template-columns:1.08fr 1fr;gap:14px;margin:16px 0}svg{width:100%;display:block}figcaption,small{color:#46655b}button{border:1px solid #a6bdb2;background:white;border-radius:8px;padding:8px 12px;font:inherit;cursor:pointer;color:#21483e;margin:4px 5px 4px 0}#action{background:#155e4e;color:white}button:disabled{opacity:.5;cursor:default}b#bits{font:700 30px monospace}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}th,td{border-bottom:1px solid #d8e2d9;text-align:right;padding:4px}th:first-child{text-align:left}.progress{display:flex;gap:5px;margin:10px 0}.progress i{height:7px;flex:1;background:#dce5dd;border-radius:4px}.progress .done{background:#14806a}.progress .active{background:#efae38}a{color:#15624c}@media(max-width:680px){article{grid-template-columns:1fr}main{padding:14px 10px}} 
+</style><main><small>ENGR 102 · Baseline25</small><h1>同一组动力，跑十趟</h1><p>四轮全程 25% PWM。用同一起点、同一方向重复测量，看小车每次穿过横线时是否一样直。</p>
+<article><figure><svg viewBox="0 0 340 339" id="board" aria-label="四横四竖场地，起点在左列白格中间的 H1 横线上"></svg><figcaption>每格 6 英寸。蓝虚线是摆车参考，地面留白；绿色实线显示本趟模拟轨迹。</figcaption></figure>
+<section><h2 id="stage"></h2><p id="instruction" aria-live="polite"></p><div class="progress" id="progress"></div><p id="count"></p><button id="action">模拟按 RST</button><button id="reset">从头演示</button><p>探头（左 / 中 / 右）　<b id="bits"></b></p><table><caption>本趟示例触线时间 · 毫秒</caption><thead><tr><th>横线</th><th>左</th><th>中</th><th>右</th><th>左−右</th></tr></thead><tbody id="record"></tbody></table><small>动画只演示流程。板上 CSV 使用微秒，真实记录以串口导出为准。</small></section></article>
+<section><h2>在实车上照着做</h2><ol><li>拔 USB，用电池供电。将车头三个探头横压在 H1 上，中探头对准左列白格的中点，车头朝 H4。确认三个灯都亮。</li><li>按一次 RST，手离开车。等待 2.5 秒后小车起跑，穿过白地时读到 000 正常。H2、H3、H4 每条线分别记录三个探头首次稳定触线的时刻。</li><li>过 H4 后短暂寻找终点窄带并停车。等停车、保存结束，再手动摆回同一起点。重复到 10 趟完整记录。漏测或超时会记录失败，需补跑；完整过线但错过短带仍算完整一趟。</li><li>接回 USB，串口发 <code>?</code> 看 <code>completed=10/10</code>，发 <code>D</code> 导出全部 CSV。满十趟后按 RST 也不会再起跑。</li></ol>
+<a href="../white-lane/#twin">查看时间戳怎样用于拟合 →</a></section></main>
+<script>
+const $=s=>document.getElementById(s),gates=[289,217,145,73],side=[-6,0,6];
+const drift=[-9,-5,2,-7,4,-3,-8,1,-4,-6]; // Illustrative end offsets, not measured.
+let done=0,phase='place',start=0,t=0,current,raf=0;
+function makeTrial(n){
+ const frames=[],edges=gates.slice(1).map(()=>[null,null,null]);let hit=false;
+ for(let ms=0;ms<=5550;ms+=5){
+  const y=289-ms*.043,q=(289-y)/236,x=79+drift[n]*q*q,angle=Math.atan(2*drift[n]*q/236);
+  let bits='';side.forEach((v,i)=>{
+   let sx=x+v*Math.cos(angle),sy=y+v*Math.sin(angle);
+   let tape=gates.some((g,j)=>{let on=Math.abs(sy-g)<=3&&sx>=40&&sx<=262;
+    if(j&&on&&edges[j-1][i]===null)edges[j-1][i]=ms;return on});
+   let marker=Math.abs(sx-79)<=3&&sy>=45&&sy<=57;
+   bits+=tape||marker?'1':'0';
+  });
+  frames.push({ms,x,y,angle,bits});if(y<=57&&bits==='010'){hit=true;break}
+ }
+ return {frames,edges,hit}
+}
+function draw(){
+ const f=current.frames[Math.min(current.frames.length-1,Math.floor(t/5))];
+ let svg='<rect width="340" height="339" rx="10" fill="#f7f6ed"/><path d="M79 289 V46" stroke="#64a0b2" stroke-dasharray="4 4"/>';
+ gates.forEach((y,i)=>{const x=43+72*i;svg+='<path d="M43 '+y+' H259 M'+x+' 73 V289" stroke="#25392e" stroke-width="6" stroke-linecap="square"/><text x="274" y="'+(y+4)+'" font-size="13">H'+(i+1)+'</text>'});
+ svg+='<path d="M79 57 V45" stroke="#25392e" stroke-width="6"/><text x="91" y="50" font-size="12">终点短带</text><polyline fill="none" stroke="#15906b" stroke-width="2.4" points="'+current.frames.filter((v,i)=>v.ms<=t&&i%9===0).map(v=>v.x+','+v.y).join(' ')+'"/>';
+ svg+='<g transform="translate('+f.x+' '+f.y+') rotate('+f.angle*180/Math.PI+')"><rect x="-10" y="0" width="20" height="23" rx="4" fill="#a8d8c6" stroke="#245145"/><path d="M0 18 V7 m-3 4 3-4 3 4" fill="none" stroke="#245145"/>';
+ side.forEach((x,i)=>svg+='<circle cx="'+x+'" cy="0" r="2.6" stroke="#345147" fill="'+(f.bits[i]==='1'?'#ffc54a':'white')+'"/>');
+ $('board').innerHTML=svg+'</g>';$('bits').textContent=f.bits;
+ $('record').innerHTML=current.edges.map((e,j)=>'<tr><th>H'+(j+2)+'</th>'+[...e,e.every(v=>v!==null&&v<=t)?e[0]-e[2]:null].map((v,i)=>'<td>'+(v!==null&&(i===3||v<=t)?v:'—')+'</td>').join('')+'</tr>').join('');
+ $('progress').innerHTML=Array.from({length:10},(_,i)=>'<i class="'+(i<done?'done':i===done&&phase!=='return'?'active':'')+'"></i>').join('');
+ $('count').textContent='模拟完成 '+done+' / 10 趟　·　左 25% / 右 25%';
+ const finished=done===10, waiting=phase==='wait', moving=phase==='run', back=phase==='return';
+ $('stage').textContent=finished?'十趟完成，接回 USB':back?'停车并保存 · 第 '+done+' 趟':'第 '+(done+1)+' 趟 · '+(waiting?'启动倒计时':moving?'实车自动采集':'对齐起点');
+ $('instruction').textContent=finished?'用串口 D 导出记录。':back?(current.hit?'终点短带命中。':'本趟完整过线，终点短带未命中。')+'现在用手将实车摆回 H1。':waiting?'已按 RST，等待 '+Math.max(0,(2500-(performance.now()-start))/1000).toFixed(1)+' 秒。':moving?'保持双手离车，观察三个探头先后碰到横线。':'让中探头对准左列白格中央，三灯亮 111 后按一次 RST。';
+ $('action').textContent=finished?'已完成':back?'模拟手动摆回 H1':moving?'自动行驶中':waiting?'等待起跑':'模拟按 RST';
+ $('action').disabled=finished||waiting||moving;
+}
+function tick(now){
+ if(phase==='wait'&&now-start>=2500){phase='run';start=now}
+ if(phase==='run'){t=Math.min(current.frames.at(-1).ms,now-start);if(t>=current.frames.at(-1).ms){done++;phase='return'}}
+ draw();if(phase==='wait'||phase==='run')raf=requestAnimationFrame(tick)
+}
+function place(){phase='place';t=0;current=makeTrial(done);draw()}
+$('action').onclick=()=>{if(done>=10)return;if(phase==='return'){place();return}if(phase==='place'){phase='wait';start=performance.now();draw();raf=requestAnimationFrame(tick)}};
+$('reset').onclick=()=>{cancelAnimationFrame(raf);done=0;place()};place();
+</script></html>
