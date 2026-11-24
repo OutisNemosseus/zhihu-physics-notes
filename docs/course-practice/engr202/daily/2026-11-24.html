@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · RL Frequency Response with Coil Resistance</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-24">November 24, 2026</time></p>
+<h1>RL Frequency Response with Coil Resistance</h1>
+<article class="worksheet">
+<p>An ideal sinusoidal source drives an <strong>80 Ω resistor</strong> in series with a coil. Model the coil as an ideal <strong>20 mH inductor</strong> in series with a <strong>20 Ω winding resistance</strong>. Vout is measured across the entire coil, including its winding resistance. The output is unloaded. Define H(jω) = Vout/Vₛ.</p>
+<figure><svg viewBox="0 0 590 332" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Output across a lossy coil</title><desc id="circuit-desc">The source feeds an 80 ohm series resistor, then the output node. From the output node a 20 ohm winding resistance and an ideal 20 millihenry inductor connect in series to the return. The output voltage is measured across both coil components.</desc>
+<g class="wire"><path d="M78 142V67h85l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h165v40M78 192v112h326v-36M404 151v21a12 10 0 0 1 0 20a12 10 0 0 1 0 20a12 10 0 0 1 0 20a12 10 0 0 1 0 20v16M404 67h107"/><rect x="390" y="107" width="28" height="44"/><circle cx="78" cy="167" r="25"/><path d="M63 167q7.5-14 15 0t15 0"/></g>
+<rect x="373" y="93" width="151" height="190" rx="6" fill="none" stroke="currentColor" stroke-dasharray="5 5" opacity=".5"/>
+<g class="node"><circle cx="404" cy="67" r="4"/><circle cx="511" cy="67" r="4"/></g>
+<g text-anchor="middle"><text x="205" y="40">R = 80 Ω</text><text x="503" y="44">Vout</text><text x="468" y="137">r = 20 Ω</text><text x="468" y="229">L = 20 mH</text><text x="30" y="174">Vₛ</text><text x="449" y="325">Coil model</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Derive H(jω) by voltage division. Calculate its DC and high-frequency limits, then solve for the frequency where the gain magnitude is 1/√2 of its high-frequency limit. Use the source voltage as the phase reference. Enter answers to three significant figures.</p>
+<form id="answers"><ol type="a"><li><label for="dc">DC gain magnitude |H(0)| (V/V)</label><input id="dc" type="number" step="any" required data-answer="0.2"></li>
+<li><label for="pole">Pole frequency fₚ, defined by ωₚ = (R + r)/L (Hz)</label><input id="pole" type="number" step="any" required data-answer="795.7747154594766"></li>
+<li><label for="mag">Gain magnitude at fₚ (V/V)</label><input id="mag" type="number" step="any" required data-answer="0.7211102550927979"></li>
+<li><label for="phase">Output phase relative to Vₛ at fₚ (degrees)</label><input id="phase" type="number" step="any" required data-answer="33.690067525979785"></li>
+<li><label for="cutoff">Frequency where |H| equals its high-frequency limit divided by √2 (Hz)</label><input id="cutoff" type="number" step="any" required data-answer="763.2802931711535"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>输出跨在线圈的电阻和电感两端，故 H(jω) = (r + jωL)/(R + r + jωL) = (20 + jω·0.020)/(100 + jω·0.020)。高频极限为 1 V/V。</p>
+<ol type="a">
+<li>令 ω = 0，H(0) = 20/100 = 0.200 V/V。</li>
+<li>分母对应的极点角频率为 ωₚ = 100/0.020 = 5000 rad/s，故 fₚ = 5000/(2π) ≈ 796 Hz。</li>
+<li>在极点频率，ωL = 100 Ω。因此 |H| = √(20² + 100²)/√(100² + 100²) = √0.52 ≈ 0.721 V/V。</li>
+<li>同一频率下，∠H = arctan(100/20) − arctan(100/100) ≈ 78.690° − 45° = +33.7°。</li>
+<li>相对高频极限的 −3.01 dB 频率满足 (20² + (ωL)²)/(100² + (ωL)²) = 1/2。整理得 (ωL)² = 100² − 2×20² = 9200，故 f = √9200/(2π×0.020) ≈ 763 Hz。</li>
+</ol><p>本电路的分子含有零点。线圈内阻使低频增益大于零，也使极点处的幅值偏离 1/√2。</p></details></article>
+<p lang="zh">原创题，参考 <a href="../hw7-hw8-filter-practice/hw7.html#problem-2">HW 7 第 2 题的被动 RL 滤波考点</a>，加入线圈绕组电阻条件。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
