@@ -1,0 +1,164 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ENGR 103 · ICA 与 HW 练习</title><style>
+:root{color-scheme:light;--ink:#172c36;--muted:#526975;--sea:#08695d;--mist:#e2f3ec;--line:#d5e1e6;--paper:#f5f8f9}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.6 "Inter","Noto Sans",system-ui,sans-serif;background:var(--paper)}a{color:var(--sea)}header{background:#153342;color:white;padding:24px max(20px,calc((100vw - 1240px)/2));border-bottom:4px solid #4fb29a}header a{color:#aff3dd}header p{margin:.35em 0}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.18;margin:.35em 0}.shell{max-width:1240px;margin:auto;display:grid;grid-template-columns:245px minmax(0,1fr);gap:24px;padding:24px 18px}aside{align-self:start;position:sticky;top:16px;background:white;border:1px solid var(--line);border-radius:16px;padding:15px}aside h2{font-size:1.1rem;margin:0 0 .6rem}nav{display:grid;gap:7px}button,select{font:inherit;min-height:42px;color:inherit;background:white;border:1px solid #9eb5bd;border-radius:8px;padding:6px 10px;cursor:pointer}button:hover,select:hover{border-color:var(--sea)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #2b8aa0;outline-offset:2px}button[aria-pressed=true]{background:var(--mist);border-color:var(--sea);font-weight:650}nav button{text-align:left}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:0 0 14px}.card h2,.card h3{margin:0 0 9px;line-height:1.35}.card h3{font-size:1.12rem}.meta,small{color:var(--muted);font-size:.9rem}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid var(--line)}th{background:#eaf2f5}.choices{display:grid;gap:7px}.option{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;cursor:pointer}.option input{width:18px;height:18px;flex:none}.primary{background:var(--sea);color:white;border-color:var(--sea);margin-top:10px}.arrange{list-style:none;padding:0;margin:0;display:grid;gap:7px}.arrange li{display:grid;grid-template-columns:1fr auto auto;gap:5px;align-items:center;background:#edf5f6;padding:5px 7px;border:1px solid var(--line);border-radius:8px;cursor:grab}.arrange button{min-width:38px}.arrange button:disabled{opacity:.35;cursor:default}.result{margin:.6rem 0 0;padding:7px 10px;border-radius:8px;background:#e9f5ee}.result.bad{background:#fbeadd}.result:empty{display:none}.jump{scroll-margin-top:10px}@media(max-width:740px){.shell{grid-template-columns:minmax(0,1fr);gap:12px}aside{position:static}nav{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:13px}}
+</style></head><body><header><a href="../../">Zhihu Physics Notes · 课程练习</a><h1>ENGR 103 · ICA 与 HW 练习</h1><p>按第 5–9 组作业编号复习。先看课堂练习里的方法，再判断它怎样迁移到 HW。</p></header>
+<div class="shell"><aside><h2>分类</h2><nav id="nav" aria-label="按周分类"></nav><p><a href="#practice">跳到练习</a></p></aside>
+<main><section id="map" class="jump"></section><section class="card jump" id="practice"><h2>练习</h2><div class="tools">
+<label for="type">题型</label><select id="type"><option value="all">全部题型</option><option value="mc">选择题</option><option value="drag">拖拽题</option></select>
+<label for="status">题目状态</label><select id="status"><option value="all">全部</option><option value="new">只做未做</option><option value="wrong">只做错题</option></select>
+<button id="shuffle">打乱顺序</button><button id="export">导出错题</button></div>
+<p class="meta" id="count" aria-live="polite"></p></section><div id="questions"></div></main></div>
+<template id="card"><article class="card"><p class="meta"></p><h3></h3><div class="body"></div><button class="primary" type="button">检查答案</button><p class="result" role="status"></p></article></template>
+<script id="data" type="application/json">{"title": "ENGR 103 · ICA 与 HW 练习", "intro": "按第 5–9 组作业编号复习。先看课堂练习里的方法，再判断它怎样迁移到 HW。", "weeks": [[5, "函数与参数", [["5.1", "点积与向量夹角", "5.1 · 极坐标两点距离", "共同点是把三角公式封装成函数，并将角度转为弧度。点积与极坐标距离的返回值不同。"], ["5.2", "导入并测试 dotproduct", "5.1–5.3 · 测试自定义函数", "这些 HW 都需要调用并验证自己的函数；HW 没有单独要求跨文件导入。"], ["5.3", "抛体的高度、速度和时间", "5.2 · 圆柱面积/体积；5.3 · 椭圆", "5.2 延续数组输入、多值返回和绘图；5.3 延续默认参数、数组输出和绘图。"]], [["ENGR 103 ICA 5", "https://linnbenton.instructure.com/courses/12961/modules/items/658194"], ["ENGR 103 HW 5", "https://linnbenton.instructure.com/courses/12961/modules/items/658198"]]], [6, "动画与条件分支", [["6.1", "抛物线轨迹 GIF", "6.1 · 对数轨迹 GIF", "保留逐帧更新和 GIF 导出，改为采样正数 x 并求对数曲线。"], ["6.2", "用 if/elif/else 转换美制到公制", "6.2 · 温标转换", "复用条件分支。温标之间可能要先乘再加，或先减再乘。"], ["6.3", "用 match 转换公制到美制", "6.3 · 温标转换", "复用 match/case，改为 F、C、K、R 四种温标。"], ["6.4", "整合长度转换", "6.2、6.3 · 任意输入和输出温标", "两个函数都要处理输入与输出的组合；把输入转到共同基准后再转出，是可迁移的组织方法。"]], [["ENGR 103 ICA 6", "https://linnbenton.instructure.com/courses/12961/modules/items/658201"], ["ENGR 103 HW 6", "https://linnbenton.instructure.com/courses/12961/modules/items/658206"]]], [7, "循环、数组与递推", [["7.1", "逐行计算高尔夫差点", "7.1 · 批量计算三角形面积", "每行读三个输入并写一个结果，返回形状为 (n, 1) 的列数组。"], ["7.2", "用嵌套循环填二维矩阵", "7.2 · 对称 Pascal 矩阵", "复用二维遍历；Pascal 的内部元素要等上方和左方填好。"], ["7.3", "Fibonacci 序列", "7.2 · Pascal 递推；7.3 · 递归求数字和", "都能用已知初始值和更小问题推导结果。HW 7.3 明确要求递归，不能照搬 ICA 的循环。"]], [["ENGR 103 ICA 7", "https://linnbenton.instructure.com/courses/12961/modules/items/658209"], ["ENGR 103 HW 7", "https://linnbenton.instructure.com/courses/12961/modules/items/658213"]]], [8, "TXT、CSV 与 Excel", [["8.1", "手动与 with 两种 TXT 写法", "8.1 · 五位小数 TXT", "沿用 with 写入和读取；换成 theta、y1、y2 与五位小数。"], ["8.2", "pandas CSV 写入与读回", "8.2 · 正弦数组 CSV", "沿用 DataFrame、to_csv 和 read_csv；改用新的列名和自变量。"], ["8.3", "单张 Excel 工作表", "8.3 · 正弦数组单表", "建立一个有三列的 DataFrame，读回指定工作表后返回三个数组。"], ["8.4", "一个工作簿写两张表", "8.4 · 正弦数组双表", "用同一个 ExcelWriter 写两张表，按工作表名读回，分开画两条信号。"]], [["ENGR 103 ICA 8", "https://linnbenton.instructure.com/courses/12961/modules/items/658217"], ["ENGR 103 HW 8", "https://linnbenton.instructure.com/courses/12961/modules/items/658222"]]], [9, "线性方程与数值方法", [["9.1", "多弹簧的静态位移", "9.1 · 网孔电流", "都把物理方程写成 A x = b。弹簧系统有三个位移，网孔问题有四个电流未知量。"], ["9.2", "前向差分求速度", "9.2 · 前向差分求电流", "位置改成电荷，差分公式相同；HW 还要求对照解析导数。"], ["9.3", "梯形法近似积分", "9.3 · 电流积分与分段数比较", "用相邻两端点构造梯形，比较不同分段数与解析积分。"], ["9.4", "三次多项式拟合坐标", "9.4 · 八次多项式拟合", "同样导入 CSV、用 Polynomial.fit 拟合并绘图；更换数据文件和次数。"]], [["ENGR 103 ICA 9", "https://linnbenton.instructure.com/courses/12961/modules/items/658224"], ["ENGR 103 HW 9", "https://linnbenton.instructure.com/courses/12961/modules/items/658229"]]]], "mc": [[5, "5.1", "极坐标距离函数可以从 ICA 5.1 迁移哪项技巧？", ["把半径相乘当点积", "先把角度转换为弧度，再调用三角函数", "把两个半径作为数组形状", "用字符串保存距离以便计算"], 1, "两题都将输入角度用于三角函数，但距离函数返回的是距离。"], [5, "5.2", "若圆柱函数一次接收 6 个半径和一个固定高度，最适合沿用 ICA 5.3 的哪种输出？", ["两个各含 6 个值的数组", "一个包含高度的字符串", "只有一个面积标量", "单个布尔值"], 0, "面积与体积对应每一个半径，和 ICA 5.3 的数组计算与多值返回相似。"], [5, "5.3", "调用 ellipse(a, b, k=2) 时，h 会怎样？", ["等于 2", "等于 a", "等于 b", "使用默认值 0"], 3, "像 ICA 5.3 一样，可以单独覆盖一个有默认值的参数。"], [6, "6.1", "把 ICA 的抛体动画改为 HW 的对数轨迹时，应首先换掉什么？", ["GIF 的保存机制", "逐帧更新函数的用途", "用来生成 x、y 坐标的模型", "动画帧的基本概念"], 2, "更新已有图形和导出 GIF 的流程可以复用，坐标数据改由对数模型生成。"], [6, "6.2", "把长度单位转换器迁移到华氏和摄氏，哪项假设必须改变？", ["输入可以有默认值", "必须识别输入和输出单位", "可以先统一到一种单位", "仅乘一个比例就能完成所有转换"], 3, "例如华氏转摄氏需要先减 32，再乘比例。"], [6, "6.3", "HW 6.3 对应 ICA 6.3 的哪种控制结构？", ["match/case", "for", "try/finally", "列表推导式"], 0, "两题都用 match 对单位分支，只是转换领域不同。"], [7, "7.1", "输入包含 9 个三角形，每行有三列。沿用 ICA 7.1 的输出结构，结果形状是什么？", ["(3, 9)", "(9,)", "(9, 1)", "(9, 3)"], 2, "每个输入行计算一个量，按同一行号存入二维列数组。"], [7, "7.2", "Pascal 矩阵与 ICA 7.2 的共同方法是什么？", ["每格只用当前行号", "用嵌套循环访问二维下标", "只定义一个递归基例", "从 CSV 读矩阵"], 1, "同样遍历二维矩阵，但 Pascal 内部元素依赖上方与左方。"], [7, "7.3", "用递归求非负整数各位数字和时，哪一步会产生更小的同类问题？", ["sumdig(num % 10) 每次保留最后一位", "sumdig(num - 1) 随后直接返回原整数", "sumdig(num * 10)", "sumdig(num // 10) 去掉最后一位"], 3, "用 num % 10 取最后一位，用 num // 10 递归处理剩余数字。"], [8, "8.1", "沿用 ICA 8.1 的文本格式化方法，若 HW 要小数点后五位，应选什么？", [".5f", ".5g", "5d", ".3f"], 0, "f 指定定点格式，5 是小数位数。"], [8, "8.2", "HW 的 CSV 文件已有列标签。哪种方法使输出只包含指定三列和表头？", ["to_csv(header=False)", "read_csv(index_col=0)", "to_csv(index=False)", "to_excel(index=False)"], 2, "index=False 省掉额外的 DataFrame 行索引，仍保留列标签。"], [8, "8.4", "把 ICA 的双表写法用到 HW，要保持哪一项？", ["为每条曲线写一个互不相干的工作簿", "给两次 to_excel 传同一个 ExcelWriter、不同 sheet_name", "把两张表命名为同一个名称", "用两个 read_csv 调用读取工作簿"], 1, "一个 writer 管理一个工作簿，sheet_name 区分两个数据表。"], [9, "9.1", "从三弹簧例题迁移到四个网孔时，A 的形状是什么？", ["(3, 3)", "(4, 1)", "(8, 8)", "(4, 4)"], 3, "四条网孔方程和四个未知网孔电流各对应一行、一列。"], [9, "9.2", "若包含两个端点的采样数组有 20 点，直接做相邻前向差分会算出多少个近似导数？", ["19", "20", "21", "40"], 0, "每一对相邻点贡献一个差分，因此时间轴应与前 19 个点对齐。"], [9, "9.4", "怎样把 ICA 9.4 的拟合流程迁移到 HW 9.4？", ["把 x 与 y 对调", "仅将 CSV 改成 Excel", "换用 HW 的 CSV 并将拟合次数改为 8", "增加截距但保持次数为 3"], 2, "读取数据、拟合、在采样网格求值和绘图的结构可沿用。"]], "drag": [[5, "5.1", "依次排列极坐标距离函数的四个步骤。", ["接收半径和以度为单位的角度", "计算角度差并转为弧度", "用余弦公式计算距离平方", "开平方并返回距离"], "对应 ICA 5.1 的输入、角度处理、公式求值和返回。"], [6, "6.1", "依次排列把课堂动画改成对数轨迹的步骤。", ["在正数区间生成 x 样本", "计算每个样本的对数曲线 y", "用坐标样本驱动逐帧更新", "把动画保存为 GIF"], "这沿用了 ICA 6.1 的动画流程，替换的是轨迹模型。"], [7, "7.2", "依次排列 Pascal 矩阵的构造步骤。", ["分配 n×n 数组", "把第一行和第一列设为 1", "逐行逐列用上方和左方的值填内部格", "返回填好的矩阵"], "与 ICA 7.2 同样使用二维遍历，Pascal 还要求先准备依赖项。"], [8, "8.4", "依次排列双表 Excel 的完整流程。", ["为每条曲线建立含 theta 的 DataFrame", "通过同一个 ExcelWriter 写入两张命名表", "关闭 writer 后按表名读回列数组", "用读回的数组画对应子图"], "复用 ICA 8.4 的写入、读回与绘图流程。"], [9, "9.3", "依次排列梯形近似积分的流程。", ["给定积分边界和梯形数量 N", "生成 N+1 个端点并求函数值", "用每段的宽度乘两端函数值的平均", "求和并与解析积分比较"], "ICA 9.3 的梯形公式继续适用，HW 增加不同分段数的比较。"]], "key": "engr103-ica-hw-5-9"}</script>
+<script>
+"use strict";
+const data=JSON.parse(document.querySelector("#data").textContent);
+const $=id=>document.getElementById(id);
+const key="zhihu-practice:"+data.key+":v1";
+let history={};
+try{history=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch{}
+let week="all", section="all";
+const all=[
+ ...data.mc.map(([week,hw,prompt,options,answer,why],i)=>({id:"M"+(i+1),week,hw,prompt,options,answer,why,type:"mc"})),
+ ...data.drag.map(([week,hw,prompt,items,why],i)=>({id:"D"+(i+1),week,hw,prompt,items,why,type:"drag"}))
+];
+let order=[...all];
+const drafts=new Map();
+function node(tag,text,klass){
+ const el=document.createElement(tag);
+ if(text!==undefined)el.textContent=text;
+ if(klass)el.className=klass;
+ return el;
+}
+function link(label,url){const a=node("a",label);a.href=url;return a}
+function navigation(){
+ const nav=$("nav");nav.replaceChildren();
+ for(const [value,label] of [["all","全部周次"],...data.weeks.map(([num,topic])=>[num,"第 "+num+" 周 · "+topic])]){
+  const b=node("button",label);b.type="button";b.dataset.week=value;
+  b.setAttribute("aria-pressed",String(value===week&&section==="all"));
+  b.onclick=()=>{week=value;section="all";render()};nav.append(b);
+  if(data.hideDrag&&value===week&&value!=="all"){
+   const groups=[...new Set(all.filter(q=>q.week===week).map(q=>q.hw.split(" · ")[0]))];
+   const names={"§10.1":"图的类型","§10.2":"顶点度与二分图","§10.3":"邻接矩阵","§10.4":"路径与连通性","§10.5":"Euler 与 Hamilton","§10.6":"最短路与旅行商","§11.1":"树的概念与计数","§11.3":"遍历与表达式","§11.5":"最小生成树"};
+   for(const group of groups){
+    const item=node("button",group+" "+names[group],"meta");item.type="button";
+    item.setAttribute("aria-pressed",String(section===group));
+    item.onclick=()=>{section=group;render()};nav.append(item);
+   }
+  }
+ }
+}
+if(data.hideDrag)$("type").querySelector('[value="drag"]').remove();
+function mapping(){
+ const out=$("map");out.replaceChildren();
+ for(const [num,topic,rows,sources] of data.weeks){
+  if(week!=="all"&&week!==num)continue;
+  const card=node("section",undefined,"card");
+  card.append(node("h2","第 "+num+" 周 · "+topic));
+  if(rows.length){
+   const scroll=node("div",undefined,"scroll"),table=node("table"),head=table.createTHead().insertRow();
+   for(const label of ["ICA 小题","HW 对应题","迁移方法"]){const th=node("th",label);th.scope="col";head.append(th)}
+   const body=table.createTBody();
+   for(const [ica,summary,hw,how] of rows){const tr=body.insertRow();for(const val of ["ICA "+ica+" · "+summary,"HW "+hw,how])tr.insertCell().textContent=val}
+   scroll.append(table);card.append(scroll);
+  }
+  if(sources?.length){const p=node("p",undefined,"meta");for(const [label,url] of sources){if(p.childNodes.length)p.append(" · ");p.append(link(label,url))}card.append(p)}
+  out.append(card);
+ }
+}
+function shuffled(list){
+ const arr=[...list];
+ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
+ if(arr.length>1&&arr.every((x,i)=>x===list[i]))arr.push(arr.shift());
+ return arr;
+}
+function arrange(q,body){
+ if(!drafts.has(q.id))drafts.set(q.id,shuffled(q.items.map((_,i)=>i)));
+ let start=null;
+ const hint=node("p","拖拽排序，也可以用 ↑ / ↓ 按钮。","meta");
+ const list=node("ol",undefined,"arrange");
+ function move(from,to,focus){
+  if(from===to||to<0||to>=q.items.length)return;
+  const ids=drafts.get(q.id);ids.splice(to,0,ids.splice(from,1)[0]);draw();
+  if(focus){const buttons=list.children[to].querySelectorAll("button");(buttons[focus-1].disabled?buttons[2-focus]:buttons[focus-1]).focus()}
+ }
+ function draw(){
+  list.replaceChildren();
+  for(const [i,id] of drafts.get(q.id).entries()){
+   const row=node("li");row.draggable=true;
+   row.ondragstart=e=>{start=i;e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",String(i))};
+   row.ondragend=()=>{start=null};
+   row.ondragover=e=>{if(start!==null)e.preventDefault()};
+   row.ondrop=e=>{e.preventDefault();if(start!==null)move(start,i);start=null};
+   row.append(node("span",q.items[id]));
+   for(const [step,label] of [[-1,"↑"],[1,"↓"]]){
+    const b=node("button",label);b.type="button";b.setAttribute("aria-label",(step<0?"上移 ":"下移 ")+q.items[id]);
+    b.disabled=i+step<0||i+step>=q.items.length;b.onclick=()=>move(i,i+step,step<0?1:2);row.append(b);
+   }
+   list.append(row);
+  }
+ }
+ draw();body.append(hint,list);
+}
+function card(q){
+ const article=$("card").content.firstElementChild.cloneNode(true);
+ article.id=q.id;
+ article.querySelector(".meta").textContent=q.id+" · 第 "+q.week+" 周 · "+(data.hideDrag?"作业":"HW")+" "+q.hw;
+ article.querySelector("h3").textContent=q.prompt;
+ const body=article.querySelector(".body"),feedback=article.querySelector(".result");
+ if(q.type==="mc"){
+  body.classList.add("choices");
+  for(const [i,label] of q.options.entries()){
+   const row=node("label",undefined,"option"),input=node("input");
+   input.type="radio";input.name=q.id;input.checked=drafts.get(q.id)===i;
+   input.onchange=()=>drafts.set(q.id,i);row.append(input,document.createTextNode(label));body.append(row);
+  }
+ }else arrange(q,body);
+ article.querySelector(".primary").onclick=()=>{
+  const answer=drafts.get(q.id);
+  if(answer===undefined){feedback.textContent="请先选择一个答案。";return}
+  const correct=q.type==="mc"?answer===q.answer:answer.every((id,i)=>id===i);
+  const prev=history[q.id]||{attempts:0,errors:0};
+  history[q.id]={attempts:prev.attempts+1,errors:prev.errors+Number(!correct),correct,lastAnswer:Array.isArray(answer)?[...answer]:answer};
+  try{localStorage.setItem(key,JSON.stringify(history))}catch{}
+  feedback.classList.toggle("bad",!correct);
+  const solution=q.type==="mc"?q.options[q.answer]:q.items.join(" → ");
+  feedback.textContent=(correct?"答对了。":"这次答错了。正确答案："+solution+"。")+q.why;
+  count();
+ };
+ return article;
+}
+function count(){
+ const items=all.filter(q=>week==="all"||q.week===week);
+ $("count").textContent="已做 "+items.filter(q=>history[q.id]).length+"/"+items.length+" · 未做 "+items.filter(q=>!history[q.id]).length+" · 错题 "+items.filter(q=>history[q.id]?.correct===false).length;
+}
+function isVisible(q){
+ const type=$("type").value,status=$("status").value;
+ return (week==="all"||week===q.week)&&(section==="all"||q.hw.startsWith(section+" · "))&&(type==="all"||q.type===type)
+  &&(status==="all"||(status==="new"&&!history[q.id])||(status==="wrong"&&history[q.id]?.correct===false));
+}
+function render(){
+ navigation();
+ mapping();count();
+ const list=order.filter(isVisible);
+ $("questions").replaceChildren(...list.map(card));
+ if(!list.length)$("questions").append(node("p","这个分类下没有符合筛选条件的题目。","card"));
+}
+$("type").onchange=render;$("status").onchange=render;
+$("shuffle").onclick=()=>{
+ const replacement=shuffled(order.filter(isVisible));let pos=0;
+ order=order.map(q=>isVisible(q)?replacement[pos++]:q);render();
+};
+$("export").onclick=()=>{
+ const records=all.filter(q=>history[q.id]?.correct===false).map(q=>{
+  const record=history[q.id];
+  const selected=q.type==="mc"?q.options[record.lastAnswer]:record.lastAnswer.map(i=>q.items[i]).join(" → ");
+  const answer=q.type==="mc"?q.options[q.answer]:q.items.join(" → ");
+  return [q.id+" · 第 "+q.week+" 周 · "+q.hw,q.prompt,"上次作答："+selected,"正确答案："+answer,q.why].join("\n");
+ });
+ if(!records.length){$("count").textContent="当前没有可导出的错题。";return}
+ const href=URL.createObjectURL(new Blob([data.title,"\n\n",records.join("\n\n")],{type:"text/plain;charset=utf-8"}));
+ const a=link("下载错题",href);a.download=data.key+"-错题.txt";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),1000);
+};
+render();
+</script></body></html>
