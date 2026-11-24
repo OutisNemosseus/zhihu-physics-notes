@@ -4,88 +4,97 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f7f6f1;color:#182e2a;font:16px/1.5 system-ui,sans-serif}main{max-width:1100px;margin:auto;padding:30px 22px}h1{font-size:clamp(28px,4vw,46px);letter-spacing:-.06em;margin:0}header p{margin:4px 0 22px;color:#4d625b}.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,1fr);gap:20px}.board,aside{background:#fffefa;border:1px solid #d5ddd4;border-radius:16px}.board{padding:10px;align-self:start}.board svg{width:100%;display:block;touch-action:none;cursor:crosshair}figcaption{padding:4px 10px;color:#56675e;font-size:14px}figure{margin:0}aside{padding:20px}h2{font-size:16px;margin:0 0 8px}.read{display:flex;gap:10px;margin-bottom:14px}.lamp{text-align:center;border:1px solid #c6d4ca;border-radius:8px;padding:5px 12px;font-size:13px}.lamp b{display:block;font:700 26px monospace}.on{background:#dbf4df;color:#145039}.history{font:14px/1.6 monospace;min-height:42px;overflow-wrap:anywhere}hr{border:0;border-top:1px solid #dbe1d8;margin:16px 0}.state{font-weight:650;min-height:48px}button{font:inherit;border:1px solid #bdc9bd;border-radius:8px;background:white;color:#193d34;padding:7px 12px;cursor:pointer}button:hover{background:#e4efe6}.actions{display:flex;flex-wrap:wrap;gap:6px}.primary{background:#164f42;color:white}.primary:hover{background:#216451}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin:12px 0}.up{grid-column:2}.left{grid-column:1}small{color:#52465e}label{display:block;margin:8px 0}input{accent-color:#146b53}svg text{font-family:system-ui,sans-serif;pointer-events:none}@media(max-width:760px){main{padding:16px 10px}.layout{grid-template-columns:1fr;gap:10px}aside{padding:14px}}
 </style>
-<main><header><h1>九宫格 · 红外定位实验</h1><p>三横三竖，共 9 个交点。点击或拖动小车可选择起点。车头始终朝上，左右键控制横移。</p></header>
-<div class="layout"><figure class="board"><svg id="map" viewBox="-8 -8 40 40" role="img" aria-label="可拖拽的九宫格小车与候选位置"></svg><figcaption>橙圈为目标（第 3 横、第 2 竖）。绿色小点为与观测一致的候选探头位置。</figcaption></figure>
+<main><header><h1>九宫格 · 红外定位实验</h1><p>三横三竖，共 9 个交点。点击或拖动小车可选择起点。起点对定位器保密。方向键指定沿哪条线探测，车头转向在模拟中按指令完成。</p></header>
+<div class="layout"><figure class="board"><svg id="map" viewBox="-8 -8 40 40" role="img" aria-label="可拖拽的九宫格小车与候选位置"></svg><figcaption>橙圈为目标（第 3 横、第 2 竖）。绿圈表示最近一次确认的交点可能在哪里。</figcaption></figure>
 <aside><h2>红外读数</h2><div class="read" id="lamps"></div><div class="history" id="history"></div><hr><h2>定位结果</h2><div class="state" id="state"></div>
-<div class="actions"><button id="auto" class="primary">自动定位并归位</button><button id="demo">演示 A → B</button></div>
-<div class="pad"><button class="up" data-d="0,-1">↑ 前进</button><button class="left" data-d="-1,0">← 左移</button><button data-d="0,1">↓ 后退</button><button data-d="1,0">→ 右移</button></div>
+<div class="actions"><button id="auto" class="primary">先探索，再归位</button><button id="demo">演示 A → B</button></div>
+<div class="pad"><button class="up" data-d="0,-1">↑ 前进</button><button class="left" data-d="-1,0">← 向左探测</button><button data-d="0,1">↓ 向下探测</button><button data-d="1,0">→ 向右探测</button></div>
 <label><input type="checkbox" id="show" checked> 显示候选位置</label><label>动画速度 <input type="range" min="1" max="10" value="6" id="speed"></label>
-<small>理想模型：每格 12 步，每步位移已知。拖动会清除定位记忆。坐标按下往上数横线、左往右数竖线；定位点是中间探头。</small></aside></div></main>
+<small>定位器只接收方向指令和红外变化。地图假设相邻两线之间没有漏检，也没有掉头。拖动会清除定位记忆。坐标按下往上数横线、左往右数竖线；定位点是中间探头。</small></aside></div></main>
 <script>
-// World and estimator share only the known map and sensor geometry.
-const END=24, GRID=12, goal={x:12,y:0}, dirs=[[0,-1],[1,0],[0,1],[-1,0]];
-function tape(x,y){return (x>=-0.5&&x<=24.5&&y>=0&&y<=24&&y%12===0)||(y>=-0.5&&y<=24.5&&x>=0&&x<=24&&x%12===0)}
-function ir(x,y){return Number(tape(x-2,y))*4+Number(tape(x,y))*2+Number(tape(x+2,y))}
-function prior(bits){let p=[];for(let y=0;y<=END;y+=GRID)for(let x=0;x<=END;x+=GRID)if(ir(x,y)===bits)p.push({x,y});return p}
-function update(p,dx,dy,bits){return p.map(v=>({x:v.x+dx,y:v.y+dy})).filter(v=>ir(v.x,v.y)===bits)}
-// Choose a short probe whose possible outcomes separate the remaining hypotheses.
-// Restrict every hypothetical path to the same visible workspace; no boundary oracle.
-function probe(p){
- let best=null,score=0;
- for(let dist=1;dist<=42;dist++){
-  if(score && 1/dist<=score)break;
-  for(let dx=-dist;dx<=dist;dx++){
-   const ay=dist-Math.abs(dx);
-   for(const dy of ay?[ay,-ay]:[0]){
-    let counts=[0,0,0,0,0,0,0,0],valid=true;
-    for(const q of p){let x=q.x+dx,y=q.y+dy;if(x< -4||x>28||y< -4||y>28){valid=false;break}counts[ir(x,y)]++}
-    if(!valid)continue;
-    let split=1-counts.reduce((s,n)=>s+n*n,0)/(p.length*p.length);
-    if(split/dist>score){score=split/dist;best={dx,dy}}
-   }
+const directions=[[0,-1],[1,0],[0,1],[-1,0]];
+const sites=Array.from({length:9},(_,i)=>[i%3,Math.floor(i/3)]);
+const goal=[1,0], inside=([x,y])=>x>=0&&x<=2&&y>=0&&y<=2;
+const advance=([x,y],[dx,dy])=>[x+dx,y+dy];
+// This estimator receives only commands and IR changes. Repeated readings carry no distance information.
+class Localizer {
+ constructor(){this.points=sites.slice();this.bits='111';this.direction=null;this.departed=false}
+ command(d){this.direction=d;this.departed=false}
+ observe(bits){
+  if(bits===this.bits)return false;
+  this.bits=bits;
+  if(!this.direction)return false;
+  if(bits==='010'){this.departed=true;return false}
+  if(bits==='111'&&this.departed){
+   this.points=this.points.map(p=>advance(p,this.direction)).filter(inside);
+   this.direction=null;this.departed=false;return true
   }
+  this.departed=false;return false
  }
- return best
-}
-function plan(p){if(p.length===1)return {dx:goal.x-p[0].x,dy:goal.y-p[0].y};return probe(p)}
-// UI
-const $=s=>document.getElementById(s),svg=$('map');
-let world={x:12,y:12},p=[],history=[],mode='',timer=0,path=[],route=[],phase='',steps=0;
-const str=b=>b.toString(2).padStart(3,'0');
-function note(bits){if(history.at(-1)!==bits)history.push(bits);if(history.length>12)history.shift()}
-function halt(){clearTimeout(timer);mode='';route=[]}
-function place(x,y){halt();world={x,y};let b=ir(x,y);p=prior(b);history=[b];path=[{x,y}];steps=0;phase='等待操作';draw()}
-function walk(dx,dy){
- let x=world.x+dx,y=world.y+dy;
- if(x< -4||y< -4||x>28||y>28){halt();phase='已到显示场地边缘';return false}
- world={x,y};let b=ir(x,y);p=update(p,dx,dy,b);note(b);steps++;path.push(world);return true
-}
-function queue(dx,dy){let out=[];for(let i=0;i<Math.abs(dx);i++)out.push([Math.sign(dx),0]);for(let i=0;i<Math.abs(dy);i++)out.push([0,Math.sign(dy)]);return out}
-function tick(){
- if(!mode)return;
- if(mode==='demo'&&world.y===0){halt();phase='到达 B：111';draw();return}
- if(mode==='auto'&&!route.length){
-  let m=plan(p);
-  if(!m||(!m.dx&&!m.dy)){halt();phase=m?'已定位并到达目标':'当前观测不足';draw();return}
-  phase=p.length===1?'已定位，驶向目标':'主动探测';route=queue(m.dx,m.dy)
+ choose(tried=new Set()){
+  const p=this.points;
+  if(p.length===1){let [x,y]=p[0];return x!==1?[Math.sign(1-x),0]:y?[0,-1]:null}
+  // Prefer an informative completed crossing. A failed probe supplies no location.
+  const options=directions.map(d=>({d,n:p.filter(q=>inside(advance(q,d))).length}));
+  const informative=options.filter(o=>!tried.has(o.d.join())&&o.n>0&&o.n<p.length).sort((a,b)=>b.n-a.n)[0]?.d;
+  if(informative)return informative;
+  return options.find(o=>o.n===p.length&&tried.has(o.d.map(v=>-v).join()))?.d
  }
- let d=mode==='demo'?[0,-1]:route.shift(),n=p.length;
- if(walk(...d)&&p.length<n)route=[];
- draw();if(mode)timer=setTimeout(tick,290-26*Number($('speed').value))
 }
-function position(q){return q.x%12===0&&q.y%12===0?'第 '+(3-q.y/12)+' 横、第 '+(1+q.x/12)+' 竖':'距左边 '+(q.x/12).toFixed(2)+' 格，距底边 '+((24-q.y)/12).toFixed(2)+' 格'}
+// World coordinates below drive the animation only.
+const $=id=>document.getElementById(id), svg=$('map');
+let tried=new Set();let loc,world,log,phase,auto=false,frame=0,busy=false,angle=0;
+function place(x,y){cancelAnimationFrame(frame);world=[x,y];loc=new Localizer();tried.clear();log=['111'];auto=false;busy=false;angle=0;phase='起点未知';draw()}
 function draw(){
  let s='<rect x="-8" y="-8" width="40" height="40" rx="2" fill="#f5f5ec"/>';
- for(let i=0;i<=24;i+=12){s+='<path d="M 0 '+i+' H 24 M '+i+' 0 V 24" stroke="#26352e" stroke-width="1" stroke-linecap="square"/><text x="'+i+'" y="29.7" text-anchor="middle" font-size="1.3" fill="#4a6254">'+(i/12+1)+'</text><text x="-5.5" y="'+(i+.45)+'" font-size="1.3" fill="#4a6254">'+(3-i/12)+'</text>'}
- if($('show').checked)for(let q of p)s+='<circle cx="'+q.x+'" cy="'+q.y+'" r=".16" fill="#298958" opacity=".65"/>';
- s+='<polyline points="'+path.slice(-220).map(q=>q.x+','+q.y).join(' ')+'" fill="none" stroke="#4aa892" stroke-width=".26"/><circle cx="12" cy="0" r="1.45" fill="none" stroke="#d77c27" stroke-width=".4"/>';
- s+='<g transform="translate('+world.x+' '+world.y+')"><rect x="-2.3" y=".3" width="4.6" height="4" rx=".6" fill="#cee3de" stroke="#1b6155" stroke-width=".25"/><path d="M 0 3.4 V 1.1 m -.65 .8 L 0 1 l .65 .9" fill="none" stroke="#20594c" stroke-width=".35"/>';
- let bits=str(ir(world.x,world.y));
- for(let i=0;i<3;i++)s+='<circle cx="'+(2*i-2)+'" cy="0" r=".5" fill="'+(bits[i]==='1'?'#fbd86e':'#eef1eb')+'" stroke="#405247" stroke-width=".15"/>';
- svg.innerHTML=s+'</g>';
- $('lamps').innerHTML=[...bits].map((v,i)=>'<div class="lamp '+(v==='1'?'on':'')+'">'+['左','中','右'][i]+'<b>'+v+'</b></div>').join('');
- $('history').textContent=history.map(str).join(' → ');
- $('state').textContent=phase+' · '+(p.length===1?position(p[0]):p.length+' 个候选')+' · '+steps+' 步';
- $('auto').textContent=mode==='auto'?'暂停':'自动定位并归位'
+ for(let i=0;i<3;i++){let t=12*i;s+='<path d="M -2 '+t+' H 26 M '+t+' -2 V 26" stroke="#26352e" stroke-width=".9"/><text x="-5" y="'+(t+.5)+'" font-size="1.4">'+(3-i)+'</text><text x="'+t+'" y="30" font-size="1.4">'+(i+1)+'</text>'}
+ if($('show').checked)for(const [x,y] of loc.points)s+='<circle cx="'+12*x+'" cy="'+12*y+'" r="1.25" fill="none" stroke="#168260" stroke-width=".4"/>';
+ s+='<circle cx="12" cy="0" r="1.8" fill="none" stroke="#d77c27" stroke-width=".4"/><g transform="translate('+world.map(v=>v*12).join(' ')+') rotate('+angle+')"><rect x="-1.8" y="0" width="3.6" height="3.2" rx=".6" fill="#52918a"/>';
+ for(let i=0;i<3;i++)s+='<circle cx="'+(i-1)*1.45+'" cy="0" r=".45" fill="'+(loc.bits[i]==='1'?'#ffd058':'white')+'" stroke="#405247" stroke-width=".15"/>';
+ svg.innerHTML=s+'</g>'; $('lamps').innerHTML=[...loc.bits].map((v,i)=>'<div class="lamp '+(v==='1'?'on':'')+'">'+['左','中','右'][i]+'<b>'+v+'</b></div>').join('');
+ $('history').textContent=log.slice(-11).join(' → ');let p=loc.points[0];
+ $('state').textContent=phase+' · '+(loc.points.length===1?'最近确认：第 '+(3-p[1])+' 横、第 '+(p[0]+1)+' 竖':loc.points.length+' 个候选交点');
+ $('auto').textContent=auto?'暂停自动探索':'先探索，再归位'
 }
-$('auto').onclick=()=>{if(mode==='auto'){halt();phase='已暂停';draw()}else{halt();mode='auto';tick()}};
-$('demo').onclick=()=>{place(12,12);phase='从 A 向前一格';mode='demo';tick()};
-function manual(dx,dy){halt();phase='手动移动';walk(dx,dy);draw()}
-document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>manual(...b.dataset.d.split(',').map(Number)));
-document.addEventListener('keydown',e=>{let i=['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].indexOf(e.key);if(i>=0&&e.target.tagName!=='INPUT'){e.preventDefault();manual(...dirs[i])}});
-function drop(e){let q=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());let clamp=v=>Math.max(0,Math.min(24,GRID*Math.round(v/GRID)));place(clamp(q.x),clamp(q.y))}
+function sense(bits){if(loc.bits!==bits)log.push(bits);return loc.observe(bits)}
+function next(){if(!auto)return;let d=loc.choose(tried);if(!d){auto=false;phase=loc.points.length===1?'已定位并归位':'现有观测无法区分';draw();return}probe(d)}
+function probe(d){
+ if(busy)return;busy=true;loc.command(d);angle=Math.atan2(d[0],-d[1])*180/Math.PI;
+ const start=world.slice(),end=advance(start,d),exists=inside(end);
+ let began=performance.now(),duration=1600-110*Number($('speed').value);
+ phase='沿指令方向探测';draw();
+ function animate(now){
+  const f=Math.min(1,(now-began)/duration),travel=exists?f:Math.min(f,.30);
+  world=[start[0]+travel*d[0],start[1]+travel*d[1]];
+  const bits=travel<.04?'111':exists?(f>=1?'111':'010'):(travel<.16?'010':'000');
+  // Preserve the departure event even if a background tab skips animation frames.
+  if(exists&&f===1&&loc.bits==='111')sense('010');
+  const crossed=sense(bits);
+  if(crossed){tried.clear();world=end;busy=false;phase='检测到下一交点';draw();if(auto)frame=requestAnimationFrame(next);return}
+  if(bits==='000'){
+   tried.add(d.join());loc.direction=null;loc.departed=false;
+   phase='失线，原路倒回最近交点';draw();
+   const turn=now;
+   function recover(t){
+    const offset=Math.max(0,travel-(t-turn)/duration);
+    world=[start[0]+offset*d[0],start[1]+offset*d[1]];
+    sense(offset<=0?'111':offset<.16?'010':'000');draw();
+    if(loc.bits==='111'){busy=false;phase='倒回原交点，候选保持不变';draw();if(auto)frame=requestAnimationFrame(next)}
+    else frame=requestAnimationFrame(recover)
+   }
+   frame=requestAnimationFrame(recover);return
+  }
+  draw();frame=requestAnimationFrame(animate)
+ }
+ frame=requestAnimationFrame(animate)
+}
+$('auto').onclick=()=>{if(auto){auto=false;return draw()}if(!busy){auto=true;next()}};
+$('demo').onclick=()=>{place(1,1);probe(directions[0])};
+function manual(d){if(!busy){auto=false;cancelAnimationFrame(frame);probe(d)}}
+document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>manual(b.dataset.d.split(',').map(Number)));
+document.addEventListener('keydown',e=>{let i=['ArrowUp','ArrowRight','ArrowDown','ArrowLeft'].indexOf(e.key);if(i>=0&&e.target.tagName!=='INPUT'){e.preventDefault();manual(directions[i])}});
+function drop(e){const q=new DOMPoint(e.clientX,e.clientY).matrixTransform(svg.getScreenCTM().inverse());const idx=v=>Math.max(0,Math.min(2,Math.round(v/12)));place(idx(q.x),idx(q.y))}
 svg.onpointerdown=e=>{svg.setPointerCapture(e.pointerId);drop(e)};
 svg.onpointermove=e=>{if(svg.hasPointerCapture(e.pointerId))drop(e)};
-svg.onpointerup=e=>{if(svg.hasPointerCapture(e.pointerId))svg.releasePointerCapture(e.pointerId)};
-$('show').onchange=draw;place(12,12);
+$('show').onchange=draw;place(1,1);
 </script></html>
