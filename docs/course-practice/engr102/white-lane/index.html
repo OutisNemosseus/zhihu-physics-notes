@@ -2,12 +2,19 @@
 <style>
 *{box-sizing:border-box}body{margin:0;background:#f4f3ed;color:#193b34;font:16px/1.6 system-ui,sans-serif}main{max-width:1040px;margin:auto;padding:32px 20px}h1{font-size:clamp(32px,5vw,55px);line-height:1.08;letter-spacing:-.06em;margin:0 0 10px}h2{font-size:22px;margin:0 0 10px}p{margin:8px 0}section,article{background:#fffefa;border:1px solid #cdd9cf;border-radius:14px;padding:20px}.lab{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin:22px 0 14px}svg{width:100%;display:block}button{font:inherit;border-radius:8px;padding:7px 16px;border:1px solid #94afa5;background:#fff;color:#164d40;cursor:pointer}button:first-of-type{background:#164d40;color:white}output{display:block;font:bold 32px monospace;color:#13644f}table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}td,th{padding:5px;text-align:left;border-bottom:1px solid #dce3dc}ol{padding-left:23px}li{margin:6px 0}a{color:#146450}.crumb,small{color:#52685d}figure{margin:0}figcaption{font-size:14px}button:focus-visible{outline:3px solid orange}@media(max-width:720px){.lab{grid-template-columns:1fr}main{padding:20px 12px}}
 </style><main><p class="crumb">ENGR 102 / 小车实验</p><h1>白地直行校准</h1><p>沿两条竖线之间的白地行驶。每经过一条横线，记录三个探头各自第一次碰到胶带的时间。</p>
-<section id="calibration"><h2>跑偏以后，怎样选 PWM？</h2><p>选择一种车况，播放 9 趟校准和 10 趟验证。地面尺寸、轮速与读数均为模拟值。</p>
+<p><a href="#twin">导入实车 CSV，运行数字孪生配平实验 ↓</a></p><section id="calibration"><a href="#twin">进入数字孪生实验 →</a><h2>跑偏以后，怎样选 PWM？</h2><p>选择一种车况，播放 9 趟校准和 10 趟验证。地面尺寸、轮速与读数均为模拟值。</p>
 <label>车况 <select id="bias"><option value="1">通常向右偏</option><option value="-1">通常向左偏</option><option value="0">同一组有时左偏、有时右偏</option></select></label>
 <div class="lab"><figure><svg id="trialmap" viewBox="0 0 260 250" aria-label="模拟轨迹、探头和三条测量横线"></svg><figcaption>蓝虚线为目标方向；彩色实线为本趟轨迹。图中以车头探头中心描迹。</figcaption></figure>
 <div><b id="trialname"></b><p id="trialmsg" aria-live="polite"></p><button id="trialplay">播放校准</button> <button id="prevtrial">上一趟</button> <button id="nexttrial">下一趟</button><p><label>查看过程 <input id="timeline" type="range" min="0" max="19" step=".001" value="0"></label></p>
 <table><caption>本趟触线记录（毫秒）</caption><thead><tr><th>线</th><th>左</th><th>中</th><th>右</th><th>左−右</th></tr></thead><tbody id="rawgates"></tbody></table></div></div>
 <table><caption>仅用已经完成的校准趟次选参数</caption><thead><tr><th>左 / 右 PWM</th><th>每趟误差（ms）</th><th>三趟中位数</th></tr></thead><tbody id="rank"></tbody></table><p id="decision"></p></section>
+<section id="twin"><h2>从跑偏记录到四轮 PWM</h2><p>先看同一动力下连续十趟左偏，再加入不同动力的对照记录。模型用三条横线的时间戳估算从 H2 到 H4 的航向变化，正值向右，负值向左。</p>
+<div><button id="singleDemo">① 看十趟左偏</button> <button id="contrastDemo">② 加入两侧配平对照</button> <label style="display:inline-block">或导入 Pico CSV <input id="logFile" type="file" accept=".csv,.txt,text/csv"></label></div>
+<p><label>相邻横线距离 <input id="pitch" type="number" value="20" min=".1" step=".1" style="width:65px"> cm</label>　<label>左至右探头间距 <input id="span" type="number" value="4" min=".1" step=".1" style="width:65px"> cm</label></p>
+<p><button id="sweep">③ 拟合并运行虚拟试跑</button></p>
+<p id="origin"></p><div style="overflow:auto"><table><thead><tr><th>左右 PWM</th><th>有效趟数</th><th>向左 / 向右 / 零</th><th>平均航向变化</th><th>终点带命中</th></tr></thead><tbody id="measurements"></tbody></table></div>
+<p id="model" aria-live="polite"></p><svg id="sweepPlot" viewBox="0 0 600 170" aria-label="各配平预测平均绝对转角，越小越好" hidden></svg><p id="result"></p>
+<details><summary>模型怎样评分？</summary><p>四轮按左侧两轮、右侧两轮联动。平均 PWM 固定为 25，配平 u = (左−右)/2。用直线拟合 H2 到 H4 的净转角 = a + b × u。在每组内重采样试跑、重新拟合，再加入一次实测残差；每个候选重复 1,000 次，比较预测净转角绝对值的平均数。只比较采过数据的配平范围内的整数 PWM。终点命中单独显示，净转角小仍可能整车偏离中心。此模型没有各轮编码器数据，无法分别辨认四个电机增益或侧滑。</p></details></section>
 <div class="lab"><section><figure><svg id="board" viewBox="0 0 420 388" aria-label="四横四竖胶带，左列白地直行路线，车头朝上"></svg><figcaption>四横四竖围出 9 个空格。外圈有 12 个交点，内部另有 4 个。蓝色虚线只表示行驶方向，地面上留白。</figcaption></figure></section><section><h2 id="stage"></h2><button id="play">播放试跑</button> <button id="again">回到起点</button><p>左 / 中 / 右红外</p><output id="bits"></output><p id="explain"></p><h2>示例触线时间</h2><small>动画时间，单位 ms，从启动电机计时。表中先后顺序模拟一次斜着过线的试跑。</small><table><thead><tr><th>横线</th><th>左</th><th>中</th><th>右</th></tr></thead><tbody id="times"></tbody></table></section></div>
 <article><h2>为什么还要一条短纵胶带？</h2><p>从下往上看。两幅图都画了同一辆车在两个时刻的位置。黄色表示探头读到黑胶带。</p><svg xmlns="http://www.w3.org/2000/svg" width="820" height="378" viewBox="0 0 820 378" role="img" aria-label="车头平行，左右位置不同：横线都读111，目标带读010或000"><rect width="820" height="378" rx="14" fill="#f6f6ed"/><g font-family="system-ui,sans-serif" fill="#183e35"><g transform="translate(22 0)"><text x="14" y="38" font-size="22" font-weight="bold">车沿中心到达</text></g><path d="M198 328 V98" stroke="#75a8a0" stroke-width="2" stroke-dasharray="5 6"/><rect x="193" y="80" width="10" height="72" fill="#23342d"/><rect x="32" y="220" width="365" height="16" fill="#23342d"/><text x="34" y="211" font-size="15">H4 横线</text><text x="32" y="95" font-size="15">短纵胶带</text><rect x="170" y="232" width="56" height="41" rx="9" fill="#bde7d5" stroke="#1c6051" stroke-width="2"/><path d="M198 264 v-20 m-6 8 6-8 6 8" fill="none" stroke="#236453" stroke-width="3"/><circle cx="180" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><circle cx="198" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><circle cx="216" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><text x="233" y="218" font-family="monospace" font-size="21" font-weight="bold">111</text><rect x="170" y="124" width="56" height="41" rx="9" fill="#bde7d5" stroke="#1c6051" stroke-width="2"/><path d="M198 156 v-20 m-6 8 6-8 6 8" fill="none" stroke="#236453" stroke-width="3"/><circle cx="180" cy="120" r="6" fill="white" stroke="#275447" stroke-width="2"/><circle cx="198" cy="120" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><circle cx="216" cy="120" r="6" fill="white" stroke="#275447" stroke-width="2"/><text x="233" y="110" font-family="monospace" font-size="21" font-weight="bold">010</text><text x="34" y="354" font-size="16">中探头压住目标带 → 命中</text><g transform="translate(426 0)"><text x="14" y="38" font-size="22" font-weight="bold">整车偏右，车头仍朝前</text></g><path d="M602 328 V98" stroke="#75a8a0" stroke-width="2" stroke-dasharray="5 6"/><rect x="597" y="80" width="10" height="72" fill="#23342d"/><rect x="436" y="220" width="365" height="16" fill="#23342d"/><text x="438" y="211" font-size="15">H4 横线</text><text x="436" y="95" font-size="15">短纵胶带</text><rect x="629" y="232" width="56" height="41" rx="9" fill="#bde7d5" stroke="#1c6051" stroke-width="2"/><path d="M657 264 v-20 m-6 8 6-8 6 8" fill="none" stroke="#236453" stroke-width="3"/><circle cx="639" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><circle cx="657" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><circle cx="675" cy="228" r="6" fill="#ffcc58" stroke="#275447" stroke-width="2"/><text x="692" y="218" font-family="monospace" font-size="21" font-weight="bold">111</text><rect x="629" y="124" width="56" height="41" rx="9" fill="#bde7d5" stroke="#1c6051" stroke-width="2"/><path d="M657 156 v-20 m-6 8 6-8 6 8" fill="none" stroke="#236453" stroke-width="3"/><circle cx="639" cy="120" r="6" fill="white" stroke="#275447" stroke-width="2"/><circle cx="657" cy="120" r="6" fill="white" stroke="#275447" stroke-width="2"/><circle cx="675" cy="120" r="6" fill="white" stroke="#275447" stroke-width="2"/><text x="692" y="110" font-family="monospace" font-size="21" font-weight="bold">000</text><text x="438" y="354" font-size="16">三个探头都在目标带右边 → 错过</text></g></svg><p>中探头压住短纵带时读到 010。轻微偏移也可能只有左或右探头亮；偏得更远才会出现图右的 000。</p></article><article style="margin-top:14px"><h2>实车怎样采集一组数据</h2><ol>
 <li><b>一次布场。</b>从下往上编号 H1–H4。在左列白地中央对准 H1 摆车，三探头压线亮 111。在 H4 后方留一小段白地，再沿车道中心贴短纵胶带，用来检测终点横向偏移。</li>
@@ -103,6 +110,77 @@ $('again').onclick=()=>{cancelAnimationFrame(raf);playing=false;elapsed=last=0;d
  el('nexttrial').onclick=()=>{stop();cursor=Math.min(19,Math.floor(cursor)+1);render()};
  el('prevtrial').onclick=()=>{stop();cursor=Math.max(0,Math.ceil(cursor)-1);render()};
  build();render();
+})();
+</script>
+<script>
+(()=>{
+const get=id=>document.getElementById(id), names=[2,3,4].flatMap(h=>['L','M','R'].map(s=>'H'+h+'_'+s+'_us'));
+const headers=['trial','left_pwm','right_pwm','status','target_hit',...names];
+const mean=v=>v.reduce((a,b)=>a+b,0)/v.length;
+function demo(extra){
+ const rows=[headers.join(',')],trims=Array(10).fill(0).concat(extra?[-2,2,-2,2,-2,2]:[]);
+ const jitter=[-.6,.4,-.1,.65,-.25,.12,-.45,.37,.2,-.3];
+ trims.forEach((u,i)=>{
+  let delta=-3.6+2.6*u+jitter[i%10],start=-.5+jitter[(i+4)%10],times=[];
+  for(let g=0;g<3;g++){let mid=(g+1)*1e6,diff=2e5*Math.sin((start+delta*g/2)*Math.PI/180);
+   times.push(Math.round(mid-diff/2),mid,Math.round(mid+diff/2));}
+  rows.push([i+1,25+u,25-u,'ok',Number(Math.abs(start+delta/2)<1.1),...times].join(','));
+ });return rows.join('\n')
+}
+function parse(csv,D,B){
+ if(!(D>0&&B>0&&Number.isFinite(D)&&Number.isFinite(B)))throw Error('请输入正数尺寸。');
+ let lines=csv.trim().split(/\r?\n/).map(x=>x.trim()).filter(Boolean);
+ const h=lines.findIndex(x=>x.replace(/^\uFEFF/,'').startsWith('trial,left_pwm,'));
+ if(h<0)throw Error('找不到 WhiteLane CSV 表头。请用串口 D 导出的完整记录。');
+ const cols=lines[h].replace(/^\uFEFF/,'').split(','),ids=headers.map(k=>cols.indexOf(k));
+ if(ids.includes(-1))throw Error('CSV 缺少 PWM、状态、命中或三路时间戳列。');
+ const data=[];let skipped=0;
+ for(const line of lines.slice(h+1)){
+  if(line==='END_WHITE_LANE')break;
+  const cells=line.split(','),[id,l,r,status,hit,...ts]=ids.map(i=>cells[i]?.trim());
+  const t=ts.map(v=>Number(v)/1e6);
+  if(status!=='ok'||!id||!l||!r||+l + +r!==50||![+l,+r].every(x=>Number.isInteger(x)&&x>=0&&x<=100)||!['0','1'].includes(hit)||!t.every(x=>Number.isFinite(x)&&x>0)||!(t[1]<t[4]&&t[4]<t[7])){skipped++;continue}
+  const v=[D/(t[4]-t[1]),2*D/(t[7]-t[1]),D/(t[7]-t[4])];
+  const angles=v.map((s,i)=>Math.asin(s*(t[3*i+2]-t[3*i])/B)*180/Math.PI);
+  if(!angles.every(Number.isFinite)){skipped++;continue}
+  data.push({u:(+l-r)/2,y:angles[2]-angles[0],hit:+hit});
+ }return {data,skipped}
+}
+function fit(rows){
+ const x=mean(rows.map(r=>r.u)),y=mean(rows.map(r=>r.y));
+ const b=rows.reduce((s,r)=>s+(r.u-x)*(r.y-y),0)/rows.reduce((s,r)=>s+(r.u-x)**2,0);
+ return {a:y-b*x,b}
+}
+let raw=demo(false),label='合成示例 · 同一组十趟',generation=0;
+function run(sim=false){
+ const plot=get('sweepPlot');plot.innerHTML='';plot.style.display='none';get('result').textContent='';get('measurements').innerHTML='';
+ try{
+ const {data,skipped}=parse(raw,+get('pitch').value,+get('span').value);
+ get('origin').textContent=label+' · 有效 '+data.length+' 趟，排除 '+skipped+' 条。';
+ const groups=new Map();
+ for(const r of data){if(!groups.has(r.u))groups.set(r.u,[]);groups.get(r.u).push(r)}
+ const keys=[...groups.keys()].sort((a,b)=>a-b);
+ for(const u of keys){const g=groups.get(u),ys=g.map(r=>r.y);
+ get('measurements').innerHTML+='<tr><th>'+(25+u)+' / '+(25-u)+'</th><td>'+g.length+'</td><td>'+ys.filter(x=>x<0).length+' / '+ys.filter(x=>x>0).length+' / '+ys.filter(x=>x===0).length+'</td><td>'+mean(ys).toFixed(2)+'°</td><td>'+g.reduce((s,r)=>s+r.hit,0)+' / '+g.length+'</td></tr>';}
+ if(keys.length<2||keys.some(u=>groups.get(u).length<3)){get('model').textContent='当前记录只能描述已测动力的偏转。要估计调一档 PWM 会改变多少，需至少两种配平各有三趟。示例可点 ② 加入对照。';return}
+ const {a,b}=fit(data),cv=Math.sqrt(mean(data.map((r,i)=>{const m=fit(data.filter((_,j)=>i!==j));return (r.y-m.a-m.b*r.u)**2})));
+ get('model').textContent='拟合：净转角 ≈ '+a.toFixed(2)+' + ('+b.toFixed(2)+') × u 度。逐趟留一预测 RMSE '+cv.toFixed(2)+'°。';
+ if(!sim){get('result').textContent='点击 ③ 比较候选 PWM。';return}
+ const candidates=[];for(let u=keys[0];u<=keys.at(-1);u++)candidates.push({u,sum:0});
+ let seed=413;function pick(arr){seed=(Math.imul(seed,1664525)+1013904223)>>>0;return arr[Math.floor(seed/4294967296*arr.length)]}
+ const residuals=data.map(r=>r.y-a-b*r.u);
+ for(let n=0;n<1000;n++){const batch=[];for(const g of groups.values())for(let i=0;i<g.length;i++)batch.push(pick(g));
+  const m=fit(batch),noise=pick(residuals);for(const c of candidates)c.sum+=Math.abs(m.a+m.b*c.u+noise);}
+ const best=candidates.reduce((x,y)=>x.sum<=y.sum?x:y),max=Math.max(.001,...candidates.map(c=>c.sum/1000));
+ const w=560/candidates.length;
+ plot.style.display='block';plot.innerHTML=candidates.map((c,i)=>{let x=20+i*w,height=100*c.sum/(1000*max);return '<rect x="'+(x+w*.2)+'" y="'+(130-height)+'" width="'+(w*.6)+'" height="'+height+'" fill="'+(c===best?'#15715e':'#8ab5ab')+'"/><text x="'+(x+w*.5)+'" y="'+(123-height)+'" text-anchor="middle" font-size="12">'+(c.sum/1000).toFixed(2)+'°</text><text x="'+(x+w*.5)+'" y="150" text-anchor="middle" font-size="12">'+(25+c.u)+'/'+(25-c.u)+'</text>'}).join('');
+ get('result').textContent=(1000*candidates.length).toLocaleString()+' 次虚拟试跑 · 测试范围内推荐复测：左侧两轮 '+(25+best.u)+'%，右侧两轮 '+(25-best.u)+'%。预测平均绝对净转角 '+(best.sum/1000).toFixed(2)+'°。用新一批实车试跑与 25/25 对照，再决定是否采用。';
+ }catch(e){get('origin').textContent=label;get('model').textContent=e.message}
+}
+function example(extra){generation++;get('logFile').value='';get('pitch').value=20;get('span').value=4;raw=demo(extra);label=extra?'合成示例 · 十趟基线＋六趟对照':'合成示例 · 同一组十趟';run()}
+get('singleDemo').onclick=()=>example(false);get('contrastDemo').onclick=()=>example(true);
+get('logFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;const id=++generation;try{const csv=await f.text();if(id!==generation)return;raw=csv;label='导入文件 '+f.name+'（请核对上方两个尺寸）';run()}catch{if(id===generation){raw='';label='文件读取失败';run()}}};
+get('pitch').oninput=get('span').oninput=()=>run();get('sweep').onclick=()=>run(true);run();
 })();
 </script>
 </html>
