@@ -1,0 +1,164 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MTH 231 · 第 8、9 周作业选择题</title><style>
+:root{color-scheme:light;--ink:#172c36;--muted:#526975;--sea:#08695d;--mist:#e2f3ec;--line:#d5e1e6;--paper:#f5f8f9}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.6 "Inter","Noto Sans",system-ui,sans-serif;background:var(--paper)}a{color:var(--sea)}header{background:#153342;color:white;padding:24px max(20px,calc((100vw - 1240px)/2));border-bottom:4px solid #4fb29a}header a{color:#aff3dd}header p{margin:.35em 0}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.18;margin:.35em 0}.shell{max-width:1240px;margin:auto;display:grid;grid-template-columns:245px minmax(0,1fr);gap:24px;padding:24px 18px}aside{align-self:start;position:sticky;top:16px;background:white;border:1px solid var(--line);border-radius:16px;padding:15px}aside h2{font-size:1.1rem;margin:0 0 .6rem}nav{display:grid;gap:7px}button,select{font:inherit;min-height:42px;color:inherit;background:white;border:1px solid #9eb5bd;border-radius:8px;padding:6px 10px;cursor:pointer}button:hover,select:hover{border-color:var(--sea)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #2b8aa0;outline-offset:2px}button[aria-pressed=true]{background:var(--mist);border-color:var(--sea);font-weight:650}nav button{text-align:left}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:0 0 14px}.card h2,.card h3{margin:0 0 9px;line-height:1.35}.card h3{font-size:1.12rem}.meta,small{color:var(--muted);font-size:.9rem}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid var(--line)}th{background:#eaf2f5}.choices{display:grid;gap:7px}.option{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;cursor:pointer}.option input{width:18px;height:18px;flex:none}.primary{background:var(--sea);color:white;border-color:var(--sea);margin-top:10px}.arrange{list-style:none;padding:0;margin:0;display:grid;gap:7px}.arrange li{display:grid;grid-template-columns:1fr auto auto;gap:5px;align-items:center;background:#edf5f6;padding:5px 7px;border:1px solid var(--line);border-radius:8px;cursor:grab}.arrange button{min-width:38px}.arrange button:disabled{opacity:.35;cursor:default}.result{margin:.6rem 0 0;padding:7px 10px;border-radius:8px;background:#e9f5ee}.result.bad{background:#fbeadd}.result:empty{display:none}.jump{scroll-margin-top:10px}@media(max-width:740px){.shell{grid-template-columns:minmax(0,1fr);gap:12px}aside{position:static}nav{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:13px}}
+</style></head><body><header><a href="../../">Zhihu Physics Notes · 课程练习</a><h1>MTH 231 · 第 8、9 周作业选择题</h1><p>按 Written Homework 8–9 的方法编写的英文四选一变式。用侧栏选周次，提交后查看中文解析。</p></header>
+<div class="shell"><aside><h2>分类</h2><nav id="nav" aria-label="按周分类"></nav><p><a href="#practice">跳到练习</a></p></aside>
+<main><section id="map" class="jump"></section><section class="card jump" id="practice"><h2>练习</h2><div class="tools">
+<label for="type">题型</label><select id="type"><option value="all">全部题型</option><option value="mc">选择题</option><option value="drag">拖拽题</option></select>
+<label for="status">题目状态</label><select id="status"><option value="all">全部</option><option value="new">只做未做</option><option value="wrong">只做错题</option></select>
+<button id="shuffle">打乱顺序</button><button id="export">导出错题</button></div>
+<p class="meta" id="count" aria-live="polite"></p></section><div id="questions"></div></main></div>
+<template id="card"><article class="card"><p class="meta"></p><h3></h3><div class="body"></div><button class="primary" type="button">检查答案</button><p class="result" role="status"></p></article></template>
+<script id="data" type="application/json">{"title": "MTH 231 · 第 8、9 周作业选择题", "intro": "按 Written Homework 8–9 的方法编写的英文四选一变式。用侧栏选周次，提交后查看中文解析。", "hideDrag": true, "weeks": [[8, "图、路径与最短路", [], [["Written Homework 8", "https://canvas.oregonstate.edu/courses/2063729/modules/items/27041976"]]], [9, "树、遍历与最小生成树", [], [["Written Homework 9", "https://canvas.oregonstate.edu/courses/2063729/modules/items/27041986"]]]], "mc": [[8, "§10.1 · Graph types", "A map records every one-way bus trip, including parallel trips and a sightseeing trip that returns to its starting stop. Which graph can represent all of this?", ["Simple graph", "Undirected multigraph", "Directed multigraph", "Simple directed graph"], 2, "需要方向、重边和自环，所以用有向多重图。"], [8, "§10.1 · Graph types", "A transit map ignores direction and collapses all direct services between distinct stops into one edge. It contains no self-loops. Which graph model fits?", ["Pseudograph", "Simple graph", "Directed multigraph", "Rooted tree"], 1, "无向、无重边、无自环是简单图的条件。"], [8, "§10.2 · Degrees", "An undirected graph has a loop at u and three other edges incident with u. What is deg(u)?", ["3", "4", "5", "6"], 2, "无向自环给同一个顶点的度加 2，另外三条边各加 1。"], [8, "§10.2 · Degrees", "A directed graph has arcs a→b, b→a, a→c, and a→a. What are the in-degree and out-degree of a, respectively?", ["1 and 3", "2 and 2", "3 and 2", "2 and 3"], 3, "自环给入度和出度各加 1。b→a 也计入入度，a→b 和 a→c 也计入出度。"], [8, "§10.2 · Bipartite graphs", "Which graph is bipartite?", ["A cycle with 5 vertices", "A cycle with 8 vertices", "Three mutually adjacent vertices", "A single vertex with a loop"], 1, "偶数环可以交替二染色；奇数环与自环均无法这样染色。"], [8, "§10.2 · Pigeonhole principle", "Why can a simple graph on 8 vertices not have 8 distinct degrees?", ["Degrees 0 and 7 cannot both occur", "All degrees must be even", "Every graph has an isolated vertex", "Vertices cannot have degree 7"], 0, "度为 7 的顶点和其余所有顶点相连，因此无法同时有度为 0 的顶点。"], [8, "§10.3 · Adjacency matrices", "The rows and columns of a directed graph’s adjacency matrix are ordered a, b, c. The only 1s are at row a, column c and row c, column b. Which arcs exist?", ["c→a and b→c", "a→c and b→c", "a→c and c→b", "a→b and c→a"], 2, "行是起点，列是终点。"], [8, "§10.4 · Paths and circuits", "An undirected graph has edges ab, bc, ca, and cd. How should the sequence a,b,c,a be classified?", ["An open path of length 2", "A simple circuit of length 3", "A circuit reusing one edge", "It is invalid because a vertex repeats"], 1, "连续三对顶点都有边，回到起点，三条边都只使用一次。"], [8, "§10.5 · Euler paths", "A connected graph has exactly two odd-degree vertices, p and q. What must be true?", ["Every Euler path starts and ends at p", "It has an Euler circuit", "An Euler path can start at either p or q and ends at the other", "It has no Euler path"], 2, "欧拉路径经过每条边一次，只有起点和终点可以有奇度。"], [8, "§10.5 · Hamilton circuits", "Which requirement defines a Hamilton circuit in a finite simple graph?", ["Use every edge exactly once", "Visit each vertex exactly once before returning to the start", "Visit each vertex an even number of times", "Use every edge and every vertex twice"], 1, "Hamilton 关心顶点，Euler 关心边。"], [8, "§10.6 · Dijkstra", "From source s, tentative distances are d(a)=3, d(b)=5, d(c)=9. Dijkstra settles a, and edge a–c has weight 2. What is the updated d(c)?", ["2", "3", "9", "5"], 3, "松弛得到 min(9,3+2)=5。"], [8, "§10.6 · Traveling salesperson", "For a complete undirected graph with 6 cities, fix the start city and count a tour and its reverse as one. How many tours must be considered?", ["60", "120", "360", "720"], 0, "排列其余五城有 5! 种，再除以 2 合并反向路线。"], [9, "§11.1 · Rooted trees", "A rooted tree has edges r–a, r–b, a–c, a–d, and c–e, with root r. Which vertices are strict ancestors of e?", ["r, a, c", "a, d, c", "r, b, c", "c, e"], 0, "从根到 e 的唯一路径是 r、a、c、e，去掉 e 本身就是严格祖先。"], [9, "§11.1 · Tree vocabulary", "The children of r are a and b. The children of a are e and f, and b has no children. Which pair are siblings?", ["r and a", "a and e", "e and f", "b and f"], 2, "siblings 指具有同一父节点的顶点。"], [9, "§11.1 · Full m-ary trees", "A full 4-ary tree has 13 internal vertices. How many total vertices does it have?", ["39", "52", "53", "69"], 2, "每个内部顶点有 4 条通向孩子的边，边数为 52。树的顶点数比边数多 1。"], [9, "§11.1 · Leaves", "A full ternary tree has 40 vertices in all. How many leaves does it have?", ["13", "26", "27", "39"], 2, "内部顶点数为 (40−1)/3=13，叶子数为 40−13=27。"], [9, "§11.1 · Complete trees", "A full 3-ary tree has height 3 and every leaf is at depth 3. How many leaves and total vertices does it have, respectively?", ["9 and 13", "27 and 40", "27 and 39", "81 and 121"], 1, "深度 3 有 3³=27 个叶子，各层合计 1+3+9+27=40。"], [9, "§11.3 · Universal addresses", "The second child of the root has address 2. What is the address of its third child?", ["3.2", "2.3", "5", "2.2.3"], 1, "从根向下把每一层的孩子序号依次连接。"], [9, "§11.3 · Preorder", "Root r has children a,b from left to right. Vertex a has children c,d and b has child e. Which order is preorder?", ["c,d,a,e,b,r", "r,a,b,c,d,e", "r,a,c,d,b,e", "r,b,e,a,d,c"], 2, "先访问根，再由左到右递归访问各子树。"], [9, "§11.3 · Postorder", "Root r has children a,b from left to right. Vertex a has children c,d and b has child e. Which order is postorder?", ["c,d,a,e,b,r", "r,a,c,d,b,e", "d,c,a,b,e,r", "a,c,d,b,e,r"], 0, "先依序完成每棵子树，再访问根。"], [9, "§11.3 · Expression trees", "What is the postfix notation for (a+b)×c?", ["× + a b c", "a b c × +", "a b + c ×", "a + b × c"], 2, "后缀是表达式树的后序遍历。先输出 a b +，再输出 c 和乘号。"], [9, "§11.3 · Postfix evaluation", "Evaluate the postfix expression 8 2 / 5 3 − ×.", ["2", "6", "8", "12"], 2, "8÷2=4，5−3=2，两者相乘得到 8。"], [9, "§11.5 · Prim", "Prim has reached vertices {a,b}. The remaining vertices are c,d, with edges a–c=7, b–c=3, b–d=4 and c–d=1. Which edge is added next?", ["c–d", "a–c", "b–d", "b–c"], 3, "Prim 只看连接树内和树外的边。跨界候选中 b–c 最轻。"], [9, "§11.5 · Kruskal", "Kruskal already accepted ab with weight 1 and bc with weight 2. Next it considers ac with weight 3, then cd with weight 4. Which edge should be accepted next?", ["ac", "cd", "both ac and cd", "neither edge"], 1, "a、c 已通过 b 连通，所以跳过会成环的 ac，接受 cd。"]], "drag": [], "key": "mth231-hw-8-9"}</script>
+<script>
+"use strict";
+const data=JSON.parse(document.querySelector("#data").textContent);
+const $=id=>document.getElementById(id);
+const key="zhihu-practice:"+data.key+":v1";
+let history={};
+try{history=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch{}
+let week="all", section="all";
+const all=[
+ ...data.mc.map(([week,hw,prompt,options,answer,why],i)=>({id:"M"+(i+1),week,hw,prompt,options,answer,why,type:"mc"})),
+ ...data.drag.map(([week,hw,prompt,items,why],i)=>({id:"D"+(i+1),week,hw,prompt,items,why,type:"drag"}))
+];
+let order=[...all];
+const drafts=new Map();
+function node(tag,text,klass){
+ const el=document.createElement(tag);
+ if(text!==undefined)el.textContent=text;
+ if(klass)el.className=klass;
+ return el;
+}
+function link(label,url){const a=node("a",label);a.href=url;return a}
+function navigation(){
+ const nav=$("nav");nav.replaceChildren();
+ for(const [value,label] of [["all","全部周次"],...data.weeks.map(([num,topic])=>[num,"第 "+num+" 周 · "+topic])]){
+  const b=node("button",label);b.type="button";b.dataset.week=value;
+  b.setAttribute("aria-pressed",String(value===week&&section==="all"));
+  b.onclick=()=>{week=value;section="all";render()};nav.append(b);
+  if(data.hideDrag&&value===week&&value!=="all"){
+   const groups=[...new Set(all.filter(q=>q.week===week).map(q=>q.hw.split(" · ")[0]))];
+   const names={"§10.1":"图的类型","§10.2":"顶点度与二分图","§10.3":"邻接矩阵","§10.4":"路径与连通性","§10.5":"Euler 与 Hamilton","§10.6":"最短路与旅行商","§11.1":"树的概念与计数","§11.3":"遍历与表达式","§11.5":"最小生成树"};
+   for(const group of groups){
+    const item=node("button",group+" "+names[group],"meta");item.type="button";
+    item.setAttribute("aria-pressed",String(section===group));
+    item.onclick=()=>{section=group;render()};nav.append(item);
+   }
+  }
+ }
+}
+if(data.hideDrag)$("type").querySelector('[value="drag"]').remove();
+function mapping(){
+ const out=$("map");out.replaceChildren();
+ for(const [num,topic,rows,sources] of data.weeks){
+  if(week!=="all"&&week!==num)continue;
+  const card=node("section",undefined,"card");
+  card.append(node("h2","第 "+num+" 周 · "+topic));
+  if(rows.length){
+   const scroll=node("div",undefined,"scroll"),table=node("table"),head=table.createTHead().insertRow();
+   for(const label of ["ICA 小题","HW 对应题","迁移方法"]){const th=node("th",label);th.scope="col";head.append(th)}
+   const body=table.createTBody();
+   for(const [ica,summary,hw,how] of rows){const tr=body.insertRow();for(const val of ["ICA "+ica+" · "+summary,"HW "+hw,how])tr.insertCell().textContent=val}
+   scroll.append(table);card.append(scroll);
+  }
+  if(sources?.length){const p=node("p",undefined,"meta");for(const [label,url] of sources){if(p.childNodes.length)p.append(" · ");p.append(link(label,url))}card.append(p)}
+  out.append(card);
+ }
+}
+function shuffled(list){
+ const arr=[...list];
+ for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
+ if(arr.length>1&&arr.every((x,i)=>x===list[i]))arr.push(arr.shift());
+ return arr;
+}
+function arrange(q,body){
+ if(!drafts.has(q.id))drafts.set(q.id,shuffled(q.items.map((_,i)=>i)));
+ let start=null;
+ const hint=node("p","拖拽排序，也可以用 ↑ / ↓ 按钮。","meta");
+ const list=node("ol",undefined,"arrange");
+ function move(from,to,focus){
+  if(from===to||to<0||to>=q.items.length)return;
+  const ids=drafts.get(q.id);ids.splice(to,0,ids.splice(from,1)[0]);draw();
+  if(focus){const buttons=list.children[to].querySelectorAll("button");(buttons[focus-1].disabled?buttons[2-focus]:buttons[focus-1]).focus()}
+ }
+ function draw(){
+  list.replaceChildren();
+  for(const [i,id] of drafts.get(q.id).entries()){
+   const row=node("li");row.draggable=true;
+   row.ondragstart=e=>{start=i;e.dataTransfer.effectAllowed="move";e.dataTransfer.setData("text/plain",String(i))};
+   row.ondragend=()=>{start=null};
+   row.ondragover=e=>{if(start!==null)e.preventDefault()};
+   row.ondrop=e=>{e.preventDefault();if(start!==null)move(start,i);start=null};
+   row.append(node("span",q.items[id]));
+   for(const [step,label] of [[-1,"↑"],[1,"↓"]]){
+    const b=node("button",label);b.type="button";b.setAttribute("aria-label",(step<0?"上移 ":"下移 ")+q.items[id]);
+    b.disabled=i+step<0||i+step>=q.items.length;b.onclick=()=>move(i,i+step,step<0?1:2);row.append(b);
+   }
+   list.append(row);
+  }
+ }
+ draw();body.append(hint,list);
+}
+function card(q){
+ const article=$("card").content.firstElementChild.cloneNode(true);
+ article.id=q.id;
+ article.querySelector(".meta").textContent=q.id+" · 第 "+q.week+" 周 · "+(data.hideDrag?"作业":"HW")+" "+q.hw;
+ article.querySelector("h3").textContent=q.prompt;
+ const body=article.querySelector(".body"),feedback=article.querySelector(".result");
+ if(q.type==="mc"){
+  body.classList.add("choices");
+  for(const [i,label] of q.options.entries()){
+   const row=node("label",undefined,"option"),input=node("input");
+   input.type="radio";input.name=q.id;input.checked=drafts.get(q.id)===i;
+   input.onchange=()=>drafts.set(q.id,i);row.append(input,document.createTextNode(label));body.append(row);
+  }
+ }else arrange(q,body);
+ article.querySelector(".primary").onclick=()=>{
+  const answer=drafts.get(q.id);
+  if(answer===undefined){feedback.textContent="请先选择一个答案。";return}
+  const correct=q.type==="mc"?answer===q.answer:answer.every((id,i)=>id===i);
+  const prev=history[q.id]||{attempts:0,errors:0};
+  history[q.id]={attempts:prev.attempts+1,errors:prev.errors+Number(!correct),correct,lastAnswer:Array.isArray(answer)?[...answer]:answer};
+  try{localStorage.setItem(key,JSON.stringify(history))}catch{}
+  feedback.classList.toggle("bad",!correct);
+  const solution=q.type==="mc"?q.options[q.answer]:q.items.join(" → ");
+  feedback.textContent=(correct?"答对了。":"这次答错了。正确答案："+solution+"。")+q.why;
+  count();
+ };
+ return article;
+}
+function count(){
+ const items=all.filter(q=>week==="all"||q.week===week);
+ $("count").textContent="已做 "+items.filter(q=>history[q.id]).length+"/"+items.length+" · 未做 "+items.filter(q=>!history[q.id]).length+" · 错题 "+items.filter(q=>history[q.id]?.correct===false).length;
+}
+function isVisible(q){
+ const type=$("type").value,status=$("status").value;
+ return (week==="all"||week===q.week)&&(section==="all"||q.hw.startsWith(section+" · "))&&(type==="all"||q.type===type)
+  &&(status==="all"||(status==="new"&&!history[q.id])||(status==="wrong"&&history[q.id]?.correct===false));
+}
+function render(){
+ navigation();
+ mapping();count();
+ const list=order.filter(isVisible);
+ $("questions").replaceChildren(...list.map(card));
+ if(!list.length)$("questions").append(node("p","这个分类下没有符合筛选条件的题目。","card"));
+}
+$("type").onchange=render;$("status").onchange=render;
+$("shuffle").onclick=()=>{
+ const replacement=shuffled(order.filter(isVisible));let pos=0;
+ order=order.map(q=>isVisible(q)?replacement[pos++]:q);render();
+};
+$("export").onclick=()=>{
+ const records=all.filter(q=>history[q.id]?.correct===false).map(q=>{
+  const record=history[q.id];
+  const selected=q.type==="mc"?q.options[record.lastAnswer]:record.lastAnswer.map(i=>q.items[i]).join(" → ");
+  const answer=q.type==="mc"?q.options[q.answer]:q.items.join(" → ");
+  return [q.id+" · 第 "+q.week+" 周 · "+q.hw,q.prompt,"上次作答："+selected,"正确答案："+answer,q.why].join("\n");
+ });
+ if(!records.length){$("count").textContent="当前没有可导出的错题。";return}
+ const href=URL.createObjectURL(new Blob([data.title,"\n\n",records.join("\n\n")],{type:"text/plain;charset=utf-8"}));
+ const a=link("下载错题",href);a.download=data.key+"-错题.txt";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(href),1000);
+};
+render();
+</script></body></html>
