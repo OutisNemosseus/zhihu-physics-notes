@@ -35,3 +35,24 @@ a{color:#08695d}
 .figures{margin:0;padding:4px}
 .figures img{display:block;max-height:330px;object-fit:contain;object-position:left}
 .figures figcaption{color:var(--muted);font-size:.85rem;margin-top:4px}
+
+.practice-panel{padding:clamp(12px,2vw,22px);border:1px solid var(--line);border-radius:14px;background:white;min-width:0}
+.practice-panel button,.practice-panel select{font:inherit;min-height:38px;padding:5px 10px;border:1px solid #9aafb4;border-radius:6px;background:white;color:#172c36;cursor:pointer}
+.practice-panel button:focus-visible,.practice-panel select:focus-visible,.choice:focus-within{outline:3px solid #277d9c}
+.practice-panel button:disabled{opacity:.45;cursor:default}
+.practice-panel [hidden]{display:none!important}
+.practice-panel .modes,.practice-tools,.run-tools,.practice-panel .paging{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0}
+.modes button[aria-pressed=true],.practice-panel .run{background:#0b6258;color:white}
+.picker{max-width:100%}.tally,.eyeline,.reference small,.run-status{color:#526975;font-size:.88rem}
+.qa-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:16px}
+.qa-layout h3{font-size:1.05em;margin:6px 0 12px}
+.reference{padding:12px;background:#edf5f4;border-radius:9px;align-self:start}
+.reference-code,.practice-panel details pre,.block-list pre{background:#1e1e1e;color:#eee;padding:10px;overflow:auto;font:13px/1.55 ui-monospace,monospace}
+.reference-code{white-space:pre-wrap;overflow-wrap:anywhere}
+.choice{display:grid;grid-template-columns:auto auto minmax(0,1fr);align-items:start;gap:6px;padding:8px 6px;margin:6px 0;border:1px solid var(--line);border-radius:6px;cursor:pointer}
+.choice:has(:checked){border-color:#087265;background:#edf8f4}
+.choice pre{margin:0;font:13px/1.5 ui-monospace,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.block-list{list-style:none;padding:0}.block-list li{display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;gap:5px;margin:6px 0;padding:6px;background:#e9f0f1;border-radius:8px;cursor:grab}
+.block-list pre{margin:0}.runtime pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.plots img{display:block;max-width:100%;height:auto}.plots figure{margin:6px 0}.plots figcaption{display:flex;gap:1em}
+@media(max-width:640px){.qa-layout{grid-template-columns:minmax(0,1fr)}.reference{order:1}.modes button{font-size:.9rem}}

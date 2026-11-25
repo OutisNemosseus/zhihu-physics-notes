@@ -3,11 +3,13 @@ import 'monaco-editor/languages/definitions/python/register';
 import EditorWorker from 'monaco-editor/editor/editor.worker?worker';
 import { pairs, weeks, figures } from './compare-data.js';
 import './compare.css';
+import { practicePanel } from './hw-practice.js';
 
 self.MonacoEnvironment = { getWorker: () => new EditorWorker() };
 const comparison = document.querySelector('#comparison');
 const handles = [];
 let visibleWeek;
+const practice = practicePanel();
 
 function element(tag, content, className) {
   const el = document.createElement(tag);
@@ -102,7 +104,8 @@ function render(week) {
     editor.dispose();
     model.dispose();
   }
-  comparison.replaceChildren();
+  comparison.replaceChildren(practice.root);
+  practice.setWeek(week);
   for (const [num, topic, sources] of weeks) {
     if (week !== 'all' && num !== week) continue;
     const group = element('section', '', 'week');

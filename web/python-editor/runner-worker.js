@@ -80,7 +80,9 @@ sys.modules["_tong_editor_plots"].begin_run()
   return true;
 }
 self.onmessage = async (event) => {
-  const { code, stdin, files = [] } = event.data;
+  const { code, stdin, files = [], exerciseRun, gif, excel } = event.data;
+  let directory;
+  let result = { type: 'done' };
   try {
     if (!runtime) {
       self.postMessage({ type: 'status', text: '首次运行正在加载 Python，稍等片刻…' });
@@ -93,12 +95,29 @@ self.onmessage = async (event) => {
     runtime.setStdout({ batched: (text) => self.postMessage({ type: 'stdout', text }) });
     runtime.setStderr({ batched: (text) => self.postMessage({ type: 'stderr', text }) });
     runtime.FS.chdir('/');
+    if (exerciseRun) {
+      directory = await runtime.runPythonAsync(`import tempfile, os, sys
+d = tempfile.mkdtemp()
+os.chdir(d)
+if "" not in sys.path: sys.path.insert(0, "")
+d`);
+    }
     for (const file of files) {
       if (!file || typeof file.name !== 'string' || !file.name || /[\\/\0]/.test(file.name) || file.name === '.' || file.name === '..' || typeof file.content !== 'string') throw new Error('Invalid CSV filename or content');
-      runtime.FS.writeFile('/' + file.name, file.content, { encoding: 'utf8' });
+      runtime.FS.writeFile((directory || '') + '/' + file.name, file.content, { encoding: 'utf8' });
     }
     self.postMessage({ type: 'started' });
     // Package installation doesn't import pyplot. Configure Agg before user code.
+    if (excel) {
+      const available = await runtime.runPythonAsync(`import importlib.util
+importlib.util.find_spec('openpyxl') is not None`);
+      if (!available) {
+        self.postMessage({type:'status', text:'正在加载 Excel 读写支持…'});
+        await runtime.loadPackage('micropip');
+        await runtime.runPythonAsync(`import micropip
+await micropip.install('openpyxl==3.1.5')`);
+      }
+    }
     await runtime.loadPackagesFromImports(code);
     const plotsReady = await preparePlots();
     const globals = runtime.toPy({ __name__: '__main__' });
@@ -114,8 +133,17 @@ self.onmessage = async (event) => {
         self.postMessage({ type: 'stderr', text: `图像导出失败：${String(error)}` });
       } finally { globals.destroy(); }
     }
-    self.postMessage({ type: 'done' });
+    if (gif && exerciseRun && /^[\w-]+\.gif$/.test(gif)) {
+      const bytes = runtime.FS.readFile(directory + '/' + gif);
+      self.postMessage({type:'animation', bytes}, [bytes.buffer]);
+    }
   } catch (error) {
-    self.postMessage({ type: 'error', text: String(error) });
+    result = { type: 'error', text: String(error) };
+  } finally {
+    if (directory) {
+      runtime.FS.chdir('/');
+      await runtime.runPythonAsync('import shutil; shutil.rmtree(' + JSON.stringify(directory) + ', ignore_errors=True)');
+    }
   }
+  self.postMessage(result);
 };
