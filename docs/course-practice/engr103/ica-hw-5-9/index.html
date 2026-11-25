@@ -1,9 +1,10 @@
 <!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>ENGR 103 · ICA 与 HW 练习</title><style>
+<title>ENGR 103 · ICA 5–9 与 HW 5–9 代码对照</title><style>
 :root{color-scheme:light;--ink:#172c36;--muted:#526975;--sea:#08695d;--mist:#e2f3ec;--line:#d5e1e6;--paper:#f5f8f9}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:16px/1.6 "Inter","Noto Sans",system-ui,sans-serif;background:var(--paper)}a{color:var(--sea)}header{background:#153342;color:white;padding:24px max(20px,calc((100vw - 1240px)/2));border-bottom:4px solid #4fb29a}header a{color:#aff3dd}header p{margin:.35em 0}h1{font-size:clamp(1.85rem,4vw,3rem);line-height:1.18;margin:.35em 0}.shell{max-width:1240px;margin:auto;display:grid;grid-template-columns:245px minmax(0,1fr);gap:24px;padding:24px 18px}aside{align-self:start;position:sticky;top:16px;background:white;border:1px solid var(--line);border-radius:16px;padding:15px}aside h2{font-size:1.1rem;margin:0 0 .6rem}nav{display:grid;gap:7px}button,select{font:inherit;min-height:42px;color:inherit;background:white;border:1px solid #9eb5bd;border-radius:8px;padding:6px 10px;cursor:pointer}button:hover,select:hover{border-color:var(--sea)}button:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #2b8aa0;outline-offset:2px}button[aria-pressed=true]{background:var(--mist);border-color:var(--sea);font-weight:650}nav button{text-align:left}.card{background:white;border:1px solid var(--line);border-radius:15px;padding:18px;margin:0 0 14px}.card h2,.card h3{margin:0 0 9px;line-height:1.35}.card h3{font-size:1.12rem}.meta,small{color:var(--muted);font-size:.9rem}.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.scroll{overflow:auto}table{width:100%;border-collapse:collapse;min-width:640px}th,td{text-align:left;vertical-align:top;padding:9px;border-bottom:1px solid var(--line)}th{background:#eaf2f5}.choices{display:grid;gap:7px}.option{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:7px 10px;cursor:pointer}.option input{width:18px;height:18px;flex:none}.primary{background:var(--sea);color:white;border-color:var(--sea);margin-top:10px}.arrange{list-style:none;padding:0;margin:0;display:grid;gap:7px}.arrange li{display:grid;grid-template-columns:1fr auto auto;gap:5px;align-items:center;background:#edf5f6;padding:5px 7px;border:1px solid var(--line);border-radius:8px;cursor:grab}.arrange button{min-width:38px}.arrange button:disabled{opacity:.35;cursor:default}.result{margin:.6rem 0 0;padding:7px 10px;border-radius:8px;background:#e9f5ee}.result.bad{background:#fbeadd}.result:empty{display:none}.jump{scroll-margin-top:10px}@media(max-width:740px){.shell{grid-template-columns:minmax(0,1fr);gap:12px}aside{position:static}nav{grid-template-columns:repeat(2,minmax(0,1fr))}.card{padding:13px}}
-</style></head><body><header><a href="../../">Zhihu Physics Notes · 课程练习</a><h1>ENGR 103 · ICA 与 HW 练习</h1><p>按第 5–9 组作业编号复习。先看课堂练习里的方法，再判断它怎样迁移到 HW。</p></header>
+.comparison{width:100%;height:700px;border:0;display:block;margin-bottom:16px}.context-links{margin:0 0 16px}.context-links ul{margin:.5em 0 0;padding-left:1.25em}</style></head><body><header><a href="../../">Zhihu Physics Notes · 课程练习</a><h1>ENGR 103 · ICA 5–9 与 HW 5–9</h1><p>左栏 ICA，右栏 HW。同色代码实现相同的步骤。代码为按作业要求整理的教学片段，可用 Canvas 链接核对原题。作图示例和题目示意图附在对应代码下，可点开看原图。</p></header>
 <div class="shell"><aside><h2>分类</h2><nav id="nav" aria-label="按周分类"></nav><p><a href="#practice">跳到练习</a></p></aside>
-<main><section id="map" class="jump"></section><section class="card jump" id="practice"><h2>练习</h2><div class="tools">
+<main><section id="map" class="jump" aria-label="ICA 与 HW 代码对照"><iframe class="comparison" id="comparison" title="Monaco · ICA 和 HW 代码对照" src="../../../assets/python-editor/compare.html?week=5"></iframe></section>
+<section class="card context-links" id="supplemental" aria-label="补充练习"></section><section class="card jump" id="practice"><h2>练习</h2><div class="tools">
 <label for="type">题型</label><select id="type"><option value="all">全部题型</option><option value="mc">选择题</option><option value="drag">拖拽题</option></select>
 <label for="status">题目状态</label><select id="status"><option value="all">全部</option><option value="new">只做未做</option><option value="wrong">只做错题</option></select>
 <button id="shuffle">打乱顺序</button><button id="export">导出错题</button></div>
@@ -17,7 +18,7 @@ const $=id=>document.getElementById(id);
 const key="zhihu-practice:"+data.key+":v1";
 let history={};
 try{history=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch{}
-let week="all", section="all";
+let week=5, section="all";
 const all=[
  ...data.mc.map(([week,hw,prompt,options,answer,why],i)=>({id:"M"+(i+1),week,hw,prompt,options,answer,why,type:"mc"})),
  ...data.drag.map(([week,hw,prompt,items,why],i)=>({id:"D"+(i+1),week,hw,prompt,items,why,type:"drag"}))
@@ -33,7 +34,7 @@ function node(tag,text,klass){
 function link(label,url){const a=node("a",label);a.href=url;return a}
 function navigation(){
  const nav=$("nav");nav.replaceChildren();
- for(const [value,label] of [["all","全部周次"],...data.weeks.map(([num,topic])=>[num,"第 "+num+" 周 · "+topic])]){
+ for(const [value,label] of [["all","全部作业"],...data.weeks.map(([num,topic])=>[num,"第 "+num+" 组 · "+topic])]){
   const b=node("button",label);b.type="button";b.dataset.week=value;
   b.setAttribute("aria-pressed",String(value===week&&section==="all"));
   b.onclick=()=>{week=value;section="all";render()};nav.append(b);
@@ -49,21 +50,37 @@ function navigation(){
  }
 }
 if(data.hideDrag)$("type").querySelector('[value="drag"]').remove();
+const comparison=$("comparison");
+function sendWeek(){
+ comparison.contentWindow?.postMessage({type:"engr103-week",week},location.origin);
+}
+window.addEventListener("message",event=>{
+ if(event.origin!==location.origin||event.source!==comparison.contentWindow) return;
+ if(event.data?.type==="engr103-ready")sendWeek();
+ if(event.data?.type==="engr103-height"&&Number.isSafeInteger(event.data.height)&&event.data.height>0){
+  comparison.style.height=event.data.height+"px";
+ }
+});
 function mapping(){
- const out=$("map");out.replaceChildren();
- for(const [num,topic,rows,sources] of data.weeks){
-  if(week!=="all"&&week!==num)continue;
-  const card=node("section",undefined,"card");
-  card.append(node("h2","第 "+num+" 周 · "+topic));
-  if(rows.length){
-   const scroll=node("div",undefined,"scroll"),table=node("table"),head=table.createTHead().insertRow();
-   for(const label of ["ICA 小题","HW 对应题","迁移方法"]){const th=node("th",label);th.scope="col";head.append(th)}
-   const body=table.createTBody();
-   for(const [ica,summary,hw,how] of rows){const tr=body.insertRow();for(const val of ["ICA "+ica+" · "+summary,"HW "+hw,how])tr.insertCell().textContent=val}
-   scroll.append(table);card.append(scroll);
+ sendWeek();
+ const extra=$("supplemental");
+ const items=[
+  [6,"ICA / HW 6–7 · 13 道代码排序题","../ica-hw-6-7-ordering/"],
+  [7,"HW 7 · 三题代码排序","../hw7-ordering/"],
+  [7,"HW 7 · 三题代码填空","../hw7-fill/"],
+  [7,"HW 7.1 · 三角形面积数组 6 题","../rotation-03-triangle-arrays/"],
+  [8,"HW 8.2 · 正弦数组 CSV 6 题","../rotation-05-sinusoid-csv/"]
+ ].filter(([group])=>week==="all"||week===group||(week===7&&group===6));
+ extra.hidden=!items.length;
+ extra.replaceChildren();
+ if(items.length){
+  const list=node("ul");
+  for(const [,label,url] of items){
+   const item=node("li");
+   item.append(link(label,url));
+   list.append(item);
   }
-  if(sources?.length){const p=node("p",undefined,"meta");for(const [label,url] of sources){if(p.childNodes.length)p.append(" · ");p.append(link(label,url))}card.append(p)}
-  out.append(card);
+  extra.append(node("h2","补充练习"),list);
  }
 }
 function shuffled(list){

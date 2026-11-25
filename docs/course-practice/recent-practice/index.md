@@ -30,15 +30,11 @@ title: 近期练习链接
 
 ## ENGR 103 · Python
 
-- [轮换 05 · 正弦数组写入与读回 CSV · 6 道原创同型练习（2026-11-22）](../engr103/rotation-05-sinusoid-csv/)
-
-- HW7 三题：[代码排序](../engr103/hw7-ordering/) · [代码填空](../engr103/hw7-fill/)
-
-- [轮换 03 · 三角形面积数组 · 6 道原创同型练习（2026-11-18）](../engr103/rotation-03-triangle-arrays/)
-
-- [ICA / HW 6–7 · 13 道代码排序题](https://outisnemosseus.github.io/zhihu-physics-notes/course-practice/engr103/ica-hw-6-7-ordering/)
+- [ICA 5–9 与 HW 5–9 · 同色代码对照与练习](../engr103/ica-hw-5-9/)
 
 ## MTH 256 · 微分方程
+
+- [Exam 2 至 Final · Laplace 变换 · 28 道选择题](../differential-equations/laplace-exam2-final/)
 
 - [轮换 02 · 实特征根初值问题 · 8 道原创复习题（2026-11-16）](../differential-equations/rotation-02-real-roots/)
 
