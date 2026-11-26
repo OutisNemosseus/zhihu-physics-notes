@@ -30,6 +30,8 @@ title: 近期练习链接
 
 ## ENGR 103 · Python
 
+- [轮换 07 · 复合梯形法估算电荷 · 5 道原创练习（2026-11-26）](../engr103/rotation-07-composite-trapezoid/)
+
 - [ICA 5–9 与 HW 5–9 · 同色代码对照与练习](../engr103/ica-hw-5-9/)
 
 ## MTH 256 · 微分方程

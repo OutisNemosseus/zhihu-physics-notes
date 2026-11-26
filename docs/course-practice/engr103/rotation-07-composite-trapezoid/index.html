@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>复合梯形法估算电荷 · 轮换 07</title>
+<style>
+:root{color-scheme:light;--ink:#183832;--sub:#4a625d;--brand:#176958;--line:#c9dcd5;--surface:#fff}
+*{box-sizing:border-box}body{margin:0;background:#f3f7f5;color:var(--ink);font:clamp(16px,2vw,18px)/1.65 system-ui,sans-serif}
+main{width:min(100%,850px);margin:auto;padding:22px 20px 65px}h1,h2,h3{line-height:1.22}h1{font-size:clamp(1.8rem,5vw,2.8rem);margin:.25em 0}h2{font-size:1.38rem;margin-top:0}h3{font-size:1.05rem}a{color:var(--brand)}p{margin:.8em 0}.note{color:var(--sub);font-size:.92em}.tag{color:var(--brand);font-weight:700}.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;margin:14px 0}.equations{background:#edf5f1;border-radius:10px;padding:10px 16px;font-size:1.06em}.equations p{margin:.1em 0}.panelpair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:12px 0}.panelpair>div{border:1px solid var(--line);border-radius:10px;padding:8px;text-align:center;min-width:0}.panelpair strong{display:block}nav{display:flex;gap:8px;flex-wrap:wrap}button{font:inherit;color:var(--ink);background:#fff;border:1px solid #77958b;border-radius:8px;cursor:pointer;min-height:44px;min-width:44px;padding:7px 12px}button[aria-current=true]{background:var(--brand);color:white}button:disabled{opacity:.45;cursor:default}details{border-top:1px solid var(--line);padding-top:12px;margin-top:18px}summary{cursor:pointer;font-weight:700}code{font-size:.9em;overflow-wrap:anywhere}pre{overflow:auto;max-width:100%;background:#edf5f1;padding:10px;border-radius:8px;font-size:.83em;white-space:pre}li{margin-bottom:.38em}ol{padding-left:1.4em}[hidden]{display:none!important}:focus-visible{outline:3px solid #a55c15;outline-offset:3px}.sr{position:absolute;width:1px;height:1px;clip-path:inset(50%);overflow:hidden}
+@media(max-width:480px){main{padding:14px 12px 48px}.card{padding:14px}.panelpair>div{font-size:.83em}.equations{padding:8px 10px}}
+</style></head><body><main>
+<a href="../../recent-practice/">近期练习汇总</a><p class="tag">ENGR 103 · Python · 2026-11-26 · 轮换 07</p>
+<h1>复合梯形法估算电荷</h1>
+<p>5 道原创同型练习。用 NumPy 生成等距节点，估算电流曲线下的面积，再用 2×2 子图对照四种细分。</p>
+<p class="note">结构依据：已核对 ENGR 103 HW9 的复合梯形法小题。参数是新编的；不需要 CSV。</p>
+<nav id="numbers" aria-label="题号"></nav>
+<div id="announcer" class="sr" aria-live="polite"></div>
+<section id="questions" aria-label="练习题"><article class="card" id="q1">
+<h2>1. 低频测试脉冲</h2>
+<div class="equations"><p><b>i(t) = 3π cos(2πt) A</b></p><p>积分区间：[-1/8, 1/6] s</p></div>
+<p>电荷 Q（C）等于 i(t) 在给定时间区间内的积分。用 NumPy 和 Matplotlib 完成：</p>
+<ol>
+<li>先对 i(t) 解析积分，求 Q 的精确值。</li>
+<li>分别取 N = 4、8、16、32 个等宽小区间。每次用 <code>np.linspace</code> 生成含两个端点的 N+1 个时间，求复合梯形近似 Q<sub>N</sub> 和带符号的百分误差 100 × (Q<sub>N</sub> − Q) / Q。</li>
+<li>画一张 2×2 图：左上 N=4，右上 N=8，左下 N=16，右下 N=32。每格用蓝色实线画平滑的 i(t)，用红色虚线连起梯形上边，标出各节点至横轴的竖线，并给梯形面积填色。标注 N、精确值、近似值、带符号误差，加时间（s）和电流（A）轴标签、网格及图例。</li>
+</ol>
+<details><summary>展开答案与参考代码</summary>
+<p>原函数：(3/2) sin(2πt)。在两个端点相减得到 <strong>2.359698 C</strong>。将相邻样点的平均电流乘以步长，再累加各段面积。</p>
+<ul><li>N = 4：2.318278 C；误差 -1.7553%</li><li>N = 8：2.349370 C；误差 -0.4377%</li><li>N = 16：2.357118 C；误差 -0.1093%</li><li>N = 32：2.359053 C；误差 -0.0273%</li></ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+A, k = 3, 2
+a, b = -1/8, 1/6
+def current(t):
+    return A * np.pi * np.cos(k * np.pi * t)
+
+exact = (A / k) * (np.sin(k * np.pi * b) - np.sin(k * np.pi * a))
+fine = np.linspace(a, b, 401)
+fig, axes = plt.subplots(2, 2)
+fig.set_size_inches(11, 7)
+fig.subplots_adjust(wspace=.28, hspace=.45)
+for ax, n in zip(axes.flat, (4, 8, 16, 32)):
+    t = np.linspace(a, b, n + 1)
+    y = current(t)
+    dx = (b - a) / n
+    q = dx * (0.5*y[0] + np.sum(y[1:-1]) + 0.5*y[-1])
+    error = 100 * (q - exact) / exact
+    ax.plot(fine, current(fine), &quot;b-&quot;, label=&quot;Current&quot;)
+    ax.fill_between(t, 0, y, color=&quot;salmon&quot;, alpha=0.25)
+    ax.vlines(t, 0, y, color=&quot;gray&quot;, linewidth=0.6)
+    ax.plot(t, y, &quot;r--&quot;, label=&quot;Trapezoids&quot;)
+    ax.set_title(f&quot;N={n} | error {error:+.4f}%&quot;)
+    ax.text(0.03, 0.04, f&quot;Exact {exact:.6f} C; approx {q:.6f} C&quot;,
+            transform=ax.transAxes)
+    ax.set_xlabel(&quot;Time (s)&quot;)
+    ax.set_ylabel(&quot;Current (A)&quot;)
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+print(f&quot;Exact: {exact:.8f} C&quot;)
+plt.show()</code></pre></details></article>
+<article class="card" id="q2" hidden>
+<h2>2. 传感器校准</h2>
+<div class="equations"><p><b>i(t) = 5π cos(4πt) A</b></p><p>积分区间：[0, 1/10] s</p></div>
+<p>电荷 Q（C）等于 i(t) 在给定时间区间内的积分。用 NumPy 和 Matplotlib 完成：</p>
+<ol>
+<li>先对 i(t) 解析积分，求 Q 的精确值。</li>
+<li>分别取 N = 4、8、16、32 个等宽小区间。每次用 <code>np.linspace</code> 生成含两个端点的 N+1 个时间，求复合梯形近似 Q<sub>N</sub> 和带符号的百分误差 100 × (Q<sub>N</sub> − Q) / Q。</li>
+<li>画一张 2×2 图：左上 N=4，右上 N=8，左下 N=16，右下 N=32。每格用蓝色实线画平滑的 i(t)，用红色虚线连起梯形上边，标出各节点至横轴的竖线，并给梯形面积填色。标注 N、精确值、近似值、带符号误差，加时间（s）和电流（A）轴标签、网格及图例。</li>
+</ol>
+<details><summary>展开答案与参考代码</summary>
+<p>原函数：(5/4) sin(4πt)。在两个端点相减得到 <strong>1.188821 C</strong>。将相邻样点的平均电流乘以步长，再累加各段面积。</p>
+<ul><li>N = 4：1.179027 C；误差 -0.8238%</li><li>N = 8：1.186375 C；误差 -0.2057%</li><li>N = 16：1.188209 C；误差 -0.0514%</li><li>N = 32：1.188668 C；误差 -0.0129%</li></ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+A, k = 5, 4
+a, b = 0, 1/10
+def current(t):
+    return A * np.pi * np.cos(k * np.pi * t)
+
+exact = (A / k) * (np.sin(k * np.pi * b) - np.sin(k * np.pi * a))
+fine = np.linspace(a, b, 401)
+fig, axes = plt.subplots(2, 2)
+fig.set_size_inches(11, 7)
+fig.subplots_adjust(wspace=.28, hspace=.45)
+for ax, n in zip(axes.flat, (4, 8, 16, 32)):
+    t = np.linspace(a, b, n + 1)
+    y = current(t)
+    dx = (b - a) / n
+    q = dx * (0.5*y[0] + np.sum(y[1:-1]) + 0.5*y[-1])
+    error = 100 * (q - exact) / exact
+    ax.plot(fine, current(fine), &quot;b-&quot;, label=&quot;Current&quot;)
+    ax.fill_between(t, 0, y, color=&quot;salmon&quot;, alpha=0.25)
+    ax.vlines(t, 0, y, color=&quot;gray&quot;, linewidth=0.6)
+    ax.plot(t, y, &quot;r--&quot;, label=&quot;Trapezoids&quot;)
+    ax.set_title(f&quot;N={n} | error {error:+.4f}%&quot;)
+    ax.text(0.03, 0.04, f&quot;Exact {exact:.6f} C; approx {q:.6f} C&quot;,
+            transform=ax.transAxes)
+    ax.set_xlabel(&quot;Time (s)&quot;)
+    ax.set_ylabel(&quot;Current (A)&quot;)
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+print(f&quot;Exact: {exact:.8f} C&quot;)
+plt.show()</code></pre></details></article>
+<article class="card" id="q3" hidden>
+<h2>3. 驱动器充电段</h2>
+<div class="equations"><p><b>i(t) = 7π cos(5πt) A</b></p><p>积分区间：[-1/15, 1/20] s</p></div>
+<p>电荷 Q（C）等于 i(t) 在给定时间区间内的积分。用 NumPy 和 Matplotlib 完成：</p>
+<ol>
+<li>先对 i(t) 解析积分，求 Q 的精确值。</li>
+<li>分别取 N = 4、8、16、32 个等宽小区间。每次用 <code>np.linspace</code> 生成含两个端点的 N+1 个时间，求复合梯形近似 Q<sub>N</sub> 和带符号的百分误差 100 × (Q<sub>N</sub> − Q) / Q。</li>
+<li>画一张 2×2 图：左上 N=4，右上 N=8，左下 N=16，右下 N=32。每格用蓝色实线画平滑的 i(t)，用红色虚线连起梯形上边，标出各节点至横轴的竖线，并给梯形面积填色。标注 N、精确值、近似值、带符号误差，加时间（s）和电流（A）轴标签、网格及图例。</li>
+</ol>
+<details><summary>展开答案与参考代码</summary>
+<p>原函数：(7/5) sin(5πt)。在两个端点相减得到 <strong>2.202385 C</strong>。将相邻样点的平均电流乘以步长，再累加各段面积。</p>
+<ul><li>N = 4：2.163726 C；误差 -1.7553%</li><li>N = 8：2.192746 C；误差 -0.4377%</li><li>N = 16：2.199977 C；误差 -0.1093%</li><li>N = 32：2.201783 C；误差 -0.0273%</li></ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+A, k = 7, 5
+a, b = -1/15, 1/20
+def current(t):
+    return A * np.pi * np.cos(k * np.pi * t)
+
+exact = (A / k) * (np.sin(k * np.pi * b) - np.sin(k * np.pi * a))
+fine = np.linspace(a, b, 401)
+fig, axes = plt.subplots(2, 2)
+fig.set_size_inches(11, 7)
+fig.subplots_adjust(wspace=.28, hspace=.45)
+for ax, n in zip(axes.flat, (4, 8, 16, 32)):
+    t = np.linspace(a, b, n + 1)
+    y = current(t)
+    dx = (b - a) / n
+    q = dx * (0.5*y[0] + np.sum(y[1:-1]) + 0.5*y[-1])
+    error = 100 * (q - exact) / exact
+    ax.plot(fine, current(fine), &quot;b-&quot;, label=&quot;Current&quot;)
+    ax.fill_between(t, 0, y, color=&quot;salmon&quot;, alpha=0.25)
+    ax.vlines(t, 0, y, color=&quot;gray&quot;, linewidth=0.6)
+    ax.plot(t, y, &quot;r--&quot;, label=&quot;Trapezoids&quot;)
+    ax.set_title(f&quot;N={n} | error {error:+.4f}%&quot;)
+    ax.text(0.03, 0.04, f&quot;Exact {exact:.6f} C; approx {q:.6f} C&quot;,
+            transform=ax.transAxes)
+    ax.set_xlabel(&quot;Time (s)&quot;)
+    ax.set_ylabel(&quot;Current (A)&quot;)
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+print(f&quot;Exact: {exact:.8f} C&quot;)
+plt.show()</code></pre></details></article>
+<article class="card" id="q4" hidden>
+<h2>4. 台架电流测量</h2>
+<div class="equations"><p><b>i(t) = 4π cos(3πt) A</b></p><p>积分区间：[-1/9, 1/12] s</p></div>
+<p>电荷 Q（C）等于 i(t) 在给定时间区间内的积分。用 NumPy 和 Matplotlib 完成：</p>
+<ol>
+<li>先对 i(t) 解析积分，求 Q 的精确值。</li>
+<li>分别取 N = 4、8、16、32 个等宽小区间。每次用 <code>np.linspace</code> 生成含两个端点的 N+1 个时间，求复合梯形近似 Q<sub>N</sub> 和带符号的百分误差 100 × (Q<sub>N</sub> − Q) / Q。</li>
+<li>画一张 2×2 图：左上 N=4，右上 N=8，左下 N=16，右下 N=32。每格用蓝色实线画平滑的 i(t)，用红色虚线连起梯形上边，标出各节点至横轴的竖线，并给梯形面积填色。标注 N、精确值、近似值、带符号误差，加时间（s）和电流（A）轴标签、网格及图例。</li>
+</ol>
+<details><summary>展开答案与参考代码</summary>
+<p>原函数：(4/3) sin(3πt)。在两个端点相减得到 <strong>2.097510 C</strong>。将相邻样点的平均电流乘以步长，再累加各段面积。</p>
+<ul><li>N = 4：2.060692 C；误差 -1.7553%</li><li>N = 8：2.088329 C；误差 -0.4377%</li><li>N = 16：2.095216 C；误差 -0.1093%</li><li>N = 32：2.096936 C；误差 -0.0273%</li></ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+A, k = 4, 3
+a, b = -1/9, 1/12
+def current(t):
+    return A * np.pi * np.cos(k * np.pi * t)
+
+exact = (A / k) * (np.sin(k * np.pi * b) - np.sin(k * np.pi * a))
+fine = np.linspace(a, b, 401)
+fig, axes = plt.subplots(2, 2)
+fig.set_size_inches(11, 7)
+fig.subplots_adjust(wspace=.28, hspace=.45)
+for ax, n in zip(axes.flat, (4, 8, 16, 32)):
+    t = np.linspace(a, b, n + 1)
+    y = current(t)
+    dx = (b - a) / n
+    q = dx * (0.5*y[0] + np.sum(y[1:-1]) + 0.5*y[-1])
+    error = 100 * (q - exact) / exact
+    ax.plot(fine, current(fine), &quot;b-&quot;, label=&quot;Current&quot;)
+    ax.fill_between(t, 0, y, color=&quot;salmon&quot;, alpha=0.25)
+    ax.vlines(t, 0, y, color=&quot;gray&quot;, linewidth=0.6)
+    ax.plot(t, y, &quot;r--&quot;, label=&quot;Trapezoids&quot;)
+    ax.set_title(f&quot;N={n} | error {error:+.4f}%&quot;)
+    ax.text(0.03, 0.04, f&quot;Exact {exact:.6f} C; approx {q:.6f} C&quot;,
+            transform=ax.transAxes)
+    ax.set_xlabel(&quot;Time (s)&quot;)
+    ax.set_ylabel(&quot;Current (A)&quot;)
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+print(f&quot;Exact: {exact:.8f} C&quot;)
+plt.show()</code></pre></details></article>
+<article class="card" id="q5" hidden>
+<h2>5. 储能模块检测</h2>
+<div class="equations"><p><b>i(t) = 9π cos(6πt) A</b></p><p>积分区间：[-1/18, 1/16] s</p></div>
+<p>电荷 Q（C）等于 i(t) 在给定时间区间内的积分。用 NumPy 和 Matplotlib 完成：</p>
+<ol>
+<li>先对 i(t) 解析积分，求 Q 的精确值。</li>
+<li>分别取 N = 4、8、16、32 个等宽小区间。每次用 <code>np.linspace</code> 生成含两个端点的 N+1 个时间，求复合梯形近似 Q<sub>N</sub> 和带符号的百分误差 100 × (Q<sub>N</sub> − Q) / Q。</li>
+<li>画一张 2×2 图：左上 N=4，右上 N=8，左下 N=16，右下 N=32。每格用蓝色实线画平滑的 i(t)，用红色虚线连起梯形上边，标出各节点至横轴的竖线，并给梯形面积填色。标注 N、精确值、近似值、带符号误差，加时间（s）和电流（A）轴标签、网格及图例。</li>
+</ol>
+<details><summary>展开答案与参考代码</summary>
+<p>原函数：(9/6) sin(6πt)。在两个端点相减得到 <strong>2.684857 C</strong>。将相邻样点的平均电流乘以步长，再累加各段面积。</p>
+<ul><li>N = 4：2.615251 C；误差 -2.5925%</li><li>N = 8：2.667524 C；误差 -0.6456%</li><li>N = 16：2.680528 C；误差 -0.1612%</li><li>N = 32：2.683775 C；误差 -0.0403%</li></ul>
+<pre><code>import numpy as np
+import matplotlib.pyplot as plt
+
+A, k = 9, 6
+a, b = -1/18, 1/16
+def current(t):
+    return A * np.pi * np.cos(k * np.pi * t)
+
+exact = (A / k) * (np.sin(k * np.pi * b) - np.sin(k * np.pi * a))
+fine = np.linspace(a, b, 401)
+fig, axes = plt.subplots(2, 2)
+fig.set_size_inches(11, 7)
+fig.subplots_adjust(wspace=.28, hspace=.45)
+for ax, n in zip(axes.flat, (4, 8, 16, 32)):
+    t = np.linspace(a, b, n + 1)
+    y = current(t)
+    dx = (b - a) / n
+    q = dx * (0.5*y[0] + np.sum(y[1:-1]) + 0.5*y[-1])
+    error = 100 * (q - exact) / exact
+    ax.plot(fine, current(fine), &quot;b-&quot;, label=&quot;Current&quot;)
+    ax.fill_between(t, 0, y, color=&quot;salmon&quot;, alpha=0.25)
+    ax.vlines(t, 0, y, color=&quot;gray&quot;, linewidth=0.6)
+    ax.plot(t, y, &quot;r--&quot;, label=&quot;Trapezoids&quot;)
+    ax.set_title(f&quot;N={n} | error {error:+.4f}%&quot;)
+    ax.text(0.03, 0.04, f&quot;Exact {exact:.6f} C; approx {q:.6f} C&quot;,
+            transform=ax.transAxes)
+    ax.set_xlabel(&quot;Time (s)&quot;)
+    ax.set_ylabel(&quot;Current (A)&quot;)
+    ax.grid(True, alpha=0.25)
+    ax.legend()
+print(f&quot;Exact: {exact:.8f} C&quot;)
+plt.show()</code></pre></details></article></section>
+<nav aria-label="翻题"><button id="prev" disabled>上一题</button><button id="next">下一题</button></nav>
+</main><script>
+const cards=[...document.querySelectorAll('.card')],nav=document.getElementById('numbers');
+const prev=document.getElementById('prev'),next=document.getElementById('next');
+const buttons=cards.map((_,i)=>{const b=document.createElement('button');b.type='button';b.textContent=i+1;b.setAttribute('aria-label','第 '+(i+1)+' 题');b.addEventListener('click',()=>show(i));nav.append(b);return b});
+let current=0;
+function show(n){const i=Math.max(0,Math.min(cards.length-1,n));if(i!==current)cards.forEach(c=>c.querySelector('details').open=false);current=i;cards.forEach((c,j)=>{c.hidden=j!==i});buttons.forEach((b,j)=>b.setAttribute('aria-current',String(i===j)));prev.disabled=i===0;next.disabled=i===cards.length-1;document.getElementById('announcer').textContent='第 '+(i+1)+' / '+cards.length+' 题'}
+prev.addEventListener('click',()=>show(current-1));next.addEventListener('click',()=>show(current+1));show(0);
+</script></body></html>
