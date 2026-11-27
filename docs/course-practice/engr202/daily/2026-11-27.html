@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ENGR 202 Daily Practice · Series RLC Resonance and Half-Power Bandwidth</title>
+<style>
+:root{color-scheme:light;--ink:#142d31;--accent:#075a55;--border:#c9dbd3}*{box-sizing:border-box}
+body{margin:0;background:#f2f7f4;color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:770px;margin:auto;padding:32px 18px 100px}a{color:var(--accent)}
+h1{font-size:clamp(2rem,6vw,3rem);line-height:1.1;letter-spacing:-.04em;margin:.2em 0}
+.worksheet{background:white;border:1px solid var(--border);padding:clamp(15px,4vw,30px);border-radius:14px;margin:20px 0}
+figure{margin:14px 0;background:#f6faf8;border-radius:10px;padding:8px}
+svg{display:block;width:100%;color:var(--accent)}.wire{fill:none;stroke:currentColor;stroke-width:2.6;stroke-linejoin:round;stroke-linecap:round}
+svg text,svg .node{fill:currentColor;font:21px system-ui,sans-serif}
+label{display:block}li{padding:.35rem 0}input,button{font:inherit;border:1px solid #648780;border-radius:6px;padding:.35rem .55rem}
+input{width:8em;max-width:100%}button{background:var(--accent);color:white;cursor:pointer}output{display:block;margin-top:8px}
+summary{cursor:pointer;font-weight:700;color:var(--accent)}details{margin-top:1rem}.math{overflow-wrap:anywhere}
+</style></head><body><main>
+<a href="../../../engr202/">ENGR 202</a>
+<p><time datetime="2026-11-27">November 27, 2026</time></p>
+<h1>Series RLC Resonance and Half-Power Bandwidth</h1>
+<article class="worksheet">
+<p>A variable-frequency ideal source with voltage <strong>Vₛ = 10.0∠0° V RMS</strong> drives the series RLC circuit shown. The source magnitude stays constant as its frequency changes. All components are ideal and the resistor shown is the entire series resistance.</p>
+<figure><svg viewBox="0 0 640 250" role="img" aria-labelledby="circuit-title circuit-desc">
+<title id="circuit-title">Series resistor, inductor and capacitor</title><desc id="circuit-desc">An ideal voltage source drives a single series loop containing a twenty ohm resistor, a one hundred millihenry inductor and a ten microfarad capacitor.</desc>
+<g class="wire"><path d="M73 109V70h71l8-9 10 18 10-18 10 18 10-18 10 18 10-18 8 9h74a10 13 0 0 1 20 0a10 13 0 0 1 20 0a10 13 0 0 1 20 0a10 13 0 0 1 20 0h70m0-15v30m14-30v30m0-15h79v136H73v-47"/><circle cx="73" cy="134" r="25"/><path d="M58 134q7.5-14 15 0t15 0"/></g>
+<g text-anchor="middle"><text x="184" y="40">R = 20.0 Ω</text><text x="337" y="40">L = 100 mH</text><text x="469" y="40">C = 10.0 μF</text><text x="28" y="140">Vₛ</text><text x="315" y="235">Vₛ = 10.0∠0° V RMS</text></g>
+</svg></figure>
+<p><strong>Show your work.</strong> Write Z(jω) and find resonance by cancelling its imaginary part. Derive the half-power condition from resistor power, then find the bandwidth. Find the capacitor voltage using its impedance at resonance. Enter answers to three significant figures. Define f₁ and f₂ as the lower and upper positive frequencies where resistor power is half its maximum.</p>
+<form id="answers"><ol type="a"><li><label for="f0">Resonant frequency f₀ (Hz)</label><input id="f0" type="number" step="any" required data-answer="159.15494309189535"></li>
+<li><label for="q">Series quality factor Q (dimensionless)</label><input id="q" type="number" step="any" required data-answer="5"></li>
+<li><label for="bw">Half-power bandwidth f₂ − f₁ (Hz)</label><input id="bw" type="number" step="any" required data-answer="31.830988618379067"></li>
+<li><label for="i">Current magnitude at resonance (A RMS)</label><input id="i" type="number" step="any" required data-answer="0.5"></li>
+<li><label for="vc">Capacitor voltage magnitude at resonance (V RMS)</label><input id="vc" type="number" step="any" required data-answer="50"></li></ol><button type="submit">Check answers</button><output aria-live="polite"></output></form>
+<details lang="zh"><summary>展开中文推导</summary>
+<p>Z(jω) = R + j[ωL − 1/(ωC)]。谐振时虚部为零，串联总阻抗等于 R。</p><ol type="a">
+<li>ω₀L = 1/(ω₀C)，所以 ω₀ = 1/√(LC) = 1/√[(0.100)(10.0×10⁻⁶)] = 1000 rad/s。f₀ = ω₀/(2π) ≈ 159 Hz。</li>
+<li>Q = ω₀L/R = 1000 × 0.100/20.0 = 5.00。</li>
+<li>电阻功率 P = Vₛ²R/[R² + (ωL − 1/(ωC))²]。峰值为 Vₛ²/R，半功率时 |ωL − 1/(ωC)| = R。解得 ω₁ = [√(R² + 4L/C) − R]/(2L)，ω₂ = [√(R² + 4L/C) + R]/(2L)。相减得 ω₂ − ω₁ = R/L = 200 rad/s。因此带宽 f₂ − f₁ = 200/(2π) ≈ 31.8 Hz。</li>
+<li>谐振时 I = Vₛ/R = 10.0/20.0 = 0.500 A RMS。</li>
+<li>|Z<sub>C</sub>| = 1/(ω₀C) = 100 Ω，故 |V<sub>C</sub>| = |I| |Z<sub>C</sub>| = 0.500 × 100 = 50.0 V RMS。其相位为 −90°，与电感电压相反，两者在 KVL 中抵消。</li>
+</ol></details></article>
+<p lang="zh">原创题，参考 <a href="https://web.engr.oregonstate.edu/~webbky/ENGR202_files/SECTION%203%20Second%20Order%20Filters.pdf">OSU ENGR 202 · Kyle Webb 第 3 节，串联谐振、品质因数与带宽</a>。</p>
+</main>
+<script>
+const form = document.querySelector('#answers');
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const fields = Array.from(form.querySelectorAll('[data-answer]'));
+  const results = fields.map((field, index) => {
+    const answer = Number(field.dataset.answer);
+    const tolerance = 0.005 * Math.abs(answer);
+    const correct = Math.abs(field.valueAsNumber - answer) <= tolerance;
+    return '(' + 'abcdef'[index] + ') ' + (correct ? 'Correct' : 'Try again');
+  });
+  form.querySelector('output').textContent = results.join(' · ');
+});
+</script><script src="../../assets/practice-timers.js" defer></script></body></html>
